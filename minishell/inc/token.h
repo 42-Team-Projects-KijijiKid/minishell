@@ -1,5 +1,5 @@
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef TOKEN_H
+# define TOKEN_H
 
 typedef enum	e_redir_type
 {
