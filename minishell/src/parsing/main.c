@@ -9,5 +9,6 @@ int main(void)
 	cmd = readline("Minishell>> ");
 	printf("%s\n", cmd);
 	tmp = create_tokens(cmd);
+
 	
 }
