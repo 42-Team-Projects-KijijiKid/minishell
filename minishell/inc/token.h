@@ -1,8 +1,16 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+typedef enum	e_redir_type
+{
+	IN_FD,
+	OUT_FD,
+	HEREDOC
+}	t_redir_type;
+
 typedef struct	s_redir
 {
+	t_redir_type	type;
 	int				fd;
 	char			*path;
 	struct s_redir	*next;
@@ -23,7 +31,7 @@ typedef enum	e_token_type
 typedef struct	s_token
 {
 	t_token_enum	type;
-	char			value;
+	char			*value;
 	t_redir			*redirections;
 
 	struct s_token	*left;
