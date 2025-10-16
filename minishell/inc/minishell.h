@@ -9,7 +9,6 @@
 typedef struct	s_meta
 {
 	t_token	*head;
-	
 }	t_meta;
 
 

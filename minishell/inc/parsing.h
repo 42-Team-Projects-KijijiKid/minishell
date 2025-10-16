@@ -3,8 +3,8 @@
 
 typedef struct	s_redir
 {
-	int		write_fd;
-	int		read_fd;
+	int		fd;
+	char	*path;
 	t_redir	*next;
 }	t_redir;
 
@@ -24,7 +24,7 @@ typedef struct	s_token
 {
 	t_token_enum	type;
 	char			value;
-	t_redir			redirections;
+	t_redir			*redirections;
 
 	t_token			*left;
 	t_token			*right;
