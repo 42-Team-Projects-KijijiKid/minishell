@@ -1,22 +1,35 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mateoandre <mateoandre@student.42.fr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 11:41:30 by mateoandre        #+#    #+#             */
-/*   Updated: 2025/10/15 11:44:50 by mateoandre       ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PARSING_H
 # define PARSING_H
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+typedef struct	s_redir
+{
+	int		write_fd;
+	int		read_fd;
+	t_redir	*next;
+}	t_redir;
 
+typedef enum	e_token_type
+{
+	T_TEXT,
+	T_PIPE,
+	T_AND,
+	T_OR,
+	T_IN_RDR,
+	T_OUT_RDR,
+	T_APPEND,
+	T_HEREDOC
+}	t_token_enum;
+
+typedef struct	s_token
+{
+	t_token_enum	type;
+	char			value;
+	t_redir			redirections;
+
+	t_token			*left;
+	t_token			*right;
+	t_token			*back;
+}	t_token;
 
 
 #endif
