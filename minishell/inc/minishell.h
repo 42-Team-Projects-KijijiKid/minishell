@@ -5,6 +5,18 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "parsing.h"
+//Malloc , pwd , cd, terminal information
+#include <stdlib.h>
+#include <unistd.h>
+// Dir manipulation like read , close ,open
+#include <sys/types.h>
+#include <dirent.h>
+// Strerror
+#include <string.h>
+
+#include <termios.h>
+
+
 
 typedef struct	s_meta
 {
