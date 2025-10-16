@@ -23,7 +23,7 @@ typedef enum	e_token_type
 typedef struct	s_token
 {
 	t_token_enum	type;
-	char			value;
+	char			*value;
 	t_redir			*redirections;
 
 	struct s_token	*left;
