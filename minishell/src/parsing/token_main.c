@@ -36,19 +36,19 @@ char	*rtn_meta_str(char cmd)
 
 char	*rtn_str(char *cmd)
 {
-	int	i;
-	char *rtn;
+	int		i;
+	char	*rtn;
 
 	i = 0;
 	if (is_meta_char(*cmd))
 		return (rtn_meta_str(*cmd));
 	while (cmd[i] && !is_meta_char(cmd[i])
-			&& cmd[i] != ' ')
+		&& cmd[i] != ' ')
 		i++;
 	rtn = malloc(sizeof(char) * i + 1);
 	i = 0;
 	while (cmd[i] && !is_meta_char(cmd[i])
-			&& cmd[i] != ' ')
+		&& cmd[i] != ' ')
 	{
 		rtn[i] = cmd[i];
 		i++;
@@ -81,8 +81,7 @@ t_tmp_cmd_token	*create_tokens(char *cmd)
 		if (*cmd != ' ' && !is_meta_char(*cmd))
 		{
 			node->value = rtn_str(cmd);
-			while (*cmd && !is_meta_char(*cmd)
-			 && *cmd != ' ')
+			while (*cmd && !is_meta_char(*cmd) && *cmd != ' ')
 				cmd++;
 		}
 		head = node;
