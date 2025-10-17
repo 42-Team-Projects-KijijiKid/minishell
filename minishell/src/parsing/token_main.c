@@ -3,8 +3,8 @@
 bool	is_meta_char(char cmd)
 {
 	int			i;
-	const char	meta[14] = {'|', '&', ';', '(', ')',\
-		'<', '>', '\"', '\'', '\\', '*', '$', '?', '\0'};
+	const char	meta[15] = {'|', '&', ';', '(', ')',\
+		'<', '>', '\"', '\'', '\\', '*', '$', '?', '"', '\0'};
 
 	i = 0;
 	while (meta[i] && cmd != meta[i])
@@ -14,21 +14,29 @@ bool	is_meta_char(char cmd)
 	return (false);
 }
 
-char	*rtn_meta_str(char cmd)
+char	*rtn_meta_str(char *cmd)
 {
 	int			i;
 	char		*rtn;
-	const char	meta[14] = {'|', '&', ';', '(', ')',\
-		'<', '>', '\"', '\'', '\\', '*', '$', '?', '\0'};
+	const char	meta[15] = {'|', '&', ';', '(', ')',\
+		'<', '>', '\"', '\'', '\\', '*', '$', '?', '"', '\0'};
 
 	i = 0;
-	while (meta[i] && cmd != meta[i])
+	while (meta[i] && *cmd != meta[i])
 		i++;
-	if (meta[i])
+	if (meta[i] && meta[i] != cmd[1])
 	{
 		rtn = malloc(sizeof(char) + 1);
 		rtn[0] = meta[i];
 		rtn[1] = '\0';
+		return (rtn);
+	}
+	else if (meta[i] && meta[i] == cmd[1])
+	{
+		rtn = malloc(sizeof(char) * 2 + 1);
+		rtn[0] = meta[i];
+		rtn[1] = meta[i];
+		rtn[2] = '\0';
 		return (rtn);
 	}
 	return (NULL);
@@ -41,7 +49,7 @@ char	*rtn_str(char *cmd)
 
 	i = 0;
 	if (is_meta_char(*cmd))
-		return (rtn_meta_str(*cmd));
+		return (rtn_meta_str(cmd));
 	while (cmd[i] && !is_meta_char(cmd[i])
 		&& cmd[i] != ' ')
 		i++;
@@ -78,8 +86,11 @@ t_tmp_cmd_token	*create_tokens(char *cmd)
 		{
 			node->value = rtn_str(cmd);
 			cmd++;
+			if ((*node->value == '&' && *(node->value + 1) == '&')
+				|| (*node->value == '|' && *(node->value + 1) == '|'))
+				cmd++;
 		}
-		if (*cmd != ' ' && !is_meta_char(*cmd))
+		else if (*cmd != ' ' && !is_meta_char(*cmd))
 		{
 			node->value = rtn_str(cmd);
 			while (*cmd && !is_meta_char(*cmd) && *cmd != ' ')
