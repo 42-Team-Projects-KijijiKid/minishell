@@ -65,6 +65,28 @@ char	*rtn_str(char *cmd)
 	return (rtn);
 }
 
+char *get_and_advance_token(char **cmd_ptr)
+{
+	char	*rtn;
+
+	rtn = NULL;
+	if (is_meta_char(**cmd_ptr))
+	{
+		rtn = rtn_str(*cmd_ptr);
+		(*cmd_ptr)++;
+		if ((*rtn == '&' && *(rtn + 1) == '&')
+			|| (*rtn == '|' && *(rtn + 1) == '|'))
+			(*cmd_ptr)++;
+	}
+	else if (**cmd_ptr != ' ' && !is_meta_char(**cmd_ptr))
+	{
+		rtn = rtn_str(*cmd_ptr);
+		while (**cmd_ptr && !is_meta_char(**cmd_ptr) && **cmd_ptr != ' ')
+			(*cmd_ptr)++;
+	}
+	return (rtn);
+}
+
 /// @brief Creating a simple linked list for
 /// provided input devides between text and 
 /// meta chars (inverted order)
@@ -84,20 +106,7 @@ t_tmp_cmd_token	*create_tokens(char *cmd)
 		node->next = head;
 		while (*cmd == ' ')
 			cmd++;
-		if (is_meta_char(*cmd))
-		{
-			node->value = rtn_str(cmd);
-			cmd++;
-			if ((*node->value == '&' && *(node->value + 1) == '&')
-				|| (*node->value == '|' && *(node->value + 1) == '|'))
-				cmd++;
-		}
-		else if (*cmd != ' ' && !is_meta_char(*cmd))
-		{
-			node->value = rtn_str(cmd);
-			while (*cmd && !is_meta_char(*cmd) && *cmd != ' ')
-				cmd++;
-		}
+		node->value = get_and_advance_token(&cmd);
 		head = node;
 		node = node->next;
 	}
