@@ -7,6 +7,6 @@ int main(void)
 	t_token	*tmp;
 
 	cmd = readline("Minishell>> ");
-	printf("%s\n", cmd);
+	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd, &meta);
 }
