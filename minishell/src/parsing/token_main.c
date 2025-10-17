@@ -79,6 +79,8 @@ t_tmp_cmd_token	*create_tokens(char *cmd)
 	while (*cmd)
 	{
 		node = malloc(sizeof(t_tmp_cmd_token));
+		if (head)
+			head->prev = node;
 		node->next = head;
 		while (*cmd == ' ')
 			cmd++;

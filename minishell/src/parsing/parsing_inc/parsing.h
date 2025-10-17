@@ -8,6 +8,7 @@ typedef struct s_tmp_cmd_token
 {
 	char					*value;
 	struct s_tmp_cmd_token	*next;
+	struct s_tmp_cmd_token	*prev;
 }	t_tmp_cmd_token;
 
 void			parsing_process(char *cmd, t_meta *meta);
