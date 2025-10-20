@@ -75,7 +75,9 @@ char *get_and_advance_token(char **cmd_ptr)
 		rtn = rtn_str(*cmd_ptr);
 		(*cmd_ptr)++;
 		if ((*rtn == '&' && *(rtn + 1) == '&')
-			|| (*rtn == '|' && *(rtn + 1) == '|'))
+			|| (*rtn == '|' && *(rtn + 1) == '|')
+			|| (*rtn == '<' && *(rtn + 1) == '<')
+			|| (*rtn == '>' && *(rtn + 1) == '>'))
 			(*cmd_ptr)++;
 	}
 	else if (**cmd_ptr != ' ' && !is_meta_char(**cmd_ptr))
