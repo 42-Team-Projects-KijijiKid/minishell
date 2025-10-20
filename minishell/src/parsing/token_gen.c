@@ -24,6 +24,7 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 /// into the nodes for the parsing
 /// also in a linked list like way
 /// (always assigned on left)
+/// Redirection list is handled elsewhere
 /// @param cmd_head 
 /// @return 
 static t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
@@ -35,10 +36,11 @@ static t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 	while (cmd_head)
 	{
 		token = malloc(sizeof(t_token));
-		head = token;
+		token->left = head;
 		token->right = NULL;
 		token->type = evaluate_token_type(cmd_head);
-
+		token->value = cmd_head;
+		head = token;
 		cmd_head = cmd_head->next;
 	}
 

@@ -13,7 +13,8 @@ static t_token	*parse_tokens(t_tmp_cmd_token *cmd_head)
 	t_token	*curr_token_head;
 
 	curr_token_head = create_tokens(cmd_head);
-
+	print_tokens(curr_token_head);
+	exit (1);
 	//Find Root Node(lowest Precedence, left-right associativity)
 	root = find_root(cmd_head);
 
