@@ -12,7 +12,10 @@ typedef struct s_tmp_cmd_token
 }	t_tmp_cmd_token;
 
 void			parsing_process(char *cmd, t_meta *meta);
-t_tmp_cmd_token	*create_tokens(char *cmd);
+t_tmp_cmd_token	*create_commands(char *cmd);
 
+
+//Debug Functions
+void	print_tokens(t_token *token);
 
 #endif

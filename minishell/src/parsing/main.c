@@ -6,8 +6,7 @@ int main(void)
 	char	*cmd;
 	t_token	*tmp;
 
-	// cmd = readline("Minishell>> ");
-	cmd = "echo \"Hello World\" | grep a && make re || echo \"I like the way BASH works\" | ls -a";
+	cmd = readline("Minishell>> ");
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd, &meta);
 }

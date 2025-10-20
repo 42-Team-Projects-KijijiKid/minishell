@@ -90,9 +90,8 @@ char *get_and_advance_token(char **cmd_ptr)
 /// @brief Creating a simple linked list for
 /// provided input devides between text and 
 /// meta chars (inverted order)
-/// @return pointer to the last head,
-/// holding the last cmd in the string
-t_tmp_cmd_token	*create_tokens(char *cmd)
+/// @return pointer to the first elem(last command)
+t_tmp_cmd_token	*create_commands(char *cmd)
 {
 	t_tmp_cmd_token	*node;
 	t_tmp_cmd_token	*head;
