@@ -21,8 +21,7 @@ static char	*conv_type_enums(t_token_enum token_type)
 		str = "Append\0";
 	else if (token_type == 7)
 		str = "Heredoc\0";
-	rtn = malloc(ft_strlen(str + 1));
-	rtn = str;
+	rtn = ft_strdup(str);
 	return (rtn);
 }
 
@@ -33,10 +32,10 @@ void	print_tokens(t_token *token)
 	while (token)
 	{
 		type_buff = conv_type_enums(token->type);
-		printf("Type: %s", type_buff);
-		printf(" ---\\\n");
+		printf("Type: %s\n", type_buff);
 		printf("Value: %s\n", token->value);
-		printf(" ---/\n");
+		printf("-------------\n");
 		free(type_buff);
+		token = token->left;
 	}
 }

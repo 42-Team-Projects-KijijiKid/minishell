@@ -15,6 +15,9 @@ void			parsing_process(char *cmd, t_meta *meta);
 t_tmp_cmd_token	*create_commands(char *cmd);
 
 
+//Token Gen
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head);
+
 //Debug Functions
 void	print_tokens(t_token *token);
 

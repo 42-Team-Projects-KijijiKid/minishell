@@ -110,5 +110,7 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 		node = node->next;
 	}
 	head->prev = NULL;
+	while (head->next)
+		head = head->next;
 	return (head);
 }

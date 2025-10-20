@@ -2,19 +2,19 @@
 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
-	if (ft_strncmp(cmd, "|", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd->value, "|", ft_strlen(cmd->value)) == 0)
 		return (T_PIPE);
-	else if (ft_strncmp(cmd, "&&", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, "&&", ft_strlen(cmd->value)) == 0)
 		return (T_AND);
-	else if (ft_strncmp(cmd, "||", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, "||", ft_strlen(cmd->value)) == 0)
 		return (T_OR);
-	else if (ft_strncmp(cmd, "<", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, "<", ft_strlen(cmd->value)) == 0)
 		return (T_IN_RDR);
-	else if (ft_strncmp(cmd, ">", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, ">", ft_strlen(cmd->value)) == 0)
 		return (T_OUT_RDR);
-	else if (ft_strncmp(cmd, ">>", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, ">>", ft_strlen(cmd->value)) == 0)
 		return (T_APPEND);
-	else if (ft_strncmp(cmd, "<<", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd->value, "<<", ft_strlen(cmd->value)) == 0)
 		return (T_HEREDOC);
 	else
 		return (T_TEXT);
@@ -27,21 +27,27 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 /// Redirection list is handled elsewhere
 /// @param cmd_head 
 /// @return 
-static t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 {
 	t_token	*head;
 	t_token *token;
+	t_token *prev;
 
-	token->left = NULL;
+	prev = NULL;
 	while (cmd_head)
 	{
 		token = malloc(sizeof(t_token));
-		token->left = head;
-		token->right = NULL;
+		if (!token)
+			return NULL;
 		token->type = evaluate_token_type(cmd_head);
-		token->value = cmd_head;
-		head = token;
-		cmd_head = cmd_head->next;
+		token->value = cmd_head->value;
+		token->right = NULL;
+		if (prev)
+			prev->left = token;
+		else
+			head = token;
+		prev = token;
+		cmd_head = cmd_head->prev;
 	}
-
+	return (head);
 }
