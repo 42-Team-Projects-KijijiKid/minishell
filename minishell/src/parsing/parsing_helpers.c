@@ -23,7 +23,7 @@ t_token	*find_root(t_token *token_head)
 
 	root = NULL;
 	token_head_buff = token_head;
-	while (token_head)
+	while (token_head->left)
 	{
 		if (compare_operator(tmp_enum, token_head->type))
 		{
@@ -31,8 +31,8 @@ t_token	*find_root(t_token *token_head)
 			root = token_head;
 		}
 		token_head = token_head->left;
-		if (!root && !token_head->left)
-			root = token_head_buff;
 	}
+	if (!root)
+		root =	token_head_buff;
 	return (root);
 }
