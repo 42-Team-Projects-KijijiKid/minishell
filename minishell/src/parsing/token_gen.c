@@ -49,6 +49,5 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 		prev = token;
 		cmd_head = cmd_head->prev;
 	}
-	
 	return (head);
 }

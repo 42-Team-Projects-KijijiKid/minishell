@@ -16,9 +16,13 @@ static bool	compare_operator(t_token_enum before, t_token_enum current)
 t_token	*find_root(t_token *token_head)
 {
 	t_token			*root;
+	t_token			*token_head_buff;
 	t_token_enum	tmp_enum;
 
 	tmp_enum = T_TEXT;
+
+	root = NULL;
+	token_head_buff = token_head;
 	while (token_head)
 	{
 		if (compare_operator(tmp_enum, token_head->type))
@@ -27,6 +31,8 @@ t_token	*find_root(t_token *token_head)
 			root = token_head;
 		}
 		token_head = token_head->left;
+		if (!root && !token_head->left)
+			root = token_head_buff;
 	}
 	return (root);
 }
