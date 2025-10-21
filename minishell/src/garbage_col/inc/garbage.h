@@ -10,7 +10,7 @@ typedef struct	s_mem_block
 	struct	s_mem_block;
 }	t_mem_block;
 
-void	add_to_layer(t_mem_block *layer, void *data);
-void	free_layer(t_mem_block *layer_head);
+t_mem_block	*add_to_layer(t_mem_block *layer, void *data);
+void		free_layer(t_mem_block *layer_head);
 
 #endif
