@@ -3,6 +3,14 @@
 
 #include "minishell.h"
 
+typedef struct	s_mem_block
+{
+	void	*mem;
+	size_t	size;
+	struct	s_mem_block;
+}	t_mem_block;
 
+void	add_to_layer(t_mem_block *layer, void *data);
+void	free_layer(t_mem_block *layer_head);
 
 #endif
