@@ -18,6 +18,9 @@ t_tmp_cmd_token	*create_commands(char *cmd);
 //Token Gen
 t_token	*create_tokens(t_tmp_cmd_token *cmd_head);
 
+//Parsing functions
+t_token	*find_root(t_token *token_head);
+
 //Debug Functions
 void	print_tokens(t_token *token);
 
