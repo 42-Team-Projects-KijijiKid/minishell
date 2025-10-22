@@ -24,5 +24,5 @@ void	build_ast(t_token *root);
 
 //Debug Functions
 void	print_tokens(t_token *token);
-
+void print_ast_structure(t_token *root, int level);
 #endif
