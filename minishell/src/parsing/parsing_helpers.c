@@ -36,3 +36,25 @@ t_token	*find_root(t_token *token_head)
 		root =	token_head_buff;
 	return (root);
 }
+
+t_token	*find_root_reversed(t_token *token_head)
+{
+	t_token			*root;
+	t_token_enum	tmp_enum;
+
+	tmp_enum = T_TEXT;
+
+	root = NULL;
+	while (token_head->back)
+	{
+		if (compare_operator(tmp_enum, token_head->type))
+		{
+			tmp_enum = token_head->type;
+			root = token_head;
+		}
+		token_head = token_head->back;
+	}
+	if (!root)
+		root =	token_head;
+	return (root);
+}

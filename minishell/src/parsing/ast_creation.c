@@ -1,22 +1,37 @@
 #include "parsing.h"
 
-/// @brief Builds the ast asigning
-/// left right of each node
-void	build_ast(t_token *root)
+void build_ast(t_token *root)
 {
-	t_token	*pre_pipe;
-	t_token	*post_pipe;
+    t_token *pre_head;
+    t_token *post_head;
 
-	// here we first have to split left from operator and right from operator
-	// Trying to figure out a recursive way. 
-	// We again have to also detect precedence
-	pre_pipe = root;
-	root->back->left = NULL;
-	while (pre_pipe->back)
-		pre_pipe = pre_pipe->back;
-	post_pipe = root->left;
-	post_pipe->back = NULL;
-	root->left = NULL;
-	root->left = pre_pipe;
-	root->right = post_pipe;
+	pre_head = NULL;
+	post_head = NULL;
+	if (!root)
+        return;
+    // Detach left side (tokens before `root`)
+    if (root->back)
+	{
+        pre_head = root->back;
+        pre_head->left = NULL;
+        root->back = NULL;
+    }
+    // Detach right side (tokens after `root`)
+    if (root->left)
+	{
+        post_head = root->left;
+        post_head->back = NULL;
+        root->left = NULL;
+    }
+	if (pre_head)
+		root->left = find_root_reversed(pre_head);
+	else
+		root->left = NULL;
+	if (post_head)
+		root->right = find_root(post_head);
+	else 
+		root->right = NULL;
+    build_ast(root->left);
+    build_ast(root->right);
 }
+

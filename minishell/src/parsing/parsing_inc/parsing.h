@@ -20,6 +20,7 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head);
 
 //Parsing functions
 t_token	*find_root(t_token *token_head);
+t_token	*find_root_reversed(t_token *token_head);
 void	build_ast(t_token *root);
 
 //Debug Functions
