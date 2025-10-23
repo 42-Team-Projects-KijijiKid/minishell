@@ -42,6 +42,8 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 		token->type = evaluate_token_type(cmd_head);
 		token->value = cmd_head->value;
 		token->right = NULL;
+		if (cmd_head->args_2d)
+			token->args_2d = cmd_head->args_2d;
 		if (prev)
 			prev->left = token;
 		else

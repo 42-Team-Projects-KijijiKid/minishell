@@ -108,6 +108,8 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 		while (*cmd == ' ')
 			cmd++;
 		node->value = get_and_advance_token(&cmd);
+		if (!is_meta_char(*cmd))
+			node->args_2d = give_2d_arg(&cmd);
 		head = node;
 		node = node->next;
 	}
