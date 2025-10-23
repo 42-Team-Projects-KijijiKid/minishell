@@ -6,7 +6,8 @@ int main(void)
 	char	*cmd;
 	t_token	*tmp;
 
-	cmd = readline("Minishell>> ");
+	// cmd = readline("Minishell>> ");
+	cmd = "ls | grep a && ls || wc -l";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd, &meta);
 }

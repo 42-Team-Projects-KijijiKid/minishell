@@ -20,7 +20,6 @@ void	parsing_process(char *cmd, t_meta *meta)
 	t_token			*root_node;
 
 	cmd_head = create_commands (cmd);
-	//Returns the root node
 	meta->head = parse_tokens(cmd_head);
 	print_ast_structure(meta->head, 0);
 }
