@@ -7,6 +7,9 @@ int main(void)
 	// t_token	*tmp;
 
 	// cmd = readline("Minishell>> ");
+	meta.layer_1 = NULL;
+	meta.layer_2 = NULL;
+	meta.layer_3 = NULL;
 	cmd = "ls | grep a && ls || wc -l";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd, &meta);

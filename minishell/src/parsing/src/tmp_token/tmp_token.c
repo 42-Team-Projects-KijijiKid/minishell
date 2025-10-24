@@ -93,7 +93,7 @@ char *get_and_advance_token(char **cmd_ptr)
 /// provided input devides between text and 
 /// meta chars (inverted order)
 /// @return pointer to the first elem(last command)
-t_tmp_cmd_token	*create_commands(char *cmd)
+t_tmp_cmd_token	*create_commands(char *cmd, t_meta *meta)
 {
 	t_tmp_cmd_token	*node;
 	t_tmp_cmd_token	*head;
@@ -102,6 +102,7 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 	while (*cmd)
 	{
 		node = malloc(sizeof(t_tmp_cmd_token));
+		meta->layer_3 = add_to_layer(meta->layer_3, (void *)node);
 		if (head)
 			head->prev = node;
 		node->args_2d = NULL;

@@ -32,7 +32,7 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 /// Redirection list is handled elsewhere
 /// @param cmd_head 
 /// @return 
-t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head, t_meta *meta)
 {
 	t_token	*head;
 	t_token *token;
@@ -42,6 +42,7 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 	while (cmd_head)
 	{
 		token = malloc(sizeof(t_token));
+		meta->layer_2 = add_to_layer(meta->layer_2, (void*)token);
 		if (!token)
 			return NULL;
 		token->type = evaluate_token_type(cmd_head);
@@ -57,5 +58,6 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 		prev = token;
 		cmd_head = cmd_head->prev;
 	}
+	token->left = NULL;
 	return (head);
 }

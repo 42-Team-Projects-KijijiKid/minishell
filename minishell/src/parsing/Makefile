@@ -1,7 +1,7 @@
 # <==== Meta Data =====>
 NAME	:= parsing
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra -Iparsing_inc/ -I../../inc -I../../lib/libft/ -I../garbage_col/inc -g
+CFLAGS	:= -Wall -Werror -Wextra -Iparsing_inc/ -Igarbage_col/inc/ -I../../inc -I../../lib/libft/
  
 # Flag to gernerate dependencies (outpu to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
@@ -15,6 +15,9 @@ MAIN_FILE	:= main.c
 
 SRC_DIR		:= src/
 OBJS_DIR	:= objs/
+
+#TEMPORARY
+GARBAGE_COL_FILES	:= garbage_col/garbage_col.c
 
 #Folders inside src/
 CORE_DIR		:= core/
@@ -31,7 +34,7 @@ MELTING_POT	:= $(CORE_FILES) $(TMP_TOKEN_FILES) $(DEBUG_FILES)
 
 
 # Every Folder path prefixed with src/ and the main (top level)
-SRCS		:= $(MAIN_FILE) $(addprefix $(SRC_DIR), $(MELTING_POT))
+SRCS		:= $(MAIN_FILE) $(GARBAGE_COL_FILES) $(addprefix $(SRC_DIR), $(MELTING_POT))
 
 # All .c to .o -> See compilation Rule $< $@
 OBJS		:= $(addprefix $(OBJS_DIR), $(SRCS:%.c=%.o))

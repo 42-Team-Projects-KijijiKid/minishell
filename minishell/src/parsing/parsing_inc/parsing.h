@@ -12,12 +12,12 @@ typedef struct s_tmp_cmd_token
 }	t_tmp_cmd_token;
 
 void			parsing_process(char *cmd, t_meta *meta);
-t_tmp_cmd_token	*create_commands(char *cmd);
+t_tmp_cmd_token	*create_commands(char *cmd, t_meta *meta);
 
 char	**special_split(char **str);
 
 //Token Gen
-t_token	*create_tokens(t_tmp_cmd_token *cmd_head);
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head, t_meta *meta);
 char	**give_2d_arg(char **str);
 bool	is_meta_char(char cmd);
 
