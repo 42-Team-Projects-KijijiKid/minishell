@@ -32,8 +32,9 @@ typedef struct	s_token
 {
 	t_token_enum	type;
 	char			*value;
+	char			**args_2d;
 	t_redir			*redirections;
-
+	
 	struct s_token	*left;
 	struct s_token	*right;
 	struct s_token	*back;
