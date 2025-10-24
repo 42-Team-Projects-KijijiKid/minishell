@@ -53,7 +53,7 @@ int	word_count(char *str)
 	return (count);
 }
 
-char	**special_split(char **str)
+char	**special_split(char **str, t_meta *meta)
 {
 	int		i;
 	char	**rtn;
@@ -61,10 +61,12 @@ char	**special_split(char **str)
 
 	words = word_count(*str);
 	rtn = malloc(sizeof(char *) * (word_count(*str) + 1));
+	meta->layer_2 = add_to_layer(meta->layer_2, (void *)rtn);
 	i = 0;
 	while (i < words)
 	{
 		rtn[i] = give_word(str);
+		meta->layer_2 = add_to_layer(meta->layer_2, (void *)rtn[i]);
 		i++;
 	}
 	rtn[i] = NULL;

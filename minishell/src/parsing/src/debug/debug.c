@@ -33,6 +33,7 @@ void	print_tokens(t_token *token)
 	{
 		type_buff = conv_type_enums(token->type);
 		printf("Type: %s\n", type_buff);
+		free(type_buff);
 		if (token->value)
 			printf("Value: %s\n", token->value);
 		else

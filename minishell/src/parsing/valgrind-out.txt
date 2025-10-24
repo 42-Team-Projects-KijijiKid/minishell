@@ -1,281 +1,119 @@
-==30858== Memcheck, a memory error detector
-==30858== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==30858== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
-==30858== Command: ./parsing
-==30858== Parent PID: 4993
-==30858== 
---30858-- 
---30858-- Valgrind options:
---30858--    --leak-check=full
---30858--    --show-leak-kinds=all
---30858--    --track-origins=yes
---30858--    --verbose
---30858--    --log-file=valgrind-out.txt
---30858-- Contents of /proc/version:
---30858--   Linux version 6.8.0-85-generic (buildd@lcy02-amd64-024) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.2) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #85~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep 19 16:18:59 UTC 2
---30858-- 
---30858-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
---30858-- Page sizes: currently 4096, max supported 4096
---30858-- Valgrind library directory: /usr/libexec/valgrind
---30858-- Reading syms from /home/mandre/Documents/minishell/minishell/src/parsing/parsing
---30858-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
---30858--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
---30858--   .. build-id is valid
---30858-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
---30858--    object doesn't have a symbol table
---30858--    object doesn't have a dynamic symbol table
---30858-- Scheduler: using generic scheduler lock implementation.
---30858-- Reading suppressions file: /usr/libexec/valgrind/default.supp
-==30858== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-30858-by-mandre-on-???
-==30858== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-30858-by-mandre-on-???
-==30858== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-30858-by-mandre-on-???
-==30858== 
-==30858== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==30858== don't want to do, unless you know exactly what you're doing,
-==30858== or are doing some strange experiment):
-==30858==   /usr/bin/vgdb --pid=30858 ...command...
-==30858== 
-==30858== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==30858==   /path/to/gdb ./parsing
-==30858== and then give GDB the following command
-==30858==   target remote | /usr/bin/vgdb --pid=30858
-==30858== --pid is optional if only one valgrind process is running
-==30858== 
---30858-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
---30858-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
---30858-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
---30858--    object doesn't have a symbol table
---30858-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
---30858--    object doesn't have a symbol table
-==30858== WARNING: new redirection conflicts with existing -- ignoring it
---30858--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
---30858--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
---30858-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
---30858-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
---30858-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
---30858--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
---30858--   .. build-id is valid
-==30858== WARNING: new redirection conflicts with existing -- ignoring it
---30858--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---30858--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==30858== WARNING: new redirection conflicts with existing -- ignoring it
---30858--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---30858--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
-==30858== WARNING: new redirection conflicts with existing -- ignoring it
---30858--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---30858--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
-==30858== WARNING: new redirection conflicts with existing -- ignoring it
---30858--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
---30858--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
---30858-- REDIR: 0x4919720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49199e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49192e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4937cd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a6d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4936540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491ac10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4936370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a5a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
-==30858== Preferring higher priority redirection:
---30858--     old: 0x04a11840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
---30858--     new: 0x04a11840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
---30858-- REDIR: 0x49363f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a9e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49369b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491aa70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4936470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49191d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491ab60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4922570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491c010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491ab10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49196a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x49198d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a3f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4919b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491a7d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491aac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x491bf80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
---30858-- REDIR: 0x4a0e690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
---30858-- REDIR: 0x4a0e480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
---30858-- REDIR: 0x49160a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
---30858-- REDIR: 0x4a0e860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
---30858-- REDIR: 0x4a11800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4011F6: add_to_layer (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x402283: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a stack allocation
-==30858==    at 0x401170: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4011F6: add_to_layer (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401771: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a stack allocation
-==30858==    at 0x401170: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4014FC: find_root (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016F9: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4014FC: find_root (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401485: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40171F: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x401418: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4014BB: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40171F: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
---30858-- REDIR: 0x49163e0 (libc.so.6:free) redirected to 0x484b210 (free)
-==30858== 
-==30858== HEAP SUMMARY:
-==30858==     in use at exit: 107 bytes in 13 blocks
-==30858==   total heap usage: 42 allocs, 29 frees, 1,971 bytes allocated
-==30858== 
-==30858== Searching for pointers to 13 not-freed blocks
-==30858== Checked 107,968 bytes
-==30858== 
-==30858== 2 bytes in 1 blocks are definitely lost in loss record 1 of 4
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x401E80: rtn_meta_str (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401F64: rtn_str (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4020DB: get_and_advance_token (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40231F: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 6 bytes in 2 blocks are definitely lost in loss record 2 of 4
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x401EDC: rtn_meta_str (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401F64: rtn_str (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4020DB: get_and_advance_token (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40231F: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 19 bytes in 6 blocks are indirectly lost in loss record 3 of 4
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x401B32: give_word (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401CD5: special_split (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x402306: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 99 (80 direct, 19 indirect) bytes in 4 blocks are definitely lost in loss record 4 of 4
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x401CB5: special_split (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x402306: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== LEAK SUMMARY:
-==30858==    definitely lost: 88 bytes in 7 blocks
-==30858==    indirectly lost: 19 bytes in 6 blocks
-==30858==      possibly lost: 0 bytes in 0 blocks
-==30858==    still reachable: 0 bytes in 0 blocks
-==30858==         suppressed: 0 bytes in 0 blocks
-==30858== 
-==30858== ERROR SUMMARY: 8 errors from 8 contexts (suppressed: 0 from 0)
-==30858== 
-==30858== 1 errors in context 1 of 8:
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x401418: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4014BB: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40171F: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 
-==30858== 1 errors in context 2 of 8:
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4014FC: find_root (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401485: build_ast (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40171F: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 
-==30858== 1 errors in context 3 of 8:
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4014FC: find_root (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016F9: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a heap allocation
-==30858==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==30858==    by 0x40175C: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 
-==30858== 1 errors in context 4 of 8:
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4011F6: add_to_layer (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x401771: create_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4016EC: parse_tokens (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40168D: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a stack allocation
-==30858==    at 0x401170: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== 
-==30858== 1 errors in context 5 of 8:
-==30858== Conditional jump or move depends on uninitialised value(s)
-==30858==    at 0x4011F6: add_to_layer (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x402283: create_commands (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x40167C: parsing_process (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==    by 0x4011A7: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858==  Uninitialised value was created by a stack allocation
-==30858==    at 0x401170: main (in /home/mandre/Documents/minishell/minishell/src/parsing/parsing)
-==30858== 
-==30858== ERROR SUMMARY: 8 errors from 8 contexts (suppressed: 0 from 0)
+==36605== Memcheck, a memory error detector
+==36605== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==36605== Using Valgrind-3.18.1-42b08ed5bd-20211015 and LibVEX; rerun with -h for copyright info
+==36605== Command: ./parsing
+==36605== Parent PID: 4993
+==36605== 
+--36605-- 
+--36605-- Valgrind options:
+--36605--    --leak-check=full
+--36605--    --show-leak-kinds=all
+--36605--    --track-origins=yes
+--36605--    --verbose
+--36605--    --log-file=valgrind-out.txt
+--36605-- Contents of /proc/version:
+--36605--   Linux version 6.8.0-85-generic (buildd@lcy02-amd64-024) (x86_64-linux-gnu-gcc-12 (Ubuntu 12.3.0-1ubuntu1~22.04.2) 12.3.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #85~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep 19 16:18:59 UTC 2
+--36605-- 
+--36605-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--36605-- Page sizes: currently 4096, max supported 4096
+--36605-- Valgrind library directory: /usr/libexec/valgrind
+--36605-- Reading syms from /home/mandre/Documents/minishell/minishell/src/parsing/parsing
+--36605-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+--36605--   Considering /usr/lib/debug/.build-id/ac/af96d7b1a6bad57b559d646233d5dc1a23257c.debug ..
+--36605--   .. build-id is valid
+--36605-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
+--36605--    object doesn't have a symbol table
+--36605--    object doesn't have a dynamic symbol table
+--36605-- Scheduler: using generic scheduler lock implementation.
+--36605-- Reading suppressions file: /usr/libexec/valgrind/default.supp
+==36605== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-36605-by-mandre-on-???
+==36605== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-36605-by-mandre-on-???
+==36605== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-36605-by-mandre-on-???
+==36605== 
+==36605== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==36605== don't want to do, unless you know exactly what you're doing,
+==36605== or are doing some strange experiment):
+==36605==   /usr/bin/vgdb --pid=36605 ...command...
+==36605== 
+==36605== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==36605==   /path/to/gdb ./parsing
+==36605== and then give GDB the following command
+==36605==   target remote | /usr/bin/vgdb --pid=36605
+==36605== --pid is optional if only one valgrind process is running
+==36605== 
+--36605-- REDIR: 0x402aa40 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bcec2 (???)
+--36605-- REDIR: 0x402a810 (ld-linux-x86-64.so.2:index) redirected to 0x580bcedc (???)
+--36605-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--36605--    object doesn't have a symbol table
+--36605-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
+--36605--    object doesn't have a symbol table
+==36605== WARNING: new redirection conflicts with existing -- ignoring it
+--36605--     old: 0x0402aa40 (strlen              ) R-> (0000.0) 0x580bcec2 ???
+--36605--     new: 0x0402aa40 (strlen              ) R-> (2007.0) 0x0484ee30 strlen
+--36605-- REDIR: 0x4027220 (ld-linux-x86-64.so.2:strcmp) redirected to 0x484fcd0 (strcmp)
+--36605-- REDIR: 0x402afa0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4853840 (mempcpy)
+--36605-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
+--36605--   Considering /usr/lib/debug/.build-id/4f/7b0c955c3d81d7cac1501a2498b69d1d82bfe7.debug ..
+--36605--   .. build-id is valid
+==36605== WARNING: new redirection conflicts with existing -- ignoring it
+--36605--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--36605--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==36605== WARNING: new redirection conflicts with existing -- ignoring it
+--36605--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--36605--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+==36605== WARNING: new redirection conflicts with existing -- ignoring it
+--36605--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--36605--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e050 aligned_alloc
+==36605== WARNING: new redirection conflicts with existing -- ignoring it
+--36605--     old: 0x04916c60 (memalign            ) R-> (1011.0) 0x0484e080 memalign
+--36605--     new: 0x04916c60 (memalign            ) R-> (1017.0) 0x0484e020 aligned_alloc
+--36605-- REDIR: 0x4919720 (libc.so.6:strnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49199e0 (libc.so.6:strpbrk) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49192e0 (libc.so.6:strcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4937cd0 (libc.so.6:wcsnlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a6d0 (libc.so.6:memset) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4936540 (libc.so.6:wcslen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491ac10 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4936370 (libc.so.6:wcschr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919260 (libc.so.6:index) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919960 (libc.so.6:rindex) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a5a0 (libc.so.6:memmove) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+==36605== Preferring higher priority redirection:
+--36605--     old: 0x04a11840 (__memcpy_avx_unalign) R-> (2018.0) 0x04850f90 __memcpy_avx_unaligned_erms
+--36605--     new: 0x04a11840 (__memcpy_avx_unalign) R-> (2018.1) 0x04852880 memmove
+--36605-- REDIR: 0x49363f0 (libc.so.6:wcscmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a9e0 (libc.so.6:stpncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49369b0 (libc.so.6:wmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919830 (libc.so.6:strncmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491aa70 (libc.so.6:strcasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919420 (libc.so.6:strcspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4936470 (libc.so.6:wcscpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49191d0 (libc.so.6:strcat) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491ab60 (libc.so.6:strncasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a480 (libc.so.6:bcmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4922570 (libc.so.6:memrchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491c010 (libc.so.6:strchrnul) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919390 (libc.so.6:strcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491ab10 (libc.so.6:strcasecmp_l) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49196a0 (libc.so.6:strlen) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x49198d0 (libc.so.6:strncpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a950 (libc.so.6:stpcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a3f0 (libc.so.6:memchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4919b00 (libc.so.6:strspn) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491a7d0 (libc.so.6:mempcpy) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491aac0 (libc.so.6:strncasecmp) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x491bf80 (libc.so.6:rawmemchr) redirected to 0x483f220 (_vgnU_ifunc_wrapper)
+--36605-- REDIR: 0x4a0e690 (libc.so.6:__strrchr_avx2) redirected to 0x484e810 (rindex)
+--36605-- REDIR: 0x4a0e480 (libc.so.6:__strchrnul_avx2) redirected to 0x4853330 (strchrnul)
+--36605-- REDIR: 0x49160a0 (libc.so.6:malloc) redirected to 0x4848820 (malloc)
+--36605-- REDIR: 0x4a0e860 (libc.so.6:__strlen_avx2) redirected to 0x484ed10 (strlen)
+--36605-- REDIR: 0x4a11800 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x4853440 (mempcpy)
+--36605-- REDIR: 0x49163e0 (libc.so.6:free) redirected to 0x484b210 (free)
+==36605== 
+==36605== HEAP SUMMARY:
+==36605==     in use at exit: 0 bytes in 0 blocks
+==36605==   total heap usage: 51 allocs, 51 frees, 2,126 bytes allocated
+==36605== 
+==36605== All heap blocks were freed -- no leaks are possible
+==36605== 
+==36605== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

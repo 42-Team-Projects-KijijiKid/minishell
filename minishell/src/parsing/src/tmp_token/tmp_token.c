@@ -111,9 +111,12 @@ t_tmp_cmd_token	*create_commands(char *cmd, t_meta *meta)
 		while (*cmd == ' ')
 			cmd++;
 		if (!is_meta_char(*cmd))
-			node->args_2d = special_split(&cmd);
+			node->args_2d = special_split(&cmd, meta);
 		else
+		{
 			node->value = get_and_advance_token(&cmd);
+			meta->layer_3 = add_to_layer(meta->layer_3, (void *)node->value);
+		}
 		head = node;
 		node = node->next;
 	}

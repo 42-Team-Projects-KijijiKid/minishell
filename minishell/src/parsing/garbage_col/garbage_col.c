@@ -66,7 +66,7 @@ void	free_layer(t_mem_block *layer_head)
 	{
 		tmp = layer_head;
 		layer_head = layer_head->next;
-		free(tmp->mem);
+		free(tmp->mem++);
 		free(tmp);
 	}
 }
