@@ -13,6 +13,11 @@ static bool	compare_operator(t_token_enum before, t_token_enum current)
 	return (false);
 }
 
+/// @brief Finds the rootnode going from left
+/// to right when there are tokens with the 
+/// same precedence left associvity 
+/// @param token_head head of the token list
+/// @return pointer to root token
 t_token	*find_root(t_token *token_head)
 {
 	t_token			*root;
@@ -20,7 +25,6 @@ t_token	*find_root(t_token *token_head)
 	t_token_enum	tmp_enum;
 
 	tmp_enum = T_TEXT;
-
 	root = NULL;
 	token_head_buff = token_head;
 	while (token_head->left)
@@ -37,13 +41,17 @@ t_token	*find_root(t_token *token_head)
 	return (root);
 }
 
+/// @brief This is just when there are multiple levels 
+/// of operators
+/// to evaluate the left side of the root
+/// @param token_head 
+/// @return pointer to root
 t_token	*find_root_reversed(t_token *token_head)
 {
 	t_token			*root;
 	t_token_enum	tmp_enum;
 
 	tmp_enum = T_TEXT;
-
 	root = NULL;
 	while (token_head->back)
 	{

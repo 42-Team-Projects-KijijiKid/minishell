@@ -71,26 +71,26 @@ char	**special_split(char **str)
 	return (rtn);
 }
 
-char	**give_2d_arg(char **str)
-{
-	char	**rtn;
+// char	**give_2d_arg(char **str)
+// {
+// 	char	**rtn;
 
-	rtn = special_split(str);
-	return (rtn);
-}
+// 	rtn = special_split(str);
+// 	return (rtn);
+// }
 
-int main(void)
-{
-	char * str= "ls -l | grep a";
-	char **splitted;
+// int main(void)
+// {
+// 	char * str= "ls -l | grep a";
+// 	char **splitted;
 
-	splitted = give_2d_arg(&str);
-	printf("[");
-	while (*splitted)
-	{
-		if (splitted)
-			printf("%s, ", *splitted);
-		splitted++;
-	}
-	printf("]\n");
-}
+// 	splitted = give_2d_arg(&str);
+// 	printf("[");
+// 	while (*splitted)
+// 	{
+// 		if (splitted)
+// 			printf("%s, ", *splitted);
+// 		splitted++;
+// 	}
+// 	printf("]\n");
+// }

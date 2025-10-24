@@ -1,5 +1,9 @@
 #include "parsing.h"
 
+/// @brief Builds ast recursively
+/// Always evaluates root then splits linked list
+/// at the current root and reevaluates the root
+/// @param root pointer to current root
 void build_ast(t_token *root)
 {
 	t_token *pre_head;

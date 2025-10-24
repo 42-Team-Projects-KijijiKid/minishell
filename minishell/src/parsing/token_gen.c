@@ -1,5 +1,8 @@
 #include "parsing.h"
 
+/// @brief Checks the cmd-> value for matches with strncmp
+/// @param cmd tmporary command token
+/// @return enum with the matching type 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
 	if (ft_strncmp(cmd->value, "|", ft_strlen(cmd->value)) == 0)
