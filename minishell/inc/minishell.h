@@ -6,6 +6,7 @@
 #include <readline/history.h>
 #include "token.h"
 #include "libft.h"
+#include "garbage.h"
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
 #include <unistd.h>
