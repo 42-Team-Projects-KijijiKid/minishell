@@ -33,7 +33,18 @@ void	print_tokens(t_token *token)
 	{
 		type_buff = conv_type_enums(token->type);
 		printf("Type: %s\n", type_buff);
-		printf("Value: %s\n", token->value);
+		if (token->value)
+			printf("Value: %s\n", token->value);
+		else
+		{
+			printf("[");
+			while (*token->args_2d)
+			{
+				printf("%s, ", *token->args_2d);
+				token->args_2d++;
+			}
+			printf("]");
+		}
 		printf("-------------\n");
 		free(type_buff);
 		token = token->left;

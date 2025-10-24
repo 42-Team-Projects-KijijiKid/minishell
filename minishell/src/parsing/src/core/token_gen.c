@@ -5,6 +5,8 @@
 /// @return enum with the matching type 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
+	if (!cmd->value)
+		return (T_TEXT);
 	if (ft_strncmp(cmd->value, "|", ft_strlen(cmd->value)) == 0)
 		return (T_PIPE);
 	else if (ft_strncmp(cmd->value, "&&", ft_strlen(cmd->value)) == 0)

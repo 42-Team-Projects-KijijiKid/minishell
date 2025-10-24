@@ -1,7 +1,7 @@
 # <==== Meta Data =====>
 NAME	:= parsing
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra -Iparsing_inc/ -I../../inc -I../../lib/libft/ -I../garbage_col/inc
+CFLAGS	:= -Wall -Werror -Wextra -Iparsing_inc/ -I../../inc -I../../lib/libft/ -I../garbage_col/inc -g
  
 # Flag to gernerate dependencies (outpu to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
@@ -44,7 +44,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
