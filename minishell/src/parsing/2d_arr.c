@@ -5,7 +5,8 @@ int	world_len(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != ' ' && str[i])
+	while (str[i] != ' ' && str[i]
+			&& !is_meta_char(str[i]))
 		i++;
 	return (i);
 }
@@ -80,7 +81,7 @@ char	**give_2d_arg(char **str)
 
 int main(void)
 {
-	char * str= "Hello World Iam MATEO jfyi";
+	char * str= "ls -l | grep a";
 	char **splitted;
 
 	splitted = give_2d_arg(&str);
