@@ -6,7 +6,6 @@
 typedef struct	s_mem_block
 {
 	void	*mem;
-	size_t	size;
 	struct	s_mem_block;
 }	t_mem_block;
 
