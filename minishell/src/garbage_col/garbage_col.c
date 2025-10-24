@@ -1,11 +1,34 @@
 #include "garbage.h"
 
+static t_mem_block  *add_node(t_mem_block *head, void *data)
+{
+	t_mem_block	*tmp;
+
+	tmp = malloc(sizeof(t_mem_block));
+	if (!tmp)
+	{
+		write(2, "Malloc Failed", ft_strlen("Malloc Failed"));
+		exit (120);
+	}
+	tmp->mem = data;
+	tmp->next = head;
+	tmp = head;
+	return (head);
+}
+
 static t_mem_block  *create_first_node(void *data)
 {
     t_mem_block* first_node;
 
 	first_node = malloc(sizeof(t_mem_block));
+	if (!first_node)
+	{
+		write(2, "Malloc Failed", ft_strlen("Malloc Failed"));
+		exit (120);
+	}
 	first_node->mem = data;
+	first_node->next = NULL;
+	return (first_node);
 }
 
 /// @brief Adds the provided data to a linked list.
@@ -23,7 +46,8 @@ t_mem_block	*add_to_layer(t_mem_block *layer_head, void *data)
 	}
 	if (!layer_head)
         head = create_first_node(data);
-
+	else
+		head = add_node(layer_head, data);
     return (head);
 }
 
@@ -31,9 +55,17 @@ t_mem_block	*add_to_layer(t_mem_block *layer_head, void *data)
 /// @param layer_head Provided layer
 void	free_layer(t_mem_block *layer_head)
 {
+	t_mem_block	*tmp;
+
 	if (!layer_head)
 	{
 		write(2, "Nothing to free\n", 16);
 		return ;
+	}
+	while (layer_head)
+	{
+		tmp = layer_head;
+		layer_head = layer_head->next;
+		free(tmp);
 	}
 }

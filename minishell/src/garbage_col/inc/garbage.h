@@ -5,8 +5,8 @@
 
 typedef struct	s_mem_block
 {
-	void	*mem;
-	struct	s_mem_block;
+	struct	s_mem_block	*next;
+	void				*mem;
 }	t_mem_block;
 
 t_mem_block	*add_to_layer(t_mem_block *layer, void *data);
