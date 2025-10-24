@@ -17,7 +17,7 @@ static t_token	*parse_tokens(t_tmp_cmd_token *cmd_head)
 void	parsing_process(char *cmd, t_meta *meta)
 {
 	t_tmp_cmd_token	*cmd_head;
-	t_token			*root_node;
+	// t_token			*root_node;
 
 	cmd_head = create_commands (cmd);
 	meta->head = parse_tokens(cmd_head);

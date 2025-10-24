@@ -104,12 +104,15 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 		node = malloc(sizeof(t_tmp_cmd_token));
 		if (head)
 			head->prev = node;
+		node->args_2d = NULL;
+		node->value = NULL;
 		node->next = head;
 		while (*cmd == ' ')
 			cmd++;
-		node->value = get_and_advance_token(&cmd);
 		if (!is_meta_char(*cmd))
-			node->args_2d = give_2d_arg(&cmd);
+			node->args_2d = special_split(&cmd);
+		else
+			node->value = get_and_advance_token(&cmd);
 		head = node;
 		node = node->next;
 	}
