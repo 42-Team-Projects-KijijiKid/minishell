@@ -71,18 +71,18 @@ void	free_layer(t_mem_block *layer_head)
 	}
 }
 
-int	main(void)
-{
-	int	i;
-	char *test;
-	t_mem_block	*layer_1;
+// int	main(void)
+// {
+// 	int	i;
+// 	char *test;
+// 	t_mem_block	*layer_1;
 
-	i = 0;
-	while (i < 100)
-	{
-		test = malloc(1234);
-		layer_1 = add_to_layer(layer_1, (void*)test);
-		i++;
-	}
-	free_layer(layer_1);
-}
+// 	i = 0;
+// 	while (i < 100)
+// 	{
+// 		test = malloc(1234);
+// 		layer_1 = add_to_layer(layer_1, (void*)test);
+// 		i++;
+// 	}
+// 	free_layer(layer_1);
+// }
