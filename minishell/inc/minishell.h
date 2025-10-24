@@ -21,7 +21,10 @@
 
 typedef struct	s_meta
 {
-	t_token	*head;
+	t_token		*head;
+	t_mem_block	*layer_1;
+	t_mem_block	*layer_2;
+	t_mem_block	*layer_3;
 }	t_meta;
 
 
