@@ -20,7 +20,8 @@ void	parsing_process(char *cmd, t_meta *meta)
 
 	cmd_head = create_commands (cmd, meta);
 	meta->head = parse_tokens(cmd_head, meta);
-	syntax_errors(meta->head, meta, 0);
+	check_syntax(meta->head, meta);
+	expand_tokens(meta->head, meta);
 	print_ast_structure(meta->head, 0);
 	free_layer(meta->layer_2);
 	free_layer(meta->layer_3);

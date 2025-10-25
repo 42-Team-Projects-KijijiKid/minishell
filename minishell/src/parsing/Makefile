@@ -24,7 +24,7 @@ CORE_DIR		:= core/
 TMP_TOKEN_DIR	:= tmp_token/
 DEBUG_DIR		:= debug/
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors expand)) 
 TMP_TOKEN_FILES	:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token)) 
 DEBUG_FILES	:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast)) 
 

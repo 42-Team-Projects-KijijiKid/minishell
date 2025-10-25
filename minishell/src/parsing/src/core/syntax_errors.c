@@ -5,19 +5,24 @@
 /// @param head 
 /// @param meta 
 /// @return 
-t_token *syntax_errors(t_token *head, t_meta *meta, int quote_counter)
+static int quote_err(t_token *head, t_meta *meta, int tmp_quote)
 {
 	if (!head)
-		return (NULL);
-	printf("%s\n", head->value);
+		return (tmp_quote);
 	if (*head->value == '"' || *head->value == '\'')
-		quote_counter++;
-	syntax_errors(head->left, meta, quote_counter);
-	syntax_errors(head->right, meta, quote_counter);
-	if (quote_counter % 2)
+		tmp_quote++;
+	tmp_quote =	quote_err(head->left, meta, tmp_quote);
+	return (quote_err(head->right, meta, tmp_quote));
+}
+
+void	check_syntax(t_token *head, t_meta *meta)
+{
+	int	amount_qoutes;
+
+	amount_qoutes = quote_err(head, meta, 0);
+	if (amount_qoutes % 2)
 	{
-		write(2, "Syntax Error:\n", 14);
-		exit(1);
+			write(2, "Syntax Error:\n", 14);
+			exit(1);
 	}
-	return (NULL);
 }
