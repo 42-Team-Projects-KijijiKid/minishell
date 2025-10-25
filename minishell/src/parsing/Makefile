@@ -1,7 +1,7 @@
 # <==== Meta Data =====>
 NAME	:= parsing
 CC		:= cc
-CFLAGS	:= -Wall -Werror -Wextra -Iparsing_inc/ -Igarbage_col/inc/ -I../../inc -I../../lib/libft/
+CFLAGS	:= -g -Wall -Werror -Wextra -Iparsing_inc/ -Igarbage_col/inc/ -I../../inc -I../../lib/libft/
  
 # Flag to gernerate dependencies (outpu to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
@@ -24,7 +24,7 @@ CORE_DIR		:= core/
 TMP_TOKEN_DIR	:= tmp_token/
 DEBUG_DIR		:= debug/
 
-CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen)) 
+CORE_FILES	:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
 TMP_TOKEN_FILES	:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token)) 
 DEBUG_FILES	:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast)) 
 

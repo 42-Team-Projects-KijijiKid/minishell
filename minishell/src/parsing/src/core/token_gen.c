@@ -49,7 +49,10 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head, t_meta *meta)
 		token->value = cmd_head->value;
 		token->right = NULL;
 		if (cmd_head->args_2d)
+		{
 			token->args_2d = cmd_head->args_2d;
+			token->value = cmd_head->args_2d[0];
+		}
 		if (prev)
 			prev->left = token;
 		else
