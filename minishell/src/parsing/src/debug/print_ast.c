@@ -12,7 +12,7 @@ void	print_ast_structure(t_token *root, int level)
 		printf("-> ");
 	if (root->value)
 			printf("%s\n", root->value);
-	else
+	if (root->args_2d)
 	{
 		printf("[");
 		while (*root->args_2d)

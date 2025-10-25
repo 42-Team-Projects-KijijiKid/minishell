@@ -1,10 +1,10 @@
 #include "garbage.h"
 
-static t_mem_block  *add_node(t_mem_block *head, void *data)
+static t_mem_node  *add_node(t_mem_node *head, void *data)
 {
-	t_mem_block	*tmp;
+	t_mem_node	*tmp;
 
-	tmp = malloc(sizeof(t_mem_block));
+	tmp = malloc(sizeof(t_mem_node));
 	if (!tmp)
 	{
 		write(2, "Malloc Failed", 13);
@@ -16,11 +16,11 @@ static t_mem_block  *add_node(t_mem_block *head, void *data)
 	return (head);
 }
 
-static t_mem_block  *create_first_node(void *data)
+static t_mem_node  *create_first_node(void *data)
 {
-    t_mem_block* first_node;
+    t_mem_node* first_node;
 
-	first_node = malloc(sizeof(t_mem_block));
+	first_node = malloc(sizeof(t_mem_node));
 	if (!first_node)
 	{
 		write(2, "Malloc Failed", 13);
@@ -35,9 +35,9 @@ static t_mem_block  *create_first_node(void *data)
 /// @param layer_head Layer where to add the data.
 /// @param data void pointer of the data
 /// @return new head of layer
-t_mem_block	*add_to_layer(t_mem_block *layer_head, void *data)
+t_mem_node	*add_to_layer(t_mem_node *layer_head, void *data)
 {
-	t_mem_block	*head;
+	t_mem_node	*head;
 
 	if (!data)
 	{
@@ -53,9 +53,9 @@ t_mem_block	*add_to_layer(t_mem_block *layer_head, void *data)
 
 /// @brief Totaly frees the stored information of the layer
 /// @param layer_head Provided layer
-void	free_layer(t_mem_block *layer_head)
+void	free_layer(t_mem_node *layer_head)
 {
-	t_mem_block	*tmp;
+	t_mem_node	*tmp;
 
 	if (!layer_head)
 	{
@@ -75,7 +75,7 @@ void	free_layer(t_mem_block *layer_head)
 // {
 // 	int	i;
 // 	char *test;
-// 	t_mem_block	*layer_1;
+// 	t_mem_node	*layer_1;
 
 // 	i = 0;
 // 	while (i < 100)

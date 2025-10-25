@@ -110,6 +110,8 @@ t_tmp_cmd_token	*create_commands(char *cmd, t_meta *meta)
 		node->next = head;
 		while (*cmd == ' ')
 			cmd++;
+		// if (*cmd == '\"' || *cmd == '\'')
+		// 	node->value = rtn_str_quotes(&cmd, meta);
 		if (!is_meta_char(*cmd))
 			node->args_2d = special_split(&cmd, meta);
 		else
