@@ -1,14 +1,14 @@
 # <==== Meta Data =====>
 NAME	:= minishell
 CC		:= cc
-CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Isrc/ -Ilib/ -std=c99
+CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
  
 # Flag to gernerate dependencies (output to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
 # Not working at moment
 
 #Includes
-vpath %.h inc/ src/ lib/
+vpath %.h inc/
 
 # <==== Files & Folders =====>
 MAIN_FILE	:= main.c
