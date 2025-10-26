@@ -43,6 +43,7 @@ void	free_layer(t_layer *layer_meta)
 	{
 		tmp = layer_meta->head;
 		layer_meta->head = layer_meta->head->next;
+		free(tmp->mem);
 		free(tmp);
 	}
 }
