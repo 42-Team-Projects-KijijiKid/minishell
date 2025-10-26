@@ -31,7 +31,7 @@ void	*ft_malloc(ssize_t size, t_layer_type type)
 
 	meta = get_meta();
 	rtn = malloc(size);
-	if (rtn)
+	if (!rtn)
 		ft_error("Malloc failed", __FILE__, __LINE__, 2);
 	if (type == LAYER_1)
 		add_to_layer(&meta->garbage.layer_1, (void *)rtn);

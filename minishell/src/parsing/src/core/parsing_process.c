@@ -22,7 +22,7 @@ void	parsing_process(char *cmd)
 	meta = get_meta();
 	cmd_head = create_commands (cmd);
 	meta->head = parse_tokens(cmd_head);
-	check_syntax(meta->head);
-	expand_tokens(meta->head);
-	print_ast_structure(meta->head, 0);
+	// check_syntax(meta->head); can we do before everything so not good here
+	// expand_tokens(meta->head);
+	print_ast_structure(meta->head, 0, false);
 }
