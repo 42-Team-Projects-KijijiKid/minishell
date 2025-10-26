@@ -70,6 +70,7 @@ void	free_layer(t_mem_block *layer_head)
 		free(tmp);
 	}
 }
+void	ft_malloc()
 
 // int	main(void)
 // {

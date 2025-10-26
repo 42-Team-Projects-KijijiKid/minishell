@@ -11,16 +11,16 @@ typedef struct s_tmp_cmd_token
 	struct s_tmp_cmd_token	*prev;
 }	t_tmp_cmd_token;
 
-void			parsing_process(char *cmd, t_meta *meta);
-t_tmp_cmd_token	*create_commands(char *cmd, t_meta *meta);
-void			check_syntax(t_token *head, t_meta *meta);
-void			expand_tokens(t_token *head, t_meta *meta);
-char			*rtn_str_quotes(char **str, t_meta *meta);
+void			parsing_process(char *cmd);
+t_tmp_cmd_token	*create_commands(char *cmd);
+void			check_syntax(t_token *head);
+void			expand_tokens(t_token *head);
+char			*rtn_str_quotes(char **str);
 
-char	**special_split(char **str, t_meta *meta);
+char	**special_split(char **str);
 
 //Token Gen
-t_token	*create_tokens(t_tmp_cmd_token *cmd_head, t_meta *meta);
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head);
 char	**give_2d_arg(char **str);
 bool	is_meta_char(char cmd);
 

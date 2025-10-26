@@ -7,6 +7,7 @@
 #include "token.h"
 #include "libft.h"
 #include "garbage.h"
+#include "parsing.h"
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
 #include <unistd.h>
@@ -15,15 +16,21 @@
 #include <dirent.h>
 // Strerror
 #include <string.h>
-
 #include <termios.h>
-
 
 typedef struct	s_meta
 {
 	t_token				*head;
-	t_garbage			garbage;
+	t_garbage	garbage;
 }	t_meta;
+
+///Util Prototypes
+t_meta	*init_meta(void);
+t_meta	*get_meta(void);
+void	*ft_malloc(ssize_t size, t_layer_type type);
+void	ft_error(char *msg, char *file, int line, uint8_t exit_stat);
+
+
 
 
 #endif

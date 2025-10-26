@@ -23,3 +23,14 @@ t_meta	*init_meta(void)
 	meta->garbage.layer_3.size = 0;
 	return (meta);
 }
+
+void	*ft_malloc(ssize_t size, t_layer_type type)
+{
+	t_meta	*meta;
+	void	*rtn;
+
+	meta = get_meta();
+	rtn = malloc(size);
+	if (rtn)
+		ft_error("Malloc failed", __FILE__, __LINE__, 2);
+}
