@@ -33,4 +33,13 @@ void	*ft_malloc(ssize_t size, t_layer_type type)
 	rtn = malloc(size);
 	if (rtn)
 		ft_error("Malloc failed", __FILE__, __LINE__, 2);
+	if (type == LAYER_1)
+		add_to_layer(&meta->garbage.layer_1, (void *)rtn);
+	else if (type == LAYER_2)
+		add_to_layer(&meta->garbage.layer_2, (void *)rtn);
+	else if (type == LAYER_3)
+		add_to_layer(&meta->garbage.layer_1, (void *)rtn);
+	else
+		ft_error("Provided Layer does not exist", __FILE__, __LINE__, 12);
+	return (rtn);
 }

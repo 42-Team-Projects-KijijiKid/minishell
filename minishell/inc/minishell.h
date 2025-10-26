@@ -21,7 +21,7 @@
 typedef struct	s_meta
 {
 	t_token				*head;
-	t_garbage	garbage;
+	t_garbage			garbage;
 }	t_meta;
 
 ///Util Prototypes

@@ -21,24 +21,26 @@ GC_DIR		:= garbage_col/
 UTILS_DIR	:= utils/
 
 #Folders inside src/parsing
-CORE_DIR		:= core/
-TMP_TOKEN_DIR	:= tmp_token/
-DEBUG_DIR		:= debug/
+CORE_DIR			:= src/core/
+TMP_TOKEN_DIR		:= src/tmp_token/
+EXPANSION_DIR		:= src/expansion/
+DEBUG_DIR			:= src/debug/
 
 #.c files in src/parsing with subfolders
-CORE_FILES_PARSING		:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors expand)) 
-TMP_TOKEN_FILES_PARSING	:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token string)) 
-DEBUG_FILES_PARSING		:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast)) 
+CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
+TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token string)) 
+TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand)) 
+DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast)) 
 
 #.c files in src/garbage_col with subfolders
-CORE_FILES_GC	:= garbage_col.cs
+CORE_FILES_GC	:= garbage_col.c
 
 #.c files in src/utils with subfolders
-CORE_FILES_UTILS		:= $(addsuffix .c, utils)
+CORE_FILES_UTILS		:= $(addsuffix .c, utils error)
 
 
 # This is the total path to the .c files
-PARSING_MAIN_PATH	:= $(addprefix $(PARSING_DIR), $(CORE_FILES_PARSING) $(TMP_TOKEN_FILES_PARSING) $(DEBUG_FILES_PARSING))
+PARSING_MAIN_PATH	:= $(addprefix $(PARSING_DIR), $(CORE_FILES_PARSING) $(TMP_TOKEN_FILES_PARSING) $(DEBUG_FILES_PARSING) $(TOKEN_EXPANSION_PARSING))
 GC_MAIN_PATH		:= $(addprefix $(GC_DIR), $(CORE_FILES_GC))
 UTILS_MAIN_PATH		:= $(addprefix $(UTILS_DIR), $(CORE_FILES_UTILS))
 
@@ -60,7 +62,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) lib/libft/libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)

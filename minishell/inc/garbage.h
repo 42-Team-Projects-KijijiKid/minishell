@@ -14,12 +14,12 @@ typedef struct	s_mem_block
 {
 	struct	s_mem_block	*next;
 	void				*mem;
-}	t_mem_block;
+}	t_mem_node;
 
 typedef struct	s_layer
 {
-	t_mem_block	*head;
-	t_mem_block	*tail;
+	t_mem_node	*head;
+	t_mem_node	*tail;
 	ssize_t		size;
 }	t_layer;
 
@@ -31,7 +31,8 @@ typedef struct s_garbage
 }	t_garbage;
 
 
-t_mem_block	*add_to_layer(t_mem_block *layer, void *data);
-void		free_layer(t_mem_block *layer_head);
+void 		add_to_layer(t_layer *layer_meta, void *data);
+void		free_layer(t_layer *layer_meta);
+void		free_gc(void);
 
 #endif

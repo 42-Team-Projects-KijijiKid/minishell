@@ -5,21 +5,19 @@
 /// @return enum with the matching type 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
-	if (!cmd->value)
-		return (T_TEXT);
-	if (ft_strncmp(cmd->value, "|", ft_strlen(cmd->value)) == 0)
+	if (ft_strncmp(cmd->args_2d[0], "|", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_PIPE);
-	else if (ft_strncmp(cmd->value, "&&", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "&&", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_AND);
-	else if (ft_strncmp(cmd->value, "||", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "||", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_OR);
-	else if (ft_strncmp(cmd->value, "<", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "<", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_IN_RDR);
-	else if (ft_strncmp(cmd->value, ">", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], ">", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_OUT_RDR);
-	else if (ft_strncmp(cmd->value, ">>", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], ">>", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_APPEND);
-	else if (ft_strncmp(cmd->value, "<<", ft_strlen(cmd->value)) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "<<", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_HEREDOC);
 	else
 		return (T_TEXT);
@@ -32,27 +30,22 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 /// Redirection list is handled elsewhere
 /// @param cmd_head 
 /// @return 
-t_token	*create_tokens(t_tmp_cmd_token *cmd_head, t_meta *meta)
+t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 {
 	t_token	*head;
 	t_token *token;
 	t_token *prev;
+	t_meta	*meta;
 
+	meta = get_meta();
 	prev = NULL;
 	while (cmd_head)
 	{
-		token = malloc(sizeof(t_token));
-		meta->layer_2 = add_to_layer(meta->layer_2, (void*)token);
+		token = ft_malloc(sizeof(t_token), LAYER_2);
 		if (!token)
 			return NULL;
 		token->type = evaluate_token_type(cmd_head);
-		token->value = cmd_head->value;
-		token->right = NULL;
-		if (cmd_head->args_2d)
-		{
-			token->args_2d = cmd_head->args_2d;
-			token->value = cmd_head->args_2d[0];
-		}
+		token->args_2d = cmd_head->args_2d;
 		if (prev)
 			prev->left = token;
 		else

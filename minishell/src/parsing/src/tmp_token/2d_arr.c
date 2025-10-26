@@ -20,7 +20,7 @@ char	*give_word(char **str)
 	while (**str == ' ')
 		(*str)++;
 	len = world_len(*str);
-	rtn = malloc(sizeof(char) * (len + 1));
+	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
 	i = 0;
 	while (**str && i < len)
 	{
@@ -53,20 +53,18 @@ int	word_count(char *str)
 	return (count);
 }
 
-char	**special_split(char **str, t_meta *meta)
+char	**special_split(char **str)
 {
 	int		i;
 	char	**rtn;
 	int		words;
 
 	words = word_count(*str);
-	rtn = malloc(sizeof(char *) * (word_count(*str) + 1));
-	meta->layer_2 = add_to_layer(meta->layer_2, (void *)rtn);
+	rtn = ft_malloc(sizeof(char *) * (word_count(*str) + 1), LAYER_2);
 	i = 0;
 	while (i < words)
 	{
 		rtn[i] = give_word(str);
-		meta->layer_2 = add_to_layer(meta->layer_2, (void *)rtn[i]);
 		i++;
 	}
 	rtn[i] = NULL;

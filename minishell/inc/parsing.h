@@ -5,7 +5,6 @@
 
 typedef struct s_tmp_cmd_token
 {
-	char					*value;
 	char					**args_2d;
 	struct s_tmp_cmd_token	*next;
 	struct s_tmp_cmd_token	*prev;
@@ -13,9 +12,11 @@ typedef struct s_tmp_cmd_token
 
 void			parsing_process(char *cmd);
 t_tmp_cmd_token	*create_commands(char *cmd);
-void			check_syntax(t_token *head);
 void			expand_tokens(t_token *head);
 char			*rtn_str_quotes(char **str);
+
+//Recursive Functions
+void	check_syntax(t_token *head);
 
 char	**special_split(char **str);
 

@@ -1,89 +1,61 @@
-#include "garbage.h"
+#include "minishell.h"
 
-static t_mem_block  *add_node(t_mem_block *head, void *data)
+void	add_node(t_layer *layer_meta, void *data)
 {
-	t_mem_block	*tmp;
-
-	tmp = malloc(sizeof(t_mem_block));
-	if (!tmp)
+	t_mem_node	*node;
+	
+	node = malloc(sizeof(t_mem_node));
+	if (!node)
+		ft_error("Malloc failed", __FILE__, __LINE__, 2);
+	if (layer_meta->size == 0)
 	{
-		write(2, "Malloc Failed", 13);
-		exit (120);
+		node->next = NULL;
+		node->mem = data;
+		layer_meta->head = node;
+		layer_meta->tail = node;
+		layer_meta->size++;
 	}
-	tmp->mem = data;
-	tmp->next = head;
-	head = tmp;
-	return (head);
-}
-
-static t_mem_block  *create_first_node(void *data)
-{
-    t_mem_block* first_node;
-
-	first_node = malloc(sizeof(t_mem_block));
-	if (!first_node)
+	else
 	{
-		write(2, "Malloc Failed", 13);
-		exit (120);
+		node->next = layer_meta->head;
+		node->mem = data;
+		layer_meta->head = node;
+		layer_meta->size++;
 	}
-	first_node->mem = data;
-	first_node->next = NULL;
-	return (first_node);
 }
 
 /// @brief Adds the provided data to a linked list.
 /// @param layer_head Layer where to add the data.
 /// @param data void pointer of the data
 /// @return new head of layer
-t_mem_block	*add_to_layer(t_mem_block *layer_head, void *data)
+void add_to_layer(t_layer *layer_meta, void *data)
 {
-	t_mem_block	*head;
-
-	if (!data)
-	{
-		write(2, "No Data to add\n", 15);
-		return (NULL);
-	}
-	if (!layer_head)
-        head = create_first_node(data);
-	else
-		head = add_node(layer_head, data);
-    return (head);
+	add_node(layer_meta, data);
 }
 
 /// @brief Totaly frees the stored information of the layer
 /// @param layer_head Provided layer
-void	free_layer(t_mem_block *layer_head)
+void	free_layer(t_layer *layer_meta)
 {
-	t_mem_block	*tmp;
+	t_mem_node 	*tmp;
 
-	if (!layer_head)
+	while (layer_meta->head)
 	{
-		write(2, "Nothing to free\n", 16);
-		return ;
-	}
-	while (layer_head)
-	{
-		tmp = layer_head;
-		layer_head = layer_head->next;
-		free(tmp->mem);
+		tmp = layer_meta->head;
+		layer_meta->head = layer_meta->head->next;
 		free(tmp);
 	}
 }
-void	ft_malloc()
 
-// int	main(void)
-// {
-// 	int	i;
-// 	char *test;
-// 	t_mem_block	*layer_1;
+/// @brief Frees entire layers of
+/// the garbage collector
+/// @param  
+void	free_gc(void)
+{
+	t_meta	*meta;
 
-// 	i = 0;
-// 	while (i < 100)
-// 	{
-// 		test = malloc(1234);
-// 		layer_1 = add_to_layer(layer_1, (void*)test);
-// 		i++;
-// 	}
-// 	free_layer(layer_1);
-// }
+	meta = get_meta();
+	free_layer(&meta->garbage.layer_1);
+	free_layer(&meta->garbage.layer_2);
+	free_layer(&meta->garbage.layer_3);
+}
