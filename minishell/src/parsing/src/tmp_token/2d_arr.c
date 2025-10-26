@@ -1,6 +1,6 @@
 #include "parsing.h"
 
-int	world_len(char *str)
+int	word_len(char *str)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ char	*give_word(char **str)
 		(*str)++;
 	if (**str == '\"' || **str == '\'')
 		return (str_in_quotes(str));
-	len = world_len(*str);
+	len = word_len(*str);
 	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
 	i = 0;
 	while (**str && i < len)
