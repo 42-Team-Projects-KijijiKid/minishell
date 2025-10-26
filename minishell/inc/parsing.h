@@ -15,9 +15,6 @@ t_tmp_cmd_token	*create_commands(char *cmd);
 void			expand_tokens(t_token *head);
 char			*rtn_str_quotes(char **str);
 
-//Recursive Functions
-void	check_syntax(t_token *head);
-
 char	**special_split(char **str);
 
 //Token Gen
@@ -34,6 +31,9 @@ void	build_ast(t_token *root);
 //Debug Functions
 void	print_tokens(t_token *token);
 void	print_ast_structure(t_token *root, int level, bool left);
+
+//Syntax
+void	check_quotes(char *line);
 
 
 

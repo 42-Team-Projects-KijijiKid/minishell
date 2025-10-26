@@ -1,28 +1,31 @@
 #include "parsing.h"
 
-/// @brief Recursively goes trough the ast and 
-/// checks for unclosed quotes or similar
-/// @param head 
-/// @param meta 
-/// @return 
-static int quote_err(t_token *head, int tmp_quote)
+void	check_quotes(char *line)
 {
-	if (!head)
-		return (tmp_quote);
-	if (*head->value == '"' || *head->value == '\'')
-		tmp_quote++;
-	tmp_quote =	quote_err(head->left, tmp_quote);
-	return (quote_err(head->right, tmp_quote));
+	unsigned int	double_quote;
+	unsigned int	single_quote;
+
+	double_quote = 0;
+	single_quote = 0;
+	while (*line)
+	{
+		if (*line == '\'')
+			single_quote++;
+		if (*line == '\"')
+			double_quote++;
+		line++;
+	}
+	if (double_quote % 2)
+	{
+		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
+	}
+	if (single_quote % 2)
+	{
+		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
+	}
 }
 
-void	check_syntax(t_token *head)
+void	checlk_syntac(char *line)
 {
-	int	amount_qoutes;
-
-	amount_qoutes = quote_err(head, 0);
-	if (amount_qoutes % 2)
-	{
-			write(2, "Syntax Error:\n", 14);
-			exit(1);
-	}
+	check_quotes(line);
 }
