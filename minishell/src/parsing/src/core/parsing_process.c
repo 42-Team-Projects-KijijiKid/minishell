@@ -9,7 +9,6 @@ static t_token	*parse_tokens(t_tmp_cmd_token *cmd_head)
 	// print_tokens(token_head);
 	//Find Root Node(lowest Precedence, left-right associativity)
 	root = find_root(token_head);
-	printf("Root: %s\n", root->value);
 	build_ast(root);
 	return (root);
 }

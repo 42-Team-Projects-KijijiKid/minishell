@@ -16,20 +16,23 @@ bool	is_meta_char(char cmd)
 
 static char	**give_operator(char **str)
 {
-	static char	*rtn[2];
+	static char	**rtn;
 
+	rtn = ft_malloc(sizeof(char *) * 2, LAYER_2);
 	if (is_meta_char(**str) && is_meta_char(**str + 1))
 	{
-		rtn[0] = ft_malloc(sizeof(char) * 2, LAYER_2);
+		rtn[0] = ft_malloc((sizeof(char) * 2) + 1, LAYER_2);
 		rtn[0][0] = **str;
 		(*str)++;
 		rtn[0][1] = **str;
 		(*str)++;
+		rtn[0][2] = '\0';
 	}
 	else
 	{
-		rtn[0] = ft_malloc(sizeof(char) * 1, LAYER_2);
+		rtn[0] = ft_malloc((sizeof(char) * 1) + 1, LAYER_2);
 		rtn[0][0] = *(*str)++;
+		rtn[0][1] = '\0';
 	}
 	rtn[1] = NULL;
 	return (rtn);
