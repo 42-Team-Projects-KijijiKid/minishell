@@ -18,9 +18,8 @@ t_meta	*init_meta(void)
 	meta->garbage.layer_2.head = NULL;
 	meta->garbage.layer_2.tail = NULL;
 	meta->garbage.layer_2.size = 0;
-
-
-	///
-
+	meta->garbage.layer_3.head = NULL;
+	meta->garbage.layer_3.tail = NULL;
+	meta->garbage.layer_3.size = 0;
 	return (meta);
 }
