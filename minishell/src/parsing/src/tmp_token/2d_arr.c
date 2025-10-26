@@ -6,7 +6,7 @@ int	world_len(char *str)
 
 	i = 0;
 	while (str[i] != ' ' && str[i]
-			&& !is_meta_char(str[i]))
+			&& (!is_meta_char(*str) || *str == '\"' || *str == '\''))
 		i++;
 	return (i);
 }
@@ -19,6 +19,8 @@ char	*give_word(char **str)
 
 	while (**str == ' ')
 		(*str)++;
+	if (**str == '\"' || **str == '\'')
+		return (str_in_quotes(str));
 	len = world_len(*str);
 	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
 	i = 0;
@@ -39,9 +41,19 @@ int	word_count(char *str)
 
 	count = 0;
 	flag = 1;
-	while (!is_meta_char(*str) && *str)
+	while ((!is_meta_char(*str) || *str == '\"' || *str == '\'') && *str)
 	{
-		if (*str != ' ' && flag)
+		if ((*str == '\"' || *str == '\''))
+		{
+			count++;
+			while (1)
+			{
+				str++;
+				if ((*str == '\"' || *str == '\''))
+					break ;
+			}
+		}
+		else if (*str != ' ' && flag)
 		{
 			count++;
 			flag = 0;
