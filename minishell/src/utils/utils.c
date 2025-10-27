@@ -21,6 +21,7 @@ t_meta	*init_meta(char **envp)
 	meta->garbage.layer_3.head = NULL;
 	meta->garbage.layer_3.tail = NULL;
 	meta->garbage.layer_3.size = 0;
+	meta->envp = envp;
 	return (meta);
 }
 

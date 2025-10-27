@@ -23,16 +23,16 @@ GC_DIR			:= garbage_col/
 UTILS_DIR		:= utils/
 
 #Folders inside src/parsing && src/execcution
-CORE_DIR			:= src/core/
+CORE_DIR			:= core/
 
 #Folders inside src/parsing
-TMP_TOKEN_DIR		:= src/tmp_token/
-EXPANSION_DIR		:= src/expansion/
-DEBUG_DIR			:= src/debug/
-REDIRECTION_DIR		:= src/redirection/
+TMP_TOKEN_DIR		:= tmp_token/
+EXPANSION_DIR		:= expansion/
+DEBUG_DIR			:= debug/
+REDIRECTION_DIR		:= redirection/
 
 #Folders inside src/execution
-HELPERS_DIR			:= src/helpers/
+HELPERS_DIR			:= helpers/
 
 #.c files in src/parsing with subfolders
 CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
@@ -59,7 +59,7 @@ GC_MAIN_PATH		:= $(addprefix $(GC_DIR), $(CORE_FILES_GC))
 UTILS_MAIN_PATH		:= $(addprefix $(UTILS_DIR), $(CORE_FILES_UTILS))
 
 # Every folder path including the .c files inside the src/ folder 
-MELTING_POT	:= $(PARSING_MAIN_PATH) $(GC_MAIN_PATH) $(UTILS_MAIN_PATH)
+MELTING_POT	:= $(PARSING_MAIN_PATH) $(GC_MAIN_PATH) $(UTILS_MAIN_PATH) $(EXECUTION_MAIN_PATH)
 
 
 # Every Folder path prefixed with src/ and the main (top level)

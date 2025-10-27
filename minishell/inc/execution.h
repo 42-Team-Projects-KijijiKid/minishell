@@ -5,6 +5,7 @@
 
 char	**extract_path(char **envp);
 char	*access_path(char *cmd, char **paths_2d);
+void	execution_process(t_token *token);
 
 
 #endif

@@ -1,21 +1,5 @@
 #include "minishell.h"
 
-char	**extract_path(char **envp)
-{
-	char	**path_2d;
-
-	while (*envp)
-	{
-		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
-		{
-			path_2d = ft_split((*envp + 5), ':');
-			return (path_2d);
-		}
-		envp++;
-	}
-	return (NULL);
-}
-
 int main(int ac, char **av, char **env)
 {
 	char	*cmd;
@@ -30,8 +14,9 @@ int main(int ac, char **av, char **env)
 	// 	parsing_process(cmd);
 	// }
 	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
-	cmd = "echo \"Hello Worl\"";
+	cmd = "echo Hello World Chian";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd);
+	execution_process(meta->head);
 	free_gc();
 }

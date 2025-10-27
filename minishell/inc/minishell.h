@@ -8,6 +8,7 @@
 #include "libft.h"
 #include "garbage.h"
 #include "parsing.h"
+#include "execution.h"
 #include <fcntl.h>
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
@@ -31,8 +32,6 @@ t_meta	*init_meta(char **envp);
 t_meta	*get_meta(void);
 void	*ft_malloc(ssize_t size, t_layer_type type);
 void	ft_error(char *msg, char *file, int line, uint8_t exit_stat);
-
-
 
 
 #endif
