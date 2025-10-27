@@ -5,8 +5,6 @@
 /// @return enum with the matching type 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
-	printf("%s  ", cmd->args_2d[0]);
-	printf("%zu\n", ft_strlen(cmd->args_2d[0]));
 	if (ft_strncmp(cmd->args_2d[0], "|", ft_strlen(cmd->args_2d[0])) == 0)
 		return (T_PIPE);
 	else if (ft_strncmp(cmd->args_2d[0], "&&", ft_strlen(cmd->args_2d[0])) == 0)
