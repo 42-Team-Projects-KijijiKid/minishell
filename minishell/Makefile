@@ -1,7 +1,8 @@
 # <==== Meta Data =====>
 NAME	:= minishell
 CC		:= cc
-CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
+# CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
+CFLAGS	:= -g -Iinc/ -Ilib/libft
  
 # Flag to gernerate dependencies (output to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
@@ -62,7 +63,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) lib/libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/libft/libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
