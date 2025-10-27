@@ -76,7 +76,6 @@ void	set_redirections(t_token *head_token)
 			else if (head_token->type == T_IN_RDR)
 				handle_io_redir(head_token);
 		}
-		printf("%d\n", head_token->type);
 		head_token= head_token->left;
 	}
 }
