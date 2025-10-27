@@ -33,8 +33,7 @@ typedef enum	e_token_type
 	T_IN_RDR,
 	T_OUT_RDR,
 	T_APPEND,
-	T_HEREDOC,
-	NOT_ASSIGNED
+	T_HEREDOC
 }	t_token_enum;
 
 typedef struct	s_token

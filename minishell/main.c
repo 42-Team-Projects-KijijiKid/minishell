@@ -29,7 +29,8 @@ int main(int ac, char **av, char **env)
 	// 	printf("Command Print: %s\n", cmd);
 	// 	parsing_process(cmd);
 	// }
-	cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
+	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
+	cmd = "ps -ef | echo $USER systemd | grep a";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd);
 	free_gc();

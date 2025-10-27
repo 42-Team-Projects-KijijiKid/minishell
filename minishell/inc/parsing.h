@@ -41,6 +41,6 @@ void	handle_pipe(t_token *head_token);
 void	handle_append(t_token *head_token);
 void	handle_heredoc(t_token *head_token);
 void	handle_io_redir(t_token *head_token);
-
+void	set_node_val(t_redir *node);
 
 #endif

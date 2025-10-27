@@ -35,7 +35,6 @@ static void	null_values(t_token *token)
 	token->redir_meta.head = NULL;
 	token->redir_meta.tail = NULL;
 	token->redir_meta.size = 0;
-	token->type = NOT_ASSIGNED;
 }
 
 /// @brief Turns the command linked list

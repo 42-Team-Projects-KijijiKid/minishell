@@ -1,5 +1,14 @@
 #include "parsing.h"
 
+/// @brief Standardizes the inital values
+/// of the t_redir nodes
+void	set_node_val(t_redir *node)
+{
+	node->fd = -1;
+	node->next = NULL;
+	node->path = NULL;
+}
+
 static bool	is_redir_type(t_token_enum type)
 {
 	if (type == T_PIPE)
@@ -36,6 +45,7 @@ void	set_redirections(t_token *head_token)
 			else if (head_token->type == T_IN_RDR)
 				handle_io_redir(head_token);
 		}
+		printf("%d\n", head_token->type);
 		head_token= head_token->left;
 	}
 }
