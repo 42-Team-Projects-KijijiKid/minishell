@@ -8,6 +8,7 @@
 #include "libft.h"
 #include "garbage.h"
 #include "parsing.h"
+#include <fcntl.h>
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
 #include <unistd.h>

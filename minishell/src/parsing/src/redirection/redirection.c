@@ -1,5 +1,36 @@
 #include "parsing.h"
 
+/// @brief This function creates redirection nodes
+/// and assign them to the given node
+/// The redir are stored in Layer2 of the gc
+/// @param token Token that the redir affect
+/// @param redir_type Redirection type
+/// @param fd the file desriptor
+void	assign_redir_node_values(t_token *token, t_redir_type redir_type, int fd)
+{
+	t_redir	*redir_node;
+
+	redir_node = ft_malloc(sizeof(t_redir), LAYER_2);
+	set_node_val(redir_node);
+	if (!token->redir_meta.head)
+	{
+		redir_node->fd = fd;
+		redir_node->type = redir_type;
+		token->redir_meta.head = redir_node;
+		token->redir_meta.tail = redir_node;
+	}
+	else if (token->redir_meta.size <= 2)
+	{
+		redir_node->fd = fd;
+		redir_node->type = redir_type;
+		token->redir_meta.head->next = redir_node;
+		token->redir_meta.tail = redir_node;
+	}
+	else
+		ft_error("More than two redir for one command:", __FILE__, __LINE__, 38);
+	token->redir_meta.size++;
+}
+
 /// @brief Standardizes the inital values
 /// of the t_redir nodes
 void	set_node_val(t_redir *node)

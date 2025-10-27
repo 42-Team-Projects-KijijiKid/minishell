@@ -36,11 +36,12 @@ void	print_ast_structure(t_token *root, int level, bool left);
 void	check_quotes(char *line);
 
 //Redirection
+void	assign_redir_node_values(t_token *token, t_redir_type redir_type, int fd);
 void	set_redirections(t_token *token_head);
-void	handle_pipe(t_token *head_token);
-void	handle_append(t_token *head_token);
-void	handle_heredoc(t_token *head_token);
-void	handle_io_redir(t_token *head_token);
+void	handle_pipe(t_token *token);
+void	handle_append(t_token *token);
+void	handle_heredoc(t_token *token);
+void	handle_io_redir(t_token *token);
 void	set_node_val(t_redir *node);
 
 #endif
