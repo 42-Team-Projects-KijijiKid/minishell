@@ -23,6 +23,21 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 		return (T_TEXT);
 }
 
+/// @brief Nulls every value of the token.
+/// Safety wise.
+/// @param token 
+static void	null_values(t_token *token)
+{
+	token->args_2d = NULL;
+	token->back = NULL;
+	token->left = NULL;
+	token->right =NULL;
+	token->redir_meta.head = NULL;
+	token->redir_meta.tail = NULL;
+	token->redir_meta.size = 0;
+	token->type = NOT_ASSIGNED;
+}
+
 /// @brief Turns the command linked list
 /// into the nodes for the parsing
 /// also in a linked list like way
@@ -42,8 +57,7 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 	while (cmd_head)
 	{
 		token = ft_malloc(sizeof(t_token), LAYER_2);
-		if (!token)
-			return NULL;
+		null_values(token);
 		token->type = evaluate_token_type(cmd_head);
 		token->args_2d = cmd_head->args_2d;
 		if (prev)
