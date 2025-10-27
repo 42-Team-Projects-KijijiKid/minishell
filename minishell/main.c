@@ -14,7 +14,7 @@ int main(int ac, char **av, char **env)
 	// 	parsing_process(cmd);
 	// }
 	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
-	cmd = "echo Hello World Chian";
+	cmd = "echo Hello World Chiau";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd);
 	execution_process(meta->head);
