@@ -23,11 +23,14 @@ int main(int ac, char **av, char **env)
 	char	*path;
 
 	meta = init_meta();
-	while (1)
-	{
-		cmd = readline("Minishell>> ");
-		printf("Command Print: %s\n", cmd);
-		parsing_process(cmd);
-	}
+	// while (1)
+	// {
+	// 	cmd = readline("Minishell>> ");
+	// 	printf("Command Print: %s\n", cmd);
+	// 	parsing_process(cmd);
+	// }
+	cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
+	printf("Command Print: %s\n", cmd);
+	parsing_process(cmd);
 	free_gc();
 }

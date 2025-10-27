@@ -35,6 +35,11 @@ void	print_ast_structure(t_token *root, int level, bool left);
 //Syntax
 void	check_quotes(char *line);
 
-
+//Redirection
+void	set_redirections(t_token *token_head);
+void	handle_pipe(t_token *head_token);
+void	handle_append(t_token *head_token);
+void	handle_heredoc(t_token *head_token);
+void	handle_io_redir(t_token *head_token);
 
 #endif
