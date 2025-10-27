@@ -7,7 +7,7 @@ t_meta	*get_meta(void)
 	return (&meta);
 }
 
-t_meta	*init_meta(void) 
+t_meta	*init_meta(char **envp) 
 {
 	t_meta *meta;
 

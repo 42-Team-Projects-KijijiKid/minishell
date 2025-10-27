@@ -21,12 +21,13 @@
 
 typedef struct	s_meta
 {
-	t_token				*head;
-	t_garbage			garbage;
+	t_token		*head;
+	t_garbage	garbage;
+	char		**envp;
 }	t_meta;
 
 ///Util Prototypes
-t_meta	*init_meta(void);
+t_meta	*init_meta(char **envp);
 t_meta	*get_meta(void);
 void	*ft_malloc(ssize_t size, t_layer_type type);
 void	ft_error(char *msg, char *file, int line, uint8_t exit_stat);

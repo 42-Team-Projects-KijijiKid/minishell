@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
 	t_meta	*meta;
 	char	*path;
 
-	meta = init_meta();
+	meta = init_meta(env);
 	// while (1)
 	// {
 	// 	cmd = readline("Minishell>> ");
@@ -30,7 +30,7 @@ int main(int ac, char **av, char **env)
 	// 	parsing_process(cmd);
 	// }
 	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
-	cmd = "ps -ef < text.txt";
+	cmd = "echo \"Hello Worl\"";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd);
 	free_gc();
