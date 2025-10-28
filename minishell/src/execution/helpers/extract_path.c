@@ -1,9 +1,13 @@
 #include "execution.h"
 
-char	**extract_path(char **envp)
+char	**extract_path(void)
 {
 	char	**path_2d;
+	t_meta	*meta;
+	char	**envp;
 
+	meta = get_meta();
+	envp = meta->envp;
 	while (*envp)
 	{
 		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)

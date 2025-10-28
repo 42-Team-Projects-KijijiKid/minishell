@@ -3,7 +3,7 @@
 
 #include "minishell.h"
 
-char	**extract_path(char **envp);
+char	**extract_path(void);
 char	*access_path(char *cmd, char **paths_2d);
 void	execution_process(t_token *token);
 

@@ -37,7 +37,7 @@ HELPERS_DIR			:= helpers/
 #.c files in src/parsing with subfolders
 CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
 TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token string)) 
-TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand)) 
+TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers)) 
 REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection pipe in_out_redir heredoc append)) 
 DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
 
