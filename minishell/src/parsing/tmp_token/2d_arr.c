@@ -34,11 +34,28 @@ char	*give_word(char **str)
 	return (rtn);
 }
 
+/// @brief Moves the pointer till reaches the
+/// matching quote pair
+/// @param str the adress of the current
+/// cmd string
+void	go_trough_quoted_str(char **str)
+{
+	char	quote_end;
+	
+	quote_end = **str;
+	while (1)
+	{
+		(*str)++;
+		if (**str == quote_end)
+
+			break ;
+	}
+}
+
 int	word_count(char *str)
 {
 	int		flag;
 	int		count;
-	char	quote_end;
 
 	count = 0;
 	flag = 1;
@@ -46,14 +63,8 @@ int	word_count(char *str)
 	{
 		if ((*str == '\"' || *str == '\''))
 		{
-			quote_end = *str;
 			count++;
-			while (1)
-			{
-				str++;
-				if (*str == quote_end)
-					break ;
-			}
+			go_trough_quoted_str(&str);
 		}
 		else if (*str != ' ' && flag)
 		{
