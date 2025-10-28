@@ -6,7 +6,23 @@
 /// @param str 
 char	*single_quotes(char *str)
 {
-	return (NULL);
+	int		str_len;
+	char	*rtn;
+	int		i;
+
+	if (*str == '\'')
+		str++;
+	str_len = strlen_whitout_quotes(str, '\'');
+	rtn = ft_malloc(sizeof(char) * str_len + 1, LAYER_2);
+	i = 0;
+	while (*str != '\'')
+	{
+		rtn[i] = *str;
+		str++;
+		i++;
+	}
+	rtn[i] = '\0';
+	return (rtn);
 }
 
 /// @brief Does not expand the variable

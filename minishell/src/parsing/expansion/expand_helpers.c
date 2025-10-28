@@ -1,5 +1,21 @@
 #include "parsing.h"
 
+/// @brief Pass the string not beginning with the qoute
+/// and count how many chars are inside the string
+/// without the counting of the matching quote
+int	strlen_whitout_quotes(char *str, char quote)
+{
+	int	i;
+
+	i = -1;
+	while (*str != quote && str)
+	{
+		str++;
+		i++;
+	}
+	return (i);
+}
+
 /// @brief Null ends a possible expansion
 /// string isolate from rest of the string
 /// @param str str thats in quotes

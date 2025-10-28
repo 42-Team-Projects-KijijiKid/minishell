@@ -31,6 +31,7 @@ void			build_ast(t_token *root);
 //Expansion
 void			expand_process(t_token *token);
 char			*expand_inside_str(char *str, char quote);
+int				strlen_whitout_quotes(char *str, char quote);
 
 //Debug Functions
 void			print_tokens(t_token *token);
