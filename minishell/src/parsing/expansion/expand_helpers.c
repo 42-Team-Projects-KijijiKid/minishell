@@ -1,6 +1,5 @@
 #include "parsing.h"
 
-
 /// @brief Null ends a possible expansion
 /// string isolate from rest of the string
 /// @param str str thats in quotes
@@ -8,17 +7,23 @@
 char	*null_end_str(char **str)
 {
 	int		i;
-	char	*rtn_str;
+	char	*rtn;
 
 	i = 0;
-	rtn_str = *str;
-	while (*str && **str != ' ' && !is_meta_char(**str))
+	while (str[i] && (*str)[i] != ' ' && !is_meta_char((*str)[i])
+			&& (*str)[i] != '$')
+		i++;
+	rtn = ft_malloc((sizeof(char) * i) + 1, LAYER_2);
+	i = 0;
+	while (*str && **str != ' ' && !is_meta_char(**str)
+			&& **str != '$')
 	{
+		rtn[i] = **str;
 		(*str)++;
 		i++;
 	}
-	rtn_str[i] = '\0';
-	return (rtn_str);
+	rtn[i] = '\0';
+	return (rtn);
 }
 
 unsigned int	strlen_with_expansion(char *str, char quote)
@@ -31,26 +36,59 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 	len_2 = 0;
 	while (*str != quote && *str)
 	{
-
 		if (*str == '$')
 		{
 			str++;
 			tmp_str = null_end_str(&str);
-			len_2 = ft_strlen(rtn_env_value(tmp_str));
+			len_2 += ft_strlen(rtn_env_value(tmp_str));
 		}
-		else
+		if (*str && *str != quote)
 			len_1++;
-		str++;
+		if (*str != '$')
+			str++;
 	}
 	return (len_1 + len_2);
 }
 
+char	*give_env_str(char **str)
+{
+	char	*tmp;
+	char	*rtn;
+
+	if (**str == '$')
+		(*str)++;
+	else
+		return (NULL);
+	tmp = null_end_str(str);
+	rtn = rtn_env_value(tmp);
+	return (rtn);
+}
+
 char	*expand_inside_str(char *str, char quote)
 {
-	printf("Expanded Len: %d\n", strlen_with_expansion(str, quote));
-	// while (*str != *quote)
-	// {
+	char	*rtn;
+	char	*tmp_str;
+	int		i;
 
-	// }
-	return (NULL);
+	rtn = ft_malloc((sizeof(char) * strlen_with_expansion(str, quote)) + 1, LAYER_2);
+	i = 0;
+	while (*str != quote && *str)
+	{
+		if (*str == '$')
+		{
+			tmp_str =  give_env_str(&str);
+			while (*tmp_str)
+			{
+				rtn[i] = *tmp_str;
+				tmp_str++;
+				i++;
+			}
+		}
+		if (*str != quote && *str)
+			rtn[i++] = *str;
+		str++;
+		// i++;
+	}
+	rtn[i] = '\0';
+	return (str);
 }
