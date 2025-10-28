@@ -15,13 +15,10 @@ int main(int ac, char **av, char **envp)
 	// 	free_gc();
 	// }
 	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
-	// cmd = "echo \"$PATH$USER\"";
-	cmd = "echo \"$USER\"";
+	cmd = "echo \"$PATH$USER\"";
+	// cmd = "echo \"$USER\"";
 	printf("Command Print: %s\n", cmd);
 	parsing_process(cmd);
-	char *a = *meta->head->args_2d;
-	char *b = meta->head->args_2d[1];
-
 	execution_process(meta->head); 
 	free_gc();
 }

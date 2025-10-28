@@ -79,16 +79,16 @@ char	*expand_inside_str(char *str, char quote)
 			tmp_str =  give_env_str(&str);
 			while (*tmp_str)
 			{
-				rtn[i] = *tmp_str;
+				rtn[i++] = *tmp_str;
 				tmp_str++;
-				i++;
 			}
 		}
-		if (*str != quote && *str)
+		if (*str != quote && *str
+			&& *str != '$')
 			rtn[i++] = *str;
-		str++;
-		// i++;
+		if (*str != '$')
+			str++;
 	}
 	rtn[i] = '\0';
-	return (str);
+	return (rtn);
 }
