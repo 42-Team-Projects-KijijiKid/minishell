@@ -49,7 +49,7 @@ HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract_p
 CORE_FILES_GC 	:= $(addsuffix .c, garbage_col) 
 
 #.c files in src/utils with subfolders
-CORE_FILES_UTILS		:= $(addsuffix .c, utils error)
+CORE_FILES_UTILS		:= $(addsuffix .c, utils error env_ops)
 
 
 # This is the total path to the .c files
