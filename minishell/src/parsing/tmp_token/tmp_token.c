@@ -18,10 +18,10 @@ bool	is_meta_char(char cmd)
 
 static char	**give_operator(char **str)
 {
-	static char	**rtn;
+	char	**rtn;
 
 	rtn = ft_malloc(sizeof(char *) * 2, LAYER_2);
-	if (is_meta_char(**str) && is_meta_char(*str[1]))
+	if (is_meta_char(**str) && **str == *(*str + sizeof(char)))
 	{
 		rtn[0] = ft_malloc((sizeof(char) * 2) + 1, LAYER_2);
 		rtn[0][0] = **str;
