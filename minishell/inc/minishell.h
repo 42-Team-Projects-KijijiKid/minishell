@@ -28,10 +28,15 @@ typedef struct	s_meta
 }	t_meta;
 
 ///Util Prototypes
+
+//	utils
 t_meta	*init_meta(char **envp);
 t_meta	*get_meta(void);
+//	error
 void	*ft_malloc(ssize_t size, t_layer_type type);
 void	ft_error(char *msg, char *file, int line, uint8_t exit_stat);
+//	env_ops
+char	*rtn_env_value(char *to_search);
 
 
 #endif

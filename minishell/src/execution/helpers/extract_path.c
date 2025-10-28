@@ -3,11 +3,9 @@
 char	**extract_path(char **envp)
 {
 	char	**path_2d;
-	char	*a;
 
 	while (*envp)
 	{
-		a = *envp;
 		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
 		{
 			path_2d = ft_split((*envp + 5), ':');

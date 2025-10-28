@@ -36,8 +36,9 @@ char	*give_word(char **str)
 
 int	word_count(char *str)
 {
-	int	flag;
-	int	count;
+	int		flag;
+	int		count;
+	char	quote_end;
 
 	count = 0;
 	flag = 1;
@@ -45,11 +46,12 @@ int	word_count(char *str)
 	{
 		if ((*str == '\"' || *str == '\''))
 		{
+			quote_end = *str;
 			count++;
 			while (1)
 			{
 				str++;
-				if ((*str == '\"' || *str == '\''))
+				if (*str == quote_end)
 					break ;
 			}
 		}

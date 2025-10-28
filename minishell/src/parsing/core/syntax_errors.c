@@ -16,13 +16,9 @@ void	check_quotes(char *line)
 		line++;
 	}
 	if (double_quote % 2)
-	{
 		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
-	}
 	if (single_quote % 2)
-	{
 		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
-	}
 }
 
 void	checlk_syntac(char *line)
