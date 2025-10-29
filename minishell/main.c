@@ -9,17 +9,16 @@ int main(int ac, char **av, char **envp)
 	meta = init_meta(envp);
 	while (1)
 	{
-		cmd = readline("Minishell>> ");
+		cmd = readline("\033[34mMinishell>>\033[34m ");
 		printf("Command Print: %s\n", cmd);
 		parsing_process(cmd);
+		printf("Head: %s\n", *meta->head->args_2d);
 		execution_process(meta->head);
-		free_gc();
+		free_layer(&meta->garbage.layer_2);
+		free_layer(&meta->garbage.layer_3);
 	}
-	// cmd = "ps -ef | grep systemd | awk '{print $2}' | grep -v grep";
-	// cmd = "echo \'$PATH$USER\'";
-	// cmd = "echo \"$USER\"";
 	// printf("Command Print: %s\n", cmd);
 	// parsing_process(cmd);
-	execution_process(meta->head); 
-	free_gc();
+	// execution_process(meta->head);
+	// free_gc();
 }

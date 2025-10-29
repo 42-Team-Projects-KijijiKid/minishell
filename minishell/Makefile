@@ -43,7 +43,7 @@ DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_a
 
 #.c files in src/parsing with subfolders
 CORE_FILES_EXECUTION		:= $(addprefix $(CORE_DIR), $(addsuffix .c, execution_process)) 
-HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract_path)) 
+HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract fork)) 
 
 #.c core file gc
 CORE_FILES_GC 	:= $(addsuffix .c, garbage_col) 
