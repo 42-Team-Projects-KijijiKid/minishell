@@ -39,5 +39,6 @@ void	execution_process(t_token *token)
 		run_cmd(token, 0, 1);
 	else if (T_OUT_RDR == token->type)
 		out_redir(token);
-
+	else if (T_IN_RDR == token->type)
+		in_redir(token);
 }

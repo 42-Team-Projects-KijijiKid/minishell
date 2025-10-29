@@ -1,7 +1,5 @@
 #include "parsing.h"
 
-
-
 /// @brief Opens or creates the outfile
 /// and adds the matching redir token
 /// @param token 
@@ -12,6 +10,7 @@ static void	handle_out_redir(t_token *token)
 	fd = open(*token->left->args_2d, O_CREAT | O_WRONLY, 0644);
 	if(fd == -1)
 		ft_error("Open error:", __FILE__, __LINE__, 38);
+	printf("In assign: %d\n", fd);
 	assign_redir_node_values(token->back, OUT_FD, fd);
 }
 
@@ -19,7 +18,7 @@ static void	handle_in_redir(t_token *token)
 {
 	int	fd;
 
-	fd = open(*token->left->args_2d, O_WRONLY);
+	fd = open(*token->left->args_2d, O_RDONLY);
 	if(fd == -1)
 		ft_error("No such file or directory:", __FILE__, __LINE__, 39);
 	assign_redir_node_values(token->back, IN_FD, fd);

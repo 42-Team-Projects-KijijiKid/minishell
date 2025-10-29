@@ -31,13 +31,20 @@ void	run_cmd(t_token *token, int in_fd, int out_fd)
 		wait(NULL);
 		if (2 < out_fd)
 			close(out_fd);
+		if (2 < in_fd)
+			close(in_fd);
 	}
 
 }
 
-
 void	out_redir(t_token *token)
 {
-	printf("%d\n", token->left->redir_meta.head->fd);
 	run_cmd(token->left, 0, token->left->redir_meta.head->fd);
+}
+
+void	in_redir(t_token *token)
+{
+	printf("FD: %d\n", token->left->redir_meta.head->fd);
+	// exit (1);
+	run_cmd(token->left, token->left->redir_meta.head->fd, 1);
 }
