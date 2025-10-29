@@ -9,14 +9,12 @@ int main(int ac, char **av, char **envp)
 	meta = init_meta(envp);
 	while (1)
 	{
-		// cmd = readline("\033[34mMinishell>>\033[34m ");
-		cmd = "wc -l < out.txt";
+		cmd = readline("\033[34mMinishell>>\033[34m ");
 		parsing_process(cmd);
 		printf("%s\n", *meta->head->args_2d);
 		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);
-		break ;
 	}
 	// printf("Command Print: %s\n", cmd);
 	// parsing_process(cmd);

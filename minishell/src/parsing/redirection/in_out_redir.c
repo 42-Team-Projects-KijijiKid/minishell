@@ -10,7 +10,6 @@ static void	handle_out_redir(t_token *token)
 	fd = open(*token->left->args_2d, O_CREAT | O_WRONLY, 0644);
 	if(fd == -1)
 		ft_error("Open error:", __FILE__, __LINE__, 38);
-	printf("In assign: %d\n", fd);
 	assign_redir_node_values(token->back, OUT_FD, fd);
 }
 

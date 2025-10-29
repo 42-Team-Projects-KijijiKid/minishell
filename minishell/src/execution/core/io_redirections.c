@@ -6,7 +6,7 @@
 /// @param token command token
 /// @param in_fd file descriptor for infile
 /// @param out_fd file descriptor for outfile
-void	run_cmd(t_token *token, int in_fd, int out_fd)
+void	run_cmd(t_token *token, t_redir_type redir_type, int fd)
 {
 	int		pid;
 	t_meta	*meta;
@@ -19,32 +19,29 @@ void	run_cmd(t_token *token, int in_fd, int out_fd)
 		char	**paths_2d;
 
 		paths_2d = extract_path();
-		if (2 < in_fd)
-			dup2(in_fd, STDIN_FILENO);
-		if (2 < out_fd)
-			dup2(out_fd, STDOUT_FILENO);
+		if (redir_type == IN_FD)
+			dup2(fd, STDIN_FILENO);
+		if (redir_type == OUT_FD)
+			dup2(fd, STDOUT_FILENO);
 		path = access_path(*token->args_2d, paths_2d);
 		execve(path, token->args_2d, meta->envp);
 	}
 	else
 	{
 		wait(NULL);
-		if (2 < out_fd)
-			close(out_fd);
-		if (2 < in_fd)
-			close(in_fd);
+		if (redir_type != STD)
+			close(fd);
 	}
-
 }
 
 void	out_redir(t_token *token)
 {
-	run_cmd(token->left, 0, token->left->redir_meta.head->fd);
+	printf("FD: %d\n", token->left->redir_meta.head->fd);
+	run_cmd(token->left, token->left->redir_meta.head->type, token->left->redir_meta.head->fd);
 }
 
 void	in_redir(t_token *token)
 {
 	printf("FD: %d\n", token->left->redir_meta.head->fd);
-	// exit (1);
-	run_cmd(token->left, token->left->redir_meta.head->fd, 1);
+	run_cmd(token->left, token->left->redir_meta.head->type, token->left->redir_meta.head->fd);
 }

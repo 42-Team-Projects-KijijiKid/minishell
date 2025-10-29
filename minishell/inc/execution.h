@@ -10,7 +10,7 @@ void	execution_process(t_token *token);
 int		ft_fork(void);
 
 //I/O Redirections
-void	run_cmd(t_token *token, int in_fd, int out_fd);
+void	run_cmd(t_token *token, t_redir_type redir_type, int fd);
 void	out_redir(t_token *token);
 void	in_redir(t_token *token);
 

@@ -1,1 +1,8 @@
-jasdn kasd aslkda asd;as '' msadk kasdm sadlmda slkasd k;sadk sad; aslkdk ;kmsd lksdm asdkmas lsas,dkl /home/mandre/bin:/home/mandre/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/binmandre jandlsandl
+inc
+lib
+main.c
+Makefile
+minishell
+objs
+out.txt
+src

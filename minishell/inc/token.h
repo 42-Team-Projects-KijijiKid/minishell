@@ -5,7 +5,8 @@ typedef enum	e_redir_type
 {
 	IN_FD,
 	OUT_FD,
-	HEREDOC
+	HEREDOC,
+	STD
 }	t_redir_type;
 
 typedef struct	s_redir
