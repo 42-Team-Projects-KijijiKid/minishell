@@ -10,9 +10,8 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		cmd = readline("\033[34mMinishell>>\033[34m ");
-		printf("Command Print: %s\n", cmd);
 		parsing_process(cmd);
-		printf("Head: %s\n", *meta->head->args_2d);
+		printf("%s\n", *meta->head->args_2d);
 		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);

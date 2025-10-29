@@ -42,7 +42,7 @@ REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, red
 DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
 
 #.c files in src/parsing with subfolders
-CORE_FILES_EXECUTION		:= $(addprefix $(CORE_DIR), $(addsuffix .c, execution_process)) 
+CORE_FILES_EXECUTION		:= $(addprefix $(CORE_DIR), $(addsuffix .c, execution_process io_redirections)) 
 HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract fork)) 
 
 #.c core file gc
