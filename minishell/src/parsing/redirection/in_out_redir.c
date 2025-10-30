@@ -8,6 +8,7 @@ static void	handle_out_redir(t_token *token)
 	int	fd;
 
 	fd = open(*token->left->args_2d, O_CREAT | O_WRONLY, 0644);
+	printf("FD: %d\n", fd);
 	if(fd == -1)
 		ft_error("Open error:", __FILE__, __LINE__, 38);
 	assign_redir_node_values(token->back, OUT_FD, fd);
@@ -18,6 +19,7 @@ static void	handle_in_redir(t_token *token)
 	int	fd;
 
 	fd = open(*token->left->args_2d, O_RDONLY);
+	printf("FD: %d\n", fd);
 	if(fd == -1)
 		ft_error("No such file or directory:", __FILE__, __LINE__, 39);
 	assign_redir_node_values(token->back, IN_FD, fd);

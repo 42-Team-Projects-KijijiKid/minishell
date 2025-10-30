@@ -21,7 +21,7 @@ char	**give_operator(char **str)
 	char	**rtn;
 	char	next_char;
 
-	if (!*(*str + sizeof(char)))
+	if (*(*str + sizeof(char)))
 		next_char = *(*str + sizeof(char));
 	rtn = ft_malloc(sizeof(char *) * 2, LAYER_2);
 	if (is_meta_char(**str) && **str == next_char)
@@ -52,27 +52,26 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 {
 	t_tmp_cmd_token	*node;
 	t_tmp_cmd_token	*head;
-	t_meta *meta;
 
-	meta = get_meta();
 	head = NULL;
 	while (*cmd)
 	{
+		while (*cmd == ' ')
+			cmd++;
+		if (!*cmd)
+			break ;
 		node = ft_malloc(sizeof(t_tmp_cmd_token), LAYER_3);
+		node->prev = NULL;
 		if (head)
 			head->prev = node;
 		node->args_2d = NULL;
 		node->next = head;
-		while (*cmd == ' ')
-			cmd++;
 		if (is_meta_char(*cmd) && (*cmd != '\"' || *cmd != '\''))
 			node->args_2d = give_operator(&cmd);
 		else
 			node->args_2d = special_split(&cmd);
 		head = node;
-		node = node->next;
 	}
-	head->prev = NULL;
 	while (head->next)
 		head = head->next;
 	return (head);

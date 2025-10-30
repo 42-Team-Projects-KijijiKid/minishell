@@ -8,6 +8,7 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 	int	len;
 
 	len = ft_strlen(*cmd->args_2d);
+	char *a = *cmd->args_2d;
 	if (ft_strncmp(cmd->args_2d[0], "|", len) == 0)
 		return (T_PIPE);
 	else if (ft_strncmp(cmd->args_2d[0], "&&", len) == 0)

@@ -1,0 +1,8 @@
+inc
+lib
+main.c
+Makefile
+minishell
+objs
+out.txt
+src

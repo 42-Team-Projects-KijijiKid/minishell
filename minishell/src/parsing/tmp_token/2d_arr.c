@@ -81,7 +81,6 @@ char	**special_split(char **str)
 	int		words;
 
 	words = word_count(*str);
-	printf("Words: %d\n", words);
 	rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
 	i = 0;
 	while (i < words)
