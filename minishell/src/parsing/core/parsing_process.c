@@ -22,5 +22,5 @@ void	parsing_process(char *cmd)
 	cmd_head = create_commands(cmd);
 	meta->head = parse_tokens(cmd_head);
 	expand_process(meta->head);
-	// print_ast_structure(meta->head, 0, false);
+	print_ast_structure(meta->head, 0, false);
 }

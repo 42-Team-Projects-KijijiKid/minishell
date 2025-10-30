@@ -40,7 +40,7 @@ char	**give_operator(char **str)
 		(*str)++;
 		rtn[0][1] = '\0';
 	}
-	rtn[1] = '\0';
+	rtn[1] = NULL;
 	return (rtn);
 }
 
