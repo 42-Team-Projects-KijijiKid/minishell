@@ -5,19 +5,22 @@
 /// @return enum with the matching type 
 static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 {
-	if (ft_strncmp(cmd->args_2d[0], "|", ft_strlen(cmd->args_2d[0])) == 0)
+	int	len;
+
+	len = ft_strlen(*cmd->args_2d);
+	if (ft_strncmp(cmd->args_2d[0], "|", len) == 0)
 		return (T_PIPE);
-	else if (ft_strncmp(cmd->args_2d[0], "&&", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "&&", len) == 0)
 		return (T_AND);
-	else if (ft_strncmp(cmd->args_2d[0], "||", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "||", len) == 0)
 		return (T_OR);
-	else if (ft_strncmp(cmd->args_2d[0], "<", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "<", len) == 0)
 		return (T_IN_RDR);
-	else if (ft_strncmp(cmd->args_2d[0], ">", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], ">", len) == 0)
 		return (T_OUT_RDR);
-	else if (ft_strncmp(cmd->args_2d[0], ">>", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], ">>", len) == 0)
 		return (T_APPEND);
-	else if (ft_strncmp(cmd->args_2d[0], "<<", ft_strlen(cmd->args_2d[0])) == 0)
+	else if (ft_strncmp(cmd->args_2d[0], "<<", len) == 0)
 		return (T_HEREDOC);
 	else
 		return (T_TEXT);

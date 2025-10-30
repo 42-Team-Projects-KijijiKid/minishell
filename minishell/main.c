@@ -11,7 +11,7 @@ int main(int ac, char **av, char **envp)
 	{
 		cmd = readline("\033[34mMinishell>>\033[34m ");
 		parsing_process(cmd);
-		printf("%s\n", *meta->head->args_2d);
+		exit (100);
 		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);

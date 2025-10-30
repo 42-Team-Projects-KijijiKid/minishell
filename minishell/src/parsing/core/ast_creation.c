@@ -13,14 +13,12 @@ void build_ast(t_token *root)
 	post_head = NULL;
 	if (!root)
 		return;
-	// Detach left side (tokens before `root`)
 	if (root->back)
 	{
 		pre_head = root->back;
 		pre_head->left = NULL;
 		root->back = NULL;
 	}
-	// Detach right side (tokens after `root`)
 	if (root->left)
 	{
 		post_head = root->left;
