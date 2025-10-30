@@ -1,9 +1,0 @@
-inc
-lib
-main.c
-Makefile
-minishell
-objs
-outfile.txt
-out.txt
-src
