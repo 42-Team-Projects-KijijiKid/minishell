@@ -54,28 +54,24 @@ void	go_trough_quoted_str(char **str)
 
 int	word_count(char *str)
 {
-	int		flag;
-	int		count;
+	int	words;
+	int	flag;
 
-	count = 0;
+	words = 0;
 	flag = 1;
-	while ((!is_meta_char(*str) || *str == '\"' || *str == '\'') && *str)
+	while (*str)
 	{
-		if ((*str == '\"' || *str == '\''))
+		if (flag && ft_isalpha(*str))
 		{
-			count++;
-			go_trough_quoted_str(&str);
-		}
-		else if (*str != ' ' && flag)
-		{
-			count++;
 			flag = 0;
+			words++;
 		}
-		if (*str == ' ')
+		if (is_meta_char(*str)
+			|| *str == ' ')
 			flag = 1;
 		str++;
 	}
-	return (count);
+	return (words);
 }
 
 char	**special_split(char **str)
