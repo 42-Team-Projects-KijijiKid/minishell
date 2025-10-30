@@ -36,12 +36,10 @@ void	run_cmd(t_token *token, t_redir_type redir_type, int fd)
 
 void	out_redir(t_token *token)
 {
-	printf("FD: %d\n", token->left->redir_meta.head->fd);
 	run_cmd(token->left, token->left->redir_meta.head->type, token->left->redir_meta.head->fd);
 }
 
 void	in_redir(t_token *token)
 {
-	printf("FD: %d\n", token->left->redir_meta.head->fd);
 	run_cmd(token->left, token->left->redir_meta.head->type, token->left->redir_meta.head->fd);
 }

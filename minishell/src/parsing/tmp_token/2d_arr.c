@@ -59,15 +59,15 @@ int	word_count(char *str)
 
 	words = 0;
 	flag = 1;
-	while (*str)
+	while (*str && !is_meta_char(*str))
 	{
-		if (flag && ft_isalpha(*str))
+		if (flag && (*str == '-'
+			|| ft_isalpha(*str)))
 		{
 			flag = 0;
 			words++;
 		}
-		if (is_meta_char(*str)
-			|| *str == ' ')
+		if (*str == ' ')
 			flag = 1;
 		str++;
 	}
@@ -81,7 +81,8 @@ char	**special_split(char **str)
 	int		words;
 
 	words = word_count(*str);
-	rtn = ft_malloc(sizeof(char *) * (word_count(*str) + 1), LAYER_2);
+	printf("Words: %d\n", words);
+	rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
 	i = 0;
 	while (i < words)
 	{
