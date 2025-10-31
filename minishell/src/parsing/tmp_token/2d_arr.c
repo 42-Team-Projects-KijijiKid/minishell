@@ -9,10 +9,8 @@ bool	quote_content(char **str)
 {
 	char	quote;
 
-	printf("Content: %c\n", **str);
 	quote = **str;
 	(*str)++;
-	printf("Content:2 %c\n", **str);
 	if (quote == **str)
 		return (false);
 	while (**str != quote && **str)
@@ -69,14 +67,14 @@ char	**special_split(char **str)
 
 	words = word_count(*str);
 	printf("Words: %d\n", words);
-	// rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
-	// i = 0;
-	// while (i < words)
-	// {
-	// 	rtn[i] = give_word(str);
-	// 	i++;
-	// }
-	// rtn[i] = NULL;
+	rtn = ft_malloc((sizeof(char *) * words) + 1, LAYER_2);
+	i = 0;
+	while (i < words)
+	{
+		rtn[i] = give_word(str);
+		i++;
+	}
+	rtn[i] = NULL;
 	exit(101);
 	return (rtn);
 }
