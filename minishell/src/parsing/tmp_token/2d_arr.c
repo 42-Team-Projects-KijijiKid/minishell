@@ -1,53 +1,149 @@
 #include "parsing.h"
 
+unsigned int		len_to_quotes(char *str)
+{
+	unsigned int i;
+	char		quote_end;
+
+	i = 0;
+	quote_end = *str;
+	while (*str)
+	{
+		i++;
+		str++;
+		if (*str == quote_end)
+		{
+			i++;
+			break ;
+		}
+	}
+	return (i);
+}
+
+char	*str_in_quotes(char **str)
+{
+	unsigned int	i;
+	char			*rtn;
+	char			quote_end;
+	
+	i = len_to_quotes(*str);
+	rtn = ft_malloc((sizeof(char) * i) + 1, LAYER_2);
+	i = 0;
+	quote_end = **str;
+	while (**str)
+	{
+		rtn[i] = **str;
+		i++;
+		(*str)++;
+		if (**str == quote_end)
+		{
+			rtn[i] = **str;
+			i++;
+			(*str)++;
+			break ;
+		}
+	}
+	rtn[i] = '\0';
+	return (rtn);
+}
+
+/// @brief This function skips
+/// every space and moves
+/// the pointer pointer
+void	skip_space(char **str)
+{
+	while (**str && **str != ' ')
+		(*str)++;
+}
+
 /// @brief Checks if the quote pair has
 /// content so its not '' or "".
-/// @param str 
-/// @return false if there is no quote conentet
+/// Does not skips the content.
+/// @return false if there is no quote content
 /// true if there is quote content
-bool	quote_content(char **str)
+bool	check_for_content(char *str)
 {
 	char	quote;
-
-	quote = **str;
-	(*str)++;
-	if (quote == **str)
+	
+	quote = *str;
+	str++;
+	if (quote == *str)
 		return (false);
-	while (**str != quote && **str)
-		(*str)++;
 	return (true);
 }
 
-/// @brief Count words till operator
-/// or end of str handling quotes.
+/// @brief This goes trough the
+/// string skipping space characters
+/// or emty quotes
 /// @param str 
-/// @return amount of words till operator
-/// or null termination
-int	word_count(char *str)
+void	skip_invalid(char **str)
 {
-	int		words;
-	bool	flag;
+	while (**str && !is_meta_char(**str))
+	{
+		skip_space(str);
+		if (**str == '\'' || **str == '\"')
+		{
+			if (!check_for_content(*str))
+			{
+				(*str)++;
+				(*str)++;
+				continue ;
+			}
+			else
+				break ;
+		}
+		else
+			break ;
+		(*str)++;
+	}
+}
 
-	words = 0;
-	flag = true;
-	while (*str)
-	{	
-		if (flag && *str == '\'' || *str == '\"')
-		{
-			if (quote_content(&str))
-				words++;
-		}
-		else if (flag && *str != ' '
-			&& !is_meta_char(*str))
-		{
-			flag = false;
-			words++;
-		}
-		else if (*str == ' ')
-			flag = true;
+int	len_to_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str && *str != ' ')
+	{
+		i++;
 		str++;
 	}
-	return (words);
+	return (i);
+}
+
+char	*normal_str(char **str)
+{
+	int		i;
+	int		len;
+	char	*rtn;
+
+	len = len_to_space(*str);
+	rtn = ft_malloc((sizeof(char) * len) + 1, LAYER_2);
+	i = 0;
+	while (**str != ' ' && **str)
+	{
+		rtn[i] = **str;
+		(*str)++;
+		i++;
+	}
+	rtn[i] = '\0';
+	return (rtn);
+}
+
+char	*give_word(char **str)
+{
+	char	*rtn;
+
+	while (**str)
+	{
+		skip_invalid(str);
+		if (**str == '\''
+			|| **str == '\"')
+			return (str_in_quotes(str));
+		else
+			return (normal_str(str));
+	}
+	return (rtn);
 }
 
 /// @brief This function creates 2D array with 
@@ -66,6 +162,7 @@ char	**special_split(char **str)
 	int		words;
 
 	words = word_count(*str);
+	printf("Str: %s\n", *str);
 	printf("Words: %d\n", words);
 	rtn = ft_malloc((sizeof(char *) * words) + 1, LAYER_2);
 	i = 0;
@@ -74,8 +171,8 @@ char	**special_split(char **str)
 		rtn[i] = give_word(str);
 		i++;
 	}
+	printf("IDE: %s\n", rtn[1]);
 	rtn[i] = NULL;
-	exit(101);
 	return (rtn);
 }
 

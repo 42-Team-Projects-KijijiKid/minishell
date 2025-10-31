@@ -10,14 +10,17 @@ int main(int ac, char **av, char **envp)
 	meta = init_meta(envp);
 	while (1)
 	{
-		cmd = ft_readline("\033[34mMinishell>> ");
+		// cmd = ft_readline("\033[34mMinishell>> ");
+		cmd = "echo ''user''";
 		// printf("Command Print: %s\n", cmd);
 		if (!cmd)
 			break ;
 		parsing_process(cmd);
+		printf("Meta: %s\n", *meta->head->args_2d);
 		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);
+		break ;
 	}
 	// printf("Command Print: %s\n", cmd);
 	// parsing_process(cmd);

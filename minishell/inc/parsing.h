@@ -22,6 +22,7 @@ t_token			*create_tokens(t_tmp_cmd_token *cmd_head);
 char			**give_2d_arg(char **str);
 bool			is_meta_char(char cmd);
 char			*str_in_quotes(char **str);
+int				word_count(char *str);
 
 //Parsing functions
 t_token			*find_root(t_token *token_head);

@@ -66,7 +66,7 @@ t_tmp_cmd_token	*create_commands(char *cmd)
 			head->prev = node;
 		node->args_2d = NULL;
 		node->next = head;
-		if (is_meta_char(*cmd) && (*cmd != '\"' || *cmd != '\''))
+		if (is_meta_char(*cmd))
 			node->args_2d = give_operator(&cmd);
 		else
 			node->args_2d = special_split(&cmd);
