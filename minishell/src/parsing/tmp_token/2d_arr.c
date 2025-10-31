@@ -1,78 +1,64 @@
 #include "parsing.h"
 
-int	word_len(char *str)
+/// @brief Checks if the quote pair has
+/// content so its not '' or "".
+/// @param str 
+/// @return false if there is no quote conentet
+/// true if there is quote content
+bool	quote_content(char **str)
 {
-	int	i;
+	char	quote;
 
-	i = 0;
-	while (str[i] != ' ' && str[i]
-			&& (!is_meta_char(*str) || *str == '\"' || *str == '\''))
-		i++;
-	return (i);
-}
-
-char	*give_word(char **str)
-{
-	char	*rtn;
-	int		i;
-	int		len;
-
-	while (**str == ' ')
+	printf("Content: %c\n", **str);
+	quote = **str;
+	(*str)++;
+	printf("Content:2 %c\n", **str);
+	if (quote == **str)
+		return (false);
+	while (**str != quote && **str)
 		(*str)++;
-	if (**str == '\"' || **str == '\'')
-		return (str_in_quotes(str));
-	len = word_len(*str);
-	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
-	i = 0;
-	while (**str && i < len)
-	{
-		rtn[i] = **str;
-		(*str)++;
-		i++;
-	}
-	rtn[i] = '\0';
-	return (rtn);
-}
-
-/// @brief Moves the pointer till reaches the
-/// matching quote pair
-/// @param str the adress of the current
-/// cmd string
-void	go_trough_quoted_str(char **str)
-{
-	char	quote_end;
-	
-	quote_end = **str;
-	while (1)
-	{
-		(*str)++;
-		if (**str == quote_end)
-			break ;
-	}
+	(*str)++;
+	return (true);
 }
 
 int	word_count(char *str)
 {
-	int	words;
-	int	flag;
+	int		words;
+	bool	flag;
 
 	words = 0;
-	flag = 1;
-	while (*str && (!is_meta_char(*str)))
-	{
-		if (flag && (*str == '-'
-			|| ft_isalpha(*str)))
+	flag = true;
+	while (*str)
+	{	
+		if (flag && *str == '\'' || *str == '\"')
 		{
-			flag = 0;
+			if (!quote_content(&str))
+				str++;
+			else
+				words++;
+		}
+		else if (flag && *str != ' '
+			&& !is_meta_char(*str))
+		{
+			flag = false;
 			words++;
 		}
-		if (*str == ' ')
-			flag = 1;
+		else if (*str == ' ')
+			flag = true;
 		str++;
 	}
 	return (words);
 }
 
+/// @brief This function creates 2D array with 
+/// till end of provided command or if an operator
+/// is reached. Handles also the quote rules checking
+/// for quotes without content therefore earasing them.
+/// Does not handle expansion!
+/// @param str Command
+/// @return A split up 2D array with applied 
+/// bash rules for quotes till end or 
+/// an operator is reached
 char	**special_split(char **str)
 {
 	int		i;
@@ -81,14 +67,15 @@ char	**special_split(char **str)
 
 	words = word_count(*str);
 	printf("Words: %d\n", words);
-	rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
-	i = 0;
-	while (i < words)
-	{
-		rtn[i] = give_word(str);
-		i++;
-	}
-	rtn[i] = NULL;
+	// rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
+	// i = 0;
+	// while (i < words)
+	// {
+	// 	rtn[i] = give_word(str);
+	// 	i++;
+	// }
+	// rtn[i] = NULL;
+	exit(101);
 	return (rtn);
 }
 
