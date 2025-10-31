@@ -47,7 +47,6 @@ void	go_trough_quoted_str(char **str)
 	{
 		(*str)++;
 		if (**str == quote_end)
-
 			break ;
 	}
 }
@@ -59,7 +58,7 @@ int	word_count(char *str)
 
 	words = 0;
 	flag = 1;
-	while (*str && !is_meta_char(*str))
+	while (*str && (!is_meta_char(*str)))
 	{
 		if (flag && (*str == '-'
 			|| ft_isalpha(*str)))
@@ -81,6 +80,7 @@ char	**special_split(char **str)
 	int		words;
 
 	words = word_count(*str);
+	printf("Words: %d\n", words);
 	rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
 	i = 0;
 	while (i < words)

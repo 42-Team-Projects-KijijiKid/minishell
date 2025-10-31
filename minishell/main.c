@@ -6,10 +6,12 @@ int main(int ac, char **av, char **envp)
 	t_meta	*meta;
 	char	*path;
 
+	// echo ''''"Hello '$USER'"''''
 	meta = init_meta(envp);
 	while (1)
 	{
 		cmd = ft_readline("\033[34mMinishell>> ");
+		// printf("Command Print: %s\n", cmd);
 		if (!cmd)
 			break ;
 		parsing_process(cmd);
