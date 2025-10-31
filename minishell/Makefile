@@ -2,7 +2,7 @@
 NAME	:= minishell
 CC		:= cc
 # CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
-CFLAGS	:= -g -Iinc/ -Ilib/libft
+CFLAGS	:= -g -Iinc/ -Ilib/my_libft
  
 # Flag to gernerate dependencies (output to a.d file)
 # INC_INS	:= -MMD -MP -MF $(@:.o=.d)
@@ -30,6 +30,7 @@ TMP_TOKEN_DIR		:= tmp_token/
 EXPANSION_DIR		:= expansion/
 DEBUG_DIR			:= debug/
 REDIRECTION_DIR		:= redirection/
+READLINE_DIR		:= ft_readline/
 
 #Folders inside src/execution
 HELPERS_DIR			:= helpers/
@@ -38,8 +39,9 @@ HELPERS_DIR			:= helpers/
 CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
 TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token string)) 
 TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers)) 
-REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection pipe in_out_redir heredoc append)) 
 DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
+REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection pipe in_out_redir heredoc append)) 
+READLINE_FILES_PARSING		:= $(addprefix $(READLINE_DIR), $(addsuffix .c, readline)) 
 
 #.c files in src/parsing with subfolders
 CORE_FILES_EXECUTION		:= $(addprefix $(CORE_DIR), $(addsuffix .c, execution_process io_redirections)) 
@@ -53,7 +55,7 @@ CORE_FILES_UTILS		:= $(addsuffix .c, utils error env_ops)
 
 
 # This is the total path to the .c files
-PARSING_MAIN_PATH	:= $(addprefix $(PARSING_DIR), $(CORE_FILES_PARSING) $(TMP_TOKEN_FILES_PARSING) $(DEBUG_FILES_PARSING) $(TOKEN_EXPANSION_PARSING) $(REDIRECTION_FILES_PARSING))
+PARSING_MAIN_PATH	:= $(addprefix $(PARSING_DIR), $(CORE_FILES_PARSING) $(TMP_TOKEN_FILES_PARSING) $(DEBUG_FILES_PARSING) $(TOKEN_EXPANSION_PARSING) $(REDIRECTION_FILES_PARSING) $(READLINE_FILES_PARSING))
 EXECUTION_MAIN_PATH	:= $(addprefix $(EXECUTION_DIR), $(CORE_FILES_EXECUTION) $(HELPER_FILES_EXECUTION))
 GC_MAIN_PATH		:= $(addprefix $(GC_DIR), $(CORE_FILES_GC))
 UTILS_MAIN_PATH		:= $(addprefix $(UTILS_DIR), $(CORE_FILES_UTILS))
@@ -76,7 +78,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/my_libft/libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)

@@ -9,15 +9,16 @@ int main(int ac, char **av, char **envp)
 	meta = init_meta(envp);
 	while (1)
 	{
-		cmd = readline("\033[34mMinishell>>\033[34m ");
+		cmd = ft_readline("\033[34mMinishell>> ");
+		if (!cmd)
+			break ;
 		parsing_process(cmd);
 		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);
-		// break ;
 	}
 	// printf("Command Print: %s\n", cmd);
 	// parsing_process(cmd);
 	// execution_process(meta->head);
-	// free_gc();
+	free_gc();
 }

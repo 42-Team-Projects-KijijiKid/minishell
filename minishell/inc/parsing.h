@@ -49,4 +49,8 @@ void			handle_heredoc(t_token *token);
 void			handle_io_redir(t_token *token);
 void			set_node_val(t_redir *node);
 
+//Readline
+char			*ft_readline(char *promt);
+
+
 #endif
