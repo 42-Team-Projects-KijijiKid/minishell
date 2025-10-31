@@ -17,10 +17,14 @@ bool	quote_content(char **str)
 		return (false);
 	while (**str != quote && **str)
 		(*str)++;
-	(*str)++;
 	return (true);
 }
 
+/// @brief Count words till operator
+/// or end of str handling quotes.
+/// @param str 
+/// @return amount of words till operator
+/// or null termination
 int	word_count(char *str)
 {
 	int		words;
@@ -32,9 +36,7 @@ int	word_count(char *str)
 	{	
 		if (flag && *str == '\'' || *str == '\"')
 		{
-			if (!quote_content(&str))
-				str++;
-			else
+			if (quote_content(&str))
 				words++;
 		}
 		else if (flag && *str != ' '
