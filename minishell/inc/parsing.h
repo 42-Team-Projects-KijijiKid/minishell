@@ -27,7 +27,6 @@ typedef struct s_env_meta
 	ssize_t		size;
 }	t_env_meta;
 
-
 /// @brief Temporary token
 typedef struct s_tmp_cmd_token
 {
@@ -76,8 +75,10 @@ void			handle_heredoc(t_token *token);
 void			handle_io_redir(t_token *token);
 void			set_node_val(t_redir *node);
 
+//Create Env
+void			parse_env(char **envp);
+
 //Readline
 char			*ft_readline(char *promt);
-
 
 #endif

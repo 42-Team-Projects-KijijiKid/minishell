@@ -17,13 +17,13 @@ void	run_cmd(t_token *token, t_redir_type redir_type, int fd)
 	meta = get_meta();
 	if (pid == 0)
 	{
-		paths_2d = extract_path();
+		// paths_2d = extract_path();
 		path = access_path(*token->args_2d, paths_2d);
 		if (redir_type == IN_FD)
 			dup2(fd, STDIN_FILENO);
 		if (redir_type == OUT_FD)
 			dup2(fd, STDOUT_FILENO);
-		execve(path, token->args_2d, meta->envp);
+		execve(path, token->args_2d, NULL);
 	}
 	else
 	{

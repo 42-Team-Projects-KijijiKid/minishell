@@ -56,7 +56,7 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 		{
 			str++;
 			tmp_str = null_end_str(&str);
-			len_2 += ft_strlen(rtn_env_value(tmp_str));
+			// len_2 += ft_strlen(rtn_env_value(tmp_str));
 		}
 		if (*str && *str != quote)
 			len_1++;
@@ -76,7 +76,7 @@ char	*give_env_str(char **str)
 	else
 		return (NULL);
 	tmp = null_end_str(str);
-	rtn = rtn_env_value(tmp);
+	// rtn = rtn_env_value(tmp);
 	return (rtn);
 }
 

@@ -3,10 +3,6 @@ NAME	:= minishell
 CC		:= cc
 # CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
 CFLAGS	:= -g -Iinc/ -Ilib/my_libft
- 
-# Flag to gernerate dependencies (output to a.d file)
-# INC_INS	:= -MMD -MP -MF $(@:.o=.d)
-# Not working at moment
 
 #Includes
 vpath %.h inc/
@@ -38,7 +34,7 @@ HELPERS_DIR			:= helpers/
 #.c files in src/parsing with subfolders
 CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
 TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token 2d_arr_helpers)) 
-TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers)) 
+TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers create_env)) 
 DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
 REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection pipe in_out_redir heredoc append)) 
 READLINE_FILES_PARSING		:= $(addprefix $(READLINE_DIR), $(addsuffix .c, readline)) 
@@ -51,7 +47,7 @@ HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract f
 CORE_FILES_GC 	:= $(addsuffix .c, garbage_col) 
 
 #.c files in src/utils with subfolders
-CORE_FILES_UTILS		:= $(addsuffix .c, utils error env_ops)
+CORE_FILES_UTILS		:= $(addsuffix .c, utils error)
 
 
 # This is the total path to the .c files
@@ -69,7 +65,6 @@ SRCS		:= $(MAIN_FILE) $(addprefix $(SRC_DIR), $(MELTING_POT))
 
 # All .c to .o -> See compilation Rule $< $@
 OBJS		:= $(addprefix $(OBJS_DIR), $(SRCS:%.c=%.o))
-
 
 
 # <===== Rules =====>

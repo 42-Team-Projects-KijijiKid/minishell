@@ -52,7 +52,7 @@ char	*simple_expand(char *str)
 		str++;
 	else
 		ft_error("Tried to expand a invalid string", __FILE__, __LINE__, 73);
-	tmp_str = rtn_env_value(str);
+	// tmp_str = rtn_env_value(str);
 	if (!tmp_str)
 		return (NULL);
 	rtn = ft_strdup(tmp_str);	
