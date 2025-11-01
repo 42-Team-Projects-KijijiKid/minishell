@@ -19,7 +19,6 @@ int	len_of_str(char *str)
 
 	i = 0;
 	while (*str && !is_meta_char(*str)
-			&& *str != '-'
 			&& *str != ' ')
 	{
 		i++;
@@ -35,7 +34,7 @@ char	*normal_str(char **str)
 	char	*rtn;
 
 	len = len_of_str(*str);
-	rtn = ft_malloc((sizeof(char) * len) + 1, LAYER_2);
+	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
 	i = 0;
 	while (**str && !is_meta_char(**str)
 			&& **str != ' ')
@@ -79,14 +78,14 @@ char	**special_split(char **str)
 	int		words;
 
 	words = word_count(*str);
-	rtn = ft_malloc((sizeof(char *) * words) + 1, LAYER_2);
+	printf("Words: %d\n", words);
+	rtn = ft_malloc(sizeof(char *) * (words + 1), LAYER_2);
 	i = 0;
 	while (i < words)
 	{
 		rtn[i] = give_word(str);
 		i++;
 	}
-	// printf("IDE: %s\n", rtn[0][1]);
 	rtn[i] = NULL;
 	return (rtn);
 }
