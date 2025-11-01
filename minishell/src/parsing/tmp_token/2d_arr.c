@@ -18,9 +18,9 @@ int	len_of_str(char *str)
 	int	i;
 
 	i = 0;
-	while (*str && *str != ' '
-			&& !is_meta_char(*str)
-			&& *str != '-')
+	while (*str && !is_meta_char(*str)
+			&& *str != '-'
+			&& *str != ' ')
 	{
 		i++;
 		str++;
@@ -37,8 +37,8 @@ char	*normal_str(char **str)
 	len = len_of_str(*str);
 	rtn = ft_malloc((sizeof(char) * len) + 1, LAYER_2);
 	i = 0;
-	while (**str != ' ' && **str
-			&& !is_meta_char(**str))
+	while (**str && !is_meta_char(**str)
+			&& **str != ' ')
 	{
 		rtn[i] = **str;
 		(*str)++;
@@ -55,7 +55,10 @@ char	*give_word(char **str)
 	while (**str)
 	{
 		skip_space(str);
-		return (normal_str(str));
+		if (**str == '\'' || **str == '\"')
+			return (str_in_quotes(str));
+		else
+			return (normal_str(str));
 	}
 	return (rtn);
 }
