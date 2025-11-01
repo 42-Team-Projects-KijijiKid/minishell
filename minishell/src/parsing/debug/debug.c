@@ -1,5 +1,22 @@
 #include "parsing.h"
 
+/// @brief Prints the key && value pairs 
+/// from tail to head (so they are shown in 
+/// the right order)
+void	print_env(void)
+{
+	t_meta		*meta;
+	t_env_node	*node;
+	meta = get_meta();
+	node = meta->env.tail;
+	while (node)
+	{
+		printf("Key: %s\t", node->key);
+		printf("Value: %s\n", node->value);
+		node = node->prev;
+	}
+}
+
 static char	*conv_type_enums(t_token_enum token_type)
 {
 	char *str;

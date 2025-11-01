@@ -87,14 +87,14 @@ void	parse_env(char **envp)
 			meta->env.tail = node;
 		node->next = head;
 		node->key = abstract_key(envp);
-		printf("Key: %s\t", node->key);
 		node->value = abstract_value(envp);
-		printf("Value: %s\n", node->value);
 		node->key_len = ft_strlen(node->key);
 		node->value_len = ft_strlen(node->value);
 		envp++;
 		head = node;
 		meta->env.size++;
 	}
+	meta->env.head = head;
+	print_env();
 	head->prev = NULL;
 }

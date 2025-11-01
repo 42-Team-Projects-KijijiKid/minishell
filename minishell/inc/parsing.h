@@ -3,30 +3,6 @@
 
 #include "minishell.h"
 
-/// @brief A node for storing the
-/// environment variables in a linked list.
-/// In the key value format.
-typedef	struct s_env_node
-{
-	char				*key;
-	char				*value;
-	unsigned int		key_len;
-	unsigned int		value_len;
-	struct s_env_node	*next;
-	struct s_env_node	*prev;
-}	t_env_node;
-
-/// @brief Meta Node for the 
-/// linked list storing the
-/// environment variables
-/// in a linked list of key and values
-typedef struct s_env_meta
-{
-	t_env_node	*head;
-	t_env_node	*tail;
-	ssize_t		size;
-}	t_env_meta;
-
 /// @brief Temporary token
 typedef struct s_tmp_cmd_token
 {
@@ -62,6 +38,7 @@ int				strlen_whitout_quotes(char *str, char quote);
 //Debug Functions
 void			print_tokens(t_token *token);
 void			print_ast_structure(t_token *root, int level, bool left);
+void			print_env(void);
 
 //Syntax
 void			check_syntax(char *line);
@@ -80,5 +57,6 @@ void			parse_env(char **envp);
 
 //Readline
 char			*ft_readline(char *promt);
+
 
 #endif

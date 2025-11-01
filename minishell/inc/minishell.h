@@ -18,9 +18,33 @@
 #include <sys/wait.h>
 #include "token.h"
 #include "libft.h"
+#include "parsing.h"
 #include "garbage.h"
 #include "execution.h"
-#include "parsing.h"
+
+/// @brief A node for storing the
+/// environment variables in a linked list.
+/// In the key value format.
+typedef	struct s_env_node
+{
+	char				*key;
+	char				*value;
+	unsigned int		key_len;
+	unsigned int		value_len;
+	struct s_env_node	*next;
+	struct s_env_node	*prev;
+}	t_env_node;
+
+/// @brief Meta Node for the 
+/// linked list storing the
+/// environment variables
+/// in a linked list of key and values
+typedef struct s_env_meta
+{
+	t_env_node	*head;
+	t_env_node	*tail;
+	ssize_t		size;
+}	t_env_meta;
 
 typedef struct	s_meta
 {
