@@ -58,6 +58,9 @@ void			set_node_val(t_redir *node);
 //Create Env
 void			parse_env(char **envp);
 char			**turn_2d(void);
+unsigned int	len_to_equal(char *str);
+char			*abstract_key(char **str);
+char			*abstract_value(char **str);
 
 //Readline
 char			*ft_readline(char *promt);
