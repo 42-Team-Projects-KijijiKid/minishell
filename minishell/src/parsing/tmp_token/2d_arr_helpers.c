@@ -79,7 +79,7 @@ int	word_count(char *str)
 
 	words = 0;
 	flag = true;
-	while (*str)
+	while (*str && !is_meta_char(*str))
 	{	
 		if ((*str == '\'' || *str == '\"'))
 		{

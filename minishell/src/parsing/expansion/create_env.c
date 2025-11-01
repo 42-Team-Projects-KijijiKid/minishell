@@ -28,10 +28,7 @@ void	parse_env(char **envp)
 		meta->env.size++;
 	}
 	meta->env.head = head;
-	// print_env();
 	head->prev = NULL;
-	char **test = turn_2d();
-	print_2d_env(test);
 }
 
 /// @brief This is kinda like stringjoin

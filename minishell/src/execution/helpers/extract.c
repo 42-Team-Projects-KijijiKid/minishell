@@ -1,24 +1,22 @@
 #include "execution.h"
 
-// char	**extract_path(void)
-// {
-// 	char	**path_2d;
-// 	t_meta	*meta;
-// 	char	**envp;
+char	**extract_path(void)
+{
+	char	**path_2d;
+	char	**envp;
 
-// 	meta = get_meta();
-// 	envp = meta->envp;
-// 	while (*envp)
-// 	{
-// 		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
-// 		{
-// 			path_2d = ft_split((*envp + 5), ':');
-// 			return (path_2d);
-// 		}
-// 		envp++;
-// 	}
-// 	return (NULL);
-// }
+	envp = turn_2d();
+	while (*envp)
+	{
+		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
+		{
+			path_2d = ft_split((*envp + 5), ':');
+			return (path_2d);
+		}
+		envp++;
+	}
+	return (NULL);
+}
 
 char	*access_path(char *cmd, char **paths_2d)
 {
