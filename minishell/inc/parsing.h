@@ -41,6 +41,7 @@ int				strlen_whitout_quotes(char *str, char quote);
 void			print_tokens(t_token *token);
 void			print_ast_structure(t_token *root, int level, bool left);
 void			print_env(void);
+void			print_2d_env(char **env);
 
 //Syntax
 void			check_syntax(char *line);

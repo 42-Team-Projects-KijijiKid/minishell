@@ -95,8 +95,10 @@ void	parse_env(char **envp)
 		meta->env.size++;
 	}
 	meta->env.head = head;
-	print_env();
+	// print_env();
 	head->prev = NULL;
+	char **test = turn_2d();
+	print_2d_env(test);
 }
 
 /// @brief This is kinda like stringjoin
@@ -120,9 +122,9 @@ char	*rtn_key_value(t_env_node *node)
 		i++;
 	}
 	rtn[i++] = '=';
-	while (node->value[i])
+	while (*node->value)
 	{
-		rtn[i] = node->value[i];
+		rtn[i] = *node->value++;
 		i++;
 	}
 	rtn[i] = '\0';
@@ -139,16 +141,18 @@ char	**turn_2d(void)
 	t_meta		*meta;
 	t_env_node	*node;
 	char		**rtn;
+	int			i;
 	
 	meta = get_meta();
 	rtn = ft_malloc(sizeof(char *) * (meta->env.size + 1), LAYER_1);
 	node = meta->env.tail;
+	i = 0;
 	while (node)
 	{
-		*rtn = rtn_key_value(node);
-		rtn++;
-		node = node->prev; 
+		rtn[i] = rtn_key_value(node);
+		node = node->prev;
+		i++; 
 	}
-	*rtn = NULL;
+	rtn[i] = NULL;
 	return (rtn);
 }

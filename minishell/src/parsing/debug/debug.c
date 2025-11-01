@@ -1,5 +1,14 @@
 #include "parsing.h"
 
+void	print_2d_env(char **env)
+{
+	while (*env)
+	{
+		printf("%s\n", *env);
+		env++;
+	}
+}
+
 /// @brief Prints the key && value pairs 
 /// from tail to head (so they are shown in 
 /// the right order)
