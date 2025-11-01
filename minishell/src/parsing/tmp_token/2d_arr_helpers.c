@@ -12,6 +12,8 @@ int	len_in_quotes(char *str)
 		str++;
 		len++;
 	}
+	if (*str ==  quote)
+		len++;
 	return (len);
 }
 
@@ -78,7 +80,7 @@ int	word_count(char *str)
 	flag = true;
 	while (*str)
 	{	
-		if (flag && *str == '\'' || *str == '\"')
+		if ((*str == '\'' || *str == '\"'))
 		{
 			quote_content(&str);
 			words++;

@@ -19,7 +19,9 @@ int	len_of_str(char *str)
 
 	i = 0;
 	while (*str && !is_meta_char(*str)
-			&& *str != ' ')
+			&& *str != ' '
+			&& *str != '\''
+			&& *str != '\"')
 	{
 		i++;
 		str++;
@@ -37,7 +39,8 @@ char	*normal_str(char **str)
 	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_2);
 	i = 0;
 	while (**str && !is_meta_char(**str)
-			&& **str != ' ')
+			&& **str != ' ' && **str != '\''
+			&& **str != '\"')
 	{
 		rtn[i] = **str;
 		(*str)++;
