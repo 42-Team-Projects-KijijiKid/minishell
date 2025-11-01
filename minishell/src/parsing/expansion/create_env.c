@@ -98,3 +98,16 @@ void	parse_env(char **envp)
 	print_env();
 	head->prev = NULL;
 }
+
+/// @brief This function turns the
+/// env linked list in 2D array for
+/// execeve
+/// @param  
+/// @return 2D array of env variables 
+char	**turn_2d(void)
+{
+	t_meta	*meta;
+
+	meta = get_meta();
+
+}

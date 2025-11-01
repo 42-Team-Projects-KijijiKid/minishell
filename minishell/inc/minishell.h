@@ -38,7 +38,10 @@ typedef	struct s_env_node
 /// @brief Meta Node for the 
 /// linked list storing the
 /// environment variables
-/// in a linked list of key and values
+/// in a linked list of key and values.
+/// The storing upside down (eg.
+/// accessing the first element 
+/// is done via dereferencing the head)
 typedef struct s_env_meta
 {
 	t_env_node	*head;
@@ -52,8 +55,6 @@ typedef struct	s_meta
 	t_garbage	garbage;
 	t_env_meta	env;
 }	t_meta;
-
-///Util Prototypes
 
 //	utils
 t_meta	*init_meta(char **envp);

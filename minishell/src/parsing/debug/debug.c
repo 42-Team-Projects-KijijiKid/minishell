@@ -11,8 +11,10 @@ void	print_env(void)
 	node = meta->env.tail;
 	while (node)
 	{
-		printf("Key: %s\t", node->key);
-		printf("Value: %s\n", node->value);
+		printf("Key: %s  ", node->key);
+		printf("Key len: %d\t", node->key_len);
+		printf("Value: %s  ", node->value);
+		printf("Value Len: %d\n", node->value_len);
 		node = node->prev;
 	}
 }
