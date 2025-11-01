@@ -22,7 +22,6 @@ t_meta	*init_meta(char **envp)
 	meta->garbage.layer_3.tail = NULL;
 	meta->garbage.layer_3.size = 0;
 	parse_env(envp);
-	exit (111);
 	return (meta);
 }
 
