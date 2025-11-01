@@ -26,6 +26,7 @@ typedef struct	s_meta
 {
 	t_token		*head;
 	t_garbage	garbage;
+	t_env_meta	env;
 	char		**envp;
 }	t_meta;
 
