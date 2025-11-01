@@ -99,6 +99,36 @@ void	parse_env(char **envp)
 	head->prev = NULL;
 }
 
+/// @brief This is kinda like stringjoin
+/// just takes the key and the value and
+/// glues them togther, seperated by an
+/// equal sign
+/// @param node key and value node
+/// @return 
+char	*rtn_key_value(t_env_node *node)
+{
+	int		len;
+	char	*rtn;
+	int		i;
+
+	len = node->value_len + node->key_len + EQUAL_SIGN;
+	rtn = ft_malloc(sizeof(char) * (len + 1), LAYER_1);
+	i = 0;
+	while (node->key[i])
+	{
+		rtn[i] = node->key[i];
+		i++;
+	}
+	rtn[i++] = '=';
+	while (node->value[i])
+	{
+		rtn[i] = node->value[i];
+		i++;
+	}
+	rtn[i] = '\0';
+	return (rtn);
+}
+
 /// @brief This function turns the
 /// env linked list in 2D array for
 /// execeve
@@ -106,8 +136,19 @@ void	parse_env(char **envp)
 /// @return 2D array of env variables 
 char	**turn_2d(void)
 {
-	t_meta	*meta;
-
+	t_meta		*meta;
+	t_env_node	*node;
+	char		**rtn;
+	
 	meta = get_meta();
-
+	rtn = ft_malloc(sizeof(char *) * (meta->env.size + 1), LAYER_1);
+	node = meta->env.tail;
+	while (node)
+	{
+		*rtn = rtn_key_value(node);
+		rtn++;
+		node = node->prev; 
+	}
+	*rtn = NULL;
+	return (rtn);
 }

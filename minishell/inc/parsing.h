@@ -3,6 +3,8 @@
 
 #include "minishell.h"
 
+#define EQUAL_SIGN 1
+
 /// @brief Temporary token
 typedef struct s_tmp_cmd_token
 {
@@ -54,6 +56,7 @@ void			set_node_val(t_redir *node);
 
 //Create Env
 void			parse_env(char **envp);
+char			**turn_2d(void);
 
 //Readline
 char			*ft_readline(char *promt);
