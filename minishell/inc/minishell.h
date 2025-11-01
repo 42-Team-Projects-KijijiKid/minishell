@@ -1,11 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include "token.h"
-#include "libft.h"
-#include "garbage.h"
-#include "execution.h"
-#include "parsing.h"
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -21,6 +16,11 @@
 #include <termios.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include "token.h"
+#include "libft.h"
+#include "garbage.h"
+#include "execution.h"
+#include "parsing.h"
 
 typedef struct	s_meta
 {
