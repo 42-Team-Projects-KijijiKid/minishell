@@ -1,22 +1,18 @@
 #include "parsing.h"
 
-/// @brief Checks if the quote pair has
-/// content so its not '' or "".
-/// And skips the conetent till pairing quote
+/// @brief If Quote has content so its
+/// not just '' or "" than it skips content
 /// @param str 
-/// @return false if there is no quote content
-/// true if there is quote content
-bool	quote_content(char **str)
+void	quote_content(char **str)
 {
 	char	quote;
 
 	quote = **str;
 	(*str)++;
 	if (quote == **str)
-		return (false);
+		return ;
 	while (**str != quote && **str)
 		(*str)++;
-	return (true);
 }
 
 /// @brief Count words till operator
@@ -31,12 +27,12 @@ int	word_count(char *str)
 
 	words = 0;
 	flag = true;
-	while (*str)
+	while (*str && !is_meta_char(*str))
 	{	
 		if (flag && *str == '\'' || *str == '\"')
 		{
-			if (quote_content(&str))
-				words++;
+			quote_content(&str);
+			words++;
 		}
 		else if (flag && *str != ' '
 			&& !is_meta_char(*str))

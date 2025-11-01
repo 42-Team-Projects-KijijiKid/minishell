@@ -9,13 +9,18 @@ void	skip_space(char **str)
 		(*str)++;
 }
 
-int	len_to_space(char *str)
+/// @brief Counts the leght of a single str
+/// delimited by meta chars space or asterix(-)
+/// @param str 
+/// @return len of str
+int	len_of_str(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (*str && *str != ' '
-			&& !is_meta_char(*str))
+			&& !is_meta_char(*str)
+			&& *str != '-')
 	{
 		i++;
 		str++;
@@ -29,7 +34,7 @@ char	*normal_str(char **str)
 	int		len;
 	char	*rtn;
 
-	len = len_to_space(*str);
+	len = len_of_str(*str);
 	rtn = ft_malloc((sizeof(char) * len) + 1, LAYER_2);
 	i = 0;
 	while (**str != ' ' && **str
@@ -77,10 +82,10 @@ char	**special_split(char **str)
 	while (i < words)
 	{
 		rtn[i] = give_word(str);
-		printf("R: %s\n", rtn[i]);
+		printf("R %d: %s\n", i, rtn[i]);
 		i++;
 	}
-	printf("IDE: %s\n", rtn[0]);
+	// printf("IDE: %s\n", rtn[0][1]);
 	rtn[i] = NULL;
 	return (rtn);
 }

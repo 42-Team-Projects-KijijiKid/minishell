@@ -39,7 +39,7 @@ void			print_tokens(t_token *token);
 void			print_ast_structure(t_token *root, int level, bool left);
 
 //Syntax
-void			check_quotes(char *line);
+void			check_syntax(char *line);
 
 //Redirection
 void			assign_redir_node_values(t_token *token, t_redir_type redir_type, int fd);
