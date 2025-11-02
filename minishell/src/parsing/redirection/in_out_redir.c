@@ -6,10 +6,12 @@
 /// !(T_AND, T_PIPE, T_OR)
 /// @param  
 /// @return true if typ != operator else falses
-static bool	check_if_still_possible_redir(t_token_enum type)
+static bool	check_if_still_possible_redir(t_token *token)
 {
-	if (type != T_AND && type != T_OR
-		&& type != T_PIPE)
+	if (!token)
+		return (false);
+	if (token->type != T_AND && token->type != T_OR
+		&& token->type != T_PIPE)
 		return (true);
 	return (false);
 }
@@ -38,22 +40,18 @@ static void	handle_in_redir(t_token *token)
 	t_token	*redir_node;
 	int		fd;
 
-
-	redir_node = token->left;
-	fd = ft_open(*redir_node->args_2d, O_RDONLY); // If one of the provided infiles is not therer in redir fails, so we ft_open every possibility 
 	command_node = token; // We are storing the command node for the redirection
 	while (command_node->back->type != T_TEXT && token)//Could be that the indirection for a command is after various out redirections so to assign to the command we need to go as far as possible to the left
 		command_node = command_node->back;
-	while (check_if_still_possible_redir(token->type) && token)
+	while (check_if_still_possible_redir(token) && token)
 	{
 		if (token->type == T_IN_RDR)
 		{
 			redir_node = token->left;
-			fd = ft_open(*redir_node->args_2d, O_RDONLY); 
+			fd = ft_open(*redir_node->args_2d, O_RDONLY);
 		}
 		token = token->left;
 	}
-	printf("FD: %d\n", fd);
 	assign_redir_node_values(command_node, IN_FD, fd);
 }
 

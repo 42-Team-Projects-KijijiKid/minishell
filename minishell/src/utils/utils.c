@@ -9,7 +9,7 @@ int ft_open(char *filename, int oflag)
 	int	fd;
 
 	fd = open(filename, oflag);
-	if (fd = -1)
+	if (fd == -1)
 		ft_error("Open failed", __FILE__, __LINE__, 98);
 	return (fd);
 }
