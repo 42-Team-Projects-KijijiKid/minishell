@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+/// @brief Opens the file and handles error msg
+/// @param filename 
+/// @param oflag 
+/// @return File descriptor on success
+int ft_open(char *filename, int oflag)
+{
+	int	fd;
+
+	fd = open(filename, oflag);
+	if (fd = -1)
+		ft_error("Open failed", __FILE__, __LINE__, 98);
+	return (fd);
+}
+
+
 t_meta	*get_meta(void) 
 {
 	static t_meta	meta = {0};

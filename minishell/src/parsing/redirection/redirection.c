@@ -59,8 +59,6 @@ static bool	is_redir_type(t_token_enum type)
 /// pipes or similar and opens heredocs
 void	set_redirections(t_token *head_token)
 {
-	t_redir	*redir_node;
-
 	while (head_token)
 	{
 		if (is_redir_type(head_token->type))

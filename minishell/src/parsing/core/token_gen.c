@@ -45,7 +45,7 @@ static void	null_values(t_token *token)
 /// into the nodes for the parsing
 /// also in a linked list like way
 /// (always assigned on left)
-/// Token type is already assigned here
+/// Token type is already assigned here.
 /// @param cmd_head 
 /// @return 
 t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
