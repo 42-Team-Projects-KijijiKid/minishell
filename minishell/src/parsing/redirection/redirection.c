@@ -70,9 +70,9 @@ void	set_redirections(t_token *head_token)
 			else if (head_token->type == T_HEREDOC)
 				handle_heredoc(head_token);
 			else if (head_token->type == T_OUT_RDR)
-				handle_io_redir(head_token);
+				head_token = handle_io_redir(head_token);
 			else if (head_token->type == T_IN_RDR)
-				handle_io_redir(head_token);
+				head_token = handle_io_redir(head_token);
 		}
 		head_token= head_token->left;
 	}

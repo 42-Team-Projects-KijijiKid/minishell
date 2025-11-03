@@ -52,7 +52,7 @@ void			set_redirections(t_token *token_head);
 void			handle_pipe(t_token *token);
 void			handle_append(t_token *token);
 void			handle_heredoc(t_token *token);
-void			handle_io_redir(t_token *token);
+t_token			*handle_io_redir(t_token *token);
 void			set_node_val(t_redir *node);
 
 //Create Env
