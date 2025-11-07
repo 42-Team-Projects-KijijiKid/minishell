@@ -2,7 +2,7 @@
 NAME	:= minishell
 CC		:= cc
 # CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
-CFLAGS	:= -g -Iinc/ -Ilib/my_libft
+CFLAGS	:= -g -Iinc/ -Ilib/libft
 
 #Includes
 vpath %.h inc/
@@ -36,7 +36,7 @@ CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation pa
 TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token 2d_arr_helpers)) 
 TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers create_env create_env2)) 
 DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
-REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection pipe in_out_redir heredoc append)) 
+REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection)) 
 READLINE_FILES_PARSING		:= $(addprefix $(READLINE_DIR), $(addsuffix .c, readline)) 
 
 #.c files in src/parsing with subfolders
@@ -73,7 +73,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/my_libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/libft/libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)

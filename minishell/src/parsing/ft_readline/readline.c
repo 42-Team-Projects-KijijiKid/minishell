@@ -12,9 +12,9 @@ char	*ft_readline(char *promt)
 	while (1)
 	{
 		cmd = readline(promt);
-		len = ft_strlen(cmd);
 		if (!cmd)
 			return (NULL);
+		len = ft_strlen(cmd);
 		if (len != 0)
 		{
 			if (ft_strncmp(cmd, "exit", len) == 0)
