@@ -28,15 +28,13 @@ static bool	is_redir_type(t_token_enum type)
 /// pipes or similar and opens heredocs
 void	set_redirections(t_token *head_token)
 {
-	printf("set_redirection not implemented");
+	printf("set_redirection not implemented\n");
 	return ;
 	while (head_token)
 	{
 		if (is_redir_type(head_token->type))
 		{
-			if (head_token->type == T_PIPE)
-				handle_pipe(head_token);
-			else if (head_token->type == T_APPEND)
+			if (head_token->type == T_APPEND)
 				handle_append(head_token);
 			else if (head_token->type == T_HEREDOC)
 				handle_heredoc(head_token);
