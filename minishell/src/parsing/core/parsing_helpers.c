@@ -4,11 +4,11 @@ static bool	compare_operator(t_token_enum before, t_token_enum current)
 {
 	if (current == 0)
 		return (false); //text not an operator
-	if (before == T_TEXT)
+	if (before == TEXT)
 		return (true);
 	if (before == current)
 		return (true); //left associativity
-	if (current == T_AND || current == T_OR)
+	if (current == AND_IF || current == OR_IF)
 		return (true);
 	return (false);
 }
@@ -23,17 +23,23 @@ t_token	*find_root(t_token *token_head)
 	t_token			*root;
 	t_token			*token_head_buff;
 	t_token_enum	tmp_enum;
+	bool			flag;
 
-	tmp_enum = T_TEXT;
+	tmp_enum = TEXT;
 	root = NULL;
 	token_head_buff = token_head;
+	flag = true;
 	while (token_head->left)
 	{
-		if (compare_operator(tmp_enum, token_head->type))
+		if (token_head->type == LPAREN)
+			flag = false;
+		if (compare_operator(tmp_enum, token_head->type) && flag)
 		{
 			tmp_enum = token_head->type;
 			root = token_head;
 		}
+		if (token_head->type == RPAREN)
+			flag = true;
 		token_head = token_head->left;
 	}
 	if (!root)
@@ -51,7 +57,7 @@ t_token	*find_root_reversed(t_token *token_head)
 	t_token			*root;
 	t_token_enum	tmp_enum;
 
-	tmp_enum = T_TEXT;
+	tmp_enum = TEXT;
 	root = NULL;
 	while (token_head->back)
 	{

@@ -10,21 +10,25 @@ static t_token_enum	evaluate_token_type(t_tmp_cmd_token *cmd)
 	len = ft_strlen(*cmd->args_2d);
 	char *a = *cmd->args_2d;
 	if (ft_strncmp(cmd->args_2d[0], "|", len) == 0)
-		return (T_PIPE);
+		return (PIPE);
+	else if (ft_strncmp(cmd->args_2d[0], "(", len) == 0)
+		return (LPAREN);
+	else if (ft_strncmp(cmd->args_2d[0], ")", len) == 0)
+		return (RPAREN);
 	else if (ft_strncmp(cmd->args_2d[0], "&&", len) == 0)
-		return (T_AND);
+		return (AND_IF);
 	else if (ft_strncmp(cmd->args_2d[0], "||", len) == 0)
-		return (T_OR);
+		return (OR_IF);
 	else if (ft_strncmp(cmd->args_2d[0], "<", len) == 0)
-		return (T_IN_RDR);
+		return (LESS);
 	else if (ft_strncmp(cmd->args_2d[0], ">", len) == 0)
-		return (T_OUT_RDR);
+		return (GREAT);
 	else if (ft_strncmp(cmd->args_2d[0], ">>", len) == 0)
-		return (T_APPEND);
+		return (DGREAT);
 	else if (ft_strncmp(cmd->args_2d[0], "<<", len) == 0)
-		return (T_HEREDOC);
+		return (DLESS);
 	else
-		return (T_TEXT);
+		return (TEXT);
 }
 
 /// @brief Nulls every value of the token.

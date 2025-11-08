@@ -11,15 +11,15 @@ void	set_node_val(t_redir *node)
 
 static bool	is_redir_type(t_token_enum type)
 {
-	if (type == T_PIPE)
+	if (type == PIPE)
 		return (true);
-	else if (type == T_APPEND)
+	else if (type == DGREAT)
 		return (true);
-	else if (type == T_HEREDOC)
+	else if (type == DLESS)
 		return (true);
-	else if (type == T_OUT_RDR)
+	else if (type == GREAT)
 		return (true);
-	else if (type == T_IN_RDR)
+	else if (type == LESS)
 		return (true);
 	return (false);
 }
@@ -34,13 +34,13 @@ void	set_redirections(t_token *head_token)
 	{
 		if (is_redir_type(head_token->type))
 		{
-			if (head_token->type == T_APPEND)
+			if (head_token->type == DGREAT)
 				handle_append(head_token);
-			else if (head_token->type == T_HEREDOC)
+			else if (head_token->type == DLESS)
 				handle_heredoc(head_token);
-			else if (head_token->type == T_OUT_RDR)
+			else if (head_token->type == GREAT)
 				head_token = handle_io_redir(head_token);
-			else if (head_token->type == T_IN_RDR)
+			else if (head_token->type == LESS)
 				head_token = handle_io_redir(head_token);
 		}
 		head_token= head_token->left;

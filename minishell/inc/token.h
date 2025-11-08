@@ -24,17 +24,23 @@ typedef	struct	s_redir_meta
 	ssize_t	size;
 }	t_redir_meta;
 
-
 typedef enum	e_token_type
 {
-	T_TEXT,
-	T_PIPE,
-	T_AND,
-	T_OR,
-	T_IN_RDR,
-	T_OUT_RDR,
-	T_APPEND,
-	T_HEREDOC
+	TEXT,
+	PROP_CMD,		// Probably a command
+	IO_FILENAME,	// In/Out filename
+	PIPE,			// |
+	AND_IF,			// &&
+	OR_IF,			// ||
+	LESS,			// <
+	GREAT,			// >
+	LESSGREAT,		// <> open for read, write (I/O)
+	DGREAT,			// >>
+	DLESS,			// <<
+	DLESSDASH,		//<<-
+	LPAREN,			// (
+	RPAREN,			// )
+	SUBSHELL		// (..) -> Whats in quotes
 }	t_token_enum;
 
 typedef struct	s_token

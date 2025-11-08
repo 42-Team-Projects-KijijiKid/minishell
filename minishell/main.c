@@ -14,7 +14,6 @@ int main(int ac, char **av, char **envp)
 		if (!cmd)
 			break ;
 		parsing_process(cmd);
-		execution_process(meta->head);
 		free_layer(&meta->garbage.layer_2);
 		free_layer(&meta->garbage.layer_3);
 	}

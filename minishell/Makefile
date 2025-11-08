@@ -57,7 +57,7 @@ GC_MAIN_PATH		:= $(addprefix $(GC_DIR), $(CORE_FILES_GC))
 UTILS_MAIN_PATH		:= $(addprefix $(UTILS_DIR), $(CORE_FILES_UTILS))
 
 # Every folder path including the .c files inside the src/ folder 
-MELTING_POT	:= $(PARSING_MAIN_PATH) $(GC_MAIN_PATH) $(UTILS_MAIN_PATH) $(EXECUTION_MAIN_PATH)
+MELTING_POT	:= $(PARSING_MAIN_PATH) $(GC_MAIN_PATH) $(UTILS_MAIN_PATH) #$(EXECUTION_MAIN_PATH)
 
 
 # Every Folder path prefixed with src/ and the main (top level)

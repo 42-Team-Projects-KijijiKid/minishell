@@ -85,7 +85,7 @@ void	expand_process(t_token *token)
 {
 	if (!token)
 		return ;
-	if (token->type == T_TEXT)
+	if (token->type == TEXT)
 	{
 		if (*token->args_2d && token->args_2d[1])
 			possible_expansion(token);
