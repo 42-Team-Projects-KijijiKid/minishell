@@ -17,7 +17,6 @@ void			parsing_process(char *cmd);
 t_tmp_cmd_token	*create_commands(char *cmd);
 void			expand_tokens(t_token *head);
 char			*rtn_str_quotes(char **str);
-
 char			**special_split(char **str);
 
 //Token Gen
