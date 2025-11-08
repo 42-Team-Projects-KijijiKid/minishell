@@ -55,20 +55,28 @@ t_token	*find_root(t_token *token_head)
 t_token	*find_root_reversed(t_token *token_head)
 {
 	t_token			*root;
+	t_token			*token_head_buff;
 	t_token_enum	tmp_enum;
+	bool			flag;
 
 	tmp_enum = TEXT;
 	root = NULL;
+	token_head_buff = token_head;
+	flag = true;
 	while (token_head->back)
 	{
-		if (compare_operator(tmp_enum, token_head->type))
+		if (token_head->type == RPAREN)
+			flag = false;
+		if (compare_operator(tmp_enum, token_head->type) && flag)
 		{
 			tmp_enum = token_head->type;
 			root = token_head;
 		}
+		if (token_head->type == LPAREN)
+			flag = true;
 		token_head = token_head->back;
 	}
 	if (!root)
-		root =	token_head;
+		root =	token_head_buff;
 	return (root);
 }
