@@ -1,39 +1,6 @@
 #include "parsing.h"
 
-/// @brief Builds ast recursively
-/// Always evaluates root then splits linked list
-/// at the current root and reevaluates the root
-/// @param root pointer to current root
-void build_ast(t_token *root)
+void	create_ast(t_token *token)
 {
-	t_token *pre_head;
-	t_token *post_head;
 
-	pre_head = NULL;
-	post_head = NULL;
-	if (!root)
-		return;
-	if (root->back)
-	{
-		pre_head = root->back;
-		pre_head->left = NULL;
-		root->back = NULL;
-	}
-	if (root->left)
-	{
-		post_head = root->left;
-		post_head->back = NULL;
-		root->left = NULL;
-	}
-	if (pre_head)
-		root->left = find_root_reversed(pre_head);
-	else
-		root->left = NULL;
-	if (post_head)
-		root->right = find_root(post_head);
-	else 
-		root->right = NULL;
-	build_ast(root->left);
-	build_ast(root->right);
 }
-
