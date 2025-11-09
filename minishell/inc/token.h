@@ -1,6 +1,8 @@
 #ifndef TOKEN_H
 # define TOKEN_H
 
+#include <stdbool.h>
+
 typedef enum	e_redir_type
 {
 	IN_FD,
@@ -48,6 +50,7 @@ typedef struct	s_token
 	t_token_enum	type;
 	char			**args_2d;
 	t_redir_meta	redir_meta;
+	bool			sub;
 	
 	struct s_token	*left;
 	struct s_token	*right;
