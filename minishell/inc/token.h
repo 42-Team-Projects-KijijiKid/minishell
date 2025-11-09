@@ -41,8 +41,7 @@ typedef enum	e_token_type
 	DLESS,			// <<
 	DLESSDASH,		// <<-
 	LPAREN,			// (
-	RPAREN,			// )
-	SUBSHELL		// (..) -> Whats in quotes
+	RPAREN			// )
 }	t_token_enum;
 
 typedef struct	s_token
