@@ -72,6 +72,7 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 			prev->left = token;
 		else
 			head = token;
+		token->sub = false;
 		token->back = prev;	
 		prev = token;
 		cmd_head = cmd_head->prev;

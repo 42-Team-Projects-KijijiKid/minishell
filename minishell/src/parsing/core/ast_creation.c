@@ -22,6 +22,9 @@ static void strip_outer_parens(t_token **head)
 
 	if (!head || !*head || (*head)->type != LPAREN)
 		return ;
+	t_token *test= find_root((*head)->left);
+	// printf("Root: %s", *test->args_2d);
+	test->sub = true;
 	depth = 0;
 	open = *head;
 	cur = open;

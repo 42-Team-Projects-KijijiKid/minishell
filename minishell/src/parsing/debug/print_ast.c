@@ -13,9 +13,9 @@ void	print_ast_structure(t_token *root, int level, bool left)
 		printf("R: ");
 	if (level != 0)
 		printf("-> ");
-	if (root->type == SUBSHELL)
-		printf("SUBSHELL\n");
-	else if (root->args_2d)
+	if (root->sub)
+		printf("SUBSH");
+	if (root->args_2d)
 	{
 		printf("[");
 		while (*root->args_2d)
