@@ -40,6 +40,8 @@ static void strip_outer_parens(t_token **head)
 	}
 }
 
+/// @brief Splits linked list in two parts, 
+/// left and right site of operator.
 void	assign_subtrees(t_token *root, t_token *pre_head, t_token *post_head)
 {
 	if (root->back)
@@ -69,10 +71,12 @@ void build_ast(t_token *root)
 	pre_head = root->back;
 	post_head = root->left;
 	assign_subtrees(root, pre_head, post_head);
+	while (pre_head && pre_head->back)
+		pre_head = pre_head->back;
 	strip_outer_parens(&pre_head);
 	strip_outer_parens(&post_head);
 	if (pre_head)
-		root->left = find_root_reversed(pre_head);
+		root->left = find_root(pre_head);
 	else
 		root->left = NULL;
 	if (post_head)

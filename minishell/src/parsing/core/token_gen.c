@@ -61,6 +61,7 @@ t_token	*create_tokens(t_tmp_cmd_token *cmd_head)
 
 	meta = get_meta();
 	prev = NULL;
+	head = NULL;
 	while (cmd_head)
 	{
 		token = ft_malloc(sizeof(t_token), LAYER_2);
