@@ -6,7 +6,6 @@ int main(int ac, char **av, char **envp)
 	t_meta	*meta;
 	char	*path;
 
-	// echo ''''"Hello '$USER'"''''
 	meta = init_meta(envp);
 	while (1)
 	{
@@ -14,8 +13,8 @@ int main(int ac, char **av, char **envp)
 		if (!cmd)
 			break ;
 		parsing_process(cmd);
-		free_layer(&meta->garbage.layer_2);
-		free_layer(&meta->garbage.layer_3);
+		// free_layer(&meta->garbage.layer_2);
+		// free_layer(&meta->garbage.layer_3);
 	}
 	printf("\033[37;5mGoodbye!\033[0m\n");
 	free_gc();

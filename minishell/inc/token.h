@@ -21,9 +21,9 @@ typedef struct	s_redir
 
 typedef	struct	s_redir_meta
 {
-	t_redir *head;
-	t_redir	*tail;
-	ssize_t	size;
+	t_redir 		*head;
+	t_redir			*tail;
+	unsigned int	size;
 }	t_redir_meta;
 
 typedef enum	e_token_type
