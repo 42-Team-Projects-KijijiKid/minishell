@@ -8,6 +8,11 @@ static t_token *list_tail(t_token *h)
 	return (h);
 }
 
+/// @brief Eareser the parenthesisi and sets the 
+/// root of the parenthesis a flag for execution
+/// to know this has to run
+/// since here in a subshell
+/// @param head 
 static void strip_outer_parens(t_token **head)
 {
 	int		depth;
