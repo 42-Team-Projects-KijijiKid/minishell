@@ -44,33 +44,3 @@ t_token	*find_root(t_token *token_head)
 		root = start;
 	return (root);
 }
-
-// modified: only consider operators at depth==0 (backward)
-t_token	*find_root_reversed(t_token *token_head)
-{
-	t_token			*root;
-	t_token_enum	tmp_enum;
-	int				depth;
-
-	if (token_head->type == LPAREN)
-		return (NULL);
-	tmp_enum = TEXT;
-	root = NULL;
-	depth = 0;
-	while (token_head && token_head->back)
-	{
-		if (token_head->type == RPAREN)
-			++depth;
-		else if (token_head->type == LPAREN)
-			--depth;
-		else if (depth == 0 && compare_operator(tmp_enum, token_head->type))
-		{
-			tmp_enum = token_head->type;
-			root = token_head;
-		}
-		token_head = token_head->back;
-	}
-	if (!root)
-		root = token_head;
-	return (root);
-}
