@@ -13,7 +13,11 @@ static bool	compare_operator(t_token_enum before, t_token_enum current)
 	return (false);
 }
 
-// modified: only consider operators at depth==0 (forward)
+/// @brief Skips in quotes so there operators
+/// outside of quotes have always
+/// higher precedence
+/// @param token_head 
+/// @return 
 t_token	*find_root(t_token *token_head)
 {
 	t_token			*root;
