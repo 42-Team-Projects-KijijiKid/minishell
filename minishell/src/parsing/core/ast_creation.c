@@ -1,5 +1,45 @@
 #include "parsing.h"
 
+// helpers
+static t_token *list_tail(t_token *h)
+{
+	while (h && h->left)
+		h = h->left;
+	return (h);
+}
+
+static void strip_outer_parens(t_token **head)
+{
+	int		depth;
+	t_token	*cur;
+	t_token	*open;
+	t_token	*close;
+
+	if (!head || !*head || (*head)->type != LPAREN)
+		return;
+	depth = 0;
+	open = *head;
+	cur = open;
+	close = NULL;
+	while (cur)
+	{
+		if (cur->type == LPAREN)
+			++depth;
+		else if (cur->type == RPAREN && --depth == 0)
+		{
+			close = cur;
+			break ;
+		}
+		cur = cur->left;
+	}
+	if (close && close == list_tail(open))
+	{
+		*head = open->left;
+		if (*head)
+			(*head)->back = NULL;
+	}
+}
+
 void	assign_subtrees(t_token *root, t_token *pre_head, t_token *post_head)
 {
 	if (root->back)
@@ -18,26 +58,32 @@ void	assign_subtrees(t_token *root, t_token *pre_head, t_token *post_head)
 /// Always evaluates root then splits linked list
 /// at the current root and reevaluates the root
 /// @param root pointer to current root
+// modified build_ast: strip outer parens on each side before finding subtree roots
 void build_ast(t_token *root)
 {
 	t_token *pre_head;
 	t_token *post_head;
 
+	if (!root)
+		return;
 	pre_head = NULL;
 	post_head = NULL;
-	if (!root)
-		return ;
-	pre_head = root->back;
-	post_head = root->left;
-	assign_subtrees(root, pre_head, post_head);
-	if (pre_head)
-		root->left = find_root_reversed(pre_head);
-	else
+	if (root->back)
+	{
+		pre_head = root->back;
+		pre_head->left = NULL;
+		root->back = NULL;
+		strip_outer_parens(&pre_head);
+	}
+	if (root->left)
+	{
+		post_head = root->left;
+		post_head->back = NULL;
 		root->left = NULL;
-	if (post_head)
-		root->right = find_root(post_head);
-	else 
-		root->right = NULL;
+		strip_outer_parens(&post_head);
+	}
+	root->left = pre_head ? find_root_reversed(pre_head) : NULL;
+	root->right = post_head ? find_root(post_head) : NULL;
 	build_ast(root->left);
 	build_ast(root->right);
 }

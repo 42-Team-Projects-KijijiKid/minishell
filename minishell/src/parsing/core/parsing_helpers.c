@@ -13,70 +13,60 @@ static bool	compare_operator(t_token_enum before, t_token_enum current)
 	return (false);
 }
 
-/// @brief Finds the rootnode going from left
-/// to right when there are tokens with the 
-/// same precedence left associvity 
-/// @param token_head head of the token list
-/// @return pointer to root token
+// modified: only consider operators at depth==0 (forward)
 t_token	*find_root(t_token *token_head)
 {
 	t_token			*root;
-	t_token			*token_head_buff;
+	t_token			*start;
 	t_token_enum	tmp_enum;
-	bool			flag;
+	int				depth;
 
 	tmp_enum = TEXT;
 	root = NULL;
-	token_head_buff = token_head;
-	flag = true;
-	while (token_head->left)
+	start = token_head;
+	depth = 0;
+	while (token_head && token_head->left)
 	{
 		if (token_head->type == LPAREN)
-			flag = false;
-		if (compare_operator(tmp_enum, token_head->type) && flag)
+			++depth;
+		else if (token_head->type == RPAREN)
+			--depth;
+		else if (depth == 0 && compare_operator(tmp_enum, token_head->type))
 		{
 			tmp_enum = token_head->type;
 			root = token_head;
 		}
-		if (token_head->type == RPAREN)
-			flag = true;
 		token_head = token_head->left;
 	}
 	if (!root)
-		root =	token_head_buff;
+		root = start;
 	return (root);
 }
 
-/// @brief This is just when there are multiple levels 
-/// of operators
-/// to evaluate the left side of the root
-/// @param token_head 
-/// @return pointer to root
+// modified: only consider operators at depth==0 (backward)
 t_token	*find_root_reversed(t_token *token_head)
 {
 	t_token			*root;
-	t_token			*token_head_buff;
 	t_token_enum	tmp_enum;
-	bool			flag;
+	int				depth;
 
 	tmp_enum = TEXT;
 	root = NULL;
-	token_head_buff = token_head;
-	flag = true;
-	while (token_head->back)
+	depth = 0;
+	while (token_head && token_head->back)
 	{
 		if (token_head->type == RPAREN)
-			flag = false;
-		if (compare_operator(tmp_enum, token_head->type) && flag)
+			++depth;
+		else if (token_head->type == LPAREN)
+			--depth;
+		else if (depth == 0 && compare_operator(tmp_enum, token_head->type))
 		{
 			tmp_enum = token_head->type;
 			root = token_head;
 		}
-		if (token_head->type == LPAREN)
-			flag = true;
 		token_head = token_head->back;
 	}
 	if (!root)
-		root =	token_head_buff;
+		root = token_head;
 	return (root);
 }
