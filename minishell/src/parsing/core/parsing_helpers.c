@@ -21,6 +21,8 @@ t_token	*find_root(t_token *token_head)
 	t_token_enum	tmp_enum;
 	int				depth;
 
+	if (token_head->type == RPAREN)
+		return (NULL);
 	tmp_enum = TEXT;
 	root = NULL;
 	start = token_head;
@@ -50,6 +52,8 @@ t_token	*find_root_reversed(t_token *token_head)
 	t_token_enum	tmp_enum;
 	int				depth;
 
+	if (token_head->type == LPAREN)
+		return (NULL);
 	tmp_enum = TEXT;
 	root = NULL;
 	depth = 0;

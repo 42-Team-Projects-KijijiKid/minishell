@@ -37,7 +37,7 @@ typedef enum	e_token_type
 	LESSGREAT,		// <> open for read, write (I/O)
 	DGREAT,			// >>
 	DLESS,			// <<
-	DLESSDASH,		//<<-
+	DLESSDASH,		// <<-
 	LPAREN,			// (
 	RPAREN,			// )
 	SUBSHELL		// (..) -> Whats in quotes

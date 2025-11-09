@@ -16,7 +16,7 @@ static void strip_outer_parens(t_token **head)
 	t_token	*close;
 
 	if (!head || !*head || (*head)->type != LPAREN)
-		return;
+		return ;
 	depth = 0;
 	open = *head;
 	cur = open;
@@ -66,24 +66,19 @@ void build_ast(t_token *root)
 
 	if (!root)
 		return;
-	pre_head = NULL;
-	post_head = NULL;
-	if (root->back)
-	{
-		pre_head = root->back;
-		pre_head->left = NULL;
-		root->back = NULL;
-		strip_outer_parens(&pre_head);
-	}
-	if (root->left)
-	{
-		post_head = root->left;
-		post_head->back = NULL;
+	pre_head = root->back;
+	post_head = root->left;
+	assign_subtrees(root, pre_head, post_head);
+	strip_outer_parens(&pre_head);
+	strip_outer_parens(&post_head);
+	if (pre_head)
+		root->left = find_root_reversed(pre_head);
+	else
 		root->left = NULL;
-		strip_outer_parens(&post_head);
-	}
-	root->left = pre_head ? find_root_reversed(pre_head) : NULL;
-	root->right = post_head ? find_root(post_head) : NULL;
+	if (post_head)
+		root->right = find_root(post_head);
+	else
+		root->right = NULL;
 	build_ast(root->left);
 	build_ast(root->right);
 }
