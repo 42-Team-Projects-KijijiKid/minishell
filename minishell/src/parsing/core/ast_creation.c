@@ -8,7 +8,7 @@ static t_token *list_tail(t_token *h)
 	return (h);
 }
 
-/// @brief Eareser the parenthesisi and sets the 
+/// @brief Erase the parenthesis and sets the 
 /// root of the parenthesis a flag for execution
 /// to know this has to run
 /// since here in a subshell
@@ -19,12 +19,12 @@ static void strip_outer_parens(t_token **head)
 	t_token	*cur;
 	t_token	*open;
 	t_token	*close;
+	t_token *root;
 
 	if (!head || !*head || (*head)->type != LPAREN)
 		return ;
-	t_token *test= find_root((*head)->left);
-	// printf("Root: %s", *test->args_2d);
-	test->sub = true;
+	root = find_root((*head)->left);
+	root->sub = true;
 	depth = 0;
 	open = *head;
 	cur = open;
