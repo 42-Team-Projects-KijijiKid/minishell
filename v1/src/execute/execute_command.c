@@ -1,6 +1,6 @@
 #include "../../inc/minishell.h"
 
-int	execute_builtin(t_tree_node *node)
+static int	execute_builtin(t_tree_node *node)
 {
 	if (ft_strcmp(node->args[0], "cd") == 0)
 		return (builtin_cd());
@@ -19,7 +19,7 @@ int	execute_builtin(t_tree_node *node)
 	return (-1); 
 }
 
-int	execute_executable(t_tree_node *node)
+static int	execute_executable(t_tree_node *node)
 {
 	pid_t	pid;
 	int		wstatus;

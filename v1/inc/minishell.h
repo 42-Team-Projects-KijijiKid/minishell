@@ -18,5 +18,18 @@
 #include <sys/wait.h>
 
 # include "structs.h"
+# include "execute/execute.h"
+# include "parse/parse.h"
+# include "environment.h"
+# include "utils.h"
+
+// error.c
+void	ft_error(char *msg, char *file, int line, u_int64_t exit_stat);
+
+// garbage.c
+void	garbage_add_node(t_garbage_layer *garbage_layer, void *data);
+void	garbage_add_to_layer(t_garbage_layer *garbage_layer, void *data);
+void	garbage_free_layer(t_garbage_layer *garbage_layer);
+void	garbage_free_all(void);
 
 #endif

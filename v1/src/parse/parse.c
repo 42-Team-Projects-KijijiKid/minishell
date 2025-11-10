@@ -1,20 +1,5 @@
 #include "../../inc/minishell.h"
-/* 
-/// @brief Nulls every value of the token.
-/// Safety wise.
-/// @param token 
-static void	initialize_tree_node(t_tree_node *node)
-{
-	node->args = NULL;
-	node->left = NULL;
-	node->right = NULL;
-	node->back = NULL;
-	node->sub = false;
-	node->redirect.head = NULL;
-	node->redirect.tail = NULL;
-	node->redirect.size = 0;
-}
- */
+
 void	minishell_parse(char *input)
 {
 	t_token			*token_head;
