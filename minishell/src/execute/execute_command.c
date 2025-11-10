@@ -3,19 +3,19 @@
 static int	execute_builtin(t_tree_node *node)
 {
 	if (ft_strcmp(node->args[0], "cd") == 0)
-		return (builtin_cd());
+		return (builtin_cd(node->args));
 	else if (ft_strcmp(node->args[0], "echo") == 0)
-		return (builtin_echo());
+		return (builtin_echo(node->args));
 	else if (ft_strcmp(node->args[0], "exit") == 0)
-		return (builtin_exit());
+		return (builtin_exit(node->args));
 	else if (ft_strcmp(node->args[0], "export") == 0)
-		return (builtin_export());
+		return (builtin_export(node->args));
 	else if (ft_strcmp(node->args[0], "unset") == 0)
-		return (builtin_unset());
+		return (builtin_unset(node->args));
 	else if (ft_strcmp(node->args[0], "pwd") == 0)
-		return (builtin_pwd());
+		return (builtin_pwd(node->args));
 	else if (ft_strcmp(node->args[0], "env") == 0)
-		return (builtin_env());
+		return (builtin_env(node->args));
 	return (-1); 
 }
 

@@ -1,4 +1,4 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
 static char	*heredoc_loop(const char *delim)
 {
