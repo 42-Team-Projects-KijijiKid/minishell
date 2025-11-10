@@ -36,7 +36,7 @@ static char	*expand_heredoc_input(char **input, char *delim)
 		return (ft_error("Mismatched quotes in heredoc delimiter", \
 			__FILE__, __LINE__, 0), NULL);
 	}
-	expanded = expand_variables(*input); // add Mateos function
+	// expanded = expand_variables(*input); // add Mateos function
 	return (expanded);
 }
 

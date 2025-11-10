@@ -11,7 +11,7 @@ char	*env_get_value(char *key)
 	node = shell->env.head;
 	while (node)
 	{
-		if (ft_strcmp(node->key, key) == 0)
+		if (ft_strncmp(node->key, key) == 0)
 		{
 			len = ft_strlen(node->value);
 			result = fti_malloc(len + 1, TEMPORARY);
@@ -33,7 +33,7 @@ int	env_set_value(char *key, char *value)
 	node = shell->env.head;
 	while (node)
 	{
-		if (ft_strcmp(node->key, key) == 0)
+		if (ft_strncmp(node->key, key, ft_strlen(node->key)) == 0)
 		{
 			node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
 			ft_strcpy(node->value, value);

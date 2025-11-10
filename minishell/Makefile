@@ -46,7 +46,7 @@ INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_mall
 PARSING			:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES))
 EXECUTE			:= $(addprefix $(EXECUTION_DIR), execute.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
 ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c)
-utils			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES))
+UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(EXECUTE) $(ENVIRONMENT) $(UTILS)

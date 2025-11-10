@@ -10,9 +10,9 @@ void	*fti_malloc(ssize_t size, e_garbage_layers type)
 	if (!rtn)
 		ft_error("Malloc failed", __FILE__, __LINE__, 2);
 	if (type == PERSISTENT)
-		add_to_layer(&meta->garbage.persistent, (void *)rtn);
+		garbage_add_to_layer(&meta->garbage.persistent, (void *)rtn);
 	else if (type == TEMPORARY)
-		add_to_layer(&meta->garbage.temporary, (void *)rtn);
+		garbage_add_to_layer(&meta->garbage.temporary, (void *)rtn);
 	else
 		ft_error("Provided Layer does not exist", __FILE__, __LINE__, 12);
 	return (rtn);

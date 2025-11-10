@@ -12,7 +12,7 @@ char	*extract_quoted_string(char **str)
 	int		i;
 
 	len = get_quoted_string_len(*str);
-	rtn = ft_malloc((sizeof(char) * len) + 1, TEMPORARY);
+	rtn = fti_malloc((sizeof(char) * len) + 1, TEMPORARY);
 	quote = **str;
 	rtn[0] = **str;
 	(*str)++;
@@ -36,7 +36,7 @@ char	*extract_unquoted_string(char **str)
 	char	*rtn;
 
 	len = calculate_word_length(*str);
-	rtn = ft_malloc(sizeof(char) * (len + 1), TEMPORARY);
+	rtn = fti_malloc(sizeof(char) * (len + 1), TEMPORARY);
 	i = 0;
 	while (**str && !is_meta_char(**str)
 			&& **str != ' ' && **str != '\''
@@ -66,6 +66,58 @@ char	*extract_next_token(char **str)
 	return (rtn);
 }
 
+/// @brief Checks if the quote pair has
+/// content so its not '' or "".
+/// And skips the conetent till pairing quote
+/// @param str 
+/// @return false if there is no quote content
+/// true if there is quote content
+bool	quote_content(char **str)
+{
+	char	quote;
+
+	quote = **str;
+	(*str)++;
+	if (quote == **str)
+		return (false);
+	while (**str != quote && **str)
+		(*str)++;
+	return (true);
+}
+
+/// @brief Count words till operator
+/// or end of str handling quotes.
+/// @param str 
+/// @return amount of words till operator
+/// or null termination
+int	word_count(char *str)
+{
+	int		words;
+	bool	flag;
+
+	words = 0;
+	flag = true;
+	while (*str && !is_meta_char(*str))
+	{	
+		if ((*str == '\'' || *str == '\"'))
+		{
+			quote_content(&str);
+			words++;
+		}
+		else if (flag && *str != ' '
+			&& !is_meta_char(*str))
+		{
+			flag = false;
+			words++;
+		}
+		else if (*str == ' ')
+			flag = true;
+		str++;
+	}
+	return (words);
+}
+
+
 /// @brief Tokenizes a command string into a 2D array
 /// Processes tokens until end of command or operator is reached.
 /// Handles quote rules and removes empty quotes.
@@ -80,8 +132,7 @@ char	**tokenize_command(char **str)
 	int		words;
 
 	words = word_count(*str);
-	printf("Words: %d\n", words);
-	rtn = ft_malloc(sizeof(char *) * (words + 1), TEMPORARY);
+	rtn = fti_malloc(sizeof(char *) * (words + 1), TEMPORARY);
 	i = 0;
 	while (i < words)
 	{
