@@ -13,55 +13,41 @@ MAIN_FILE	:= main.c
 SRC_DIR		:= src/
 OBJS_DIR	:= objs/
 
-PARSING_DIR		:= parsing/
-EXECUTION_DIR	:= execution/
-GC_DIR			:= garbage_col/
-UTILS_DIR		:= utils/
+PARSING_DIR		:= parse/
+EXECUTION_DIR	:= execute/
+ENVIRONMENT_DIR	:= environment/
+GARBAGE_DIR		:= garbage/
 
-#Folders inside src/parsing && src/execcution
-CORE_DIR			:= core/
+#SUB Dir parsing
+EXPAND_DIR 		:= expand/
+TOKENIZE_DIR	:= tokenize/
+TREE_DIR		:= tree/
 
-#Folders inside src/parsing
-TMP_TOKEN_DIR		:= tmp_token/
-EXPANSION_DIR		:= expansion/
-DEBUG_DIR			:= debug/
-REDIRECTION_DIR		:= redirection/
-READLINE_DIR		:= ft_readline/
-
-#Folders inside src/execution
-HELPERS_DIR			:= helpers/
+#SUB Dirs execute
+BUILTIN_DIR		:= builtins/
+REDIRECTS_DIR	:= redirects/
 
 #.c files in src/parsing with subfolders
-CORE_FILES_PARSING			:= $(addprefix $(CORE_DIR), $(addsuffix .c, ast_creation parsing_helpers parsing_process token_gen syntax_errors)) 
-TMP_TOKEN_FILES_PARSING		:= $(addprefix $(TMP_TOKEN_DIR), $(addsuffix .c, 2d_arr tmp_token 2d_arr_helpers)) 
-TOKEN_EXPANSION_PARSING		:= $(addprefix $(EXPANSION_DIR), $(addsuffix .c, expand expand_helpers create_env create_env2)) 
-DEBUG_FILES_PARSING			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, debug print_ast))
-REDIRECTION_FILES_PARSING	:= $(addprefix $(REDIRECTION_DIR), $(addsuffix .c, redirection)) 
-READLINE_FILES_PARSING		:= $(addprefix $(READLINE_DIR), $(addsuffix .c, readline)) 
+EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand_quotes expand_variables expand)) 
+TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, token_list_utils tokenization_utils tokenize_command tokenize_operator tokens_process tokens_seperate)) 
+TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build_utils tree_build tree_find_root tree_redirect))
 
-#.c files in src/parsing with subfolders
-CORE_FILES_EXECUTION		:= $(addprefix $(CORE_DIR), $(addsuffix .c, execution_process io_redirections)) 
-HELPER_FILES_EXECUTION		:= $(addprefix $(HELPERS_DIR), $(addsuffix .c, extract fork)) 
+#.c files in src/execute with subfolders
+BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset)))
+REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(addsuffix .c, append heredoc in out utils)))
 
-#.c core file gc
-CORE_FILES_GC 	:= $(addsuffix .c, garbage_col) 
-
-#.c files in src/utils with subfolders
-CORE_FILES_UTILS		:= $(addsuffix .c, utils error)
-
-
-# This is the total path to the .c files
-PARSING_MAIN_PATH	:= $(addprefix $(PARSING_DIR), $(CORE_FILES_PARSING) $(TMP_TOKEN_FILES_PARSING) $(DEBUG_FILES_PARSING) $(TOKEN_EXPANSION_PARSING) $(REDIRECTION_FILES_PARSING) $(READLINE_FILES_PARSING))
-EXECUTION_MAIN_PATH	:= $(addprefix $(EXECUTION_DIR), $(CORE_FILES_EXECUTION) $(HELPER_FILES_EXECUTION))
-GC_MAIN_PATH		:= $(addprefix $(GC_DIR), $(CORE_FILES_GC))
-UTILS_MAIN_PATH		:= $(addprefix $(UTILS_DIR), $(CORE_FILES_UTILS))
+# This is the total path to the .c files in the prefixed directory
+PARSING			:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES))
+EXECUTE			:= $(addprefix $(EXECUTION_DIR), execute.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
+ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c)
+GARBAGE			:= $(addprefix $(GARBAGE_DIR), garbage.c)
 
 # Every folder path including the .c files inside the src/ folder 
-MELTING_POT	:= $(PARSING_MAIN_PATH) $(GC_MAIN_PATH) $(UTILS_MAIN_PATH) #$(EXECUTION_MAIN_PATH)
+MELTING_POT	:= $(PARSING) $(EXECUTE) $(ENVIRONMENT) $(GARBAGE)
 
 
 # Every Folder path prefixed with src/ and the main (top level)
-SRCS		:= $(MAIN_FILE) $(addprefix $(SRC_DIR), $(MELTING_POT))
+SRCS		:= $(addprefix $(SRC_DIR), $(MAIN_FILE) $(MELTING_POT))
 
 # All .c to .o -> See compilation Rule $< $@
 OBJS		:= $(addprefix $(OBJS_DIR), $(SRCS:%.c=%.o))
