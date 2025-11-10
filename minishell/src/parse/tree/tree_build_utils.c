@@ -4,7 +4,7 @@ t_tree_node	*token_to_tree_node(t_token *head_token)
 {
 	t_tree_node	*node;
 
-	node = (t_tree_node *)ft_malloc(sizeof(t_tree_node), TEMPORARY);
+	node = ft_malloc(sizeof(t_tree_node), TEMPORARY);
 	initialize_tree_node(node);
 	node->args = head_token->args;
 	node->type = head_token->type;

@@ -36,7 +36,7 @@ static int	print_exported_vars(void)
 
 int builtin_export(char **args)
 {
-	if (!args || !args[0] || ft_strcmp(args[0], "export") != 0)
+	if (!args || !args[0] || ft_strncmp(args[0], "export", ft_strlen(*args)) != 0)
 		return (ft_error("export: invalid arguments", __FILE__, __LINE__, 930), 930);
 	if (!args[1])
 		return (print_exported_vars());

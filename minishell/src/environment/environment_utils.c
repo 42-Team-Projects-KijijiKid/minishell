@@ -11,11 +11,11 @@ char	*env_get_value(char *key)
 	node = shell->env.head;
 	while (node)
 	{
-		if (ft_strncmp(node->key, key) == 0)
+		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
 			len = ft_strlen(node->value);
 			result = fti_malloc(len + 1, TEMPORARY);
-			ft_strcpy(result, node->value);
+			ft_strlcpy(result, node->value, ft_strlen(result));
 			return (result);
 		}
 		node = node->next;
@@ -36,7 +36,7 @@ int	env_set_value(char *key, char *value)
 		if (ft_strncmp(node->key, key, ft_strlen(node->key)) == 0)
 		{
 			node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-			ft_strcpy(node->value, value);
+			ft_strlcpy(node->value, value, ft_strlen(value));
 			return (0);
 		}
 		node = node->next;
@@ -45,9 +45,9 @@ int	env_set_value(char *key, char *value)
 	if (!new_node)
 		return (ft_error("Malloc failed", __FILE__, __LINE__, 2), 2);
 	new_node->key = fti_malloc(ft_strlen(key) + 1, PERSISTENT);
-	ft_strcpy(new_node->key, key);
+	ft_strlcpy(new_node->key, key, ft_strlen(key));
 	new_node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-	ft_strcpy(new_node->value, value);
+	ft_strlcpy(new_node->value, value, ft_strlen(value));
 	new_node->next = shell->env.head;
 	new_node->prev = NULL;
 	if (shell->env.head)
@@ -67,7 +67,7 @@ int	env_unset_value(char *key)
 	node = shell->env.head;
 	while (node)
 	{
-		if (ft_strcmp(node->key, key) == 0)
+		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
 			if (node->prev)
 				node->prev->next = node->next;
