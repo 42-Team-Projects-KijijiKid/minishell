@@ -44,6 +44,7 @@ void	minishell_parse(char *input)
 	manager.root_node = token_to_tree_node(manager.root_token);
 	tree_build(&manager);
 	shell->tree_root = manager.root_node;
-	expand(shell->tree_root); // preliminary implementation; waiting for adjusted version from Mateo
+	// expand(shell->tree_root); // preliminary implementation; waiting for adjusted version from Mateo
 	print_ast_structure(shell->tree_root, 0, false);
+	exit (101);
 }
