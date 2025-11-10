@@ -4,17 +4,6 @@
 # include <aio.h> // for ssize_t
 # include <stdbool.h>
 
-/*###################
-# Build Manager #
-###################*/
-
-typedef struct s_build_manager
-{
-	t_token			*head_token;
-	t_token			*root_token;
-	t_tree_node		*root_node;
-}	t_build_manager;
-
 /*######################
 # Abstract Syntax Tree #
 ######################*/
@@ -45,6 +34,29 @@ typedef struct s_tree_node
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 }	t_tree_node;
+
+/*#########
+# Parsing #
+#########*/
+
+typedef struct s_token
+{
+	char				**args;
+	e_tree_node_type	type;
+	struct s_token		*next;
+	struct s_token		*prev;
+}	t_token;
+
+/*###################
+# Build Manager #
+###################*/
+
+typedef struct s_build_manager
+{
+	t_token			*head_token;
+	t_token			*root_token;
+	t_tree_node		*root_node;
+}	t_build_manager;
 
 /*#############
 # Environment #
@@ -107,18 +119,6 @@ typedef struct	s_minishell
 	t_environment	env;
 	int				last_exit_status;
 }	t_minishell;
-
-/*#########
-# Parsing #
-#########*/
-
-typedef struct s_token
-{
-	char				**args;
-	e_tree_node_type	type;
-	struct s_token		*next;
-	struct s_token		*prev;
-}	t_token;
 
 /*####3######
 # Execution #

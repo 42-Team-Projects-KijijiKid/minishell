@@ -13,7 +13,7 @@ MAIN_FILE	:= main.c
 SRC_DIR		:= src/
 OBJS_DIR	:= objs/
 
-PARSING_DIR		:= parsing/
+PARSING_DIR		:= parse/
 EXECUTION_DIR	:= execute/
 ENVIRONMENT_DIR	:= environment/
 GARBAGE_DIR		:= garbage/
