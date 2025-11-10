@@ -18,7 +18,7 @@ static bool	find_matching_quote(char **str)
 /// cases like "'" because this is a valid expression
 /// the check_withing functions handle thesee cases.
 /// @param line 
-bool	validate_quote_pairs(char *line)
+void	validate_quote_pairs(char *line)
 {
 	unsigned int	double_quote;
 	unsigned int	single_quote;

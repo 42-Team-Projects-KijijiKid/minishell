@@ -8,7 +8,7 @@ static char	*heredoc_loop(const char *delim)
 	full_input = ft_strdup(""); // New version required, that adds to garbage collector
 	while (1)
 	{
-		line = ft_readline("> ");
+		line = fti_readline("> ");
 		if (!line)
 			break; 
 		if (strcmp(line, delim) == 0)

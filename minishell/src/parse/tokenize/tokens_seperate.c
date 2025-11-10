@@ -32,7 +32,7 @@ t_token	*tokens_seperate(char *input)
 			input++;
 		if (!*input)
 			break ;
-		node = (t_token *)ft_malloc(sizeof(t_token), TEMPORARY);
+		node = (t_token *)fti_malloc(sizeof(t_token), TEMPORARY);
 		node->prev = NULL;
 		if (head)
 			head->prev = node;

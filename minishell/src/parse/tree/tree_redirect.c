@@ -34,8 +34,8 @@ static void	setup_next_redirect(t_build_manager *manager, \
 {
 	next->head_token = manager->head_token;
 	next->root_token = manager->head_token;
-	next->root_node = (t_tree_node *)ft_malloc(sizeof(t_tree_node), TEMPORARY);
-	initialize_tree_node(next->root_node);
+	next->root_node = fti_malloc(sizeof(t_tree_node), TEMPORARY);
+	// initialize_tree_node(next->root_node);
 	manager->root_node->right = next->root_node;
 	build_redirect_chain(next, cmd);
 }
@@ -68,8 +68,8 @@ void	build_redirection_tree(t_build_manager *manager)
 {
 	t_token	*cmd;
 
-	if (!validate_redirection_tree(manager))
-		return ;
+	// if (!validate_redirection_tree(manager))
+	// 	return ;
 	cmd = manager->head_token;
 	remove_first_token(&(manager->head_token));
 	if (!manager->head_token || manager->head_token != manager->root_token)

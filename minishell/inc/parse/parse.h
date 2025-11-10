@@ -9,6 +9,6 @@
 void	minishell_parse(char *input);
 
 // parsing_validate.c
-bool	validate_quote_pairs(char *line);
+void	validate_quote_pairs(char *line);
 
 #endif
