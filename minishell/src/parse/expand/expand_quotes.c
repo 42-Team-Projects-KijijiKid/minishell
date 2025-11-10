@@ -30,7 +30,7 @@ char	*extract_single_quoted_content(char *quoted_str)
 	if (*quoted_str == '\'')
 		quoted_str++;
 	content_length = calculate_quoted_content_length(quoted_str, '\'');
-	result = ft_malloc(sizeof(char) * content_length + 1, LAYER_2);
+	result = fti_malloc(sizeof(char) * content_length + 1, TEMPORARY);
 	i = 0;
 	while (*quoted_str != '\'')
 	{

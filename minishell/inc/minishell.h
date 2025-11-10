@@ -17,11 +17,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-# include "structs.h"
-# include "execute/execute.h"
-# include "parse/parse.h"
-# include "environment.h"
-# include "utils.h"
+#include "libft.h"
+#include "structs.h"
+#include "execute/execute.h"
+#include "parse/parse.h"
+#include "environment.h"
+#include "utils.h"
+
+// Miishell
+t_minishell	*minishell_initialize(char **env);
+t_minishell	*minishell_get(void);
 
 // error.c
 void	ft_error(char *msg, char *file, int line, u_int64_t exit_stat);

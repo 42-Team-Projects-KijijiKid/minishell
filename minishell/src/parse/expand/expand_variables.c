@@ -1,4 +1,4 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
 /// @brief Extracts a variable name from string until delimiter
 /// Stops at space, metachar, or dollar sign
@@ -13,7 +13,7 @@ static char	*extract_variable_name(char **str_ptr)
 	while ((*str_ptr)[name_length] && (*str_ptr)[name_length] != ' ' && \
 		!is_meta_char((*str_ptr)[name_length]) && (*str_ptr)[name_length] != '$')
 		name_length++;
-	variable_name = ft_malloc((sizeof(char) * name_length) + 1, LAYER_2);
+	variable_name = fti_malloc((sizeof(char) * name_length) + 1, TEMPORARY);
 	name_length = 0;
 	while (**str_ptr && **str_ptr != ' ' && !is_meta_char(**str_ptr) && \
 		**str_ptr != '$')
@@ -82,8 +82,8 @@ char	*expand_variables_in_quotes(char *content, char closing_quote)
 	char	*variable_value;
 	int		index;
 
-	result = ft_malloc((sizeof(char) * calculate_expanded_length(content, \
-		closing_quote)) + 1, LAYER_2);
+	result = fti_malloc((sizeof(char) * calculate_expanded_length(content, \
+		closing_quote)) + 1, TEMPORARY);
 	index = 0;
 	while (*content != closing_quote && *content)
 	{
