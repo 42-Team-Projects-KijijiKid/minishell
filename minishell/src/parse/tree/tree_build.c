@@ -14,6 +14,7 @@ static void	handle_subshell_parentheses(t_build_manager *manager)
 			manager->root_node = token_to_tree_node(manager->root_token);
 		else
 		{
+			// Wieso hier ohne return(aber bei den andern mit)
 			ft_error("tree_build: failed to reassign root after removing parentheses", \
 				__FILE__, __LINE__, 71);
 		}
@@ -59,9 +60,11 @@ void	tree_build(t_build_manager *manager)
 	if (!manager || !manager->head_token || !manager->root_token || \
 		!manager->root_node)
 	{
+		//Warum hier mit return
 		ft_error("tree_build: invalid build manager", __FILE__, __LINE__, 71);
 		return ;
 	}
+	//Warum ?
 	if (manager->root_token->type == TEXT || \
 		manager->head_token == manager->root_token)
 		return ;

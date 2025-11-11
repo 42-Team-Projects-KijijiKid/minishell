@@ -47,7 +47,8 @@ t_token	*tokens_process(t_token *head_token)
 	{
 		current_token->type = get_token_type(current_token);
 		current_token = current_token->next;
-		if (current_token && current_token->next == head_token) // circular check; necessary?
+		// WHAT
+		if (current_token->next == head_token) // circular check; necessary?
 			return (head_token);
 	}
 	return (head_token);

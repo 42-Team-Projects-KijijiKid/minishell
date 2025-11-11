@@ -46,6 +46,7 @@ void	build_redirect_chain(t_build_manager *manager, t_token *cmd)
 
 	if (!manager || !manager->root_node)
 	{
+		//Wieso hier wieder mit return
 		ft_error("build_redirect_chain: invalid build manager", \
 			__FILE__, __LINE__, 71);
 		return ;
@@ -68,6 +69,7 @@ void	build_redirection_tree(t_build_manager *manager)
 {
 	t_token	*cmd;
 
+	// Wo ist diese Funktion
 	// if (!validate_redirection_tree(manager))
 	// 	return ;
 	cmd = manager->head_token;

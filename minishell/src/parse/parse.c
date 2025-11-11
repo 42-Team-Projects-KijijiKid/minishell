@@ -46,5 +46,4 @@ void	minishell_parse(char *input)
 	shell->tree_root = manager.root_node;
 	// expand(shell->tree_root); // preliminary implementation; waiting for adjusted version from Mateo
 	print_ast_structure(shell->tree_root, 0, false);
-	exit (101);
 }

@@ -1,4 +1,4 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
 static int	get_precedence(e_tree_node_type type)
 {
