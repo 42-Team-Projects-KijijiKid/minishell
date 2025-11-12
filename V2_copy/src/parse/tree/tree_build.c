@@ -30,6 +30,7 @@ static t_build_manager	*build_manager(t_token *token)
 {
 	t_build_manager	*manager;
 
+	manager = fti_malloc(sizeof(t_build_manager), TEMPORARY);
 	manager->head_token = token;
 	manager->root_token = find_root(token);
 	manager->root_node = token_to_tree_node(manager->root_token);
