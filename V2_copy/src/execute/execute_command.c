@@ -24,11 +24,11 @@ static void	execute_executable(t_tree_node *node)
 	ft_error("Execve failed", __FILE__, __LINE__, 927);
 }
 
-void	execute_redirects(t_tree_node node)
+void	execute_redirects(t_tree_node *node)
 {
-	t_redirect_node	redirect;
+	t_redirect_node	*redirect;
 
-	redirect = node->redirect->head; // TODO: redirect meta unnecessary; delete
+	redirect = node->redirect.head; // TODO: redirect meta unnecessary; delete
 	while (redirect)
 	{
 		if (redirect->type == LESS)
