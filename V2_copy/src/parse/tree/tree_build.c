@@ -4,7 +4,10 @@ static t_token	*get_left_tokens(t_token	*root)
 {
 	t_token	*node;
 
-	node = root->prev;
+	if (root->prev)
+		node = root->prev;
+	else
+		ft_error("invalid token list", __FILE__, __LINE__, 998);
 	root->prev = NULL;
 	node->next = NULL;
 	while (node->prev)
@@ -46,12 +49,13 @@ void	tree_build(t_build_manager *manager)
 		tree_redirects(manager);
 		return ;
 	}
-	// tree_subshells(manager);
+	tree_subshells(manager);
 	left = get_left_tokens(manager->root_token);
 	right = get_right_tokens(manager->root_token);
 	build_manager(left, &left_manager);
 	build_manager(right, &right_manager);
 	manager->root_node->left = left_manager.root_node;
+	debug_ast("L", __FILE__, __LINE__, left_manager.root_node);
 	manager->root_node->right = right_manager.root_node;
 	tree_build(&left_manager);
 	tree_build(&right_manager);

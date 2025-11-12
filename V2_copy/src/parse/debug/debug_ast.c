@@ -12,16 +12,19 @@ static void print_operator(e_tree_node_type type)
 
 void	debug_ast(char *prefix ,char *file, int line, t_tree_node *node)
 {
+	char	**tmp;
+
+	tmp = node->args;
 	printf("\033[31;3m%s: ", prefix);
 	if (node->type != TEXT)
 		print_operator(node->type);
 	else
 	{
 		printf("[");
-		while (*node->args)
+		while (*tmp)
 		{
-			printf("%s, ", *node->args);
-			node->args++;
+			printf("%s, ", *tmp);
+			tmp++;
 		}
 		printf("] ");
 	}

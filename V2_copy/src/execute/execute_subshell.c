@@ -19,4 +19,5 @@ int execute_subshell(t_tree_node *node)
 		if (!WIFEXITED(status))
 			ft_error("Unexpected error in subshell execution", __FILE__, __LINE__, 991);
 	}
+	exit(0);
 }
