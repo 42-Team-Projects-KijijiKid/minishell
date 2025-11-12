@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-int builtin_unset(char **args)
+void builtin_unset(char **args)
 {
 	int i;
 
@@ -12,5 +12,5 @@ int builtin_unset(char **args)
 		env_unset_value(args[i]);
 		i++;
 	}
-	return (0);
+	exit(0);
 }

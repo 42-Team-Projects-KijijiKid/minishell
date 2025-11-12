@@ -26,19 +26,18 @@ static int	execute_pipe_right(t_tree_node *node, int read_fd, int write_fd, pid_
 	if (saved_stdin == -1)
 	{
 		close(read_fd);
-		return (ft_error("Dup failed", __FILE__, __LINE__, 912), 912);
+		ft_error("Dup failed", __FILE__, __LINE__, 912);
 	}
 	if (dup2(read_fd, STDIN_FILENO) == -1)
 	{
 		close(read_fd);
-		return (ft_error("Dup2 failed", __FILE__, __LINE__, 913), 913);
+		ft_error("Dup2 failed", __FILE__, __LINE__, 913);
 	}
-	waitpid(child_pid, &status, 0);
-	status = execute_node(node->right);
+	waitpid(child_pid, &status, 0); // Question: waitpid overwrites the status variable with the exit status of the child process?
+	execute_node(node->right);
 	close(read_fd);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
-	return (ft_error("Unexpected error in pipe execution right", __FILE__, __LINE__, 1), 0);
+	if (!WIFEXITED(status))
+		ft_error("Unexpected error in pipe execution right", __FILE__, __LINE__, 1);
 }
 
 int	execute_pipe(t_tree_node *node)
@@ -46,24 +45,18 @@ int	execute_pipe(t_tree_node *node)
 	int		pipe_fds[2];
 	pid_t	pid;
 
-	if (!node || node->type != PIPE)
-		return (ft_error("Invalid node for pipe execution", __FILE__, __LINE__, 99), 99);
 	if (pipe(pipe_fds) == -1)
-		return (ft_error("Pipe creation failed", __FILE__, __LINE__, 910), 910);
+		ft_error("Pipe creation failed", __FILE__, __LINE__, 910);
 	pid = fork();
 	if (pid == -1)
 	{
 		close(pipe_fds[0]);
 		close(pipe_fds[1]);
-		return (ft_error("Fork failed", __FILE__, __LINE__, 92), 92);
+		ft_error("Fork failed", __FILE__, __LINE__, 92);
 	}
 	if (pid == 0)
-	{
 		execute_pipe_left(node, pipe_fds[0], pipe_fds[1]);
-	}
 	else
-	{
-		return (execute_pipe_right(node, pipe_fds[0], pipe_fds[1], pid));
-	}
-	return (ft_error("Unexpected error in execute_pipe", __FILE__, __LINE__, 1), 0);
+		execute_pipe_right(node, pipe_fds[0], pipe_fds[1], pid);
+	ft_error("Unexpected error in execute_pipe", __FILE__, __LINE__, 993);
 }

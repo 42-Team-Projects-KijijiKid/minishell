@@ -1,15 +1,15 @@
 #include "../../../inc/minishell.h"
 
-int builtin_pwd(char **args)
+void builtin_pwd(char **args)
 {
 	char *pwd;
 
 	pwd = env_get_value("PWD");
 	if (!pwd)
-		return (ft_error("pwd: PWD not set", __FILE__, __LINE__, 930), 930);
-	if (printf("%s\n", pwd) < 0)
-		return (ft_error("printf failed", __FILE__, __LINE__, 932), 932);
-	return (0);
+		ft_error("pwd: PWD not set", __FILE__, __LINE__, 930);
+	if (printf("%s\n", pwd) < 0) // TODO: Prototyp printf error handling; erase or implement others
+		ft_error("printf failed", __FILE__, __LINE__, 932);
+	exit(0);
 }
 
 /*int builtin_pwd(char **args)

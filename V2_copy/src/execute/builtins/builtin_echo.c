@@ -1,12 +1,10 @@
 #include "../../../inc/minishell.h"
 
-int builtin_echo(char **args)
+void builtin_echo(char **args)
 {
 	int i;
 	int newline;
 
-	if (!args)
-		return (1);
 	i = 1;
 	newline = 1;
 	if (args[1] && ft_strcmp(args[1], "-n") == 0) // New version required, that adds to garbage collector
@@ -16,16 +14,12 @@ int builtin_echo(char **args)
 	}
 	while (args[i])
 	{
-		if (printf("%s", args[i]) < 0)
-			return (ft_error("printf failed", __FILE__, __LINE__, 933), 933);
+		printf("%s", args[i]); // TODO: Question: check for printf errors?
 		if (args[i + 1])
 			printf(" ");
 		i++;
 	}
 	if (newline)
-	{
-		if (printf("\n") < 0)
-			return (ft_error("printf failed", __FILE__, __LINE__, 933), 933);
-	}
-	return (0);
+		printf("\n");
+	exit(0);
 }
