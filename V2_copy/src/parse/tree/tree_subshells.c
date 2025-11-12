@@ -14,11 +14,12 @@ void	tree_subshells(t_build_manager *manager)
 		if (head->next == last)
 			ft_error("Empty paranthesis detected", __FILE__, __LINE__, 996);
 		manager->root_node->sub = true;
-		// head = head->next;
+		head = head->next;
 		// head->prev->next = NULL;
 		head->prev = NULL;
-		// last = last->prev;
+		last = last->prev;
 		// last->next->prev = NULL;
 		last->next = NULL;
 	}
+	manager->head_token = head;
 }
