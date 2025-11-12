@@ -4,5 +4,7 @@
 #include "structs.h"
 
 // expand.c
+t_tree_node	*expand_process(t_tree_node *node);
+
 
 #endif
