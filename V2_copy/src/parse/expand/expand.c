@@ -39,10 +39,7 @@ char	*double_quotes(char *str)
 	return (expand_inside_str(str, '\"'));
 }
 
-/// @brief Directly expands the provided var
-/// @param str 
-/// @return 
-char	*simple_expand(char *str)
+char	*argument_expand(char *str)
 {
 	char	*rtn;
 	char	*tmp_str;
@@ -56,13 +53,16 @@ char	*simple_expand(char *str)
 	{
 		if (*str == '$')
 		{
-			tmp_str =  get_environment_value(str);
+			str++;
+			tmp_str = null_end_str(&str);
+			tmp_str =  get_environment_value(tmp_str);
 			while (tmp_str && *tmp_str)
 			{
 				rtn[i++] = *tmp_str;
 				tmp_str++;
 			}
 		}
+		str++;
 	}
 	rtn[i] = '\0';
 	return (rtn);
@@ -82,7 +82,7 @@ void	possible_expansion(t_tree_node *node)
 		else if (**node->args == '\"')
 			*node->args = double_quotes(*node->args);
 		else if (**node->args == '$')
-			*node->args = simple_expand(*node->args);
+			*node->args = argument_expand(*node->args);
 		node->args++;
 	}
 	node->args = head;
@@ -95,7 +95,7 @@ void	possible_expansion(t_tree_node *node)
 /// @return recursive calls of
 /// nodes to avoid destruction
 /// of binary tree
-t_tree_node	*expand_process(t_tree_node *node)
+t_tree_node	*expand(t_tree_node *node)
 {
 	if (!node)
 		return (NULL);
@@ -104,7 +104,7 @@ t_tree_node	*expand_process(t_tree_node *node)
 		if (*node->args && node->args[1])
 			possible_expansion(node);
 	}
-	expand_process(node->left);
-	expand_process(node->right);
+	expand(node->left);
+	expand(node->right);
 	return (node);
 }
