@@ -75,6 +75,8 @@ int	count_subshells(t_token	*token)
 		{
 			while (token->type != RPAREN)
 			{
+				if (!token->next)
+					return (subshells);
 				if (token->next->type == RPAREN)
 					subshells++;
 				token = token->next;
@@ -84,6 +86,7 @@ int	count_subshells(t_token	*token)
 		}
 		token = token->next;
 	}
+	printf("Subshell count: %d\n", subshells);
 	return (subshells);
 }
 
@@ -98,6 +101,7 @@ t_token	*find_root(t_token *token_head)
 		token_head = token_head->next;
 	root = token_head;
 	root_prec = get_precedence(token_head->type);
+	depth = 0;
 	while (token_head)
 	{
 		if (token_head->type == LPAREN)
