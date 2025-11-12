@@ -51,12 +51,15 @@ void	tree_build(t_build_manager *manager)
 		return ;
 	}
 	left = get_left_tokens(manager->root_token);
+	print_tokens(left, "Left-Head");
 	right = get_right_tokens(manager->root_token);
+	print_tokens(right, "Right-Head");
 	build_manager(left, &left_manager);
 	build_manager(right, &right_manager);
 	manager->root_node->left = left_manager.root_node;
 	debug_ast("L", __FILE__, __LINE__, left_manager.root_node);
 	manager->root_node->right = right_manager.root_node;
+	debug_ast("R", __FILE__, __LINE__, left_manager.root_node);
 	tree_build(&left_manager);
 	tree_build(&right_manager);
 }
