@@ -67,22 +67,20 @@ static e_tree_node_type	evaluate_token_type(char **input)
 t_token	*tokenize(char *input)
 {
 	t_token	*node;
+	t_token	*next;
 	t_token	*head;
 
-	head = NULL;
+	node = (t_token *)fti_malloc(sizeof(t_token), TEMPORARY);
+	head = node;
+	node->prev = NULL;
 	while (*input)
 	{
 		while (*input == ' ')
 			input++;
 		if (!*input)
 			break ;
-		node = (t_token *)fti_malloc(sizeof(t_token), TEMPORARY);
-		node->prev = NULL;
-		if (head)
-			head->prev = node;
 		node->type = TEXT;
 		node->args = NULL;
-		node->next = head;
 		if (is_meta_char(*input))
 		{
 			node->type = evaluate_token_type(&input);
@@ -90,7 +88,13 @@ t_token	*tokenize(char *input)
 		}
 		else
 			node->args = tokens_split_args(&input);
-		head = node;
+		if (!(*input))
+			break ;
+		next = (t_token *)fti_malloc(sizeof(t_token), TEMPORARY);
+		next->prev = node;
+		node->next = next;
+		node = next;
 	}
+	node->next = NULL;
 	return (head);
 }
