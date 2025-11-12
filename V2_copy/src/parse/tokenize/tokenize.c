@@ -53,10 +53,7 @@ static e_tree_node_type	evaluate_token_type(char **input)
 		type = DGREAT;
 	else if (ft_strncmp(input[0], "<<", len) == 0)
 		type = DLESS;
-	if (type == DLESS || type == DGREAT
-		|| type == AND_IF || type == OR_IF)
-		(*input)++;
-	(*input)++;
+	*input = *input + len;
 	return (type);
 }
 
