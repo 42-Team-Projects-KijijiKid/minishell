@@ -3,10 +3,9 @@
 /// @brief Goes through environment
 /// linked list, and returns value
 /// if its in the list
-/// @param str To match string without
-/// $
-/// @return Null or string
-char	*rtn_env_value(char *str)
+/// @param str Environment key
+/// @return NULL or environment value
+char	*get_environment_value(char *str)
 {
 	t_minishell	*minishell;
 	t_env_node	*env;

@@ -56,7 +56,7 @@ char	*simple_expand(char *str)
 	{
 		if (*str == '$')
 		{
-			tmp_str =  give_env_str(&str);
+			tmp_str =  get_environment_value(str);
 			while (tmp_str && *tmp_str)
 			{
 				rtn[i++] = *tmp_str;
