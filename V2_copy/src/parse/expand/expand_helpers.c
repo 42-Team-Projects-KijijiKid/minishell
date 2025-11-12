@@ -63,7 +63,7 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 			tmp_str = null_end_str(&str);
 			tmp_str = get_environment_value(tmp_str);
 			if (tmp_str)
-				len_2 = ft_strlen(tmp_str);
+				len_2 += ft_strlen(tmp_str);
 		}
 		if (*str && *str != quote)
 			len_1++;

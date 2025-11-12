@@ -62,7 +62,8 @@ char	*argument_expand(char *str)
 				tmp_str++;
 			}
 		}
-		str++;
+		if (*str && *str != '$')
+			str++;
 	}
 	rtn[i] = '\0';
 	return (rtn);
