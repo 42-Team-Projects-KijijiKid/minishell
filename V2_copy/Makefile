@@ -32,7 +32,7 @@ REDIRECTS_DIR	:= redirects/
 INTEGRATIONS_DIR	:= integrations/
 
 #.c files in src/parsing with subfolders
-EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, )) 
+EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers expand_helpers_2)) 
 TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, tokenize $(addprefix tokens_, find_root split_args split_utils))) 
 TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redirects tree_utils))
 DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast))

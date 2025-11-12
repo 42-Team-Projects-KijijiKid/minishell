@@ -13,7 +13,7 @@ char	*single_quotes(char *str)
 	if (*str == '\'')
 		str++;
 	str_len = strlen_whitout_quotes(str, '\'');
-	rtn = ft_malloc(sizeof(char) * str_len + 1, LAYER_2);
+	rtn = fti_malloc(sizeof(char) * str_len + 1, TEMPORARY);
 	i = 0;
 	while (*str != '\'')
 	{
@@ -50,7 +50,7 @@ char	*simple_expand(char *str)
 	int		len;
 
 	len = strlen_with_expansion(str, '\'');
-	rtn = ft_malloc((sizeof(char) * len) + 1, LAYER_2);
+	rtn = fti_malloc((sizeof(char) * len) + 1, TEMPORARY);
 	i = 0;
 	while (*str)
 	{
