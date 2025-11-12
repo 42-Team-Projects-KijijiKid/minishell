@@ -14,4 +14,7 @@ void	validate_quote_pairs(char *line);
 // debug/print_tree.c
 void	print_ast_structure(t_tree_node *root, int level, bool left);
 
+// debug/debug_ast.c
+void	debug_ast(char *prefix ,char *file, int line, t_tree_node *node);
+
 #endif
