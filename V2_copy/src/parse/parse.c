@@ -15,6 +15,7 @@ void	minishell_parse(char *input)
 	manager.root_node = token_to_tree_node(manager.root_token);
 	debug_ast("Root node", __FILE__, __LINE__, manager.root_node);
 	shell->tree_root = manager.root_node;
+	tree_subshells(&manager);
 	tree_build(&manager);
 	//expand(shell->tree_root); // preliminary implementation; waiting for adjusted version from Mateo
 	expand(shell->tree_root);

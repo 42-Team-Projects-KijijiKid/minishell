@@ -64,32 +64,52 @@ t_token	*get_last_token(t_token *node)
 	return (node);	
 }
 
+// int	count_subshells(t_token	*token)
+// {
+// 	int		subshells;
+
+// 	subshells = 0;
+// 	while (token)
+// 	{
+// 		if (token->type == LPAREN)
+// 		{
+// 			while (token->type != RPAREN)
+// 			{
+// 				if (!token->next)
+// 					return (subshells);
+// 				if (token->next->type == RPAREN)
+// 					subshells++;
+// 				token = token->next;
+// 				if (!token)
+// 					ft_error("Open paranthesis is never closed", __FILE__, __LINE__, 997);
+// 			}
+// 		}
+// 		token = token->next;
+// 	}
+// 	printf("Subshell count: %d\n", subshells);
+// 	return (subshells);
+// }
+
 int	count_subshells(t_token	*token)
 {
-	int		subshells;
+	int		open_par;
+	int		close_par;
 
-	subshells = 0;
+	open_par = 0;
+	close_par = 0;
 	while (token)
 	{
 		if (token->type == LPAREN)
-		{
-			while (token->type != RPAREN)
-			{
-				if (!token->next)
-					return (subshells);
-				if (token->next->type == RPAREN)
-					subshells++;
-				token = token->next;
-				if (!token)
-					ft_error("Open paranthesis is never closed", __FILE__, __LINE__, 997);
-			}
-		}
+			open_par++;
+		if (token->type == RPAREN)
+			close_par++;
 		token = token->next;
 	}
-	printf("Subshell count: %d\n", subshells);
-	return (subshells);
+	printf("Subshell count: open (%d) & close (%d)\n", open_par, close_par);
+	// if (open_par != close_par)
+	//  	ft_error("uneven amount of parenthesis", __FILE__, __LINE__, 997);
+	return (open_par);
 }
-
 t_token	*find_root(t_token *token_head)
 {
 	int		root_prec;
