@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+static void	print_redirects(t_tree_node *node)
+{
+	t_redirect_node	*redirect;
+
+	redirect = node->redirect.head;
+	while (redirect)
+	{
+		printf("%s -> ", redirect->file);
+		redirect = redirect->next;
+	}
+}
+
 static void print_operator(e_tree_node_type type)
 {
 	if (type == AND_IF)
@@ -10,11 +22,11 @@ static void print_operator(e_tree_node_type type)
 		printf("|");
 }
 
-void	print_ast_structure(t_tree_node *root, int level, bool left)
+void	print_ast_structure(t_tree_node *node, int level, bool left)
 {
-	if (!root)
+	if (!node)
 		return;
-	print_ast_structure(root->right, level + 1, false);
+	print_ast_structure(node->right, level + 1, false);
 	for (int i = 0; i < level; i++)
 		printf("		");
 	if (left)
@@ -23,20 +35,22 @@ void	print_ast_structure(t_tree_node *root, int level, bool left)
 		printf("R: ");
 	if (level != 0)
 		printf("-> ");
-	if (root->sub)
+	if (node->sub)
 		printf("SUBSH");
-	if (root->type != TEXT)
-		print_operator(root->type);
+	if (node->type != TEXT)
+		print_operator(node->type);
 	else
 	{
 		printf("[");
-		while (*root->args)
+		while (*node->args)
 		{
-			printf("%s, ", *root->args);
-			root->args++;
+			printf("%s, ", *node->args);
+			node->args++;
 		}
 		printf("]");
+		if (node->redirect.head)
+			print_redirects(node);
 	}
 	printf("\n");
-	print_ast_structure(root->left, level + 1, true);
+	print_ast_structure(node->left, level + 1, true);
 }

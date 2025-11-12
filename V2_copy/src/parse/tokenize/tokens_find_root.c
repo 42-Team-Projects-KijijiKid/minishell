@@ -1,14 +1,26 @@
 #include "../../../inc/minishell.h"
 
+static int	get_precedence(e_tree_node_type type)
+{
+	if (type == AND_IF ||  type == OR_IF)
+		return (1);
+	if (type == PIPE)
+		return (2);
+	if (type == TEXT)
+		return (3);
+	return (4);
+}
+
 static bool	check_precedence(e_tree_node_type before, e_tree_node_type current)
 {
-	if (current == TEXT)
-		return (false); //text not an operator
-	if (before == TEXT)
+	int	prec_cur;
+	int	prec_bef;
+
+	prec_bef = get_precedence(before);
+	prec_cur = get_precedence(current);
+	if (prec_bef > prec_cur)
 		return (true);
-	if (before == current)
-		return (true); //left associativity
-	if (current == AND_IF || current == OR_IF)
+	if (prec_bef == prec_cur && prec_cur < 3)
 		return (true);
 	return (false);
 }
