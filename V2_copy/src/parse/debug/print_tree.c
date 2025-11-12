@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+static void print_operator(e_tree_node_type type)
+{
+	if (type == AND_IF)
+		printf("&&");
+	else if (type == OR_IF)
+		printf("||");
+	else if (type == PIPE)
+		printf("|");
+}
+
 void	print_ast_structure(t_tree_node *root, int level, bool left)
 {
 	if (!root)
@@ -15,7 +25,9 @@ void	print_ast_structure(t_tree_node *root, int level, bool left)
 		printf("-> ");
 	if (root->sub)
 		printf("SUBSH");
-	if (root->args)
+	if (root->type != TEXT)
+		print_operator(root->type);
+	else
 	{
 		printf("[");
 		while (*root->args)
@@ -23,7 +35,8 @@ void	print_ast_structure(t_tree_node *root, int level, bool left)
 			printf("%s, ", *root->args);
 			root->args++;
 		}
-		printf("]\n");
+		printf("]");
 	}
+	printf("\n");
 	print_ast_structure(root->left, level + 1, true);
 }
