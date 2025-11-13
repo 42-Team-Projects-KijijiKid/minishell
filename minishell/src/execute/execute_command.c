@@ -72,17 +72,17 @@ void	execute_redirects(t_tree_node *node)
 {
 	t_redirect_node	*redirect;
 
-	redirect = node->redirect.head; // TODO: redirect meta unnecessary; delete
+	redirect = node->redirect.head;
 	while (redirect)
 	{
 		if (redirect->type == LESS)
 			execute_rdr_in(redirect);
 		else if (redirect->type == GREAT)
-			execute_rdr_in(redirect);
+			execute_rdr_out(redirect);
 		else if (redirect->type == DLESS)
-			execute_rdr_in(redirect);
+			execute_rdr_heredoc(redirect);
 		else if (redirect->type == DGREAT)
-			execute_rdr_in(redirect);
+			execute_rdr_append(redirect);
 		redirect = redirect->next;
 	}
 }

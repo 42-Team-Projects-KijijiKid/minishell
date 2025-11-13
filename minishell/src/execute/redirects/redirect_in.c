@@ -16,9 +16,4 @@ void execute_rdr_in(t_redirect_node *redirect)
 			__FILE__, __LINE__, 952);
 	}
 	close(fd);
-	if (saved_stdin != -1)
-	{
-		dup2(saved_stdin, STDIN_FILENO);
-		close(saved_stdin);
-	}
 }
