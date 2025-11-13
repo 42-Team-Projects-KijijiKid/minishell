@@ -105,7 +105,6 @@ int	count_subshells(t_token	*token)
 			close_par++;
 		token = token->next;
 	}
-	printf("Subshell count: open (%d) & close (%d)\n", open_par, close_par);
 	// if (open_par != close_par)
 	//  	ft_error("uneven amount of parenthesis", __FILE__, __LINE__, 997);
 	return (open_par);

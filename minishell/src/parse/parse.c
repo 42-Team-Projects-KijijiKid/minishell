@@ -11,7 +11,6 @@ void	minishell_parse(char *input)
 	manager.head_token = tokenize(input);
 	manager.root_token = find_root(manager.head_token);
 	manager.root_node = token_to_tree_node(manager.root_token);
-	debug_ast("Root node", __FILE__, __LINE__, manager.root_node);
 	shell->tree_root = manager.root_node;
 	tree_subshells(&manager);
 	tree_build(&manager);
