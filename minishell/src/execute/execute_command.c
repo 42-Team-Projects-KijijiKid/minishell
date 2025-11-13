@@ -18,12 +18,53 @@ static void	execute_builtin(t_tree_node *node)
 		builtin_env(node->args);
 }
 
+char	**extract_path(char **envp)
+{
+	char	**path_2d;
+
+	while (*envp)
+	{
+		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
+		{
+			path_2d = ft_split((*envp + 5), ':');
+			return (path_2d);
+		}
+		envp++;
+	}
+	return (NULL);
+}
+
+char	*access_path(char *cmd, char **paths_2d)
+{
+	char	*path_cmd;
+	char	*full_path;
+
+	path_cmd = ft_strjoin("/", cmd);
+	while (*paths_2d)
+	{
+		full_path = ft_strjoin(*paths_2d, path_cmd);
+		if (access(full_path, X_OK) == 0)
+		{
+			free(path_cmd);
+			return (full_path);
+		}
+		free(full_path);
+		paths_2d++;
+	}
+	free(path_cmd);
+	return (NULL);
+}
+
 static void	execute_executable(t_tree_node *node)
 {
 	char	**envp;
+	char	**split_path;
+	char	*bin_path;
 
 	envp = env_list_to_2d();
-	execve(node->args[0], node->args, envp);
+	split_path = extract_path(envp);
+	bin_path = access_path(*node->args, split_path);
+	execve(bin_path, node->args, envp);
 	ft_error("Execve failed", __FILE__, __LINE__, 927);
 }
 
