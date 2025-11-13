@@ -75,7 +75,7 @@ void environment_initialize(char **env_vars)
 
 	shell = minishell_get();
 	head = NULL;
-	while (*env_vars)
+	while (*env_vars && env_vars)
 	{
 		node = fti_malloc(sizeof(t_env_node), PERSISTENT);
 		if (head)

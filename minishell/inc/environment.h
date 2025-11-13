@@ -12,5 +12,6 @@ char			*env_get_value(char *key);
 int				env_set_value(char *key, char *value);
 int				env_unset_value(char *key);
 char			*rtn_key_value(t_env_node *node);
+char			**env_list_to_2d(void);
 
 #endif

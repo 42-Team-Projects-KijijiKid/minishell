@@ -1,4 +1,4 @@
-#include "../../inc/minishell.h"
+	#include "../../inc/minishell.h"
 
 static void	execute_builtin(t_tree_node *node)
 {
@@ -20,7 +20,10 @@ static void	execute_builtin(t_tree_node *node)
 
 static void	execute_executable(t_tree_node *node)
 {
-	execve(node->args[0], node->args, NULL);
+	char	**envp;
+
+	envp = env_list_to_2d();
+	execve(node->args[0], node->args, envp);
 	ft_error("Execve failed", __FILE__, __LINE__, 927);
 }
 
