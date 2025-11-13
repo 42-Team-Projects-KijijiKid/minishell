@@ -47,6 +47,7 @@ void execute_command(t_tree_node *node)
 {
 	int status;
 
+	char *test = *node->args;
 	if (node->args == NULL || node->args[0] == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
