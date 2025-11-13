@@ -16,5 +16,5 @@ void	minishell_parse(char *input)
 	tree_build(&manager);
 	//expand(shell->tree_root); // preliminary implementation; waiting for adjusted version from Mateo
 	expand(shell->tree_root);
-	print_ast_structure(shell->tree_root, 0, false);
+	// print_ast_structure(shell->tree_root, 0, false);
 }
