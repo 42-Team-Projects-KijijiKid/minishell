@@ -11,5 +11,6 @@ void			environment_initialize(char **envp);
 char			*env_get_value(char *key);
 int				env_set_value(char *key, char *value);
 int				env_unset_value(char *key);
+char			*rtn_key_value(t_env_node *node);
 
 #endif

@@ -1,4 +1,4 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
 static char	*heredoc_loop(const char *delim)
 {
@@ -8,7 +8,7 @@ static char	*heredoc_loop(const char *delim)
 	full_input = ft_strdup(""); // TODO: New version required, that adds to garbage collector
 	while (1)
 	{
-		line = ft_readline("> ");
+		line = readline(">");
 		if (!line)
 			break; 
 		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
@@ -36,7 +36,7 @@ static char	*expand_heredoc_input(char **input, char *delim)
 		ft_error("Mismatched quotes in heredoc delimiter", \
 			__FILE__, __LINE__, 0);
 	}
-	expanded = expand_variables(*input); // TODO: add Mateos function and check, if if-condition in line 53 after expand_heredoc_input still makes sense
+	// expanded = expand_variables(*input); // TODO: add Mateos function and check, if if-condition in line 53 after expand_heredoc_input still makes sense
 	return (expanded);
 }
 
@@ -46,11 +46,11 @@ void execute_rdr_heredoc(t_redirect_node *redirect)
 	if (!(redirect->file) || ft_strlen(redirect->file) == 0) // TODO: Check, if heredoc writes delimiter in file attribute
 		ft_error("Heredoc delimiter is NULL or empty", \
 			__FILE__, __LINE__, 951);
-	input = heredoc_loop(redirect->args[0]);
+	// input = heredoc_loop(redirect->args[0]);
 	if (!input)
 		ft_error("Failed to read heredoc input", \
 			__FILE__, __LINE__, 952);
-	input = expand_heredoc_input(&input, redirect->args[0]);
+	// input = expand_heredoc_input(&input, redirect->args[0]);
 	if (!input)
 		ft_error("Failed to expand heredoc input", \
 			__FILE__, __LINE__, 953);

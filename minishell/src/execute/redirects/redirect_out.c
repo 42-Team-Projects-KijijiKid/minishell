@@ -6,7 +6,7 @@ void execute_rdr_out(t_redirect_node *redirect)
 	char *filename;
 	int	saved_stdout;
 
-	filename = get_redirect_filename(redirect->left);
+	filename = redirect->file;
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		ft_error("Failed to open file for output redirection", __FILE__, __LINE__, 951);

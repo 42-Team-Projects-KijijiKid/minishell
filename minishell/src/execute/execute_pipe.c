@@ -11,12 +11,12 @@ static void	execute_pipe_left(t_tree_node *node, int read_fd, int write_fd)
 		_exit(1);
 	if (dup2(write_fd, STDOUT_FILENO) == -1)
 		_exit(1);
-	status = execute_node(node->left);
+	execute_node(node->left);
 	close(write_fd);
 	_exit(status);
 }
 
-static int	execute_pipe_right(t_tree_node *node, int read_fd, int write_fd, pid_t child_pid)
+static void	execute_pipe_right(t_tree_node *node, int read_fd, int write_fd, pid_t child_pid)
 {
 	int	saved_stdin;
 	int	status;
@@ -40,7 +40,7 @@ static int	execute_pipe_right(t_tree_node *node, int read_fd, int write_fd, pid_
 		ft_error("Unexpected error in pipe execution right", __FILE__, __LINE__, 1);
 }
 
-int	execute_pipe(t_tree_node *node)
+void	execute_pipe(t_tree_node *node)
 {
 	int		pipe_fds[2];
 	pid_t	pid;

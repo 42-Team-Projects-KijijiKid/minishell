@@ -39,7 +39,7 @@ DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast
 
 #.c files in src/execute with subfolders
 BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset)))
-REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), redirection_utils.c $(addprefix redirect_, $(addsuffix .c, append heredoc in out)))
+REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(addsuffix .c, append heredoc in out)))
 
 #.c files in src/utils with subfolders
 INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_malloc fti_readline))
@@ -51,7 +51,7 @@ ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_uti
 UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
-MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) #$(EXECUTE)
+MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)
 
 
 # Every Folder path prefixed with src/ and the main (top level)

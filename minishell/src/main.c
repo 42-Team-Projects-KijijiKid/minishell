@@ -35,7 +35,7 @@ int main(int ac, char **av, char **env)
 			break ;
 		minishell_parse(cmd);
 		// ######### -- continue -->
-		// minishell_execute(shell->tree_root);
+		minishell_execute(shell->tree_root);
 		garbage_free_layer(&shell->garbage.temporary);
 	}
 	printf("\033[37;5mGoodbye!\033[0m\n");

@@ -13,7 +13,7 @@ static char	**env_list_to_2d(void) // turn_2d() in expansion/create_inv.c
 	int			i;
 	
 	shell = minishell_get();
-	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), PERMANENT);
+	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), PERSISTENT);
 	node = shell->env.tail;
 	i = 0;
 	while (node)
@@ -38,7 +38,7 @@ void	builtin_env(char **args)
 	while (*env)
 	{
 		printf("%s\n", *env);
-		*env++;
+		env++;
 	}
 	exit(0);
 }

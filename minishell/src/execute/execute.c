@@ -10,23 +10,23 @@ void	execute_node_by_type(t_tree_node *node)
 		return (execute_pipe(node));
 	else if (node->type == TEXT)
 		return (execute_command(node));
-	return (ft_error("Unknown AST node type", __FILE__, __LINE__, 94), 94);
+	ft_error("Unknown AST node type", __FILE__, __LINE__, 94);
 }
 
 void	execute_node(t_tree_node *node)
 {
 	if (node == NULL)
-		ft_error("Null AST node", __FILE__, __LINE__, 93);
+		ft_error("NULL AST node", __FILE__, __LINE__, 93);
 	if (node->sub)
 		execute_subshell(node);
 	execute_node_by_type(node);
-	ft_error("Nodes never exited execution process", __FILE__, __LINE__, 992);
 }
 
 void minishell_execute()
 {
 	t_minishell	*shell;
 	int			pid;
+	int			wstatus;
 
 	shell = minishell_get();
 	if (shell->tree_root == NULL)
@@ -38,7 +38,6 @@ void minishell_execute()
 		execute_node(shell->tree_root);
 	else
 	{
-		int wstatus;
 		waitpid(pid, &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			shell->last_exit_status = WEXITSTATUS(wstatus); // TODO: Update minishell with last exit status?
