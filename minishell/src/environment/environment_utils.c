@@ -11,6 +11,7 @@ char	*rtn_key_value(t_env_node *node)
 	int		len;
 	char	*rtn;
 	int		i;
+	int		x;
 
 	len = node->value_len + node->key_len + 1;
 	rtn = fti_malloc(sizeof(char) * (len + 1), TEMPORARY);
@@ -21,10 +22,12 @@ char	*rtn_key_value(t_env_node *node)
 		i++;
 	}
 	rtn[i++] = '=';
-	while (node->value[i])
+	x = 0;
+	while (node->value[x])
 	{
-		rtn[i] = node->value[i];
+		rtn[i] = node->value[x];
 		i++;
+		x++;
 	}
 	rtn[i] = '\0';
 	return (rtn);
