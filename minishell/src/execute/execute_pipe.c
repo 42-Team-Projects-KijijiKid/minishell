@@ -58,5 +58,5 @@ void	execute_pipe(t_tree_node *node)
 		execute_pipe_left(node, pipe_fds[0], pipe_fds[1]);
 	else
 		execute_pipe_right(node, pipe_fds[0], pipe_fds[1], pid);
-	ft_error("Unexpected error in execute_pipe", __FILE__, __LINE__, 993);
+	// ft_error("Unexpected error in execute_pipe", __FILE__, __LINE__, 993);
 }

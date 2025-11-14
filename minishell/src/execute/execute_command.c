@@ -11,6 +11,7 @@ static int	execute_builtin(t_tree_node *node)
 	t_minishell	*shell;
 
 	shell = minishell_get();
+	exit = 0;
 	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
 		exit = builtin_cd(node->args);
 	else if (ft_strncmp(node->args[0], "echo", ft_strlen(*node->args)) == 0)
@@ -27,7 +28,8 @@ static int	execute_builtin(t_tree_node *node)
 		exit = builtin_env(node->args);
 	else
 		exit = 1;
-	shell->last_exit_status = exit;
+	if (exit != 1) 
+		shell->last_exit_status = exit;
 	return (exit);
 }
 
@@ -40,7 +42,8 @@ static void	execute_executable(t_tree_node *node)
 	envp = env_list_to_2d();
 	split_path = get_path_array(envp);
 	bin_path = get_bin_path_of_command(*node->args, split_path);
-	execve(bin_path, node->args, envp);
+	if (!bin_path && split_path)
+		execve(bin_path, node->args, envp);
 	exit (120);
 }
 
