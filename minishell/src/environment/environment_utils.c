@@ -21,9 +21,9 @@ char	*rtn_key_value(t_env_node *node)
 		i++;
 	}
 	rtn[i++] = '=';
-	while (*node->value)
+	while (node->value[i])
 	{
-		rtn[i] = *node->value++;
+		rtn[i] = node->value[i];
 		i++;
 	}
 	rtn[i] = '\0';
@@ -85,6 +85,7 @@ int	env_set_value(char *key, char *value)
 	shell->env.head = new_node;
 	if (!shell->env.tail)
 		shell->env.tail = new_node;
+	shell->env.size++;
 	return (0);
 }
 
