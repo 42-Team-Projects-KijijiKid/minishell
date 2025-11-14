@@ -2,8 +2,6 @@
 
 void	execute_and(t_tree_node *node)
 {
-	int			pid;
-	int			pid_child;
 	t_minishell	*shell;
 
 	shell = minishell_get();

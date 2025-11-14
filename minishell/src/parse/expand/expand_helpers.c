@@ -52,7 +52,6 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 	int		len_1;
 	int		len_2;
 	char	*tmp_str;
-	int		tmp;
 
 	len_1 = 0;
 	len_2 = 0;
@@ -71,7 +70,6 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 		if (*str && *str != '$')
 			str++;
 	}
-	tmp = len_1 + len_2;
 	return (len_1 + len_2);
 }
 

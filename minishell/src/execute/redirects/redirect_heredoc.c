@@ -43,6 +43,7 @@ static char	*expand_heredoc_input(char **input, char *delim)
 void execute_rdr_heredoc(t_redirect_node *redirect)
 {
 	char *input;
+	
 	if (!(redirect->file) || ft_strlen(redirect->file) == 0) // TODO: Check, if heredoc writes delimiter in file attribute
 		ft_error("Heredoc delimiter is NULL or empty", \
 			__FILE__, __LINE__, 951);

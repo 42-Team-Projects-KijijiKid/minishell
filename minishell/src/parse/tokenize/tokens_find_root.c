@@ -59,13 +59,11 @@ t_token	*find_root(t_token *head)
 	while (tail->next)
 		tail = tail->next;
 	cutoffs = count_subshell_cutoffs(head);
-	printf("%p %d\n",head, cutoffs);
 	while (cutoffs--)
 	{
 		head = head->next;
-		// head->prev = NULL;
 		tail = tail->prev;
-		// tail->next = NULL;
+
 	}
 	return (find_root_without_subshell(head, tail));
 }

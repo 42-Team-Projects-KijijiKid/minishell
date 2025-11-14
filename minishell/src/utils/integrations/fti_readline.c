@@ -3,10 +3,8 @@
 char	*fti_readline(char *promt)
 {
 	char		*cmd;
-	t_minishell	*shell;
 	int			len;
 
-	shell = minishell_get();
 	cmd = NULL;
 	while (1)
 	{

@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-int	builtin_env(char **args)
+int	builtin_env(void)
 {
 	// TODO: implement builtin_env
 	// Functions exist in different branch:
@@ -9,7 +9,7 @@ int	builtin_env(char **args)
 	char	**env;
 
 	env =  env_list_to_2d();
-	while (*env)
+	while (env && *env)
 	{
 		printf("%s\n", *env);
 		env++;

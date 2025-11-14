@@ -85,7 +85,7 @@ void environment_initialize(char **env_vars)
 		node->key_len = ft_strlen(node->key);
 		node->value_len = ft_strlen(node->value);
 		env_vars++;
-		if (*env_vars && env_vars)
+		if (env_vars && *env_vars)
 			new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
 		else
 			break ;

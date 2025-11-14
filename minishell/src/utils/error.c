@@ -2,9 +2,6 @@
 
 static void	clean_exit(u_int64_t exit_stat)
 {
-	t_minishell	*meta;
-
-	meta = minishell_get();
 	garbage_free_all();
 	exit(exit_stat);
 }

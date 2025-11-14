@@ -3,17 +3,16 @@
 static void	execute_pipe_left(t_tree_node *node, int read_fd, int write_fd)
 {
 	int	saved_stdout;
-	int	status;
 
 	close(read_fd);
 	saved_stdout = dup(STDOUT_FILENO);
 	if (saved_stdout == -1)
-		_exit(1);
+		exit(127);
 	if (dup2(write_fd, STDOUT_FILENO) == -1)
-		_exit(1);
+		exit(127);
 	execute_node(node->left);
 	close(write_fd);
-	_exit(status);
+	exit(127);
 }
 
 static void	execute_pipe_right(t_tree_node *node, int read_fd, int write_fd, pid_t child_pid)

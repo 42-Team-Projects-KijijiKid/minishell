@@ -19,7 +19,7 @@ char	*get_environment_value(char *str)
 		if (env->key_len == len \
 			&& ft_strncmp(str, env->key, len) == 0)
 			break ;
-		env =env->next;
+		env = env->next;
 	}
 	if (env)
 		return (env->value);
