@@ -7,8 +7,10 @@
 /// 1 if builtin is not found
 static int	execute_builtin(t_tree_node *node)
 {
-	int	exit;
+	int			exit;
+	t_minishell	*shell;
 
+	shell = minishell_get();
 	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
 		exit = builtin_cd(node->args);
 	else if (ft_strncmp(node->args[0], "echo", ft_strlen(*node->args)) == 0)
@@ -23,7 +25,10 @@ static int	execute_builtin(t_tree_node *node)
 		exit = builtin_pwd(node->args);
 	else if (ft_strncmp(node->args[0], "env", ft_strlen(*node->args)) == 0)
 		exit = builtin_env(node->args);
-	exit = 1;
+	else
+		exit = 1;
+	shell->last_exit_status = exit;
+	return (exit);
 }
 
 static void	execute_executable(t_tree_node *node)
@@ -61,8 +66,8 @@ void	execute_redirects(t_tree_node *node)
 void execute_command(t_tree_node *node)
 {
 	int			status;
+	t_minishell	*shell; 
 	int			pid;
-	t_minishell	*shell;
 	int			wstatus;
 
 	shell = minishell_get();
@@ -76,14 +81,11 @@ void execute_command(t_tree_node *node)
 			ft_error("Fork failed", __FILE__, __LINE__, 92);
 		if (pid == 0)
 			execute_executable(node);
+		waitpid(pid, &wstatus, 0);
+		if (WIFEXITED(wstatus))
+			shell->last_exit_status = 0;
 		else
-		{
-			waitpid(pid, &wstatus, 0);
-			if (WIFEXITED(wstatus))
-				shell->last_exit_status = 0; // TODO: Update minishell with last exit status?
-			else
-				shell->last_exit_status = 1;
-		}
+			shell->last_exit_status = 1;
 	}
 	printf("%d\n", shell->last_exit_status);
 }
