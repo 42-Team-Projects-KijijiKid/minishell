@@ -7,58 +7,23 @@
 /// 1 if builtin is not found
 static int	execute_builtin(t_tree_node *node)
 {
+	int	exit;
+
 	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
-		return (builtin_cd(node->args));
+		exit = builtin_cd(node->args);
 	else if (ft_strncmp(node->args[0], "echo", ft_strlen(*node->args)) == 0)
-		return (builtin_echo(node->args));
+		exit = builtin_echo(node->args);
 	else if (ft_strncmp(node->args[0], "exit", ft_strlen(*node->args)) == 0)
-		return (builtin_exit(node->args));
+		exit = builtin_exit(node->args);
 	else if (ft_strncmp(node->args[0], "export", ft_strlen(*node->args)) == 0)
-		return (builtin_export(node->args));
+		exit = builtin_export(node->args);
 	else if (ft_strncmp(node->args[0], "unset", ft_strlen(*node->args)) == 0)
-		return (builtin_unset(node->args));
+		exit = builtin_unset(node->args);
 	else if (ft_strncmp(node->args[0], "pwd", ft_strlen(*node->args)) == 0)
-		return (builtin_pwd(node->args));
+		exit = builtin_pwd(node->args);
 	else if (ft_strncmp(node->args[0], "env", ft_strlen(*node->args)) == 0)
-		return (builtin_env(node->args));
-	return (1);
-}
-
-char	**extract_path(char **envp)
-{
-	char	**path_2d;
-
-	while (*envp)
-	{
-		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
-		{
-			path_2d = ft_split((*envp + 5), ':');
-			return (path_2d);
-		}
-		envp++;
-	}
-	return (NULL);
-}
-
-char	*access_path(char *cmd, char **paths_2d)
-{
-	char	*path_cmd;
-	char	*full_path;
-
-	path_cmd = ft_strjoin("/", cmd);
-	while (*paths_2d)
-	{
-		full_path = ft_strjoin(*paths_2d, path_cmd);
-		if (access(full_path, X_OK) == 0)
-		{
-			free(path_cmd);
-			return (full_path);
-		}
-		free(full_path);
-		paths_2d++;
-	}
-	free(path_cmd);
-	return (NULL);
+		exit = builtin_env(node->args);
+	exit = 1;
 }
 
 static void	execute_executable(t_tree_node *node)
@@ -68,10 +33,10 @@ static void	execute_executable(t_tree_node *node)
 	char	*bin_path;
 
 	envp = env_list_to_2d();
-	split_path = extract_path(envp);
-	bin_path = access_path(*node->args, split_path);
+	split_path = get_path_array(envp);
+	bin_path = get_bin_path_of_command(*node->args, split_path);
 	execve(bin_path, node->args, envp);
-	ft_error("Execve failed", __FILE__, __LINE__, 927);
+	exit (120);
 }
 
 void	execute_redirects(t_tree_node *node)
@@ -110,14 +75,15 @@ void execute_command(t_tree_node *node)
 		if (pid == -1)
 			ft_error("Fork failed", __FILE__, __LINE__, 92);
 		if (pid == 0)
-		execute_executable(node);
+			execute_executable(node);
 		else
 		{
 			waitpid(pid, &wstatus, 0);
 			if (WIFEXITED(wstatus))
-				shell->last_exit_status = wstatus; // TODO: Update minishell with last exit status?
+				shell->last_exit_status = 0; // TODO: Update minishell with last exit status?
 			else
 				shell->last_exit_status = 1;
 		}
 	}
+	printf("%d\n", shell->last_exit_status);
 }

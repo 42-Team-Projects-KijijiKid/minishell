@@ -29,5 +29,5 @@ void minishell_execute()
 	int			wstatus;
 
 	shell = minishell_get();
-		execute_node(shell->tree_root);
+	execute_node(shell->tree_root);
 }
