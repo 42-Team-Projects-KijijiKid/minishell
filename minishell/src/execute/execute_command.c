@@ -1,21 +1,22 @@
 	#include "../../inc/minishell.h"
 
-static void	execute_builtin(t_tree_node *node)
+static int	execute_builtin(t_tree_node *node)
 {
 	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
-		builtin_cd(node->args);
+		return (builtin_cd(node->args));
 	else if (ft_strncmp(node->args[0], "echo", ft_strlen(*node->args)) == 0)
-		builtin_echo(node->args);
+		return (builtin_echo(node->args));
 	else if (ft_strncmp(node->args[0], "exit", ft_strlen(*node->args)) == 0)
-		builtin_exit(node->args);
+		return (builtin_exit(node->args));
 	else if (ft_strncmp(node->args[0], "export", ft_strlen(*node->args)) == 0)
-		builtin_export(node->args);
+		return (builtin_export(node->args));
 	else if (ft_strncmp(node->args[0], "unset", ft_strlen(*node->args)) == 0)
-		builtin_unset(node->args);
+		return (builtin_unset(node->args));
 	else if (ft_strncmp(node->args[0], "pwd", ft_strlen(*node->args)) == 0)
-		builtin_pwd(node->args);
+		return (builtin_pwd(node->args));
 	else if (ft_strncmp(node->args[0], "env", ft_strlen(*node->args)) == 0)
-		builtin_env(node->args);
+		return (builtin_env(node->args));
+	return (1);
 }
 
 char	**extract_path(char **envp)
@@ -89,11 +90,29 @@ void	execute_redirects(t_tree_node *node)
 
 void execute_command(t_tree_node *node)
 {
-	int status;
+	int			status;
+	int			pid;
+	t_minishell	*shell;
+	int			wstatus;
 
+	shell = minishell_get();
 	if (node->args == NULL || *node->args == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
-	execute_builtin(node);
-	execute_executable(node);
+	if (execute_builtin(node) == 1)
+	{
+		pid = fork();
+		if (pid == -1)
+			ft_error("Fork failed", __FILE__, __LINE__, 92);
+		if (pid == 0)
+		execute_executable(node);
+		else
+		{
+			waitpid(pid, &wstatus, 0);
+			if (WIFEXITED(wstatus))
+				shell->last_exit_status = wstatus; // TODO: Update minishell with last exit status?
+			else
+				shell->last_exit_status = 1;
+		}
+	}
 }

@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-void builtin_echo(char **args)
+int builtin_echo(char **args)
 {
 	int i;
 	int newline;
@@ -21,5 +21,5 @@ void builtin_echo(char **args)
 	}
 	if (newline)
 		printf("\n");
-	exit(0);
+	return (0);
 }

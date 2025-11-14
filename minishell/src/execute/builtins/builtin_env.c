@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-void	builtin_env(char **args)
+int	builtin_env(char **args)
 {
 	// TODO: implement builtin_env
 	// Functions exist in different branch:
@@ -14,5 +14,5 @@ void	builtin_env(char **args)
 		printf("%s\n", *env);
 		env++;
 	}
-	exit(0);
+	return (0);
 }

@@ -29,19 +29,5 @@ void minishell_execute()
 	int			wstatus;
 
 	shell = minishell_get();
-	if (shell->tree_root == NULL)
-		ft_error("No AST to execute", __FILE__, __LINE__, 91);
-	pid = fork();
-	if (pid == -1)
-		ft_error("Fork failed", __FILE__, __LINE__, 92);
-	if (pid == 0)
 		execute_node(shell->tree_root);
-	else
-	{
-		waitpid(pid, &wstatus, 0);
-		if (WIFEXITED(wstatus))
-			shell->last_exit_status = WEXITSTATUS(wstatus); // TODO: Update minishell with last exit status?
-		else
-			shell->last_exit_status = 1;
-	}
 }

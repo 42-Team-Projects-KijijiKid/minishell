@@ -38,7 +38,7 @@ static void	print_exported_vars(void)
 	}
 }
 
-void builtin_export(char **args)
+int builtin_export(char **args)
 {
 	if (!args || !args[0] || ft_strncmp(args[0], "export", ft_strlen(*args)) != 0)
 		ft_error("export: invalid arguments", __FILE__, __LINE__, 930);
@@ -60,5 +60,5 @@ void builtin_export(char **args)
 			env_set_value(key, "");
 		i++;
 	}
-	exit(0);
+	return (0);
 }
