@@ -2,7 +2,7 @@
 NAME	:= minishell
 CC		:= cc
 # CFLAGS	:= -g -Wall -Wextra -Iinc/ -Ilib/libft
-CFLAGS	:= -g -Iinc/ -Ilibft
+CFLAGS	:= -fsanitize=address -g -Iinc/ -Ilibft
 
 #Includes
 vpath %.h inc/

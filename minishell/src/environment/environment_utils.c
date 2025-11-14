@@ -77,6 +77,7 @@ int	env_set_value(char *key, char *value)
 	new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
 	shell->env.tail->next = new_node;
 	new_node->prev = shell->env.tail;
+	shell->env.size++;
 	shell->env.tail = new_node;
 	new_node->next = NULL;
 	new_node->key_len = ft_strlen(key);
