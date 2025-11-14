@@ -40,8 +40,12 @@ static void	execute_executable(t_tree_node *node)
 	envp = env_list_to_2d();
 	split_path = get_path_array(envp);
 	bin_path = get_bin_path_of_command(*node->args, split_path);
-	if (bin_path && split_path)
-		execve(bin_path, node->args, envp);
+	if (!bin_path)
+	{
+		printf("msh: command not found\n");
+		exit (127);
+	}
+	execve(bin_path, node->args, envp);
 	exit (120);
 }
 
@@ -89,11 +93,11 @@ void execute_command(t_tree_node *node)
 			ft_error("Fork failed", __FILE__, __LINE__, 92);
 		if (pid == 0)
 			execute_executable(node);
-		waitpid(pid, &wstatus, 0);
-		if (WIFEXITED(wstatus))
-			shell->last_exit_status = 0;
-		else
+		if (waitpid(pid, &wstatus, 0) == -1
+			|| wstatus != 0)
 			shell->last_exit_status = 127;
+		else
+				shell->last_exit_status = 0;
 	}
 	default_filedescripor(shell);
 }
