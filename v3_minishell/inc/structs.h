@@ -56,7 +56,7 @@ typedef struct s_tree_node
 {
 	e_tree_node_type	type;
 	char				**args;
-	bool				sub;
+	int					sub;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 	t_redirection		redirect;

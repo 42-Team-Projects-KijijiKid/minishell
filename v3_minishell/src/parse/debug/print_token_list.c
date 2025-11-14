@@ -34,7 +34,7 @@ static void	print_token_arguments(t_token *token)
 	char	**strs;
 	int		i;
 
-	if (token->args)
+	if (token && token->args && token->args[0])
 	{
 		strs = token->args;
 		i = 0;

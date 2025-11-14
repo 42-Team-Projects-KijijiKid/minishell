@@ -67,9 +67,17 @@ bool	validate_operators(t_token *token)
 {
 	while (token)
 	{
-		if (is_operator(token->type) && (!token->prev || !token->next || \
-				is_operator(token->prev->type) || is_operator(token->next->type)))
-			return (false);
+		if (is_operator(token->type))
+		{
+			if (!token->prev || !token->next)
+				return (false);
+			if (is_operator(token->prev->type) || is_operator(token->next->type))
+				return (false);
+			if (token->prev->type == LPAREN || token->next->type == RPAREN)
+				return (false);
+			if (is_redirect(token->prev->type) || is_redirect(token->next->type))
+				return (false);
+		}
 		token = token->next;
 	}
 	return (true);	
