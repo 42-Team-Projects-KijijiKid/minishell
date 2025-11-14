@@ -1,5 +1,10 @@
 	#include "../../inc/minishell.h"
 
+/// @brief Checks if command node is a builting
+/// and executes if so
+/// @param node 
+/// @return 0 if its a builtin
+/// 1 if builtin is not found
 static int	execute_builtin(t_tree_node *node)
 {
 	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
