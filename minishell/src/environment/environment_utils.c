@@ -68,27 +68,24 @@ int	env_set_value(char *key, char *value)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
-			node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-			ft_strlcpy(node->value, value, ft_strlen(value));
+			node->value = fti_malloc(node->value_len + 1, PERSISTENT);
+			ft_strlcpy(node->value, value, node->value_len + 1);
 			return (0);
 		}
 		node = node->next;
 	}
 	new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
-	if (!new_node)
-		return (ft_error("Malloc failed", __FILE__, __LINE__, 2), 2);
-	new_node->key = fti_malloc(ft_strlen(key) + 1, PERSISTENT);
-	ft_strlcpy(new_node->key, key, ft_strlen(key) + 1);
-	new_node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-	ft_strlcpy(new_node->value, value, ft_strlen(value) + 1);
-	new_node->next = shell->env.head;
-	new_node->prev = NULL;
-	if (shell->env.head)
-		shell->env.head->prev = new_node;
-	shell->env.head = new_node;
-	if (!shell->env.tail)
-		shell->env.tail = new_node;
-	shell->env.size++;
+	shell->env.tail->next = new_node;
+	new_node->prev = shell->env.tail;
+	shell->env.tail = new_node;
+	new_node->next = NULL;
+	new_node->key_len = ft_strlen(key);
+	new_node->key = fti_malloc(new_node->key_len + 1, PERSISTENT);
+	ft_strlcpy(new_node->key, key, new_node->key_len + 1);
+	new_node->value_len = ft_strlen(value);
+	new_node->value = fti_malloc(new_node->value_len + 1, PERSISTENT);
+	ft_strlcpy(new_node->value, value, new_node->value_len + 1);
+	
 	return (0);
 }
 
@@ -132,12 +129,12 @@ char	**env_list_to_2d(void) // turn_2d() in expansion/create_inv.c
 	
 	shell = minishell_get();
 	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), PERSISTENT);
-	node = shell->env.tail;
+	node = shell->env.head;
 	i = 0;
 	while (node)
 	{
 		rtn[i] = rtn_key_value(node);
-		node = node->prev;
+		node = node->next;
 		i++; 
 	}
 	rtn[i] = NULL;
