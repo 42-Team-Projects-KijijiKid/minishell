@@ -87,5 +87,4 @@ void execute_command(t_tree_node *node)
 		else
 			shell->last_exit_status = 1;
 	}
-	printf("%d\n", shell->last_exit_status);
 }
