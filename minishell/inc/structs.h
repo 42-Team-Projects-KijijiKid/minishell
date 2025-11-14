@@ -4,6 +4,18 @@
 # include <aio.h> // for ssize_t
 # include <stdbool.h>
 
+/*######################
+# Abstract Syntax Tree #
+######################*/
+
+typedef struct s_filedescriptor
+{
+	int	std_in;
+	int	std_out;
+	int	std_err;
+}	s_filedescriptor;
+
+
 typedef enum	e_tree_node_type
 {
 	TEXT,
@@ -141,13 +153,14 @@ typedef struct s_garbage
 
 typedef struct	s_minishell
 {
-	t_tree_node		*tree_root;
-	t_garbage		garbage;
-	t_environment	env;
-	int				last_exit_status;
+	t_tree_node			*tree_root;
+	t_garbage			garbage;
+	t_environment		env;
+	s_filedescriptor	filedescriptor;
+	int					last_exit_status;
 }	t_minishell;
 
-/*####3######
+/*###########
 # Execution #
 ###########*/
 

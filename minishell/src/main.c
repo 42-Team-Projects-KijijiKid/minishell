@@ -18,6 +18,9 @@ t_minishell	*minishell_initialize(char **env)
 	shell->garbage.temporary.head = NULL;
 	shell->garbage.temporary.tail = NULL;
 	shell->garbage.temporary.size = 0;
+	shell->filedescriptor.std_in = dup(STDIN_FILENO);
+	shell->filedescriptor.std_out = dup(STDOUT_FILENO);
+	shell->filedescriptor.std_err = dup(STDERR_FILENO);
 	environment_initialize(env);
 	return (shell);
 }

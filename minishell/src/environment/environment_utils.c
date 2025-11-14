@@ -45,7 +45,7 @@ char	*env_get_value(char *key)
 		{
 			len = ft_strlen(node->value);
 			result = fti_malloc(len + 1, TEMPORARY);
-			ft_strlcpy(result, node->value, ft_strlen(node->value));
+			ft_strlcpy(result, node->value,node->value_len + 1);
 			return (result);
 		}
 		node = node->next;
