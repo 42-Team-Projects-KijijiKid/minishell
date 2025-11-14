@@ -33,7 +33,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	shell = minishell_initialize(env);
-	while (1)
+	while (isatty(fileno(stdin)))
 	{
 		cmd = fti_readline("\033[34mMinishell>>\033[0m ");
 		if (!cmd)
@@ -42,6 +42,16 @@ int main(int ac, char **av, char **env)
 		// ######### -- continue -->
 		minishell_execute();
 		garbage_free_layer(&shell->garbage.temporary);
+	}
+	while (!isatty(fileno(stdin)))
+	{
+		char	*line;
+		line = get_next_line(fileno(stdin));
+		if (!line)
+			break ;
+		minishell_parse(line);
+		minishell_execute();
+		free(line);
 	}
 	printf("\033[37;5mGoodbye!\033[0m\n");
 	garbage_free_all();
