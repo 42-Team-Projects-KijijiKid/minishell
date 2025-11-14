@@ -25,8 +25,6 @@ void	execute_node(t_tree_node *node)
 void minishell_execute()
 {
 	t_minishell	*shell;
-	int			pid;
-	int			wstatus;
 
 	shell = minishell_get();
 	execute_node(shell->tree_root);
