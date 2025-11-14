@@ -75,9 +75,9 @@ int	env_set_value(char *key, char *value)
 	if (!new_node)
 		return (ft_error("Malloc failed", __FILE__, __LINE__, 2), 2);
 	new_node->key = fti_malloc(ft_strlen(key) + 1, PERSISTENT);
-	ft_strlcpy(new_node->key, key, ft_strlen(key));
+	ft_strlcpy(new_node->key, key, ft_strlen(key) + 1);
 	new_node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-	ft_strlcpy(new_node->value, value, ft_strlen(value));
+	ft_strlcpy(new_node->value, value, ft_strlen(value) + 1);
 	new_node->next = shell->env.head;
 	new_node->prev = NULL;
 	if (shell->env.head)
