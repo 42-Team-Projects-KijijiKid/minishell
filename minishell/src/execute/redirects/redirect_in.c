@@ -13,12 +13,7 @@ void execute_rdr_in(t_redirect_node *redirect)
 	{
 		close(fd);
 		ft_error("Failed to duplicate file descriptor for input redirection", 
-			__FILE__, __LINE__, 952);
+			__FILE__, __LINE__, 12);
 	}
 	close(fd);
-	if (saved_stdin != -1)
-	{
-		dup2(saved_stdin, STDIN_FILENO);
-		close(saved_stdin);
-	}
 }

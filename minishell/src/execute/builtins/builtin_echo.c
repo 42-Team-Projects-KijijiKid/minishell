@@ -1,13 +1,13 @@
 #include "../../../inc/minishell.h"
 
-void builtin_echo(char **args)
+int builtin_echo(char **args)
 {
 	int i;
 	int newline;
 
 	i = 1;
 	newline = 1;
-	if (args[1] && ft_strcmp(args[1], "-n") == 0) // New version required, that adds to garbage collector
+	if (args[1] && ft_strncmp(args[1], "-n", ft_strlen(args[1])) == 0) // New version required, that adds to garbage collector
 	{
 		newline = 0;
 		i = 2;
@@ -21,5 +21,5 @@ void builtin_echo(char **args)
 	}
 	if (newline)
 		printf("\n");
-	exit(0);
+	return (0);
 }

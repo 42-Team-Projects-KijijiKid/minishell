@@ -18,6 +18,9 @@ t_minishell	*minishell_initialize(char **env)
 	shell->garbage.temporary.head = NULL;
 	shell->garbage.temporary.tail = NULL;
 	shell->garbage.temporary.size = 0;
+	shell->filedescriptor.std_in = dup(STDIN_FILENO);
+	shell->filedescriptor.std_out = dup(STDOUT_FILENO);
+	shell->filedescriptor.std_err = dup(STDERR_FILENO);
 	environment_initialize(env);
 	return (shell);
 }
@@ -32,12 +35,12 @@ int main(int ac, char **av, char **env)
 	shell = minishell_initialize(env);
 	while (1)
 	{
-		cmd = fti_readline("\033[34mMinishell>> ");
+		cmd = fti_readline("\033[34mMinishell>>\033[0m ");
 		if (!cmd)
 			break ;
 		minishell_parse(cmd);
 		// ######### -- continue -->
-		// minishell_execute(shell->tree_root);
+		minishell_execute(shell->tree_root);
 		garbage_free_layer(&shell->garbage.temporary);
 	}
 	printf("\033[37;5mGoodbye!\033[0m\n");

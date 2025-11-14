@@ -18,7 +18,7 @@ char	*build_new_pwd(char	*current_pwd, char *relative_path)
 	return (new_pwd);
 }
 
-void	builtin_cd(char **args)
+int	builtin_cd(char **args)
 {
 	char	*current_pwd;
 	char	*new_pwd;
@@ -26,13 +26,13 @@ void	builtin_cd(char **args)
 
 	current_pwd = env_get_value("PWD");
 	if (!current_pwd)
-		return (ft_error("cd: PWD not set", __FILE__, __LINE__, 921), 921);
+		ft_error("cd: PWD not set", __FILE__, __LINE__, 921);
 	env_set_value("OLDPWD", current_pwd);
 	if (!args[1])
 	{
 		new_pwd = env_get_value("HOME");
 		if (!new_pwd)
-			return (ft_error("cd: HOME not set", __FILE__, __LINE__, 921), 921);
+			ft_error("cd: HOME not set", __FILE__, __LINE__, 921);
 	}
 	else
 	{
@@ -46,5 +46,5 @@ void	builtin_cd(char **args)
 		ft_error(error, __FILE__, __LINE__, 922);
 	}
 	env_set_value("PWD", new_pwd);
-	exit(0);
+	return (0);
 }

@@ -7,16 +7,18 @@ char	*fti_readline(char *promt)
 	int			len;
 
 	shell = minishell_get();
+	cmd = NULL;
 	while (1)
 	{
 		cmd = readline(promt);
-		len = ft_strlen(cmd);
 		if (!cmd)
 			return (NULL);
+		len = ft_strlen(cmd);
 		if (len != 0)
 		{
 			if (ft_strncmp(cmd, "exit", len) == 0)
 				return (NULL);
+			add_history(cmd);
 			return (cmd);
 		}
 		else

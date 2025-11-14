@@ -24,8 +24,10 @@ static void print_operator(e_tree_node_type type)
 
 void	print_ast_structure(t_tree_node *node, int level, bool left)
 {
+	char	**tmp;
+
 	if (!node)
-		return;
+		return ;
 	print_ast_structure(node->right, level + 1, false);
 	for (int i = 0; i < level; i++)
 		printf("		");
@@ -41,11 +43,12 @@ void	print_ast_structure(t_tree_node *node, int level, bool left)
 		print_operator(node->type);
 	else
 	{
+		tmp = node->args;
 		printf("[");
-		while (*node->args)
+		while (*tmp)
 		{
-			printf("%s, ", *node->args);
-			node->args++;
+			printf("%s, ", *tmp);
+			tmp++;
 		}
 		printf("]");
 		if (node->redirect.head)

@@ -1,0 +1,38 @@
+#include "minishell.h"
+
+char	**get_path_array(char **envp)
+{
+	char	**path_2d;
+
+	while (*envp)
+	{
+		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
+		{
+			path_2d = ft_split((*envp + 5), ':');
+			return (path_2d);
+		}
+		envp++;
+	}
+	return (NULL);
+}
+
+char	*get_bin_path_of_command(char *cmd, char **paths_2d)
+{
+	char	*path_cmd;
+	char	*full_path;
+
+	path_cmd = ft_strjoin("/", cmd);
+	while (*paths_2d)
+	{
+		full_path = ft_strjoin(*paths_2d, path_cmd);
+		if (access(full_path, X_OK) == 0)
+		{
+			free(path_cmd);
+			return (full_path);
+		}
+		free(full_path);
+		paths_2d++;
+	}
+	free(path_cmd);
+	return (NULL);
+}

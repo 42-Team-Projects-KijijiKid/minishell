@@ -1,6 +1,6 @@
 #include "../../inc/minishell.h"
 
-int execute_subshell(t_tree_node *node)
+void execute_subshell(t_tree_node *node)
 {
 	int	pid;
 	int	status;

@@ -79,7 +79,6 @@ char	**tokens_split_args(char **input)
 	int		words;
 
 	words = count_arguments(*input);
-	printf("Words: %d\n", words);
 	rtn = fti_malloc(sizeof(char *) * (words + 1), TEMPORARY);
 	i = 0;
 	while (i < words)
