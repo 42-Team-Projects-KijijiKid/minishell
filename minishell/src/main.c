@@ -33,7 +33,7 @@ int main(int ac, char **av, char **env)
 	shell = minishell_initialize(env);
 	while (1)
 	{
-		cmd = fti_readline("\033[34mMinishell>> ");
+		cmd = fti_readline("\033[34mMinishell>>\033[0m ");
 		if (!cmd)
 			break ;
 		minishell_parse(cmd);
