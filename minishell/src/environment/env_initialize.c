@@ -95,9 +95,3 @@ void environment_initialize(char **env_vars)
 	node->next = NULL;
 	shell->env.tail = node;
 }
-
-		// node->key = env_key_from_str(env_vars);
-		// node->value = env_value_from_str(env_vars);
-		// node->key_len = ft_strlen(node->key);
-		// node->value_len = ft_strlen(node->value);
-		// env_vars++;

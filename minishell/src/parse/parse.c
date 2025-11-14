@@ -12,5 +12,6 @@ void	minishell_parse(char *input)
 	manager.root_token = find_root(manager.head_token);
 	manager.root_node = token_to_tree_node(manager.root_token);
 	shell->tree_root = manager.root_node;
+	expand(shell->tree_root);
 	tree_build(&manager, 1);
 }

@@ -31,7 +31,7 @@ int main(int ac, char **av, char **env)
 	t_minishell	*shell;
 
 	(void)ac;
-	(void)av; // TODO: is this actually always unused?
+	(void)av;
 	shell = minishell_initialize(env);
 	while (1)
 	{
