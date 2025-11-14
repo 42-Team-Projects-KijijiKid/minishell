@@ -1,71 +1,49 @@
 #include "../../../inc/minishell.h"
 
-static t_token	*get_left_tokens(t_token	*root)
+static t_token	*get_left_tokens(t_token *head, t_token *root)
 {
-	t_token	*node;
-
-	if (root->prev)
-	{
-		node = root->prev;
-		root->prev = NULL;
-		node->next = NULL;
-		while (node->prev)
-			node = node->prev;
-	}
-	// else
-	// 	ft_error("invalid token list", __FILE__, __LINE__, 998);
-	return (node);
+	root->prev->next = NULL;
+	return (head);
 }
 
-static t_token	*get_right_tokens(t_token	*root)
+static t_token	*get_right_tokens(t_token *root)
 {
-	t_token	*node;
-
-	if (root->next)
-	{
-		node = root->next;
-		node->prev = NULL;
-		root->next = NULL;
-		return (node);
-	}
-	return (NULL);
+	root = root->next;
+	root->prev = NULL;
+	return (root);
 }
 
-static t_build_manager	*build_manager(t_token *token, t_build_manager *manager)
+void	build_left_subtree(t_build_manager *manager, int lvl)
 {
-	manager->head_token = token;
-	manager->root_token = find_root(token);
-	manager->root_node = token_to_tree_node(manager->root_token);
-	return (manager);
-}
-
-void	tree_build(t_build_manager *manager)
-{
-	t_token			*left;
-	t_token			*right;
 	t_build_manager	left_manager;
+
+	left_manager.head_token = get_left_tokens(manager->head_token, manager->root_token);
+	left_manager.root_token = find_root(left_manager.head_token);
+	left_manager.root_node = token_to_tree_node(left_manager.root_token);
+	manager->root_node->left = left_manager.root_node;
+	tree_build(&left_manager, lvl + 1);
+}
+
+void	build_right_subtree(t_build_manager *manager, int lvl)
+{
 	t_build_manager	right_manager;
 
+	right_manager.head_token = get_right_tokens(manager->root_token);
+	right_manager.root_token = find_root(right_manager.head_token);
+	right_manager.root_node = token_to_tree_node(right_manager.root_token);
+	manager->root_node->right = right_manager.root_node;
+	tree_build(&right_manager, lvl + 1);
+}
+
+void	tree_build(t_build_manager *manager, int lvl)
+{
+	tokens_validate(manager->head_token);
+	tree_subshells(manager);
 	if (manager->root_token->type == TEXT)
 	{
 		tree_redirects(manager);
 		return ;
 	}
-	printf("\n\n\n\n\n");
-	left = get_left_tokens(manager->root_token);
-	print_tokens(left, "Left-Head");
-	right = get_right_tokens(manager->root_token);
-	print_tokens(right, "Right-Head");
-	build_manager(left, &left_manager);
-	build_manager(right, &right_manager);
-	print_tokens(left_manager.root_token, "Left-Root");
-	print_tokens(right_manager.root_token, "Right-Root");
-	manager->root_node->left = left_manager.root_node;
-	debug_ast("L", __FILE__, __LINE__, left_manager.root_node);
-	manager->root_node->right = right_manager.root_node;
-	debug_ast("R", __FILE__, __LINE__, left_manager.root_node);
-	tree_subshells(&left_manager);
-	tree_subshells(&right_manager);
-	tree_build(&left_manager);
-	tree_build(&right_manager);
+	build_left_subtree(manager, lvl);
+	build_right_subtree(manager, lvl);
 }

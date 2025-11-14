@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../../../inc/minishell.h"
 
 /// @brief Pass the string not beginning with the qoute
 /// and count how many chars are inside the string
@@ -52,6 +52,7 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 	int		len_1;
 	int		len_2;
 	char	*tmp_str;
+	int		tmp;
 
 	len_1 = 0;
 	len_2 = 0;
@@ -70,7 +71,7 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 		if (*str && *str != '$')
 			str++;
 	}
-	int tmp = len_1+ len_2;
+	tmp = len_1 + len_2;
 	return (len_1 + len_2);
 }
 

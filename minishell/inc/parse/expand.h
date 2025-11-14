@@ -1,7 +1,7 @@
 #ifndef EXPAND_H
 # define EXPAND_H
 
-#include "structs.h"
+#include "../structs.h"
 
 // expand.c
 t_tree_node		*expand(t_tree_node *node);

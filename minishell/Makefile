@@ -1,8 +1,8 @@
 # <==== Meta Data =====>
 NAME	:= minishell
 CC		:= cc
-# CFLAGS	:= -g -Wall -Werror -Wextra -Iinc/ -Ilib/libft
-CFLAGS	:= -g -Iinc/ -Ilib/libft
+CFLAGS	:= -g -fsanitize=address -Wall -Wextra -Iinc/ -Ilib/libft
+# CFLAGS	:= -g -Iinc/ -Ilibft
 
 #Includes
 vpath %.h inc/
@@ -33,7 +33,7 @@ INTEGRATIONS_DIR	:= integrations/
 
 #.c files in src/parsing with subfolders
 EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers get_environment_value)) 
-TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, tokenize $(addprefix tokens_, find_root split_args split_utils))) 
+TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, tokenize $(addprefix tokens_, find_root split_args split_utils validate))) 
 TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redirects tree_utils tree_subshells))
 DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
 
@@ -67,7 +67,7 @@ all: $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -lreadline lib/libft/libft.a -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -lreadline libft/libft.a -o $(NAME)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)

@@ -1,5 +1,5 @@
 {
-    "files.associations": {
-        "minishell.h": "c"
-    }
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"editor.detectIndentation": true
 }

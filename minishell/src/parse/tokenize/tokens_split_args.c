@@ -52,8 +52,6 @@ static char	*input_without_quotes(char **input)
 
 static char	*get_argument(char **input)
 {
-	char	*rtn;
-
 	while (**input)
 	{
 		skip_space(input);
@@ -62,7 +60,7 @@ static char	*get_argument(char **input)
 		else
 			return (input_without_quotes(input));
 	}
-	return (rtn);
+	return (NULL);
 }
 
 /// @brief This function creates 2D array with 

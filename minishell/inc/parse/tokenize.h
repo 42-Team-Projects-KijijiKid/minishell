@@ -19,4 +19,12 @@ char	*input_in_quotes(char **str);
 bool	quote_content(char **str);
 int	    count_arguments(char *str);
 
+// tokens_validate.c
+bool	is_operator(e_tree_node_type type);
+int		count_token_type(t_token *token, e_tree_node_type type);
+bool	validate_subshells(t_token *token);
+bool	validate_redirects(t_token *token);
+bool	validate_operators(t_token *token);
+void	tokens_validate(t_token *token);
+
 #endif

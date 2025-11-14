@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-static bool	is_redirect(e_tree_node_type type)
+bool	is_redirect(e_tree_node_type type)
 {
 	if (type == DGREAT)
 		return (true);

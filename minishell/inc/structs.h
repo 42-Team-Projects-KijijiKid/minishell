@@ -7,17 +7,17 @@
 typedef enum	e_tree_node_type
 {
 	TEXT,
-	PROP_CMD,		// Probably a command
-	IO_FILENAME,	// In/Out filename
+	// PROP_CMD,		// Probably a command
+	// IO_FILENAME,	// In/Out filename
 	PIPE,			// |
 	AND_IF,			// &&
 	OR_IF,			// ||
 	LESS,			// <
 	GREAT,			// >
-	LESSGREAT,		// <> open for read, write (I/O)
+	// LESSGREAT,		// <> open for read, write (I/O)
 	DGREAT,			// >>
 	DLESS,			// <<
-	DLESSDASH,		// <<-
+	// DLESSDASH,		// <<-
 	LPAREN,			// (
 	RPAREN			// )
 }	e_tree_node_type;
@@ -56,7 +56,7 @@ typedef struct s_tree_node
 {
 	e_tree_node_type	type;
 	char				**args;
-	bool				sub;
+	int					sub;
 	struct s_tree_node	*left;
 	struct s_tree_node	*right;
 	t_redirection		redirect;

@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../../../inc/minishell.h"
 
 /// @brief Does not expand the variable
 /// and removes the single quotes leaving the
