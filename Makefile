@@ -14,13 +14,13 @@ SRC_DIR		:= src/
 OBJS_DIR	:= objs/
 
 PARSING_DIR		:= parse/
-EXECUTION_DIR	:= execute/
-ENVIRONMENT_DIR	:= environment/
+EXECUTION_DIR		:= execute/
+ENVIRONMENT_DIR		:= environment/
 UTILS_DIR		:= utils/
 
 #SUB Dir parsing
 EXPAND_DIR 		:= expand/
-TOKENIZE_DIR	:= tokenize/
+TOKENIZE_DIR		:= tokenize/
 TREE_DIR		:= tree/
 DEBUG_DIR		:= debug/
 
@@ -34,8 +34,8 @@ INTEGRATIONS_DIR	:= integrations/
 #.c files in src/parsing with subfolders
 EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers get_environment_value)) 
 TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, tokenize $(addprefix tokens_, find_root split_args split_utils validate))) 
-TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redirects tree_utils tree_subshells))
-DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
+TREE_FILES			:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redirects tree_utils tree_subshells))
+DEBUG_FILES			:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
 
 #.c files in src/execute with subfolders
 BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset)))
@@ -53,21 +53,26 @@ UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES))
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)
 
-
 # Every Folder path prefixed with src/ and the main (top level)
 SRCS		:= $(addprefix $(SRC_DIR), $(MAIN_FILE) $(MELTING_POT))
 
 # All .c to .o -> See compilation Rule $< $@
 OBJS		:= $(addprefix $(OBJS_DIR), $(SRCS:%.c=%.o))
 
+LIBFT_A		:= libft/libft.a
+LIBFT_DIR	:= libft/
 
 # <===== Rules =====>
 
-all: $(NAME)
+all: $(LIBFT_A) $(NAME)
 
 #Compile executable including every .o file
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -lreadline libft/libft.a -o $(NAME)
+
+$(LIBFT_A):
+	@echo "Compiling libft..."
+	@$(MAKE) -C $(LIBFT_DIR)
 
 #Rule to compile all .o files
 $(OBJS_DIR)%.o: %.c | $(OBJS_DIR)
@@ -79,9 +84,11 @@ $(OBJS_DIR):
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@rm -rf $(LIBFT_DIR)/build
 
 fclean: clean
 	@rm -rf $(NAME)
+	@rm -rf $(LIBFT_A)
 
 re: fclean
 	@make
