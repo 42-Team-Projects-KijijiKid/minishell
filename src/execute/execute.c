@@ -18,15 +18,9 @@ void	execute_node(t_tree_node *node)
 	if (node == NULL)
 		ft_error("NULL AST node", __FILE__, __LINE__, 93);
 	if (node->sub)
-	{
-		expand(node);
 		execute_subshell(node);
-	}
 	else
-	{
-		expand(node);
 		execute_node_by_type(node);
-	}
 }
 
 void minishell_execute(void)

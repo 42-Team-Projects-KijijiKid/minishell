@@ -81,6 +81,7 @@ void execute_command(t_tree_node *node)
 	int			pid;
 	int			wstatus;
 
+	expand(node);
 	shell = minishell_get();
 	if (node->args == NULL || *node->args == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
