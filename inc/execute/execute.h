@@ -25,6 +25,7 @@ void	minishell_execute();
 //execute_helpers.c
 char	*get_bin_path_of_command(char *cmd, char **paths_2d);
 char	**get_path_array(char **envp);
+void	default_filedescripor(void);
 
 
 #endif

@@ -68,13 +68,6 @@ void	execute_redirects(t_tree_node *node)
 	}
 }
 
-static void default_filedescripor(t_minishell	*shell)
-{
-	dup2(shell->filedescriptor.std_in, STDIN_FILENO);
-	dup2(shell->filedescriptor.std_out, STDOUT_FILENO);
-	dup2(shell->filedescriptor.std_err, STDERR_FILENO);
-}
-
 void execute_command(t_tree_node *node)
 {
 	t_minishell	*shell;
@@ -99,5 +92,5 @@ void execute_command(t_tree_node *node)
 		else
 				shell->last_exit_status = 0;
 	}
-	default_filedescripor(shell);
+	default_filedescripor();
 }
