@@ -2,16 +2,18 @@
 
 void execute_subshell(t_tree_node *node)
 {
-	int	pid;
-	int	status;
+	int			pid;
+	t_minishell	*shell;
+	int			status;
 
 	pid = fork();
+	shell = minishell_get();
 	if (pid == -1)
 		ft_error("Fork failed", __FILE__, __LINE__, 92);
 	if (pid == 0)
 	{
 		execute_node_by_type(node);
-		ft_error("Nodes never exited subshell process", __FILE__, __LINE__, 990);
+		exit(shell->last_exit_status);
 	}
 	else
 	{
@@ -19,5 +21,4 @@ void execute_subshell(t_tree_node *node)
 		if (!WIFEXITED(status))
 			ft_error("Unexpected error in subshell execution", __FILE__, __LINE__, 991);
 	}
-	exit(0);
 }
