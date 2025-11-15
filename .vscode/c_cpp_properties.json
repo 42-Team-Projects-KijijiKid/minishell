@@ -3,7 +3,7 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/V2_copy/**"
+                "${workspaceFolder}/minishell/minishell/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
