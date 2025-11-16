@@ -41,7 +41,18 @@ static void	execute_executable(t_tree_node *node)
 
 	envp = env_list_to_2d();
 	split_path = get_path_array(envp);
-	bin_path = get_bin_path_of_command(*node->args, split_path);
+	if (!split_path)
+	{
+		if (access(*node->args, X_OK) == 0)
+			bin_path = *node->args;
+		else
+		{
+			printf("msh: command not found\n");
+			exit (127);
+		}
+	}
+	else
+		bin_path = get_bin_path_of_command(*node->args, split_path);
 	if (!bin_path)
 	{
 		printf("msh: command not found\n");
