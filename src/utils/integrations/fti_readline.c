@@ -14,7 +14,8 @@ char	*fti_readline(char *promt)
 		len = ft_strlen(cmd);
 		if (len != 0)
 		{
-			if (ft_strncmp(cmd, "exit", len) == 0)
+			if (ft_strncmp(cmd, "exit", len) == 0
+				&& len == 4)
 				return (NULL);
 			add_history(cmd);
 			return (cmd);
