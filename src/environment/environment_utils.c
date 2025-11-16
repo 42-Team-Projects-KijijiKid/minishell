@@ -38,7 +38,6 @@ char	*env_get_value(char *key)
 	t_minishell	*shell;
 	t_env_node	*node;
 	char		*result;
-	int			len;
 
 	shell = minishell_get();
 	node = shell->env.head;
@@ -46,9 +45,8 @@ char	*env_get_value(char *key)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
-			len = ft_strlen(node->value);
-			result = fti_malloc(len + 1, TEMPORARY);
-			ft_strlcpy(result, node->value,node->value_len + 1);
+			result = fti_malloc(node->value_len + 1, TEMPORARY);
+			ft_strlcpy(result, node->value, node->value_len + 1);
 			return (result);
 		}
 		node = node->next;
@@ -68,8 +66,9 @@ int	env_set_value(char *key, char *value)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
-			node->value = fti_malloc(node->value_len + 1, PERSISTENT);
-			ft_strlcpy(node->value, value, node->value_len + 1);
+			node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
+			node->value = ft_strdup(value);
+			node->value_len = ft_strlen(node->value);
 			return (0);
 		}
 		node = node->next;
@@ -86,7 +85,6 @@ int	env_set_value(char *key, char *value)
 	new_node->value_len = ft_strlen(value);
 	new_node->value = fti_malloc(new_node->value_len + 1, PERSISTENT);
 	ft_strlcpy(new_node->value, value, new_node->value_len + 1);
-	
 	return (0);
 }
 
