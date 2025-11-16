@@ -9,22 +9,24 @@ static int	execute_builtin(t_tree_node *node)
 {
 	int			exit;
 	t_minishell	*shell;
+	int			len;
 
 	shell = minishell_get();
 	exit = 1;
-	if (ft_strncmp(node->args[0], "cd", ft_strlen(*node->args)) == 0)
+	len = ft_strlen(*node->args);
+	if (!ft_strncmp(node->args[0], "cd", len) && len == 2)
 		exit = builtin_cd(node->args);
-	else if (ft_strncmp(node->args[0], "echo", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "echo", len) && len == 4)
 		exit = builtin_echo(node->args);
-	else if (ft_strncmp(node->args[0], "exit", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "exit", len) && len == 4)
 		exit = builtin_exit(node->args);
-	else if (ft_strncmp(node->args[0], "export", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "export", len) && len == 6)
 		exit = builtin_export(node->args);
-	else if (ft_strncmp(node->args[0], "unset", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "unset", len) && len == 5)
 		exit = builtin_unset(node->args);
-	else if (ft_strncmp(node->args[0], "pwd", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "pwd", len) && len == 3)
 		exit = builtin_pwd(node->args);
-	else if (ft_strncmp(node->args[0], "env", ft_strlen(*node->args)) == 0)
+	else if (!ft_strncmp(node->args[0], "env", len) && len == 3)
 		exit = builtin_env();
 	if (exit != 1) 
 		shell->last_exit_status = exit;
