@@ -1,5 +1,88 @@
 #include "minishell.h"
 
+char	*null_end_str_heredoc(char **str)
+{
+	int		i;
+	char	*rtn;
+
+	rtn = *str;
+	i = 0;
+	while ((*str)[i] && (*str)[i] != '\n'
+			&& (*str)[i] != '$')
+		i++;
+	rtn = fti_malloc((sizeof(char) * i) + 1, TEMPORARY);
+	i = 0;
+	while (**str && **str != '\n'
+		&& **str != '$')
+	{
+		rtn[i] = **str;
+		(*str)++;
+		i++;
+	}
+	rtn[i] = '\0';
+	return (rtn);
+}
+
+unsigned int	strlen_with_expansion_herdoc(char *str)
+{
+	int		len_1;
+	int		len_2;
+	char	*tmp_str;
+
+	len_1 = 0;
+	len_2 = 0;
+	while (*str)
+	{
+		if (*str == '$')
+		{
+			str++;
+			tmp_str = null_end_str_heredoc(&str);
+			tmp_str = get_environment_value(tmp_str);
+			if (tmp_str)
+				len_2 += ft_strlen(tmp_str);
+		}
+		if (*str && *str != '$')
+		{
+			str++;
+			len_1++;
+		}
+	}
+	return (len_1 + len_2);
+}
+
+char	*expand_heredoc(char *line)
+{
+	char	*rtn;
+	char	*tmp_str;
+	int		i;
+	int		len;
+
+	len = strlen_with_expansion_herdoc(line);
+	rtn = fti_malloc((sizeof(char) * len) + 1, TEMPORARY);
+	i = 0;
+	while (*line)
+	{
+		if (*line == '$')
+		{
+			line++;
+			tmp_str = null_end_str_heredoc(&line);
+			tmp_str =  get_environment_value(tmp_str);
+			while (tmp_str && *tmp_str)
+			{
+				rtn[i] = *tmp_str;
+				tmp_str++;
+				i++;
+			}
+		}
+		if (*line && *line != '$')
+		{
+			rtn[i++] = *line;
+			line++;
+		}
+	}
+	return (rtn);
+}
+
 void	run_child(char *limiter, int *pipe_fds)
 {
 	char	*line;
@@ -15,6 +98,7 @@ void	run_child(char *limiter, int *pipe_fds)
 			free(line);
 			break ;
 		}
+		line = expand_heredoc(line);
 		write(pipe_fds[1], line, ft_strlen(line));
 		free(line);
 	}
