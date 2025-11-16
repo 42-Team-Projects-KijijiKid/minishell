@@ -3,7 +3,7 @@
 static void	clean_exit(u_int64_t exit_stat)
 {
 	garbage_free_all();
-	exit(exit_stat);
+	// exit(exit_stat);
 }
 
 void	ft_error(char *msg, char *file, int line, u_int64_t exit_stat)

@@ -1,20 +1,58 @@
 #include "../../../inc/minishell.h"
 
+char	*go_home(void)
+{
+	char *new_pwd;
+
+	new_pwd = env_get_value("HOME");
+	return (new_pwd);
+}
+
+char	*go_back(char *current_pwd)
+{
+	int		len;
+	char	*new_pwd;
+
+	if (current_pwd == '/')
+		return (current_pwd);
+	len = ft_strlen(current_pwd) - 1;
+	while (current_pwd[len] != '/')
+		len--;
+	if (len == 0)
+	{
+		env_set_value("PWD", "/");
+		new_pwd = fti_strdup("/");
+		return (new_pwd);
+	}
+	new_pwd = fti_malloc(sizeof(char) * len, TEMPORARY);
+	new_pwd[len] = '\0';
+	len--;
+	while (0 <= len)
+	{
+		new_pwd[len] = current_pwd[len];
+		len--;
+	}
+	return (new_pwd);
+}
+
 char	*build_new_pwd(char	*current_pwd, char *relative_path)
 {
 	char	*new_pwd;
 	int		i;
+	int		rel_path_len;
 
-	if (relative_path[0] == '/')
-		new_pwd = fti_strdup(relative_path); // TODO: New version required, that adds to garbage collector
-	else
-	{
-		new_pwd = fti_strjoin(current_pwd, "/"); // TODO: New version required, that adds to garbage collector
-		new_pwd = fti_strjoin(new_pwd, relative_path); // TODO: New version required, that adds to garbage collector
-	}
-	i = ft_strlen(new_pwd);
-	while (new_pwd[--i] == '/')
-		new_pwd[i] = '/';
+	rel_path_len = ft_strlen(relative_path);
+	if (strncmp(relative_path, "..", rel_path_len) == 0
+		&& rel_path_len == 2)
+		new_pwd = go_back(current_pwd);
+	else if (strncmp(relative_path, "~", rel_path_len) == 0
+		&& rel_path_len == 1)
+		new_pwd = go_home();
+	// else if (strncmp(relative_path, "/", rel_path_len) == 0
+	// 	&& rel_path_len == 1)
+	// 	new_pwd = go_root();
+	// else
+	// 	new_pwd = change_by_name();
 	return (new_pwd);
 }
 
