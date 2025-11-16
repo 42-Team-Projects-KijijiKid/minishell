@@ -1,0 +1,19 @@
+#include "../../../inc/minishell.h"
+
+void execute_rdr_out(t_redirect_node *redirect)
+{
+	int	fd;
+	char *filename;
+
+	filename = redirect->file;
+	fd = open(filename, O_WRONLY | O_CREAT, 0644);
+	if (fd == -1)
+		ft_error("Failed to open file for output redirection", __FILE__, __LINE__, 951);
+	if (dup2(fd, STDOUT_FILENO) == -1)
+	{
+		close(fd);
+		ft_error("Failed to duplicate file descriptor for output redirection", 
+			__FILE__, __LINE__, 952);
+	}
+	close(fd);
+}
