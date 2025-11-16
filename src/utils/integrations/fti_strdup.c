@@ -1,13 +1,13 @@
 # include "minishell.h"
 
-char	*fti_strdup(const char *s)
+char	*fti_strdup(const char *s, e_garbage_layers layer)
 {
 	size_t	i;
 	size_t	s_len;
 	char	*ptr;
 
 	s_len = ft_strlen(s);
-	ptr = fti_malloc(sizeof(char) * s_len + 1, TEMPORARY);
+	ptr = fti_malloc(sizeof(char) * s_len + 1, layer);
 	if (!(ptr))
 		return (NULL);
 	i = 0;

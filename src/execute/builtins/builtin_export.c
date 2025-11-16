@@ -20,7 +20,7 @@ static char	*extract_value(const char *arg)
 	eq = ft_strchr(arg, '='); // New version required?
 	if (!eq)
 		return (NULL);
-	value = fti_strdup(eq + 1); // New version required, that adds to garbage collector
+	value = fti_strdup(eq + 1, PERSISTENT); // New version required, that adds to garbage collector
 	return (value);
 }
 

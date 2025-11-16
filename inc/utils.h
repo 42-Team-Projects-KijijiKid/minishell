@@ -10,7 +10,7 @@ void	*fti_malloc(ssize_t size, e_garbage_layers type);
 char	*fti_readline(char *promt);
 
 // integrations/fti_strdup.c
-char	*fti_strdup(const char *s);
+char	*fti_strdup(const char *s, e_garbage_layers layer);
 
 // integrations/fti_strjoin.c
 char	*fti_strjoin(char const *s1, char const *s2);

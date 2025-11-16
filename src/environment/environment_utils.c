@@ -66,8 +66,7 @@ int	env_set_value(char *key, char *value)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
 		{
-			node->value = fti_malloc(ft_strlen(value) + 1, PERSISTENT);
-			node->value = ft_strdup(value);
+			node->value = fti_strdup(value, PERSISTENT);
 			node->value_len = ft_strlen(node->value);
 			return (0);
 		}

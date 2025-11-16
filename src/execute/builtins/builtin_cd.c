@@ -1,10 +1,15 @@
 #include "../../../inc/minishell.h"
 
-char	*go_root(void)
+char	*go_root(char *current_pwd)
 {
 	char	*new_pwd;
+	int		len;
 
-	new_pwd = fti_strdup("/");
+	len = ft_strlen(current_pwd);
+	if (ft_strncmp(current_pwd, "/", len) == 0
+		&& len == 1)
+		return (current_pwd);
+	new_pwd = fti_strdup("/", PERSISTENT);
 	return (new_pwd);
 }
 
@@ -27,7 +32,7 @@ char	*go_back(char *current_pwd)
 	if (len == 0 || len == 1)
 	{
 		env_set_value("PWD", "/");
-		new_pwd = fti_strdup("/");
+		new_pwd = fti_strdup("/", PERSISTENT);
 		return (new_pwd);
 	}
 	new_pwd = fti_malloc(sizeof(char) * len, TEMPORARY);
@@ -38,7 +43,6 @@ char	*go_back(char *current_pwd)
 		new_pwd[len] = current_pwd[len];
 		len--;
 	}
-	printf("Thus: %s\n", new_pwd);
 	return (new_pwd);
 }
 
@@ -59,7 +63,8 @@ char	*build_new_pwd(char	*current_pwd, char *relative_path)
 	int		rel_path_len;
 
 	rel_path_len = ft_strlen(relative_path);
-	if (relative_path[rel_path_len - 1] == '/')
+	if (relative_path[rel_path_len - 1] == '/'
+		&& rel_path_len != 1)
 		relative_path[rel_path_len - 1] = '\0';
 	if (strncmp(relative_path, "..", rel_path_len) == 0
 		&& rel_path_len == 2)
@@ -69,7 +74,7 @@ char	*build_new_pwd(char	*current_pwd, char *relative_path)
 		new_pwd = go_home();
 	else if (strncmp(relative_path, "/", rel_path_len) == 0
 		&& rel_path_len == 1)
-		new_pwd = go_root();
+		new_pwd = go_root(current_pwd);
 	else
 		new_pwd = change_by_name(current_pwd, relative_path);
 	return (new_pwd);
@@ -94,7 +99,6 @@ int	builtin_cd(char **args)
 	else
 	{
 		new_pwd = build_new_pwd(current_pwd, args[1]);
-		printf("%s\n", new_pwd);
 		if (!new_pwd)
 			ft_error("cd: memory allocation failed", __FILE__, __LINE__, 923);
 	}
