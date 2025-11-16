@@ -6,15 +6,20 @@ int builtin_echo(char **args)
 	int newline;
 
 	i = 1;
-	newline = 1;
-	if (args[1] && ft_strncmp(args[1], "-n", ft_strlen(args[1])) == 0) // New version required, that adds to garbage collector
+	// if(args[i])
+	// {
+	// 	printf("%s", args[i]);
+	// 	newline = 1;
+	// 	i++;
+	// }
+	while (args[i] && ft_strncmp(args[i], "-n", ft_strlen(args[i])) == 0) // New version required, that adds to garbage collector
 	{
 		newline = 0;
-		i = 2;
+		i++;
 	}
 	while (args[i])
 	{
-		printf("%s", args[i]); // TODO: Question: check for printf errors?
+		printf("%s", args[i]);
 		if (args[i + 1])
 			printf(" ");
 		i++;
