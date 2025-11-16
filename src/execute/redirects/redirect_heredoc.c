@@ -1,59 +1,53 @@
 #include "minishell.h"
 
-static char	*heredoc_loop(const char *delim)
+void	run_child(char *limiter, int *pipe_fds)
 {
-	char *line;
-	char *full_input;
+	char	*line;
 
-	full_input = fti_strdup(""); // TODO: New version required, that adds to garbage collector
+	close(pipe_fds[0]);
 	while (1)
 	{
-		line = readline(">");
-		if (!line)
-			break; 
-		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
+		write(1, "here_doc> ", ft_strlen("here_doc> "));
+		line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(line, limiter, ft_strlen(line) - 1) == 0
+			&& *line != '\n')
 		{
-			free(line); // TODO: add_history(line); like in main?
-			break;
+			free(line);
+			break ;
 		}
-		full_input = fti_strjoin(full_input, line); // TODO: New version required, that adds to garbage collector
-		full_input = fti_strjoin(full_input, "\n"); // TODO: New version required, that adds to garbage collector
-		free(line); // TODO: add_history(line); like in main?
+		write(pipe_fds[1], line, ft_strlen(line));
+		free(line);
 	}
-	return (full_input);
+	close(pipe_fds[1]);
+	exit(0);
 }
 
-static char	*expand_heredoc_input(char **input, char *delim)
+/// @brief Initializes a here_doc in a child process
+/// @param limiter Limiter character
+/// @return The read-end of the pipe the content of here_doc
+/// was writting to
+int	init_here_doc(char *limiter)
 {
-	char *expanded;
+	int		pid;
+	int		pipe_fds[2];
 
-	if (!input || !(*input))
-		return (NULL);
-	if (delim[0] == '\"' || delim[0] == '\'')
-	{
-		if (delim[ft_strlen(delim) - 1] == delim[0])
-			return (*input);
-		ft_error("Mismatched quotes in heredoc delimiter", \
-			__FILE__, __LINE__, 0);
-	}
-	// expanded = expand_variables(*input); // TODO: add Mateos function and check, if if-condition in line 53 after expand_heredoc_input still makes sense
-	return (expanded);
+	if (pipe(pipe_fds) == -1)
+		set_error(2);
+	pid = fork();
+	if (pid == -1)
+		ft_error("Fork failed", __FILE__, __LINE__, 120);
+	if (pid == 0)
+		run_child(limiter, pipe_fds);
+	else
+		wait(NULL);
+	close(pipe_fds[1]);
+	return (pipe_fds[0]);
 }
 
-void execute_rdr_heredoc(t_redirect_node *redirect)
+void	execute_rdr_heredoc(t_redirect_node *redirect)
 {
-	char *input;
-	
-	if (!(redirect->file) || ft_strlen(redirect->file) == 0) // TODO: Check, if heredoc writes delimiter in file attribute
-		ft_error("Heredoc delimiter is NULL or empty", \
-			__FILE__, __LINE__, 951);
-	input = heredoc_loop(redirect->file);
-	if (!input)
-		ft_error("Failed to read heredoc input", \
-			__FILE__, __LINE__, 952);
-	// input = expand_heredoc_input(&input, redirect->args[0]);
-	if (!input)
-		ft_error("Failed to expand heredoc input", \
-			__FILE__, __LINE__, 953);
-	write(STDIN_FILENO, input, ft_strlen(input));
+	int	pipe_read_end;
+
+	pipe_read_end = init_here_doc(redirect->file);
+	dup2(pipe_read_end, STDIN_FILENO);
 }
