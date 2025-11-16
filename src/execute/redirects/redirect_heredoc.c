@@ -47,7 +47,7 @@ void execute_rdr_heredoc(t_redirect_node *redirect)
 	if (!(redirect->file) || ft_strlen(redirect->file) == 0) // TODO: Check, if heredoc writes delimiter in file attribute
 		ft_error("Heredoc delimiter is NULL or empty", \
 			__FILE__, __LINE__, 951);
-	// input = heredoc_loop(redirect->args[0]);
+	input = heredoc_loop(redirect->file);
 	if (!input)
 		ft_error("Failed to read heredoc input", \
 			__FILE__, __LINE__, 952);

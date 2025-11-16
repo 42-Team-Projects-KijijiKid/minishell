@@ -89,6 +89,7 @@ void execute_command(t_tree_node *node)
 
 	expand(node);
 	shell = minishell_get();
+	default_filedescripor();
 	if (node->args == NULL || *node->args == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
