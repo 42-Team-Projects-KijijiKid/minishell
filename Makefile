@@ -15,13 +15,13 @@ SRC_DIR		:= src/
 OBJS_DIR	:= objs/
 
 PARSING_DIR		:= parse/
-EXECUTION_DIR		:= execute/
-ENVIRONMENT_DIR		:= environment/
+EXECUTION_DIR	:= execute/
+ENVIRONMENT_DIR	:= environment/
 UTILS_DIR		:= utils/
 
 #SUB Dir parsing
 EXPAND_DIR 		:= expand/
-TOKENIZE_DIR		:= tokenize/
+TOKENIZE_DIR	:= tokenize/
 TREE_DIR		:= tree/
 DEBUG_DIR		:= debug/
 
@@ -31,6 +31,7 @@ REDIRECTS_DIR	:= redirects/
 
 #SUB Dirs utils
 INTEGRATIONS_DIR	:= integrations/
+SIGNALS_DIR	:= signals/
 
 #.c files in src/parsing with subfolders
 EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers get_environment_value)) 
@@ -44,12 +45,13 @@ REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(adds
 
 #.c files in src/utils with subfolders
 INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_malloc fti_readline fti_strdup fti_strjoin))
+SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 
 # This is the total path to the .c files in the prefixed directory
 PARSING			:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
 EXECUTE			:= $(addprefix $(EXECUTION_DIR), execute.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
 ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c)
-UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES))
+UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)

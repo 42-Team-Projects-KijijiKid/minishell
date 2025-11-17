@@ -22,4 +22,10 @@ void	error_msg(char *msg, char *file, int line);
 // garbage.c
 void	garbage_free_all(void);
 
+//init_minishell.c
+void		run_minishell();
+t_minishell	*minishell_initialize(char **env);
+t_minishell	*minishell_get(void);
+
+
 #endif

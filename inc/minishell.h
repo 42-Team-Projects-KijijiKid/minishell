@@ -5,7 +5,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <fcntl.h>
-#include <signal.h>
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
 #include <unistd.h>
@@ -18,6 +17,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include "signals.h"
 #include "../libft/libft.h"
 #include "structs.h"
 #include "execute/execute.h"
