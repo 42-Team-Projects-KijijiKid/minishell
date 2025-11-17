@@ -49,10 +49,16 @@ char	*go_back(char *current_pwd)
 char	*change_by_name(char *current_pwd, char *relative_path)
 {
 	char	*new_pwd;
+	int		len;
 
-	if (*current_pwd == '/')
+	len = ft_strlen(current_pwd);
+	if (current_pwd[len - 1] != '/')
+	{
 		new_pwd = fti_strjoin(current_pwd, "/");
-	new_pwd = fti_strjoin(new_pwd, relative_path);
+		new_pwd = fti_strjoin(new_pwd, relative_path);
+	}
+	else
+		new_pwd = fti_strjoin(current_pwd, relative_path);
 	return (new_pwd);
 }
 
@@ -63,9 +69,6 @@ char	*build_new_pwd(char	*current_pwd, char *relative_path)
 	int		rel_path_len;
 
 	rel_path_len = ft_strlen(relative_path);
-	if (relative_path[rel_path_len - 1] == '/'
-		&& rel_path_len != 1)
-		relative_path[rel_path_len - 1] = '\0';
 	if (strncmp(relative_path, "..", rel_path_len) == 0
 		&& rel_path_len == 2)
 		new_pwd = go_back(current_pwd);
@@ -94,7 +97,12 @@ int	builtin_cd(char **args)
 	{
 		new_pwd = env_get_value("HOME");
 		if (!new_pwd)
-			ft_error("cd: HOME not set", __FILE__, __LINE__, 921);
+		{
+			error_msg("cd: HOME not set", __FILE__, __LINE__);
+			return (101);
+		}
+		
+		
 	}
 	else
 	{
@@ -105,7 +113,8 @@ int	builtin_cd(char **args)
 	if (chdir(new_pwd) == -1)
 	{
 		error = fti_strjoin("cd: no such file or directory: ", new_pwd); // TODO: New version required, that adds to garbage collector
-		ft_error(error, __FILE__, __LINE__, 922);
+		error_msg("No such file", __FILE__, __LINE__);
+		return (101);
 	}
 	else
 		env_set_value("PWD", new_pwd);
