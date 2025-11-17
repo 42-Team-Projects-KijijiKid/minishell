@@ -2,7 +2,10 @@
 
 void	ctrl_c(int signal)
 {
-	write(1, "\n", 1);
+	if (!isatty(STDIN_FILENO))
+		printf("No newline in other shell\n");
+	else
+		write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
