@@ -136,4 +136,5 @@ void	execute_rdr_heredoc(t_redirect_node *redirect)
 
 	pipe_read_end = init_here_doc(redirect->file);
 	dup2(pipe_read_end, STDIN_FILENO);
+	close(pipe_read_end);
 }

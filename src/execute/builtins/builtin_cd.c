@@ -101,8 +101,6 @@ int	builtin_cd(char **args)
 			error_msg("cd: HOME not set", __FILE__, __LINE__);
 			return (101);
 		}
-		
-		
 	}
 	else
 	{
