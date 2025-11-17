@@ -10,7 +10,10 @@ char	*fti_readline(char *promt)
 	{
 		cmd = readline(promt);
 		if (!cmd)
+		{
+			printf("\n");
 			return (NULL);
+		}
 		len = ft_strlen(cmd);
 		if (len != 0)
 		{

@@ -25,13 +25,13 @@ t_minishell	*minishell_initialize(char **env)
 	return (shell);
 }
 
-void	run_minishell()
+void	run_minishell(void)
 {
 	char		*cmd;
 	t_minishell	*shell;
 
 	shell = minishell_get();
-	while (isatty(stdin))
+	while (isatty(STDIN_FILENO))
 	{
 		cmd = fti_readline("\033[32mMinishell>>\033[0m ");
 		if (!cmd)
@@ -40,14 +40,14 @@ void	run_minishell()
 		minishell_execute();
 		garbage_free_layer(&shell->garbage.temporary);
 	}
-	while (!isatty(fileno(stdin)))
+	while (!isatty(STDIN_FILENO))
 	{
-		char	*line;
-		line = get_next_line(fileno(stdin));
-		if (!line)
+		cmd = get_next_line(STDIN_FILENO);
+		if (!cmd)
 			break ;
-		minishell_parse(line);
+		minishell_parse(cmd);
 		minishell_execute();
-		free(line);
+		free(cmd);
 	}
+	printf("exit\n");
 }
