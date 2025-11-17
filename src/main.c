@@ -25,10 +25,15 @@ t_minishell	*minishell_initialize(char **env)
 	return (shell);
 }
 
+void	new_behaviour(void)
+{
+	printf("Not exiting\n");
+}
+
 int main(int ac, char **av, char **env)
 {
-	char		*cmd;
-	t_minishell	*shell;
+	t_minishell			*shell;
+	char				*cmd;
 
 	(void)ac;
 	(void)av;

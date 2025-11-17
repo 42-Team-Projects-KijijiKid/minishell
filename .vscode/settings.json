@@ -4,6 +4,9 @@
 	"editor.detectIndentation": true,
 	"files.associations": {
 		"stdlib.h": "c",
-		"minishell.h": "c"
+		"minishell.h": "c",
+		"execute.h": "c",
+		"unistd.h": "c",
+		"signal.h": "c"
 	}
 }

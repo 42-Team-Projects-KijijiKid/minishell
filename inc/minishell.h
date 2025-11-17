@@ -5,6 +5,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <fcntl.h>
+#include <signal.h>
 //Malloc , pwd , cd, terminal information
 #include <stdlib.h>
 #include <unistd.h>

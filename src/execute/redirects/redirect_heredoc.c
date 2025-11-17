@@ -133,8 +133,10 @@ int	init_here_doc(char *limiter)
 void	execute_rdr_heredoc(t_redirect_node *redirect)
 {
 	int	pipe_read_end;
+	t_minishell	*shell;
 
-	default_filedescripor();
+	shell = minishell_get();
+	dup2(shell->filedescriptor.std_in, STDIN_FILENO);
 	pipe_read_end = init_here_doc(redirect->file);
 	dup2(pipe_read_end, STDIN_FILENO);
 	close(pipe_read_end);
