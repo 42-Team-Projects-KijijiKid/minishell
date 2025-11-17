@@ -121,9 +121,12 @@ int	init_here_doc(char *limiter)
 		set_error(2);
 	pid = fork();
 	if (pid == -1)
-		ft_error("Fork failed", __FILE__, __LINE__, 120);
+	ft_error("Fork failed", __FILE__, __LINE__, 120);
 	if (pid == 0)
+	{
+		sig_heredoc();
 		run_child(limiter, pipe_fds);
+	}
 	else
 		wait(NULL);
 	close(pipe_fds[1]);

@@ -19,3 +19,21 @@ void	sig_init(void)
 	sa.sa_flags = 0;
 	sigaction(SIGINT, &sa, NULL);
 }
+
+//Temporary
+
+void	ctrl_heredoc(int sig)
+{
+	exit(100);
+}
+
+void	sig_heredoc(void)
+{
+	struct sigaction	sa;
+
+	sa.sa_handler = ctrl_heredoc;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}

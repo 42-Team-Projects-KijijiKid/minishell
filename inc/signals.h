@@ -5,6 +5,7 @@
 
 //signals.c
 void	sig_init(void);
+void	sig_heredoc(void);
 
 
 #endif
