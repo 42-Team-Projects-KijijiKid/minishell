@@ -23,8 +23,6 @@ void	sig_init(void)
 	sigaction(SIGINT, &sa, NULL);
 }
 
-//Temporary
-
 void	ctrl_heredoc(int sig)
 {
 	exit(100);
