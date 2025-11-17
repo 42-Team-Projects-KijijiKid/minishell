@@ -55,8 +55,13 @@ static void	execute_executable(t_tree_node *node)
 		bin_path = get_bin_path_of_command(*node->args, split_path);
 	if (!bin_path)
 	{
-		printf("msh: command not found\n");
-		exit (127);
+		if (access(*node->args, X_OK) == 0)
+			bin_path = *node->args;
+		else
+		{
+			printf("msh: command not found\n");
+			exit (127);
+		}
 	}
 	execve(bin_path, node->args, envp);
 	exit (120);
@@ -92,7 +97,8 @@ void execute_command(t_tree_node *node)
 	if (node->args == NULL || *node->args == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
-	if (execute_builtin(node) == 1)
+	if (execute_builtin(node) == 1
+		&& shell->herdoc)
 	{
 		pid = fork();
 		if (pid == -1)

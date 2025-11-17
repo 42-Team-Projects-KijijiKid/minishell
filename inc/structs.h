@@ -157,6 +157,7 @@ typedef struct	s_minishell
 	t_garbage			garbage;
 	t_environment		env;
 	s_filedescriptor	filedescriptor;
+	bool				herdoc;
 	int					last_exit_status;
 }	t_minishell;
 

@@ -114,9 +114,12 @@ void	run_child(char *limiter, int *pipe_fds)
 /// was writting to
 int	init_here_doc(char *limiter)
 {
-	int		pid;
-	int		pipe_fds[2];
+	int			pid;
+	int			pipe_fds[2];
+	t_minishell	*shell;
+	int			wstatus;
 
+	shell = minishell_get();
 	if (pipe(pipe_fds) == -1)
 		set_error(2);
 	pid = fork();
@@ -127,8 +130,14 @@ int	init_here_doc(char *limiter)
 		sig_heredoc();
 		run_child(limiter, pipe_fds);
 	}
-	else
-		wait(NULL);
+	if (waitpid(pid, &wstatus, 0) == -1
+		|| wstatus != 0)
+	{
+		shell->last_exit_status = 130;
+		close(pipe_fds[0]);
+		shell->herdoc = false;
+		printf("\n");
+	}
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);
 }
@@ -140,7 +149,10 @@ void	execute_rdr_heredoc(t_redirect_node *redirect)
 
 	shell = minishell_get();
 	dup2(shell->filedescriptor.std_in, STDIN_FILENO);
-	pipe_read_end = init_here_doc(redirect->file);
-	dup2(pipe_read_end, STDIN_FILENO);
-	close(pipe_read_end);
+	if (shell->herdoc)
+	{
+		pipe_read_end = init_here_doc(redirect->file);
+		dup2(pipe_read_end, STDIN_FILENO);
+		close(pipe_read_end);
+	}
 }

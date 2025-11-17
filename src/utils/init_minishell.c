@@ -21,6 +21,7 @@ t_minishell	*minishell_initialize(char **env)
 	shell->filedescriptor.std_in = dup(STDIN_FILENO);
 	shell->filedescriptor.std_out = dup(STDOUT_FILENO);
 	shell->filedescriptor.std_err = dup(STDERR_FILENO);
+	shell->herdoc = true;
 	environment_initialize(env);
 	return (shell);
 }
@@ -33,6 +34,7 @@ void	run_minishell(void)
 	shell = minishell_get();
 	while (isatty(STDIN_FILENO))
 	{
+		shell->herdoc = true;
 		cmd = fti_readline("\033[32mMinishell>>\033[0m ");
 		if (!cmd)
 			break ;
