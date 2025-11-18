@@ -84,7 +84,7 @@ void	possible_expansion(t_tree_node *node)
 			*node->args = double_quotes(*node->args);
 		else if (**node->args == '$')
 			*node->args = argument_expand(*node->args);
-		else if (**node->args == '~')
+		else if (!ft_strncmp(*node->args, "~", ft_strlen(*node->args)))
 			*node->args = get_environment_value("HOME");
 		node->args++;
 	}
