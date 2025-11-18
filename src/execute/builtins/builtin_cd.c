@@ -43,13 +43,10 @@ static char	*cut_till_slash(char *current_pwd)
 	len = ft_strlen(current_pwd) - 1;
 	while (current_pwd[len] && current_pwd[len] != '/')
 		len--;
-	if (!current_pwd)
-		return ("/");
-	else
-	{
-		current_pwd[len] = '\0';
-		current_pwd = fti_strdup(current_pwd, TEMPORARY);
-	}
+	current_pwd[len] = '\0';
+	if (!*current_pwd)
+		return (fti_strdup("/", TEMPORARY));
+	current_pwd = fti_strdup(current_pwd, TEMPORARY);
 	return (current_pwd);
 }
 
@@ -58,11 +55,9 @@ static char	*go_dir_back(char *current_pwd, char *new_path)
 	int	go_back_count;
 
 	go_back_count = count_go_back(new_path);
-	printf("Go Back Cnt: %d\n", go_back_count);
 	while (0 <= go_back_count)
 	{
 		new_path = cut_till_slash(current_pwd);
-		printf("New Path: %s\n", new_path);
 		go_back_count--;
 	}
 	return (new_path);
@@ -74,10 +69,10 @@ static char	*build_path(char *current_pwd, char *new_path)
 		new_path = fti_strdup(new_path, TEMPORARY);
 	else if (!ft_strncmp(new_path, "..", 2))
 		new_path = go_dir_back(current_pwd, new_path);
+	else
+		
 	return (new_path);
 }
-
-/*Improved change directory*/
 
 int	builtin_cd(char **args)
 {
@@ -104,7 +99,7 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		error_msg("cd: aslkdm: No such file or directory", __FILE__, __LINE__);
+		error_msg("cd: <PATHHH>: No such file or directory", __FILE__, __LINE__); //Add the PATH (TODO)
 		return (128);
 	}
 	return (0);
