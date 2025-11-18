@@ -41,8 +41,7 @@ void	run_minishell(void)
 		minishell_parse(cmd);
 		minishell_execute();
 		free(cmd);
-		garbage_free_all();
-		exit (101);
+		garbage_free_layer(&shell->garbage.temporary);
 	}
 	while (!isatty(STDIN_FILENO))
 	{
