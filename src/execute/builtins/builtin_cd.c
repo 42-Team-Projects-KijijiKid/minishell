@@ -41,6 +41,8 @@ static char	*cut_till_slash(char *current_pwd)
 	int	len;
 
 	len = ft_strlen(current_pwd) - 1;
+	if (len != 0 && current_pwd[len] == '/')
+		len--;
 	while (current_pwd[len] && current_pwd[len] != '/')
 		len--;
 	current_pwd[len] = '\0';
@@ -63,6 +65,19 @@ static char	*go_dir_back(char *current_pwd, char *new_path)
 	return (new_path);
 }
 
+static char *concatenate_paths(char *current_pwd, char *new_path)
+{
+	int		len;
+	char	*rtn;
+
+	len = ft_strlen(current_pwd) - 1;
+	if (current_pwd[len] != '/')
+		rtn = fti_strjoin(current_pwd, "/");
+	rtn = fti_strjoin(rtn, new_path);
+	return (rtn);
+}
+
+
 static char	*build_path(char *current_pwd, char *new_path)
 {
 	if (!ft_strncmp(current_pwd, new_path, ft_strlen(new_path)))
@@ -70,7 +85,7 @@ static char	*build_path(char *current_pwd, char *new_path)
 	else if (!ft_strncmp(new_path, "..", 2))
 		new_path = go_dir_back(current_pwd, new_path);
 	else
-		
+		new_path = concatenate_paths(current_pwd, new_path);
 	return (new_path);
 }
 
