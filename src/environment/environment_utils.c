@@ -12,7 +12,9 @@ char	*rtn_key_value(t_env_node *node)
 	char	*rtn;
 	int		i;
 	int		x;
-
+	
+	if (!node)
+		return (NULL);
 	len = node->value_len + node->key_len + 1;
 	rtn = fti_malloc(sizeof(char) * (len + 1), TEMPORARY);
 	i = 0;
@@ -126,7 +128,7 @@ char	**env_list_to_2d(void) // turn_2d() in expansion/create_inv.c
 	int			i;
 	
 	shell = minishell_get();
-	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), PERSISTENT);
+	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), TEMPORARY);
 	node = shell->env.head;
 	i = 0;
 	while (node)

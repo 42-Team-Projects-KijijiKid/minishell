@@ -85,6 +85,16 @@ char	*expand_heredoc(char *line)
 	return (rtn);
 }
 
+int	len_to_newline(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	return (i);
+}
+
 void	run_child(char *limiter, int *pipe_fds)
 {
 	char	*line;
@@ -94,14 +104,14 @@ void	run_child(char *limiter, int *pipe_fds)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
-		if (ft_strncmp(line, limiter, ft_strlen(line) - 1) == 0
+		if (ft_strncmp(line, limiter, len_to_newline(line) - 1) == 0
 			&& *line != '\n')
 		{
 			free(line);
 			break ;
 		}
 		line = expand_heredoc(line);
-		write(pipe_fds[1], line, ft_strlen(line));
+		write(pipe_fds[1], line, len_to_newline(line));
 		free(line);
 	}
 	close(pipe_fds[1]);
