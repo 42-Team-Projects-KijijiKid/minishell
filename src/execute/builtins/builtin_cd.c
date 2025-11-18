@@ -35,7 +35,7 @@ char	*go_back(char *current_pwd)
 		new_pwd = fti_strdup("/", PERSISTENT);
 		return (new_pwd);
 	}
-	new_pwd = fti_malloc(sizeof(char) * len, PERSISTENT);
+	new_pwd = fti_malloc(sizeof(char) * len + 1, PERSISTENT);
 	new_pwd[len] = '\0';
 	len--;
 	while (0 <= len)
