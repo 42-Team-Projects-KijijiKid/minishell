@@ -45,7 +45,7 @@ int builtin_export(char **args)
 	if (!args[1])
 	{
 		print_exported_vars();
-		exit(0);
+		return (0);
 	}
 	int i = 1;
 	while (args[i])

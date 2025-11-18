@@ -92,7 +92,7 @@ void	run_child(char *limiter, int *pipe_fds)
 	close(pipe_fds[0]);
 	while (1)
 	{
-		write(1, "here_doc> ", ft_strlen("here_doc> "));
+		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 		if (ft_strncmp(line, limiter, ft_strlen(line) - 1) == 0
 			&& *line != '\n')
