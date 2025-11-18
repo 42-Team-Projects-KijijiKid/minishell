@@ -100,12 +100,9 @@ void execute_command(t_tree_node *node)
 	if (execute_builtin(node) == 1
 		&& shell->herdoc)
 	{
-		pid = fork();
-		if (pid == -1)
-			ft_error("Fork failed", __FILE__, __LINE__, 92);
+		pid = ft_fork();
 		if (pid == 0)
 			execute_executable(node);
-		sig_reset();
 		if (waitpid(pid, &wstatus, 0) == -1
 			|| wstatus != 0)
 			shell->last_exit_status = 127;
