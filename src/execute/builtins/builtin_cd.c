@@ -28,7 +28,7 @@ static int	count_go_back(char *new_path)
 		if (2 < len)
 		{
 			error_msg("cd: No such file or directory", __FILE__, __LINE__);
-			return (139);
+			return (-1);
 		}
 		else if (len == 2)
 			double_dot_count++;
@@ -41,9 +41,11 @@ static char	*cut_till_slash(char *current_pwd)
 	int	len;
 
 	len = ft_strlen(current_pwd) - 1;
+	if (len == -1)
+		return (fti_strdup("/", TEMPORARY));
 	if (len != 0 && current_pwd[len] == '/')
 		len--;
-	while (current_pwd[len] && current_pwd[len] != '/')
+	while (current_pwd[len] && current_pwd[len] && current_pwd[len] != '/')
 		len--;
 	current_pwd[len] = '\0';
 	if (!*current_pwd)
@@ -72,8 +74,17 @@ static char *concatenate_paths(char *current_pwd, char *new_path)
 
 	len = ft_strlen(current_pwd) - 1;
 	if (current_pwd[len] != '/')
+	{
 		rtn = fti_strjoin(current_pwd, "/");
-	rtn = fti_strjoin(rtn, new_path);
+		rtn = fti_strjoin(rtn, new_path);
+	}
+	else
+	{
+		if (*new_path != '/')
+			rtn = fti_strjoin("/", new_path);
+		else
+			rtn = fti_strdup(new_path, TEMPORARY);
+	}
 	return (rtn);
 }
 
