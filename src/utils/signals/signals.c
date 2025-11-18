@@ -25,6 +25,13 @@ void	ctrl_heredoc(int sig)
 	exit(100);
 }
 
+void	sig_reset(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
+}
+
 void	sig_heredoc(void)
 {
 	struct sigaction	sa;

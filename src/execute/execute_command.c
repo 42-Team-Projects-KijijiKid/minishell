@@ -105,11 +105,13 @@ void execute_command(t_tree_node *node)
 			ft_error("Fork failed", __FILE__, __LINE__, 92);
 		if (pid == 0)
 			execute_executable(node);
+		sig_reset();
 		if (waitpid(pid, &wstatus, 0) == -1
 			|| wstatus != 0)
 			shell->last_exit_status = 127;
 		else
 				shell->last_exit_status = 0;
+		sig_init();
 	}
 	default_filedescripor();
 }

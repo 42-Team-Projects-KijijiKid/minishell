@@ -6,6 +6,6 @@
 //signals.c
 void	sig_init(void);
 void	sig_heredoc(void);
-
+void	sig_reset(void);
 
 #endif
