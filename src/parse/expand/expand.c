@@ -102,7 +102,7 @@ t_tree_node	*expand(t_tree_node *node)
 		return (NULL);
 	if (node->type == TEXT)
 	{
-		if (*node->args && node->args[1])
+		if (node->args)
 			possible_expansion(node);
 	}
 	expand(node->left);
