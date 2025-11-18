@@ -63,9 +63,9 @@ static void	execute_executable(t_tree_node *node)
 			exit (127);
 		}
 	}
-	execve(bin_path, node->args, envp);
 	free2d(split_path);
-	free(bin_path);
+	execve(bin_path, node->args, envp);
+	garbage_free_all();
 	exit (120);
 }
 

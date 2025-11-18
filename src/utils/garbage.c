@@ -56,6 +56,7 @@ void	garbage_free_all(void)
 	t_minishell	*meta;
 
 	meta = minishell_get();
+	clear_history();
 	garbage_free_layer(&meta->garbage.persistent);
 	garbage_free_layer(&meta->garbage.temporary);
 }

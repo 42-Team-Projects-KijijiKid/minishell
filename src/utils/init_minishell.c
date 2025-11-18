@@ -40,7 +40,9 @@ void	run_minishell(void)
 			break ;
 		minishell_parse(cmd);
 		minishell_execute();
-		garbage_free_layer(&shell->garbage.temporary);
+		free(cmd);
+		garbage_free_all();
+		exit (101);
 	}
 	while (!isatty(STDIN_FILENO))
 	{

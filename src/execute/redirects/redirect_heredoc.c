@@ -106,14 +106,11 @@ void	run_child(char *limiter, int *pipe_fds)
 		line = get_next_line(STDIN_FILENO);
 		if (ft_strncmp(line, limiter, len_to_newline(line) - 1) == 0
 			&& *line != '\n')
-		{
-			free(line);
 			break ;
-		}
 		line = expand_heredoc(line);
 		write(pipe_fds[1], line, len_to_newline(line));
-		free(line);
 	}
+	garbage_free_all();
 	close(pipe_fds[1]);
 	exit(0);
 }
