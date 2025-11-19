@@ -1,44 +1,5 @@
 #include "../../../inc/minishell.h"
 
-/// @brief Does not expand the variable
-/// and removes the single quotes leaving the
-/// inner quotes if present
-/// @param str 
-char	*single_quotes(char *str)
-{
-	int		str_len;
-	char	*rtn;
-	int		i;
-
-	if (*str == '\'')
-		str++;
-	str_len = strlen_whitout_quotes(str, '\'');
-	rtn = fti_malloc(sizeof(char) * str_len + 1, TEMPORARY);
-	i = 0;
-	while (*str != '\'')
-	{
-		rtn[i] = *str;
-		str++;
-		i++;
-	}
-	rtn[i] = '\0';
-	return (rtn);
-}
-
-/// @brief Does not expand the variable
-/// and removes the single quotes leaving the
-/// inner quotes if present.
-/// Rebuilds the whole string with expansion.
-/// @param str 
-char	*double_quotes(char *str)
-{
-	if (*str == '\"')
-		str++;
-	else
-		ft_error("Tried to expand a invalid string", __FILE__, __LINE__, 73);
-	return (expand_inside_str(str, '\"'));
-}
-
 char	*argument_expand(char *str)
 {
 	char	*rtn;
@@ -82,6 +43,102 @@ static bool	quote_has_content(char *str)
 	return (true);
 }
 
+static unsigned int	total_length(char *str)
+{
+	char	*tmp_str;
+	int		i;
+	int		len_1;
+	int		len_2;
+	bool	expand;
+
+	i = 0;
+	len_1 = 0;
+	len_2 = 0;
+	expand = true;
+	while (*str)
+	{
+		if (*str == '$' && expand)
+		{
+			str++;
+			tmp_str = null_end_str(&str);
+			tmp_str =  get_environment_value(tmp_str);
+			len_1 += ft_strlen(tmp_str);
+		}
+		else if (!quote_has_content(str))
+			str += 2;
+		else if (*str == '\'')
+		{
+			expand = !expand;
+			str++;
+		}
+		else if (*str && *str != '$')
+		{
+			len_2++;
+			str++;
+		}
+		else if (*str && *str == '$'
+				&& !expand)
+		{
+			len_2++;
+			str++;
+		}
+	}
+	return (len_1 + len_2);
+}
+
+char	*expand_arguments(char *str)
+{
+	char				*buffer;
+	char				*rtn;
+	unsigned int		expanded_len;
+	int					i;
+	bool				expand;
+	char				*tmp_str;
+
+	buffer = str;
+	expanded_len = total_length(str);
+	i = 0;
+	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
+	expand = true;
+	while (*str)
+	{
+		if (*str == '$' && expand)
+		{
+			str++;
+			tmp_str = null_end_str(&str);
+			tmp_str =  get_environment_value(tmp_str);
+			while (*tmp_str)
+			{
+				rtn[i] =  *tmp_str;
+				i++;
+				tmp_str++;
+			}
+		}
+		else if (!quote_has_content(str))
+			str += 2;
+		else if (*str == '\'')
+		{
+			expand = !expand;
+			str++;
+		}
+		else if (*str && *str != '$')
+		{
+			rtn[i] = *str;
+			i++;
+			str++;
+		}
+		else if (*str && *str == '$'
+				&& !expand)
+		{
+			rtn[i] = *str;
+			i++;
+			str++;
+		}
+	}
+	rtn[i] = '\0';
+	return (rtn);
+}
+
 /// @brief Goes trough 2D Array checking
 ///possible expansions and replacing the strings
 void	possible_expansion(t_tree_node *node)
@@ -91,16 +148,9 @@ void	possible_expansion(t_tree_node *node)
 	head = node->args;
 	while (*node->args)
 	{
-		if (!quote_has_content(*node->args))
-			*node->args = " ";
-		else if (**node->args == '\'')
-			*node->args = single_quotes(*node->args);
-		else if (**node->args == '\"' && quote_has_content(*node->args))
-			*node->args = double_quotes(*node->args);
-		else if (**node->args == '$')
-			*node->args = argument_expand(*node->args);
-		else if (!ft_strncmp(*node->args, "~", ft_strlen(*node->args)))
-			*node->args = get_environment_value("HOME");
+		printf("Val: %s\n", *node->args);
+		*node->args = expand_arguments(*node->args);
+		printf("Val after: %s\n", *node->args);
 		node->args++;
 	}
 	node->args = head;
@@ -126,3 +176,65 @@ t_tree_node	*expand(t_tree_node *node)
 	expand(node->right);
 	return (node);
 }
+
+
+
+/**
+ * 
+ * 
+ * 	STORING OLD FILES
+ * 
+ */
+
+
+//  if (!quote_has_content(*node->args))
+// 	*node->args = " ";
+// else if (**node->args == '\'')
+// 	*node->args = single_quotes(*node->args);
+// else if (**node->args == '\"' && quote_has_content(*node->args))
+// 	*node->args = double_quotes(*node->args);
+// else if (**node->args == '$')
+// 	*node->args = argument_expand(*node->args);
+// else if (!ft_strncmp(*node->args, "~", ft_strlen(*node->args)))
+// 	*node->args = get_environment_value("HOME");
+
+
+
+// /// @brief Does not expand the variable
+// /// and removes the single quotes leaving the
+// /// inner quotes if present
+// /// @param str 
+// char	*single_quotes(char *str)
+// {
+// 	int		str_len;
+// 	char	*rtn;
+// 	int		i;
+
+// 	if (*str == '\'')
+// 		str++;
+// 	str_len = strlen_whitout_quotes(str, '\'');
+// 	rtn = fti_malloc(sizeof(char) * str_len + 1, TEMPORARY);
+// 	i = 0;
+// 	while (*str != '\'')
+// 	{
+// 		rtn[i] = *str;
+// 		str++;
+// 		i++;
+// 	}
+// 	rtn[i] = '\0';
+// 	return (rtn);
+// }
+
+// /// @brief Does not expand the variable
+// /// and removes the single quotes leaving the
+// /// inner quotes if present.
+// /// Rebuilds the whole string with expansion.
+// /// @param str 
+// char	*double_quotes(char *str)
+// {
+// 	if (*str == '\"')
+// 		str++;
+// 	else
+// 		ft_error("Tried to expand a invalid string", __FILE__, __LINE__, 73);
+// 	return (expand_inside_str(str, '\"'));
+// }

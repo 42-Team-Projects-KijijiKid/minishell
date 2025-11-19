@@ -7,7 +7,9 @@ unsigned int	count_arguments(char *str)
 
 	words = 0;
 	while (*str && !is_meta_char(*str))
-	{	
+	{
+		if (*str != ' ')
+			words++;
 		while (*str && !is_meta_char(*str)
 			&& *str != ' ')
 		{
@@ -24,7 +26,6 @@ unsigned int	count_arguments(char *str)
 			else
 				str++;
 		}
-		words++;
 		if (*str == ' ')
 			str++;
 	}
