@@ -3,8 +3,8 @@
 bool	is_meta_char(char input)
 {
 	int			i;
-	const char	meta[11] = {'|', '&', ';', '(', ')',\
-		'<', '>', '\\', '*', '?', '\0'};
+	const char	meta[10] = {'|', '&', ';', '(', ')',\
+		'<', '>', '\\', '*', '\0'};
 
 	i = 0;
 	if (!input)

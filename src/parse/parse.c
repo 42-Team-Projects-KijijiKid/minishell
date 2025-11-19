@@ -14,5 +14,5 @@ void	minishell_parse(char *input)
 	shell->tree_root = manager.root_node;
 	tree_build(&manager, 1);
 	print_ast_structure(manager.root_node, 0, false);
-	exit(1023);
+	// exit(1023);
 }

@@ -27,7 +27,7 @@ unsigned int	total_len(char	*input)
 	{
 		if (input[i] == '\'' 
 			|| input[i] == '\"')
-			i += len_in_quotes(input);
+			i += len_in_quotes(&input[i]);
 		else
 			i++;
 	}
