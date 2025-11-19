@@ -69,6 +69,19 @@ char	*argument_expand(char *str)
 	return (rtn);
 }
 
+static bool	quote_has_content(char *str)
+{
+	char	quote;
+
+	quote = *str;
+	str++;
+	if (quote == *str)
+		return (false);
+	while (*str != quote && *str)
+		str++;
+	return (true);
+}
+
 /// @brief Goes trough 2D Array checking
 ///possible expansions and replacing the strings
 void	possible_expansion(t_tree_node *node)
@@ -78,9 +91,9 @@ void	possible_expansion(t_tree_node *node)
 	head = node->args;
 	while (*node->args)
 	{
-		if (**node->args == '\'')
+		if (**node->args == '\'' && quote_has_content(*node->args))
 			*node->args = single_quotes(*node->args);
-		else if (**node->args == '\"')
+		else if (**node->args == '\"' && quote_has_content(*node->args))
 			*node->args = double_quotes(*node->args);
 		else if (**node->args == '$')
 			*node->args = argument_expand(*node->args);
