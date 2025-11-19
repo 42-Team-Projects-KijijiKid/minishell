@@ -9,7 +9,10 @@ static bool	find_matching_quote(char **str)
 	while (**str && **str != quote)
 		(*str)++;
 	if (**str && **str == quote)
+	{
+		(*str)++;
 		return (true);
+	}
 	return (false);
 }
 
