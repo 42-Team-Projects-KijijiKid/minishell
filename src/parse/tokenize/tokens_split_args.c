@@ -43,7 +43,6 @@ static char	*get_argument(char **input)
 
 	i = 0;
 	token_len = total_len(*input);
-	printf("Total length: %d\n", token_len);
 	rtn = fti_malloc(sizeof(char) * (token_len + 1), TEMPORARY);
 	while ( **input && **input != ' '
 		&& !is_meta_char(**input))
@@ -86,7 +85,6 @@ char	**tokens_split_args(char **input)
 	int		words;
 
 	words = count_arguments(*input);
-	printf("Words: %d\n", words);
 	rtn = fti_malloc(sizeof(char *) * (words + 1), TEMPORARY);
 	i = 0;
 	while (i < words)
@@ -95,7 +93,6 @@ char	**tokens_split_args(char **input)
 				**input == ' ')
 			(*input)++;
 		rtn[i] = get_argument(input);
-		printf("Val: %s\n", rtn[i]);
 		i++;
 	}
 	rtn[i] = NULL;
