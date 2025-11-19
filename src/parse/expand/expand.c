@@ -49,15 +49,17 @@ static unsigned int	total_length(char *str)
 	int		i;
 	int		len_1;
 	int		len_2;
-	bool	expand;
+	bool	single_quotes;
+	bool	double_quotes;
 
 	i = 0;
 	len_1 = 0;
 	len_2 = 0;
-	expand = true;
+	single_quotes = false;
+	double_quotes = false;
 	while (*str)
 	{
-		if (*str == '$' && expand)
+		if (*str == '$' && !single_quotes)
 		{
 			str++;
 			tmp_str = null_end_str(&str);
@@ -66,9 +68,14 @@ static unsigned int	total_length(char *str)
 		}
 		else if (!quote_has_content(str))
 			str += 2;
-		else if (*str == '\'')
+		else if (*str == '\'' && !double_quotes)
 		{
-			expand = !expand;
+			single_quotes = !single_quotes;
+			str++;
+		}
+		else if (*str == '\"')
+		{
+			double_quotes = !double_quotes;
 			str++;
 		}
 		else if (*str && *str != '$')
@@ -77,7 +84,7 @@ static unsigned int	total_length(char *str)
 			str++;
 		}
 		else if (*str && *str == '$'
-				&& !expand)
+				&& single_quotes)
 		{
 			len_2++;
 			str++;
@@ -92,17 +99,19 @@ char	*expand_arguments(char *str)
 	char				*rtn;
 	unsigned int		expanded_len;
 	int					i;
-	bool				expand;
+	bool				single_quotes;
+	bool				double_quotes;
 	char				*tmp_str;
 
 	buffer = str;
 	expanded_len = total_length(str);
 	i = 0;
 	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
-	expand = true;
+	single_quotes = false;
+	double_quotes = false;
 	while (*str)
 	{
-		if (*str == '$' && expand)
+		if (*str == '$' && !single_quotes)
 		{
 			str++;
 			tmp_str = null_end_str(&str);
@@ -116,10 +125,15 @@ char	*expand_arguments(char *str)
 		}
 		else if (!quote_has_content(str))
 			str += 2;
-		else if (*str == '\'')
+		else if (*str == '\'' && !double_quotes)
 		{
-			expand = !expand;
+			single_quotes = !single_quotes;
 			str++;
+		}
+		else if (*str == '\"')
+		{
+			double_quotes = !double_quotes;
+			str++; 
 		}
 		else if (*str && *str != '$')
 		{
@@ -128,7 +142,7 @@ char	*expand_arguments(char *str)
 			str++;
 		}
 		else if (*str && *str == '$'
-				&& !expand)
+				&& single_quotes)
 		{
 			rtn[i] = *str;
 			i++;
