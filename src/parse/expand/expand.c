@@ -91,7 +91,9 @@ void	possible_expansion(t_tree_node *node)
 	head = node->args;
 	while (*node->args)
 	{
-		if (**node->args == '\'' && quote_has_content(*node->args))
+		if (!quote_has_content(*node->args))
+			*node->args = " ";
+		else if (**node->args == '\'')
 			*node->args = single_quotes(*node->args);
 		else if (**node->args == '\"' && quote_has_content(*node->args))
 			*node->args = double_quotes(*node->args);
