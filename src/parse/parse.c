@@ -1,11 +1,17 @@
 #include "../../inc/minishell.h"
 
-void	minishell_parse(char *input)
+int	minishell_parse(char *input)
 {
 	t_minishell		*shell;
 	t_build_manager	manager;
+	int				validate_rtn;
 
-	validate_quote_pairs(input);
+	validate_rtn = validate_quote_pairs(input);
+	if (validate_rtn != 0)
+	{
+		shell->last_exit_status = validate_rtn;
+		return (shell->last_exit_status);
+	}
 	shell = minishell_get();
 	manager.head_token = tokenize(input);
 	tokens_validate(manager.head_token);
@@ -14,5 +20,5 @@ void	minishell_parse(char *input)
 	shell->tree_root = manager.root_node;
 	tree_build(&manager, 1);
 	print_ast_structure(manager.root_node, 0, false);
-	// exit(1023);
+	return (0);
 }

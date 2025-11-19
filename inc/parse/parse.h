@@ -6,10 +6,10 @@
 # include "tree.h"
 
 // parse.c
-void	minishell_parse(char *input);
+int	minishell_parse(char *input);
 
 // parsing_validate.c
-void	validate_quote_pairs(char *line);
+int	validate_quote_pairs(char *line);
 
 // debug/print_tree.c
 void	print_ast_structure(t_tree_node *root, int level, bool left);

@@ -17,7 +17,7 @@ char		*fti_strjoin(char const *s1, char const *s2);
 
 // error.c
 void		ft_error(char *msg, char *file, int line, u_int64_t exit_stat);
-void		error_msg(char *msg, char *file, int line);
+int			error_msg(char *msg, char *file, int line, unsigned char rtn_value);
 
 // garbage.c
 void		garbage_free_all(void);

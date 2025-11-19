@@ -38,8 +38,8 @@ void	run_minishell(void)
 		cmd = fti_readline("\033[32mMinishell>>\033[0m ");
 		if (!cmd)
 			break ;
-		minishell_parse(cmd);
-		minishell_execute();
+		if (minishell_parse(cmd) == 0)
+			minishell_execute();
 		free(cmd);
 		garbage_free_layer(&shell->garbage.temporary);
 	}
@@ -48,7 +48,8 @@ void	run_minishell(void)
 		cmd = get_next_line(STDIN_FILENO);
 		if (!cmd)
 			break ;
-		minishell_parse(cmd);
+		if (minishell_parse(cmd) == 0)
+			minishell_execute();
 		minishell_execute();
 		free(cmd);
 	}

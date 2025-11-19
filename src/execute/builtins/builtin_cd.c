@@ -27,7 +27,7 @@ static int	count_go_back(char *new_path)
 		len = len_until_slash(new_path);
 		if (2 < len)
 		{
-			error_msg("cd: No such file or directory", __FILE__, __LINE__);
+			error_msg("cd: No such file or directory", __FILE__, __LINE__, 1);
 			return (-1);
 		}
 		else if (len == 2)
@@ -114,7 +114,7 @@ int	builtin_cd(char **args)
 			new_pwd = build_path(old_pwd, args[1]);
 		else
 		{
-			error_msg("cd: too many arguments", __FILE__, __LINE__);
+			error_msg("cd: too many arguments", __FILE__, __LINE__, 1);
 			return (129);
 		}
 	}
@@ -125,8 +125,8 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		error_msg("cd: <PATHHH>: No such file or directory", __FILE__, __LINE__); //Add the PATH (TODO)
-		return (128);
+		error_msg("cd: <PATHHH>: No such file or directory", __FILE__, __LINE__, 1); //Add the PATH (TODO)
+		return (1);
 	}
 	return (0);
 }

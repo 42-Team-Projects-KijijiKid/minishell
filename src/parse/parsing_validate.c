@@ -6,9 +6,9 @@ static bool	find_matching_quote(char **str)
 
 	quote = **str;
 	(*str)++;
-	while (**str != quote && **str)
+	while (**str && **str != quote)
 		(*str)++;
-	if (**str == quote)
+	if (**str && **str == quote)
 		return (true);
 	return (false);
 }
@@ -18,7 +18,7 @@ static bool	find_matching_quote(char **str)
 /// cases like "'" because this is a valid expression
 /// the check_withing functions handle thesee cases.
 /// @param line 
-void	validate_quote_pairs(char *line)
+int	validate_quote_pairs(char *line)
 {
 	unsigned int	double_quote;
 	unsigned int	single_quote;
@@ -29,20 +29,18 @@ void	validate_quote_pairs(char *line)
 	{
 		if (*line == '\'')
 		{
-			if (find_matching_quote(&line))
-				single_quote++;
-			single_quote++;
+			if (!find_matching_quote(&line))
+				return (error_msg("Syntax Error", __FILE__, __LINE__, 2));
 		}
-		if (*line == '\"')
+		else if (*line == '\"')
 		{
-			if (find_matching_quote(&line))
-				double_quote++;
-			double_quote++;
+			if (!find_matching_quote(&line))
+				return (error_msg("Syntax Error", __FILE__, __LINE__, 2));
 		}
-		line++;
+		if (*line
+			&& *line != '\''
+			&& *line != '\"')
+			line++;
 	}
-	if (double_quote % 2)
-		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
-	if (single_quote % 2)
-		ft_error("Syntax Error:", __FILE__, __LINE__, 5);
+	return (0);
 }
