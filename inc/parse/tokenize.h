@@ -14,10 +14,7 @@ t_token	*find_root(t_token *token_head);
 char	**tokens_split_args(char **input);
 
 // tokens_split_utils.c
-int	    len_in_quotes(char *str);
-char	*input_in_quotes(char **str);
-bool	quote_content(char **str);
-int	    count_arguments(char *str);
+unsigned int	count_arguments(char *str);
 
 // tokens_validate.c
 bool	is_operator(e_tree_node_type type);

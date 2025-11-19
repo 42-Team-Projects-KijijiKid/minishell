@@ -1,66 +1,73 @@
 #include "../../../inc/minishell.h"
 
-/// @brief This function skips
-/// every space and moves
-/// the pointer pointer
-static void	skip_space(char **input)
+static int	len_in_quotes(char *input)
 {
-	while (**input && **input == ' ')
-		(*input)++;
+	int		len;
+	char	quote;
+
+	quote = *input;
+	input++;
+	len = 1;
+	while (quote != *input)
+	{
+		input++;
+		len++;
+	}
+	if (*input ==  quote)
+		len++;
+	return (len);
 }
 
-/// @brief Counts the leght of a single input
-/// delimited by meta chars space or asterix(-)
-/// @param input 
-/// @return len of input
-static int	len_of_input(char *input)
+unsigned int	total_len(char	*input)
 {
 	int	i;
 
 	i = 0;
-	while (*input && !is_meta_char(*input)
-			&& *input != ' '
-			&& *input != '\''
-			&& *input != '\"')
+	while (input[i] && input[i] != ' ')
 	{
-		i++;
-		input++;
+		if (input[i] == '\'' 
+			|| input[i] == '\"')
+			i += len_in_quotes(input);
+		else
+			i++;
 	}
 	return (i);
 }
 
-static char	*input_without_quotes(char **input)
+static char	*get_argument(char **input)
 {
-	int		i;
-	int		len;
+	int		token_len;
 	char	*rtn;
+	char	quote;
+	int		i;
 
-	len = len_of_input(*input);
-	rtn = fti_malloc(sizeof(char) * (len + 1), TEMPORARY);
 	i = 0;
-	while (**input && !is_meta_char(**input)
-			&& **input != ' ' && **input != '\''
-			&& **input != '\"')
+	token_len = total_len(*input);
+	printf("Total length: %d\n", token_len);
+	rtn = fti_malloc(sizeof(char) * (token_len + 1), TEMPORARY);
+	while ( **input && **input != ' '
+		&& !is_meta_char(**input))
 	{
+		if (**input == '\''
+			|| **input == '\"')
+		{
+			quote = **input;
+			rtn[i] = **input;
+			i++;
+			(*input)++;
+			while (**input != quote)
+			{
+				rtn[i] = **input;
+				i++;
+				(*input)++; 
+			}
+		}
 		rtn[i] = **input;
-		(*input)++;
 		i++;
+		(*input)++;
 	}
 	rtn[i] = '\0';
 	return (rtn);
-}
-
-static char	*get_argument(char **input)
-{
-	while (**input)
-	{
-		skip_space(input);
-		if (**input == '\'' || **input == '\"')
-			return (input_in_quotes(input));
-		else
-			return (input_without_quotes(input));
-	}
-	return (NULL);
 }
 
 /// @brief This function creates 2D array with 
@@ -79,11 +86,16 @@ char	**tokens_split_args(char **input)
 	int		words;
 
 	words = count_arguments(*input);
+	printf("Words: %d\n", words);
 	rtn = fti_malloc(sizeof(char *) * (words + 1), TEMPORARY);
 	i = 0;
 	while (i < words)
 	{
+		while (**input && 
+				**input == ' ')
+			(*input)++;
 		rtn[i] = get_argument(input);
+		printf("Val: %s\n", rtn[i]);
 		i++;
 	}
 	rtn[i] = NULL;

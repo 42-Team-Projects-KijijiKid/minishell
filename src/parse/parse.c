@@ -13,5 +13,6 @@ void	minishell_parse(char *input)
 	manager.root_node = token_to_tree_node(manager.root_token);
 	shell->tree_root = manager.root_node;
 	tree_build(&manager, 1);
-	// print_ast_structure(manager.root_node, 0, false);
+	print_ast_structure(manager.root_node, 0, false);
+	exit(1023);
 }
