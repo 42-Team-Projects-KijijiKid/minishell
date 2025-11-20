@@ -37,7 +37,7 @@ BONUS_SRCS := ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_
 
 GNL_SRCS := get_next_line.c get_next_line_utils.c
 
-PRINTF_SRCS := ft_error.c ft_printf.c ft_putchar.c helper_utils.c hexa_lowercase.c hexa_uppercase.c \
+PRINTF_SRCS := ft_error.c ft_printf.c ft_fprintf.c ft_putchar.c helper_utils.c hexa_lowercase.c hexa_uppercase.c \
                print_int.c print_ptr.c print_str.c print_unsignednbr.c
 
 LIBFT_CS     := $(addprefix $(LIBFT_DIR)/,$(SRCS))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateoandre <mateoandre@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 10:36:32 by mandre            #+#    #+#             */
-/*   Updated: 2025/09/08 11:49:39 by mateoandre       ###   ########.fr       */
+/*   Updated: 2025/11/20 17:27:57 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,16 @@ int	ft_putchar(char c)
 	if (!(*get_error()))
 	{
 		if (write(1, &c, 1) < 1)
+			set_error(1);
+	}
+	return (1);
+}
+
+int	ft_fputchar(int fd, char c)
+{
+	if (!(*get_error()))
+	{
+		if (write(fd, &c, 1) < 1)
 			set_error(1);
 	}
 	return (1);

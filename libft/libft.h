@@ -6,7 +6,7 @@
 /*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:26:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/11/16 11:51:46 by mandre           ###   ########.fr       */
+/*   Updated: 2025/11/20 17:56:14 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,16 @@ int		print_usigned(unsigned int val, int rtn_val);
 int		*get_error(void);
 void	set_error(int new_status);
 int		ft_putchar(char c);
+
+// Fprintf
+int		ft_fprintf(int fd, const char *str, ...);
+int		fprint_usigned(int fd, unsigned int val, int rtn_val);
+int		fprint_ptr(int fd, unsigned long ptr);
+int		fhexa_uppercase(int fd, unsigned long val, int rtn_val);
+int		fhexa_lowercase(int fd, unsigned long val, int rtn_val);
+int		fprint_int(int fd, int val, int rtn_val);
+int		ft_fputchar(int fd, char c);
+int		fprint_str(int fd, char *str);
 
 //GNL Prototypes
 char	*get_next_line(int fd);

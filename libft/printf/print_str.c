@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mateoandre <mateoandre@student.42.fr>      +#+  +:+       +#+        */
+/*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:08:42 by mateoandre        #+#    #+#             */
-/*   Updated: 2025/09/08 11:50:06 by mateoandre       ###   ########.fr       */
+/*   Updated: 2025/11/20 17:51:33 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,17 @@ int	print_str(char *str)
 	rtn_value = -1;
 	while (str[++rtn_value])
 		ft_putchar(str[rtn_value]);
+	return (rtn_value);
+}
+
+int	fprint_str(int fd, char *str)
+{
+	int	rtn_value;
+
+	if (!str)
+		return (fprint_str(fd, "(null)"));
+	rtn_value = -1;
+	while (str[++rtn_value])
+		ft_fputchar(fd, str[rtn_value]);
 	return (rtn_value);
 }
