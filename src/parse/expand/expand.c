@@ -29,6 +29,19 @@ static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quote
 	}
 }
 
+static void	env_value(char **str, char *rtn, int *i)
+{
+	char	*tmp_str;
+
+	tmp_str =  give_env_str(str);
+	while (tmp_str && *tmp_str)
+	{
+		rtn[*i] =  *tmp_str;
+		(*i)++;
+		tmp_str++;
+	}
+}
+
 char	*expand_arguments(char *str)
 {
 	char				*buffer;
@@ -48,15 +61,7 @@ char	*expand_arguments(char *str)
 	while (*str)
 	{
 		if (*str == '$' && !single_quotes)
-		{
-			tmp_str =  give_env_str(&str);
-			while (tmp_str && *tmp_str)
-			{
-				rtn[i] =  *tmp_str;
-				i++;
-				tmp_str++;
-			}
-		}
+			env_value(&str, rtn, &i);
 		else
 			process_non_dollar(&str, rtn, &i, &double_quotes, &single_quotes);
 	}
