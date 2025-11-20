@@ -91,6 +91,13 @@ static char *concatenate_paths(char *current_pwd, char *new_path)
 
 static char	*build_path(char *current_pwd, char *new_path)
 {
+	int i;
+
+	i = 0;
+	while (new_path[i + 1])
+		i++;
+	if (new_path[i] == '/')
+		new_path[i] = '\0';
 	if (!ft_strncmp(current_pwd, new_path, ft_strlen(new_path)))
 		new_path = fti_strdup(new_path, TEMPORARY);
 	else if (!ft_strncmp(new_path, "..", 2))
