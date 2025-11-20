@@ -112,10 +112,10 @@ int	builtin_cd(char **args)
 	{
 		if (!args[2])
 			new_pwd = build_path(old_pwd, args[1]);
-		else
+		else	
 		{
-			error_msg("cd: too many arguments", __FILE__, __LINE__, 1);
-			return (129);
+			printf("cd: too many arguments\n");
+			return (1);
 		}
 	}
 	if (chdir(new_pwd) == 0)
@@ -125,7 +125,7 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		error_msg("cd: <PATHHH>: No such file or directory", __FILE__, __LINE__, 1); //Add the PATH (TODO)
+		printf("cd: %s: No such file or directory\n", args[1]);
 		return (1);
 	}
 	return (0);

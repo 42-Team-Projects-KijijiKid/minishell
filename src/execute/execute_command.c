@@ -12,7 +12,7 @@ static int	execute_builtin(t_tree_node *node)
 	int			len;
 
 	shell = minishell_get();
-	exit = 1;
+	exit = -1;
 	len = ft_strlen(*node->args);
 	if (!ft_strncmp(node->args[0], "cd", len) && len == 2)
 		exit = builtin_cd(node->args);
@@ -28,8 +28,8 @@ static int	execute_builtin(t_tree_node *node)
 		exit = builtin_pwd(node->args);
 	else if (!ft_strncmp(node->args[0], "env", len) && len == 3)
 		exit = builtin_env();
-	if (exit != 1) 
-		shell->last_exit_status = exit;
+	if (exit != -1)
+	shell->last_exit_status = exit;
 	return (exit);
 }
 
@@ -97,7 +97,7 @@ void execute_command(t_tree_node *node)
 	if (node->args == NULL || *node->args == NULL)
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
-	if (execute_builtin(node) == 1
+	if (execute_builtin(node) == -1
 		&& shell->herdoc)
 	{
 		pid = ft_fork();
