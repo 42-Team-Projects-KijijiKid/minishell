@@ -15,6 +15,9 @@ char		*fti_strdup(const char *s, e_garbage_layers layer);
 // integrations/fti_strjoin.c
 char		*fti_strjoin(char const *s1, char const *s2);
 
+// integrations/fti_itoa.c
+char	*fti_itoa(int n);
+
 // error.c
 void		ft_error(char *msg, char *file, int line, u_int64_t exit_stat);
 int			error_msg(char *msg, char *file, int line, unsigned char rtn_value);

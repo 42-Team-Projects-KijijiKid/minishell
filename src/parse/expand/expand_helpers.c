@@ -78,7 +78,7 @@ char	*last_exit_code(void)
 	t_minishell	*shell;
 
 	shell = minishell_get();
-	return (ft_itoa(shell->last_exit_status));
+	return (fti_itoa(shell->last_exit_status));
 }
 
 char	*give_env_str(char **str)
