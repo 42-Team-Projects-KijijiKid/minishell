@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-static unsigned int	give_env_len(char *s)
+static unsigned int	give_env_len(char **str)
 {
 	char *tmp;
 	unsigned int len;
 
-	tmp = give_env_str(&s);
+	tmp = give_env_str(str);
 	if (tmp)
 		len = ft_strlen(tmp);
 	else
@@ -53,13 +53,9 @@ unsigned int	total_length(char *str)
 	while (*str)
 	{
 		if (*str == '$' && !single_quotes)
-		{
-			total_len += give_env_len(str);
-		}
+			total_len += give_env_len(&str);
 		else
-		{
-			process_non_dollar(&str, &single_quotes, &double_quotes);
-		}
+			total_len += process_non_dollar(&str, &single_quotes, &double_quotes);
 	}
 	return (total_len);
 }
