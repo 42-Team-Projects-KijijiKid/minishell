@@ -35,7 +35,7 @@ void	run_minishell(void)
 	while (isatty(STDIN_FILENO))
 	{
 		shell->herdoc = true;
-		cmd = fti_readline("\033[32mMinishell>>\033[0m ");
+		cmd = fti_readline("Minishell>> ");
 		if (!cmd)
 			break ;
 		if (minishell_parse(cmd) == 0)

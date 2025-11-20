@@ -19,13 +19,13 @@ int builtin_echo(char **args)
 	// }
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		ft_fprintf(STDOUT_FILENO,"%s", args[i]);
 		if (args[i + 1] 
 			&& *args[i] != ' ')
-			printf(" ");
+			ft_fprintf(STDOUT_FILENO, " ");
 		i++;
 	}
 	if (newline)
-		printf("\n");
+		ft_fprintf(STDOUT_FILENO, "\n");
 	return (0);
 }

@@ -27,7 +27,7 @@ static int	count_go_back(char *new_path)
 		len = len_until_slash(new_path);
 		if (2 < len)
 		{
-			error_msg("cd: No such file or directory", __FILE__, __LINE__, 1);
+			ft_fprintf(STDERR_FILENO, "cd: %s: No such file or directory\n", new_path);
 			return (-1);
 		}
 		else if (len == 2)
@@ -114,7 +114,7 @@ int	builtin_cd(char **args)
 			new_pwd = build_path(old_pwd, args[1]);
 		else	
 		{
-			printf("cd: too many arguments\n");
+			ft_fprintf(2, "cd: too many arguments\n");
 			return (1);
 		}
 	}
@@ -125,7 +125,7 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		printf("cd: %s: No such file or directory\n", args[1]);
+		ft_fprintf(STDERR_FILENO ,"cd: %s: No such file or directory\n", args[1]);
 		return (1);
 	}
 	return (0);

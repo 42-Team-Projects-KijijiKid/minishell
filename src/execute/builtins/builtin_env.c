@@ -11,7 +11,7 @@ int	builtin_env(void)
 	env =  env_list_to_2d();
 	while (env && *env)
 	{
-		printf("%s\n", *env);
+		ft_fprintf(STDOUT_FILENO, "%s\n", *env);
 		env++;
 	}
 	return (0);
