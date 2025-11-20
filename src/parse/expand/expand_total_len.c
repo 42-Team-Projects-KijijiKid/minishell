@@ -15,14 +15,14 @@ static unsigned int	give_env_len(char **str)
 
 static int	process_non_dollar(char **sp, bool *single_quotes, bool *double_quotes)
 {
-	if (!quote_has_content(*sp))
+	if (!quote_has_content(*sp) && (!*single_quotes || !*double_quotes))
 		*sp += 2;
 	else if (**sp == '\'' && !*double_quotes)
 	{
 		*single_quotes = !*single_quotes;
 		(*sp)++;
 	}
-	else if (**sp == '"')
+	else if (**sp == '\"' && !*single_quotes)
 	{
 		*double_quotes = !*double_quotes;
 		(*sp)++;
