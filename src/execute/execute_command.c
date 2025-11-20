@@ -47,7 +47,7 @@ static void	execute_executable(t_tree_node *node)
 			bin_path = *node->args;
 		else
 		{
-			printf("msh: command not found\n");
+			printf("%s: command not found\n", *node->args);
 			exit (127);
 		}
 	}
@@ -59,12 +59,11 @@ static void	execute_executable(t_tree_node *node)
 			bin_path = *node->args;
 		else
 		{
-			printf("msh: command not found\n");
+			printf("%s: command not found\n", *node->args);
 			exit (127);
 		}
 	}
 	execve(bin_path, node->args, envp);
-	// garbage_free_all();
 	exit (120);
 }
 

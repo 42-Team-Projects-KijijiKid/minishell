@@ -73,6 +73,14 @@ unsigned int	strlen_with_expansion(char *str, char quote)
 	return (len_1 + len_2);
 }
 
+char	*last_exit_code(void)
+{
+	t_minishell	*shell;
+
+	shell = minishell_get();
+	return (ft_itoa(shell->last_exit_status));
+}
+
 char	*give_env_str(char **str)
 {
 	char	*tmp;
@@ -83,6 +91,8 @@ char	*give_env_str(char **str)
 	else
 		return (NULL);
 	tmp = null_end_str(str);
+	if (ft_strncmp(tmp, "?", ft_strlen(tmp)) == 0)
+		return(last_exit_code());
 	rtn = get_environment_value(tmp);
 	return (rtn);
 }
