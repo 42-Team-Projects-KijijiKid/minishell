@@ -5,7 +5,6 @@
 
 // expand.c
 t_tree_node		*expand(t_tree_node *node);
-char			*argument_expand(char *str);
 
 // expand_helpers.c
 unsigned int	strlen_with_expansion(char *str, char quote);

@@ -1,31 +1,32 @@
 #include "../../../inc/minishell.h"
 
-char	*argument_expand(char *str)
+static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quotes, bool *single_quotes)
 {
-	char	*rtn;
-	char	*tmp_str;
-	int		i;
-
-	rtn = fti_malloc(sizeof(char) * (strlen_with_expansion(str, '\'') + 1), TEMPORARY);
-	i = 0;
-	while (*str)
+	if (!quote_has_content(*str) && (!*double_quotes || !*single_quotes))
+			*str += 2;
+	else if (**str == '\'' && !*double_quotes)
 	{
-		if (*str == '$')
-		{
-			str++;
-			tmp_str = null_end_str(&str);
-			tmp_str =  get_environment_value(tmp_str);
-			while (tmp_str && *tmp_str)
-			{
-				rtn[i++] = *tmp_str;
-				tmp_str++;
-			}
-		}
-		if (*str && *str != '$')
-			str++;
+		*single_quotes = !*single_quotes;
+		(*str)++;
 	}
-	rtn[i] = '\0';
-	return (rtn);
+	else if (**str == '\"' && !*single_quotes)
+	{
+		*double_quotes = !*double_quotes;
+		(*str)++; 
+	}
+	else if (**str && **str != '$')
+	{
+		rtn[*i] = **str;
+		(*i)++;
+		(*str)++;
+	}
+	else if (**str && **str == '$'
+			&& *single_quotes)
+	{
+		rtn[*i] = **str;
+		(*i)++;
+		(*str)++;
+	}
 }
 
 char	*expand_arguments(char *str)
@@ -48,9 +49,7 @@ char	*expand_arguments(char *str)
 	{
 		if (*str == '$' && !single_quotes)
 		{
-			str++;
-			tmp_str = null_end_str(&str);
-			tmp_str =  get_environment_value(tmp_str);
+			tmp_str =  give_env_str(&str);
 			while (tmp_str && *tmp_str)
 			{
 				rtn[i] =  *tmp_str;
@@ -58,31 +57,8 @@ char	*expand_arguments(char *str)
 				tmp_str++;
 			}
 		}
-		else if (!quote_has_content(str))
-			str += 2;
-		else if (*str == '\'' && !double_quotes)
-		{
-			single_quotes = !single_quotes;
-			str++;
-		}
-		else if (*str == '\"')
-		{
-			double_quotes = !double_quotes;
-			str++; 
-		}
-		else if (*str && *str != '$')
-		{
-			rtn[i] = *str;
-			i++;
-			str++;
-		}
-		else if (*str && *str == '$'
-				&& single_quotes)
-		{
-			rtn[i] = *str;
-			i++;
-			str++;
-		}
+		else
+			process_non_dollar(&str, rtn, &i, &double_quotes, &single_quotes);
 	}
 	rtn[i] = '\0';
 	return (rtn);
@@ -98,6 +74,7 @@ void	possible_expansion(t_tree_node *node)
 	while (*node->args)
 	{
 		*node->args = expand_arguments(*node->args);
+		printf("After: %s\n", *node->args);
 		node->args++;
 	}
 	node->args = head;
