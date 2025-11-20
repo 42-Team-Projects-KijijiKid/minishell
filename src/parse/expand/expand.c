@@ -78,8 +78,10 @@ void	possible_expansion(t_tree_node *node)
 	head = node->args;
 	while (*node->args)
 	{
-		*node->args = expand_arguments(*node->args);
-		printf("After: %s\n", *node->args);
+		if (ft_strncmp(*node->args, "~", ft_strlen(*node->args)) == 0)
+			*node->args = get_environment_value("HOME");
+		else
+			*node->args = expand_arguments(*node->args);
 		node->args++;
 	}
 	node->args = head;
