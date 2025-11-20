@@ -34,6 +34,9 @@ static bool	quote_has_content(char *str)
 {
 	char	quote;
 
+	if (*str != '\''
+		|| *str != '\"')
+		return (true);
 	quote = *str;
 	str++;
 	if (quote == *str)
@@ -64,7 +67,8 @@ static unsigned int	total_length(char *str)
 			str++;
 			tmp_str = null_end_str(&str);
 			tmp_str =  get_environment_value(tmp_str);
-			len_1 += ft_strlen(tmp_str);
+			if (tmp_str)
+				len_1 += ft_strlen(tmp_str);
 		}
 		else if (!quote_has_content(str))
 			str += 2;
@@ -116,7 +120,7 @@ char	*expand_arguments(char *str)
 			str++;
 			tmp_str = null_end_str(&str);
 			tmp_str =  get_environment_value(tmp_str);
-			while (*tmp_str)
+			while (tmp_str && *tmp_str)
 			{
 				rtn[i] =  *tmp_str;
 				i++;
