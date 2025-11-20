@@ -91,6 +91,8 @@ char	*give_env_str(char **str)
 	else
 		return (NULL);
 	tmp = null_end_str(str);
+	if (!*tmp)
+		return (NULL);
 	if (ft_strncmp(tmp, "?", ft_strlen(tmp)) == 0)
 		return(last_exit_code());
 	rtn = get_environment_value(tmp);
