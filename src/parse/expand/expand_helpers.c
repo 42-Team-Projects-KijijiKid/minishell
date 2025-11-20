@@ -1,19 +1,19 @@
 #include "../../../inc/minishell.h"
 
-/// @brief Pass the string not beginning with the qoute
-/// and count how many chars are inside the string
-/// without the counting of the matching quote
-int	strlen_whitout_quotes(char *str, char quote)
+bool	quote_has_content(char *str)
 {
-	int	i;
+	char	quote;
 
-	i = 1;
-	while (*str != quote && str)
-	{
+	if (*str != '\''
+		|| *str != '\"')
+		return (true);
+	quote = *str;
+	str++;
+	if (quote == *str)
+		return (false);
+	while (*str != quote && *str)
 		str++;
-		i++;
-	}
-	return (i);
+	return (true);
 }
 
 /// @brief Null ends a possible expansion

@@ -5,10 +5,8 @@ char	*argument_expand(char *str)
 	char	*rtn;
 	char	*tmp_str;
 	int		i;
-	int		len;
 
-	len = strlen_with_expansion(str, '\'');
-	rtn = fti_malloc((sizeof(char) * len) + 1, TEMPORARY);
+	rtn = fti_malloc(sizeof(char) * (strlen_with_expansion(str, '\'') + 1), TEMPORARY);
 	i = 0;
 	while (*str)
 	{
@@ -28,73 +26,6 @@ char	*argument_expand(char *str)
 	}
 	rtn[i] = '\0';
 	return (rtn);
-}
-
-static bool	quote_has_content(char *str)
-{
-	char	quote;
-
-	if (*str != '\''
-		|| *str != '\"')
-		return (true);
-	quote = *str;
-	str++;
-	if (quote == *str)
-		return (false);
-	while (*str != quote && *str)
-		str++;
-	return (true);
-}
-
-static unsigned int	total_length(char *str)
-{
-	char	*tmp_str;
-	int		i;
-	int		len_1;
-	int		len_2;
-	bool	single_quotes;
-	bool	double_quotes;
-
-	i = 0;
-	len_1 = 0;
-	len_2 = 0;
-	single_quotes = false;
-	double_quotes = false;
-	while (*str)
-	{
-		if (*str == '$' && !single_quotes)
-		{
-			str++;
-			tmp_str = null_end_str(&str);
-			tmp_str =  get_environment_value(tmp_str);
-			if (tmp_str)
-				len_1 += ft_strlen(tmp_str);
-		}
-		else if (!quote_has_content(str))
-			str += 2;
-		else if (*str == '\'' && !double_quotes)
-		{
-			single_quotes = !single_quotes;
-			str++;
-		}
-		else if (*str == '\"')
-		{
-			double_quotes = !double_quotes;
-			str++;
-		}
-		else if (*str && *str != '$')
-		{
-			len_2++;
-			str++;
-		}
-		else if (*str && *str == '$'
-				&& single_quotes)
-		{
-			len_2++;
-			str++;
-		}
-	}
-	return (len_1 + len_2);
 }
 
 char	*expand_arguments(char *str)
