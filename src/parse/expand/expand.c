@@ -166,9 +166,7 @@ void	possible_expansion(t_tree_node *node)
 	head = node->args;
 	while (*node->args)
 	{
-		printf("Val: %s\n", *node->args);
 		*node->args = expand_arguments(*node->args);
-		printf("Val after: %s\n", *node->args);
 		node->args++;
 	}
 	node->args = head;
