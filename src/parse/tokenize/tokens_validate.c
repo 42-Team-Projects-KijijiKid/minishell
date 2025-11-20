@@ -55,8 +55,8 @@ bool	validate_redirects(t_token *token)
 {
 	while (token)
 	{
-		if (is_redirect(token->type) && (!token->prev || !token->next || \
-				token->prev->type != TEXT || token->next->type != TEXT))
+		if (is_redirect(token->type) && (!token->next || \
+				token->next->type != TEXT))
 			return (false);
 		token = token->next;
 	}
