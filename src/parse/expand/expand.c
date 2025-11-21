@@ -73,7 +73,8 @@ char	*expand_arguments(char *str)
 ///possible expansions and replacing the strings
 void	possible_expansion(t_tree_node *node)
 {
-	char **head;
+	char 			**head;
+	t_redirect_node	*redir;
 
 	head = node->args;
 	while (*node->args)
@@ -83,6 +84,15 @@ void	possible_expansion(t_tree_node *node)
 		else
 			*node->args = expand_arguments(*node->args);
 		node->args++;
+	}
+	redir = node->redirect.head;
+	while (redir)
+	{
+		if (ft_strncmp(redir->file, "~", ft_strlen(redir->file)) == 0)
+			redir->file = get_environment_value("HOME");
+		else
+			redir->file = expand_arguments(redir->file);
+		redir = redir->next;
 	}
 	node->args = head;
 }
