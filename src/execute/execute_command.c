@@ -94,21 +94,24 @@ void execute_command(t_tree_node *node)
 
 	expand(node);
 	shell = minishell_get();
-	if (node->args == NULL || *node->args == NULL)
+	if (node->args == NULL || (*node->args == NULL && node->redirect.head == NULL))
 		ft_error("Invalid args for command execution", __FILE__, __LINE__, 98);
 	execute_redirects(node);
-	if (execute_builtin(node) == -1
-		&& shell->herdoc)
+	if (node->args[0] != NULL)
 	{
-		pid = ft_fork();
-		if (pid == 0)
-			execute_executable(node);
-		if (waitpid(pid, &wstatus, 0) == -1
-			|| wstatus != 0)
-			shell->last_exit_status = 127;
-		else
-				shell->last_exit_status = 0;
-		sig_init();
+		if (execute_builtin(node) == -1
+			&& shell->herdoc)
+		{
+			pid = ft_fork();
+			if (pid == 0)
+				execute_executable(node);
+			if (waitpid(pid, &wstatus, 0) == -1
+				|| wstatus != 0)
+				shell->last_exit_status = 127;
+			else
+					shell->last_exit_status = 0;
+			sig_init();
+		}
 	}
 	default_filedescripor();
 }

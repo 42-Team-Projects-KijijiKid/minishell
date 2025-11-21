@@ -22,5 +22,6 @@ t_tree_node	*token_to_tree_node(t_token *head_token)
 	initialize_tree_node(node);
 	node->args = head_token->args;
 	node->type = head_token->type;
+	node->redirect.head = NULL;
 	return (node);
 }
