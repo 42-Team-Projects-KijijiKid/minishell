@@ -115,6 +115,7 @@ void	run_child(char *limiter, int *pipe_fds)
 		write(pipe_fds[1], line, len_to_newline(line));
 	}
 	garbage_free_all();
+	close_default_filedescriptor();
 	close(pipe_fds[1]);
 	exit(0);
 }

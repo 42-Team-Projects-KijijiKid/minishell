@@ -63,6 +63,7 @@ static void	execute_executable(t_tree_node *node)
 			exit (127);
 		}
 	}
+	close_default_filedescriptor();
 	execve(bin_path, node->args, envp);
 	exit (127);
 }
@@ -119,5 +120,6 @@ void execute_command(t_tree_node *node)
 			sig_init();
 		}
 	}
+	close_default_filedescriptor();
 	default_filedescripor();
 }

@@ -11,11 +11,6 @@ int main(int ac, char **av, char **env)
 	shell = minishell_initialize(env);
 	run_minishell();
 	rl_clear_history();
-	close(shell->filedescriptor.std_in);
-	close(shell->filedescriptor.std_out);
-	close(shell->filedescriptor.std_err);
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
-	close(STDERR_FILENO);
+	close_default_filedescriptor();
 	garbage_free_all();
 }

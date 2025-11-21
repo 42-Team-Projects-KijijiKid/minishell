@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+// void	add_fd_to_list(int fd, )
+// {
+
+// }
+
 void	default_filedescripor(void)
 {
 	t_minishell	*shell;
@@ -10,7 +15,7 @@ void	default_filedescripor(void)
 	dup2(shell->filedescriptor.std_err, STDERR_FILENO);
 }
 
-void	close_default_filedescripor(void)
+void	close_default_filedescriptor(void)
 {
 	t_minishell	*shell;
 

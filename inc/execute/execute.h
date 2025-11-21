@@ -4,6 +4,26 @@
 # include "redirects.h"
 # include "builtins.h"
 
+typedef struct	s_fd_node
+{
+	int					fd;
+	struct s_fd_node	*next;
+}	t_fd_node;
+
+typedef struct	s_fd_meta
+{
+	int			std_in;
+	int			std_out;
+	int			std_err;
+	t_fd_node	*head;
+	t_fd_node	*tail;
+	size_t		size;
+}	t_fd_meta;
+
+// filedescripor_helpers.c
+void	default_filedescripor(void);
+void	close_default_filedescriptor(void);
+
 // execute_command.c
 void	execute_command(t_tree_node *node);
 
