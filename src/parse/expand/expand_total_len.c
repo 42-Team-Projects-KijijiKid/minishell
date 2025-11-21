@@ -42,7 +42,8 @@ static bool	check_if_valid(char *str)
 		return (false);
 	else
 	{
-		if (ft_isalpha(*str))
+		if (ft_isalpha(*str)
+			|| *str == '?')
 			return (true);
 	}
 	return (false);
