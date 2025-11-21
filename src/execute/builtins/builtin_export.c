@@ -20,7 +20,7 @@ static char	*extract_value(const char *arg)
 	eq = ft_strchr(arg, '='); // New version required?
 	if (!eq)
 		return (NULL);
-	value = fti_strdup(eq + 1, PERSISTENT); // New version required, that adds to garbage collector
+	value = fti_strdup(eq + 1, TEMPORARY); // New version required, that adds to garbage collector
 	return (value);
 }
 
@@ -44,14 +44,13 @@ static bool	validate_argument(char *str)
 	bool	valid;
 	char	*buf;
 
-	buf = str;
 	if (ft_isdigit(*str))
 	{
 		ft_fprintf(2, "export: %s: not a valid identifier\n", str);
 		return (false);
 	}
 	valid = true;
-	while (*str)
+	while (*str != '=')
 	{
 		if (!ft_isalnum(*str)
 			&& *str != '=')
@@ -75,7 +74,7 @@ int builtin_export(char **args)
 		if (!validate_argument(args[i]))
 			return (1);
 		char *key = extract_key(args[i]);
-		char *value = extract_value(args[i]); // TODO: Question: expansion possible? already handled?
+		char *value = extract_value(args[i]); 
 		if (value)
 			env_set_value(key, value);
 		else

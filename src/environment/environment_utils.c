@@ -66,7 +66,8 @@ int	env_set_value(char *key, char *value)
 	node = shell->env.head;
 	while (node)
 	{
-		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0)
+		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0
+			&& node->key_len == ft_strlen(key))
 		{
 			node->value = fti_strdup(value, PERSISTENT);
 			node->value_len = ft_strlen(node->value);
