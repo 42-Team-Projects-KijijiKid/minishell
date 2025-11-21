@@ -47,7 +47,7 @@ static void	execute_executable(t_tree_node *node)
 			bin_path = *node->args;
 		else
 		{
-			printf("%s: command not found\n", *node->args);
+			ft_fprintf(2, "%s: command not found\n", *node->args);
 			exit (127);
 		}
 	}
@@ -59,12 +59,12 @@ static void	execute_executable(t_tree_node *node)
 			bin_path = *node->args;
 		else
 		{
-			printf("%s: command not found\n", *node->args);
+			ft_fprintf(2, "%s: command not found\n", *node->args);
 			exit (127);
 		}
 	}
 	execve(bin_path, node->args, envp);
-	exit (120);
+	exit (127);
 }
 
 void	execute_redirects(t_tree_node *node)
