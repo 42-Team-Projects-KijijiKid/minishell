@@ -25,6 +25,11 @@ char	*fti_substr(const char *s, unsigned int start, size_t len);
 void		ft_error(char *msg, char *file, int line, u_int64_t exit_stat);
 int			error_msg(char *msg, char *file, int line, unsigned char rtn_value);
 
+// filedescripor_helpers.c
+void	default_filedescripor(void);
+void	close_default_filedescripor(void);
+
+
 // garbage.c
 void		garbage_free_all(void);
 

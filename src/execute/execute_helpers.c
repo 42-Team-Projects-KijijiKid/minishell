@@ -36,13 +36,3 @@ char	*get_bin_path_of_command(char *cmd, char **paths_2d)
 	free(path_cmd);
 	return (NULL);
 }
-
-void	default_filedescripor(void)
-{
-	t_minishell	*shell;
-
-	shell = minishell_get();
-	dup2(shell->filedescriptor.std_in, STDIN_FILENO);
-	dup2(shell->filedescriptor.std_out, STDOUT_FILENO);
-	dup2(shell->filedescriptor.std_err, STDERR_FILENO);
-}
