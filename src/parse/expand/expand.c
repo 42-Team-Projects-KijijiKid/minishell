@@ -14,14 +14,7 @@ static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quote
 		*double_quotes = !*double_quotes;
 		(*str)++; 
 	}
-	else if (**str && **str != '$')
-	{
-		rtn[*i] = **str;
-		(*i)++;
-		(*str)++;
-	}
-	else if (**str && **str == '$'
-			&& *single_quotes)
+	else if (**str && **str)
 	{
 		rtn[*i] = **str;
 		(*i)++;
@@ -42,6 +35,19 @@ static void	env_value(char **str, char *rtn, int *i)
 	}
 }
 
+static bool	check_if_valid(char *str)
+{
+	str++;
+	if (*str == '\0')
+		return (false);
+	else
+	{
+		if (ft_isalpha(*str))
+			return (true);
+	}
+	return (false);
+}
+
 char	*expand_arguments(char *str)
 {
 	char				*buffer;
@@ -60,7 +66,8 @@ char	*expand_arguments(char *str)
 	double_quotes = false;
 	while (*str)
 	{
-		if (*str == '$' && !single_quotes)
+		if (*str == '$' && !single_quotes
+			&& check_if_valid(str))
 			env_value(&str, rtn, &i);
 		else
 			process_non_dollar(&str, rtn, &i, &double_quotes, &single_quotes);

@@ -27,12 +27,7 @@ static int	process_non_dollar(char **sp, bool *single_quotes, bool *double_quote
 		*double_quotes = !*double_quotes;
 		(*sp)++;
 	}
-	else if (**sp && **sp != '$')
-	{
-		(*sp)++;
-		return (1);
-	}
-	else if (**sp && **sp == '$' && *single_quotes)
+	else if (**sp)
 	{
 		(*sp)++;
 		return (1);
@@ -40,6 +35,18 @@ static int	process_non_dollar(char **sp, bool *single_quotes, bool *double_quote
 	return (0);
 }
 
+static bool	check_if_valid(char *str)
+{
+	str++;
+	if (*str == '\0')
+		return (false);
+	else
+	{
+		if (ft_isalpha(*str))
+			return (true);
+	}
+	return (false);
+}
 
 unsigned int	total_length(char *str)
 {
@@ -52,7 +59,8 @@ unsigned int	total_length(char *str)
 	double_quotes = false;
 	while (*str)
 	{
-		if (*str == '$' && !single_quotes)
+		if (*str == '$' && !single_quotes
+			&& check_if_valid(str))
 			total_len += give_env_len(&str);
 		else
 			total_len += process_non_dollar(&str, &single_quotes, &double_quotes);

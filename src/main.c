@@ -10,7 +10,7 @@ int main(int ac, char **av, char **env)
 	sig_init();
 	shell = minishell_initialize(env);
 	run_minishell();
-	rl_clear_history();
+	clear_history();
 	close_default_filedescriptor();
 	garbage_free_all();
 }
