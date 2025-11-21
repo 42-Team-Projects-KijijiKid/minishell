@@ -29,7 +29,7 @@ static int	execute_builtin(t_tree_node *node)
 	else if (!ft_strncmp(node->args[0], "env", len) && len == 3)
 		exit = builtin_env();
 	if (exit != -1)
-	shell->last_exit_status = exit;
+		shell->last_exit_status = exit;
 	return (exit);
 }
 
@@ -68,7 +68,7 @@ static void	execute_executable(t_tree_node *node)
 	exit (127);
 }
 
-void	execute_redirects(t_tree_node *node)
+static int	execute_redirects(t_tree_node *node)
 {
 	t_redirect_node	*redirect;
 	t_minishell		*shell;
@@ -91,6 +91,7 @@ void	execute_redirects(t_tree_node *node)
 	}
 	if (exit_code == 1)
 		shell->last_exit_status = exit_code;
+	return (exit_code);
 }
 
 void execute_command(t_tree_node *node)
@@ -103,7 +104,8 @@ void execute_command(t_tree_node *node)
 	shell = minishell_get();
 	if (node->args == NULL || (*node->args == NULL && node->redirect.head == NULL))
 		ft_fprintf(2, "Invalid args for command execution", __FILE__);
-	execute_redirects(node);
+	if (execute_redirects(node))
+		return ;
 	if (node->args[0] != NULL)
 	{
 		if (execute_builtin(node) == -1 && shell->herdoc)
@@ -118,6 +120,5 @@ void execute_command(t_tree_node *node)
 			sig_init();
 		}
 	}
-	close_default_filedescriptor();
 	default_filedescripor();
 }
