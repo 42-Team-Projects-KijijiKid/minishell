@@ -22,6 +22,9 @@ t_minishell	*minishell_initialize(char **env)
 	shell->filedescriptor.std_out = dup(STDOUT_FILENO);
 	shell->filedescriptor.std_err = dup(STDERR_FILENO);
 	shell->herdoc = true;
+	shell->fd_table.head = NULL;
+	shell->fd_table.tail = NULL;
+	shell->fd_table.size = 0;
 	environment_initialize(env);
 	return (shell);
 }

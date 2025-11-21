@@ -5,6 +5,27 @@
 # include <stdbool.h>
 
 /*######################
+#    File Descriptor   #
+######################*/
+
+typedef struct	s_fd_node
+{
+	int					fd;
+	struct s_fd_node	*next;
+}	t_fd_node;
+
+typedef struct	s_fd_meta
+{
+	int			std_in;
+	int			std_out;
+	int			std_err;
+	t_fd_node	*head;
+	t_fd_node	*tail;
+	size_t		size;
+}	t_fd_meta;
+
+
+/*######################
 # Abstract Syntax Tree #
 ######################*/
 
@@ -159,6 +180,7 @@ typedef struct	s_minishell
 	s_filedescriptor	filedescriptor;
 	bool				herdoc;
 	int					last_exit_status;
+	t_fd_meta			fd_table;
 }	t_minishell;
 
 /*###########

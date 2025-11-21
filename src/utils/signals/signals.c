@@ -22,7 +22,12 @@ void	sig_init(void)
 
 void	ctrl_heredoc(int sig)
 {
-	exit(100);
+	t_minishell	*shell;
+
+	shell = minishell_get();
+	close(shell->fd_table.head->fd);
+	close_default_filedescriptor();
+	exit(130);
 }
 
 void	sig_reset(void)

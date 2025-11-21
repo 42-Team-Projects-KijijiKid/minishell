@@ -99,20 +99,24 @@ void	run_child(char *limiter, int *pipe_fds)
 {
 	char		*line;
 	t_minishell	*shell;
+	int			len;
 
 	sig_heredoc();
 	shell = minishell_get();
+	add_fd_to_list(pipe_fds[1]);
 	close(pipe_fds[0]);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 		garbage_add_to_layer(&shell->garbage.persistent, line);
-		if (ft_strncmp(line, limiter, len_to_newline(line) - 1) == 0
-			&& *line != '\n')
+		len = len_to_newline(line);
+		if (ft_strncmp(line, limiter, len) == 0
+			&& *line != '\n' && len == ft_strlen(limiter))
 			break ;
 		line = expand_heredoc(line);
-		write(pipe_fds[1], line, len_to_newline(line));
+		write(pipe_fds[1], line, len);
+		write(pipe_fds[1], "\n", 1);
 	}
 	garbage_free_all();
 	close_default_filedescriptor();
@@ -157,9 +161,9 @@ void	execute_rdr_heredoc(t_redirect_node *redirect)
 	t_minishell	*shell;
 
 	shell = minishell_get();
-	dup2(shell->filedescriptor.std_in, STDIN_FILENO);
 	if (shell->herdoc)
 	{
+		dup2(shell->filedescriptor.std_in, STDIN_FILENO);
 		pipe_read_end = init_here_doc(redirect->file);
 		dup2(pipe_read_end, STDIN_FILENO);
 		close(pipe_read_end);
