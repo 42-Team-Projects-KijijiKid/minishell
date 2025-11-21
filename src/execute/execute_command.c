@@ -86,7 +86,7 @@ static int	execute_redirects(t_tree_node *node)
 		else if (redirect->type == DLESS)
 			execute_rdr_heredoc(redirect);
 		else if (redirect->type == DGREAT)
-			execute_rdr_append(redirect);
+			exit_code = execute_rdr_append(redirect);
 		redirect = redirect->next;
 	}
 	if (exit_code == 1)

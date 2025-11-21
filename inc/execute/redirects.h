@@ -4,7 +4,7 @@
 # include "../structs.h"
 
 // redirect_append.c
-void	execute_rdr_append(t_redirect_node *redirect);
+int		execute_rdr_append(t_redirect_node *redirect);
 
 // redirect_heredoc.c
 void	execute_rdr_heredoc(t_redirect_node *redirect);
