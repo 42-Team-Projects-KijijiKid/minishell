@@ -67,7 +67,7 @@ static void	exec_pipe_recursive(t_tree_node *node, int in_fd)
 		return ;
 	}
 	if (pipe(pipe_fds) == -1)
-		ft_error("Pipe creation failed", __FILE__, __LINE__, 910);
+		ft_error("Pipe creation failed", __FILE__, __LINE__, 12);
 	execute_left_tree(node, in_fd, pipe_fds[0], pipe_fds[1]);
 	close(pipe_fds[1]);
 	if (in_fd != STDIN_FILENO)

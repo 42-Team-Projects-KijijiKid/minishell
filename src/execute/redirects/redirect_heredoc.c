@@ -97,13 +97,17 @@ int	len_to_newline(char *line)
 
 void	run_child(char *limiter, int *pipe_fds)
 {
-	char	*line;
+	char		*line;
+	t_minishell	*shell;
 
+	sig_heredoc();
+	shell = minishell_get();
 	close(pipe_fds[0]);
 	while (1)
 	{
 		write(1, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
+		garbage_add_to_layer(&shell->garbage.persistent, line);
 		if (ft_strncmp(line, limiter, len_to_newline(line) - 1) == 0
 			&& *line != '\n')
 			break ;
@@ -128,15 +132,12 @@ int	init_here_doc(char *limiter)
 
 	shell = minishell_get();
 	if (pipe(pipe_fds) == -1)
-		set_error(2);
+		ft_error("Pipe creation failed", __FILE__, __LINE__, 12);
 	pid = fork();
 	if (pid == -1)
-	ft_error("Fork failed", __FILE__, __LINE__, 120);
+		ft_error("Fork failed", __FILE__, __LINE__, 120);
 	if (pid == 0)
-	{
-		sig_heredoc();
 		run_child(limiter, pipe_fds);
-	}
 	if (waitpid(pid, &wstatus, 0) == -1
 		|| wstatus != 0)
 	{
