@@ -70,12 +70,16 @@ static void	execute_executable(t_tree_node *node)
 void	execute_redirects(t_tree_node *node)
 {
 	t_redirect_node	*redirect;
+	t_minishell		*shell;
+	int				exit_code;
 
+	shell = minishell_get();
 	redirect = node->redirect.head;
-	while (redirect)
+	exit_code = 0;
+	while (redirect && exit_code == 0)
 	{
 		if (redirect->type == LESS)
-			execute_rdr_in(redirect);
+			exit_code = execute_rdr_in(redirect);
 		else if (redirect->type == GREAT)
 			execute_rdr_out(redirect);
 		else if (redirect->type == DLESS)
@@ -84,6 +88,8 @@ void	execute_redirects(t_tree_node *node)
 			execute_rdr_append(redirect);
 		redirect = redirect->next;
 	}
+	if (exit_code == 1)
+		shell->last_exit_status = exit_code;
 }
 
 void execute_command(t_tree_node *node)

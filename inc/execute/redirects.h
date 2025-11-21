@@ -10,7 +10,7 @@ void	execute_rdr_append(t_redirect_node *redirect);
 void	execute_rdr_heredoc(t_redirect_node *redirect);
 
 // redirect_in.c
-void	execute_rdr_in(t_redirect_node *redirect);
+int		execute_rdr_in(t_redirect_node *redirect);
 
 // redirect_out.c
 void	execute_rdr_out(t_redirect_node *redirect);
