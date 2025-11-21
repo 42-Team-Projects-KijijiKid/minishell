@@ -1,6 +1,6 @@
 # <==== Meta Data =====>
 NAME	:= minishell
-CC		:= cc
+CC		:= clang
 # CFLAGS	:= -g -fsanitize=address -Wall -Wextra -Iinc/ -Ilib/libft
 # CFLAGS	:= -fsanitize=address -g -Iinc/ -Ilibft
 CFLAGS	:= -g -Iinc/ -Ilibft

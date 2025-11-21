@@ -29,13 +29,13 @@ char	*null_end_str(char **str)
 	i = 0;
 	while ((*str)[i] && (*str)[i] != ' ' && !is_meta_char((*str)[i])
 			&& (*str)[i] != '$' && (*str)[i] != '\"'
-			&& (*str)[i] != '\'')
+			&& (*str)[i] != '\'' && (*str)[i] != '/')
 		i++;
 	rtn = fti_malloc((sizeof(char) * i) + 1, TEMPORARY);
 	i = 0;
 	while (**str && **str != ' ' && !is_meta_char(**str)
 			&& **str != '$' && **str != '\"'
-			&& **str != '\'')
+			&& **str != '\'' && **str != '/')
 	{
 		rtn[i] = **str;
 		(*str)++;
