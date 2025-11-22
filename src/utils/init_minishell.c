@@ -53,9 +53,6 @@ void	run_minishell(void)
 			break ;
 		if (minishell_parse(cmd) == 0)
 			minishell_execute();
-		minishell_execute();
 		free(cmd);
 	}
-	garbage_free_layer(&shell->garbage.persistent);
-	printf("exit\n");
 }

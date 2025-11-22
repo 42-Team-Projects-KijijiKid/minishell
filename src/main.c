@@ -12,5 +12,7 @@ int main(int ac, char **av, char **env)
 	run_minishell();
 	clear_history();
 	close_default_filedescriptor();
-	garbage_free_all();
+	garbage_free_layer(&shell->garbage.persistent);
+	if (isatty(STDIN_FILENO))
+		printf("exit\n");
 }

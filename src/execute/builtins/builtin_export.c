@@ -53,7 +53,7 @@ static bool	validate_argument(char *str)
 	while (*str != '=')
 	{
 		if (!ft_isalnum(*str)
-			&& *str != '=')
+			&& *str == ' ')
 			valid = false;
 		str++;
 	}
