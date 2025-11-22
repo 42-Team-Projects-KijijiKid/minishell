@@ -21,7 +21,7 @@ int builtin_exit(char **args)
 	if (!args[1])
 	{
 		garbage_free_all();
-		printf("Exit\n");
+		printf("exit\n");
 		exit(0);
 	}
 	else
