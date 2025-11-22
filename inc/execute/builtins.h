@@ -22,4 +22,7 @@ int	builtin_pwd(char **args);
 // builtin_unset.c
 int	builtin_unset(char **args);
 
+// builtin_export_helpers.c
+int	check_attendance_equal(char *str);
+
 #endif
