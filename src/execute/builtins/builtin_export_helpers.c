@@ -4,9 +4,9 @@ bool	has_value(char *str)
 {
 	while (*str && *str != '=')
 		str++;
-	if (*str & *str == '=')
+	if (*str && *str == '=')
 		str++;
-	else
+	if (!*str)
 		return (false);
 	return (true);
 }
