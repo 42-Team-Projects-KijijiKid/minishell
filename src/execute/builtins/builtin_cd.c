@@ -57,7 +57,11 @@ static char	*cut_till_slash(char *current_pwd)
 static char	*go_dir_back(char *current_pwd, char *new_path)
 {
 	int	go_back_count;
+	int	dot_count;
 
+	dot_count = len_until_slash(new_path);
+	if (2 != dot_count)
+		return (new_path);
 	go_back_count = count_go_back(new_path);
 	while (0 <= go_back_count)
 	{
@@ -121,7 +125,7 @@ int	builtin_cd(char **args)
 			new_pwd = build_path(old_pwd, args[1]);
 		else	
 		{
-			ft_fprintf(2, "cd: too many arguments\n");
+			ft_fprintf(2, CD_TO_MANY_ARGS);
 			return (1);
 		}
 	}

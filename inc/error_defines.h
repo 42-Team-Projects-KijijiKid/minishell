@@ -23,6 +23,7 @@
 
 //Builtins
 #define CD_FAILED "cd: %s: No such file or directory\n"
+#define CD_TO_MANY_ARGS "cd: too many arguments"
 #define INVALID_IDENTIFIER "export: `1233': not a valid identifier\n"
 
 
