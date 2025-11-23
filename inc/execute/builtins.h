@@ -23,7 +23,8 @@ int	builtin_pwd(char **args);
 int	builtin_unset(char **args);
 
 // builtin_export_helpers.c
-bool	check_attendance_equal(char *str);
+bool	has_valid_key(char *str);
+bool	has_value(char *str);
 
 // builtin_export_print.c
 void	print_sorted_exported(void);

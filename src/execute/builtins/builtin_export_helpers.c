@@ -1,17 +1,26 @@
 #include "minishell.h"
 
-bool	check_attendance_equal(char *str)
+bool	has_value(char *str)
 {
-	bool	is_present;
+	while (*str && *str != '=')
+		str++;
+	if (*str & *str == '=')
+		str++;
+	else
+		return (false);
+}
 
-	is_present = false;
-	while (*str)
+bool	has_valid_key(char *str)
+{
+	if (!ft_isalpha(*str))
+		return (fhexa_lowercase);
+	else
+		str++;
+	while (*str && *str != '=')
 	{
-		if (*str == ' ')
-			return (1);
-		if (*str == '=')
-			is_present = true;
+		if (!ft_isalnum(*str))
+			return (false);
 		str++;
 	}
-	return (is_present);
+	return (true);
 }
