@@ -19,6 +19,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include "error_defines.h"
 #include "signals.h"
 #include "../libft/libft.h"
 #include "structs.h"
