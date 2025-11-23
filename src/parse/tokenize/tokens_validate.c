@@ -87,8 +87,8 @@ void	tokens_validate(t_token *token)
 {
 	if (!validate_subshells(token))
 		ft_error("invalid subshell usage in token list", __FILE__, __LINE__, 998);
-	if (!validate_redirects(token))
-		ft_error("invalid redirect usage in token list", __FILE__, __LINE__, 998);
+	// if (!validate_redirects(token))
+	// 	ft_error("invalid redirect usage in token list", __FILE__, __LINE__, 998);
 	if (!validate_operators(token))
 		ft_error("invalid operator usage in token list", __FILE__, __LINE__, 998);
 }

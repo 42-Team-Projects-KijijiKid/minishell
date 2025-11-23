@@ -15,4 +15,5 @@ int main(int ac, char **av, char **env)
 	garbage_free_layer(&shell->garbage.persistent);
 	if (isatty(STDIN_FILENO))
 		printf("exit\n");
+	exit(shell->last_exit_status);
 }
