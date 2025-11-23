@@ -14,10 +14,12 @@ bool	has_value(char *str)
 bool	has_valid_key(char *str)
 {
 	if (!ft_isalpha(*str))
-		return (fhexa_lowercase);
+	{
+		ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, str);
+		return (false);
+	}
 	else
 		str++;
-	printf("Here 2\n");
 	while (*str && *str != '=')
 	{
 		if (!ft_isalnum(*str))
