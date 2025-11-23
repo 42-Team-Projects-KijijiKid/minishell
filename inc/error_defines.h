@@ -22,5 +22,5 @@
 #define FORK_FAILED "Fork failed\n"
 
 //Builtins
-
+#define CD_FAILED "cd: %s: No such file or directory\n"
 #endif
