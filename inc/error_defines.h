@@ -12,10 +12,6 @@
 // Redirection 
 #define OUTFILE_PERMISSION_DENIED "%s: Permission denied\n"
 
-// LS Command
-#define LS_CANNOT_ACCESS "ls: cannot access %s: No such file or directory\n"
-#define LS_CANNOT_OPEN "ls: cannot open directory %s: Permission denied\n"
-#define LS_INVALID_OPTION "ls: invalid option -- '%s'\n"
 // USER DEFINED ERROR MSG's
 #define USR_INVALID_SUBSHELL "Invalid subshell usage\n"
 #define USR_INVALID_OPERATOR "Invalid operator usage\n"
@@ -24,5 +20,7 @@
 #define DUP2_FAILED "Failed to duplicate file descriptor for input redirection\n"
 #define PIPE_FAILED "Pipe creation failed\n"
 #define FORK_FAILED "Fork failed\n"
+
+//Builtins
 
 #endif
