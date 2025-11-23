@@ -63,7 +63,7 @@ void	run_minishell(void)
 		minishell_parse(cmd);
 		if (*error_code == 0)
 			minishell_execute();
-		free(cmd);
+		// free(cmd);
 		garbage_free_layer(&shell->garbage.temporary);
 	}
 }
