@@ -37,5 +37,7 @@ t_minishell	*minishell_get(void);
 // fti_fork.c
 int			ft_fork(void);
 
+// read_next_line.c
+char	*read_next_line(int fd);
 
 #endif

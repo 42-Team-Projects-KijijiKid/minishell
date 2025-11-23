@@ -51,7 +51,7 @@ SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 PARSING			:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
 EXECUTE			:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
 ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c)
-UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c init_minishell.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
+UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c init_minishell.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)

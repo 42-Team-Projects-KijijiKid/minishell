@@ -48,11 +48,12 @@ void	run_minishell(void)
 	}
 	while (!isatty(STDIN_FILENO))
 	{
-		cmd = get_next_line(STDIN_FILENO);
-		if (!cmd)
+		cmd = read_next_line(STDIN_FILENO);
+		if (!cmd || *cmd == '\0')
 			break ;
 		if (minishell_parse(cmd) == 0)
 			minishell_execute();
 		free(cmd);
+		garbage_free_layer(&shell->garbage.temporary);
 	}
 }
