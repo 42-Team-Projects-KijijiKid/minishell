@@ -37,6 +37,7 @@ void	run_minishell(void)
 	shell = minishell_get();
 	while (isatty(STDIN_FILENO))
 	{
+		shell->last_exit_status = 0;
 		cmd = fti_readline("Minishell>> ");
 		if (!cmd)
 			break ;
