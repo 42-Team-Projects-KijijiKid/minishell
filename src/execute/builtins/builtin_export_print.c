@@ -40,28 +40,6 @@ static char	**sort_env(t_minishell *shell)
 	return (sorted_env);
 }
 
-	// int		in_idx;
-	// int		out_idx;
-	// int		count;
-	// char	**sorted;
-
-	// sorted = gc_calloc(env_get_size(env) + 1, sizeof(char *));
-	// out_idx = 0;
-	// while (env[out_idx] != NULL)
-	// {
-	// 	count = 0;
-	// 	in_idx = 0;
-	// 	while (env[in_idx] != NULL)
-	// 	{
-	// 		if (h_env_cmp(env[out_idx], env[in_idx]) > 0)
-	// 			count++;
-	// 		in_idx++;
-	// 	}
-	// 	sorted[count] = env[out_idx];
-	// 	out_idx++;
-	// }
-	// return (sorted);
-
 void	print_sorted_exported(void)
 {
 	t_minishell	*shell;
