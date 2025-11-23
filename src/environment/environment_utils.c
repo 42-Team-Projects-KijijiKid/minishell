@@ -23,6 +23,11 @@ char	*rtn_key_value(t_env_node *node)
 		rtn[i] = node->key[i];
 		i++;
 	}
+	if(!node->value)
+	{
+		rtn[i]= '\0';
+		return (rtn);
+	}
 	rtn[i++] = '=';
 	x = 0;
 	while (node->value[x])
@@ -84,9 +89,17 @@ int	env_set_value(char *key, char *value)
 	new_node->key_len = ft_strlen(key);
 	new_node->key = fti_malloc(new_node->key_len + 1, PERSISTENT);
 	ft_strlcpy(new_node->key, key, new_node->key_len + 1);
-	new_node->value_len = ft_strlen(value);
-	new_node->value = fti_malloc(new_node->value_len + 1, PERSISTENT);
-	ft_strlcpy(new_node->value, value, new_node->value_len + 1);
+	if (value)
+	{
+		new_node->value_len = ft_strlen(value);
+		new_node->value = fti_malloc(new_node->value_len + 1, PERSISTENT);
+		ft_strlcpy(new_node->value, value, new_node->value_len + 1);
+	}
+	else
+	{
+		new_node->value_len =0;
+		new_node->value = NULL;
+	}
 	return (0);
 }
 

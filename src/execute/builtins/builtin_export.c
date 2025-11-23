@@ -11,7 +11,7 @@ static void	export_key_value_variable(char *str)
 
 static void	export_key_only(char *str)
 {
-	env_set_value(str, "");
+	env_set_value(str, NULL);
 }
 
 static int	export_variable(char *str)
