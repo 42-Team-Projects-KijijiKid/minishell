@@ -29,30 +29,39 @@ t_minishell	*minishell_initialize(char **env)
 	return (shell);
 }
 
+static void	minishell(char	*input)
+{
+	
+}
+
 void	run_minishell(void)
 {
 	char		*cmd;
 	t_minishell	*shell;
+	int			*error_code;
 
 	shell = minishell_get();
+	error_code = get_error_code();
 	while (isatty(STDIN_FILENO))
 	{
-		shell->last_exit_status = 0;
+		*error_code = 0;
 		cmd = fti_readline("Minishell>> ");
 		if (!cmd)
 			break ;
 		minishell_parse(cmd);
-		if (shell->last_exit_status == 0)
+		if (*error_code == 0)
 			minishell_execute();
 		free(cmd);
 		garbage_free_layer(&shell->garbage.temporary);
 	}
 	while (!isatty(STDIN_FILENO))
 	{
+		*error_code = 0;
 		cmd = read_next_line(STDIN_FILENO);
 		if (!cmd || *cmd == '\0')
 			break ;
-		if (minishell_parse(cmd) == 0)
+		minishell_parse(cmd);
+		if (*error_code == 0)
 			minishell_execute();
 		free(cmd);
 		garbage_free_layer(&shell->garbage.temporary);

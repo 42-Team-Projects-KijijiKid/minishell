@@ -22,6 +22,6 @@ int		count_token_type(t_token *token, e_tree_node_type type);
 bool	validate_subshells(t_token *token);
 bool	validate_redirects(t_token *token);
 bool	validate_operators(t_token *token);
-void	tokens_validate(t_token *token);
+int		tokens_validate(t_token *token);
 
 #endif

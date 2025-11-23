@@ -87,14 +87,18 @@ bool	validate_operators(t_token *token)
 	return (true);	
 }
 
-void	tokens_validate(t_token *token)
+int	tokens_validate(t_token *token)
 {
+	int	*error_code;
+
+	error_code = get_error_code();
 	if (!validate_subshells(token))
-		print_error("Syntax Error1", 2); // TODO: Correct Error Message
+		*error_code = print_error("Syntax Error1", 2); // TODO: Correct Error Message
 	else if (!validate_redirects(token))
-		print_error("Syntax Error2", 2); // TODO: Correct Error Message
+		*error_code = print_error("Syntax Error2", 2); // TODO: Correct Error Message
 	else if (!validate_operators(token))
-		print_error("Syntax Error3", 2); // TODO: Correct Error Message
+		*error_code = print_error("Syntax Error3", 2); // TODO: Correct Error Message
+	return (*error_code);
 }
 
 // int	tokens_validate(t_token *token)

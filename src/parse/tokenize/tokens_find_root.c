@@ -46,7 +46,7 @@ t_token	*find_root_without_subshell(t_token *head, t_token *tail)
 		head = head->next;
 	}
 	if (!root)
-		print_error("Error: Parsing failed in find_root_without_subshell()", 2); // TODO: Correct Error Message
+		*get_error_code() = print_error("Error: Parsing failed in find_root_without_subshell()", 2); // TODO: Correct Error Message
 	return (root);
 }
 

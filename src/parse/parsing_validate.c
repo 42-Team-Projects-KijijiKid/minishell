@@ -21,29 +21,30 @@ static bool	find_matching_quote(char **str)
 /// cases like "'" because this is a valid expression
 /// the check_withing functions handle thesee cases.
 /// @param line 
-int	validate_quote_pairs(char *line)
+void	validate_quote_pairs(char *line)
 {
 	unsigned int	double_quote;
 	unsigned int	single_quote;
+	int				*error_code;
 
 	double_quote = 0;
 	single_quote = 0;
+	error_code = get_error_code();
 	while (*line)
 	{
 		if (*line == '\'')
 		{
 			if (!find_matching_quote(&line))
-				return (print_error("Syntax Error", 2)); // TODO: Correct Error Message
+				*error_code = print_error("Syntax Error", 2); // TODO: Correct Error Message
 		}
 		else if (*line == '\"')
 		{
 			if (!find_matching_quote(&line))
-				return (print_error("Syntax Error", 2)); // TODO: Correct Error Message
+				*error_code = print_error("Syntax Error", 2); // TODO: Correct Error Message
 		}
 		if (*line
 			&& *line != '\''
 			&& *line != '\"')
 			line++;
 	}
-	return (0);
 }

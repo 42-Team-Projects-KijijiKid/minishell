@@ -6,10 +6,11 @@
 # include "tree.h"
 
 // parse.c
-int	minishell_parse(char *input);
+int		minishell_parse(char *input);
+int		*get_error_code(void);
 
 // parsing_validate.c
-int	validate_quote_pairs(char *line);
+void	validate_quote_pairs(char *line);
 
 // debug/print_tree.c
 void	print_ast_structure(t_tree_node *root, int level, bool left);
@@ -18,5 +19,6 @@ void	print_ast_structure(t_tree_node *root, int level, bool left);
 void	debug_ast(char *prefix ,char *file, int line, t_tree_node *node);
 void	print_tokens(t_token *token, char *list_name);
 int		*get_level();
+
 
 #endif
