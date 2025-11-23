@@ -1,8 +1,18 @@
 #include "../../../inc/minishell.h"
 
+static void	export_key_value_variable(char *str)
+{
+	return ;
+}
+
+static void	export_key_only(char *str)
+{
+	env_set_value(str, "");
+}
+
 static int	export_variable(char *str)
 {
-	if (has_valid_key(str))
+	if (!has_valid_key(str))
 		return (1);
 	if (has_value(str))
 		export_key_value_variable(str);
@@ -15,12 +25,13 @@ int builtin_export(char **args)
 {
 	int	i;
 	int	exit;
-	i = 0;
+
 	if (!args[1])
 	{
 		print_sorted_exported();
 		return (0);
 	}
+	i = 1;
 	while (args[i])
 	{
 		exit = export_variable(args[i]);

@@ -8,6 +8,7 @@ bool	has_value(char *str)
 		str++;
 	else
 		return (false);
+	return (true);
 }
 
 bool	has_valid_key(char *str)
@@ -16,6 +17,7 @@ bool	has_valid_key(char *str)
 		return (fhexa_lowercase);
 	else
 		str++;
+	printf("Here 2\n");
 	while (*str && *str != '=')
 	{
 		if (!ft_isalnum(*str))
