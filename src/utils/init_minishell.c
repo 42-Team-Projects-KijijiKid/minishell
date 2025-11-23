@@ -37,11 +37,11 @@ void	run_minishell(void)
 	shell = minishell_get();
 	while (isatty(STDIN_FILENO))
 	{
-		shell->herdoc = true;
 		cmd = fti_readline("Minishell>> ");
 		if (!cmd)
 			break ;
-		if (minishell_parse(cmd) == 0)
+		minishell_parse(cmd);
+		if (shell->last_exit_status == 0)
 			minishell_execute();
 		free(cmd);
 		garbage_free_layer(&shell->garbage.temporary);

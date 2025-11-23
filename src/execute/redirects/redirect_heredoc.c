@@ -149,7 +149,7 @@ int	init_here_doc(char *limiter)
 		shell->last_exit_status = 130;
 		close(pipe_fds[0]);
 		shell->herdoc = false;
-		printf("\n");
+		ft_fprintf(1, "\n");
 	}
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);

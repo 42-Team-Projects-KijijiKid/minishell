@@ -55,9 +55,13 @@ bool	validate_redirects(t_token *token)
 {
 	while (token)
 	{
-		if (is_redirect(token->type) && (!token->next || \
-				token->next->type != TEXT))
-			return (false);
+		if (is_redirect(token->type))
+		{
+			if (!token->next)
+				return (false);
+			if (token->next->type != TEXT)
+				return (false);
+		}
 		token = token->next;
 	}
 	return (true);	
@@ -86,11 +90,11 @@ bool	validate_operators(t_token *token)
 void	tokens_validate(t_token *token)
 {
 	if (!validate_subshells(token))
-		ft_error("invalid subshell usage in token list", __FILE__, __LINE__, 998);
-	// if (!validate_redirects(token))
-	// 	ft_error("invalid redirect usage in token list", __FILE__, __LINE__, 998);
-	if (!validate_operators(token))
-		ft_error("invalid operator usage in token list", __FILE__, __LINE__, 998);
+		print_error("Syntax Error1", 2); // TODO: Correct Error Message
+	else if (!validate_redirects(token))
+		print_error("Syntax Error2", 2); // TODO: Correct Error Message
+	else if (!validate_operators(token))
+		print_error("Syntax Error3", 2); // TODO: Correct Error Message
 }
 
 // int	tokens_validate(t_token *token)

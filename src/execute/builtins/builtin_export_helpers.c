@@ -20,6 +20,7 @@ bool	has_valid_key(char *str)
 	}
 	else
 		str++;
+	ft_fprintf(1, "Here 2\n");
 	while (*str && *str != '=')
 	{
 		if (!ft_isalnum(*str))
