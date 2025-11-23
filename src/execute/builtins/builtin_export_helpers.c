@@ -17,7 +17,7 @@ bool	has_valid_key(char *str)
 		return (fhexa_lowercase);
 	else
 		str++;
-	printf("Here 2\n");
+	ft_fprintf(1, "Here 2\n");
 	while (*str && *str != '=')
 	{
 		if (!ft_isalnum(*str))

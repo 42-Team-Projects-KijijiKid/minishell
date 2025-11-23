@@ -22,8 +22,8 @@ char	*fti_itoa(int n);
 char	*fti_substr(const char *s, unsigned int start, size_t len);
 
 // error.c
-void		ft_error(char *msg, char *file, int line, u_int64_t exit_stat);
-int			error_msg(char *msg, char *file, int line, unsigned char rtn_value);
+void		ft_error(char *msg, char *file, int line, u_int64_t status);
+int			print_error(char *msg, unsigned char status);
 
 
 // garbage.c
@@ -38,6 +38,6 @@ t_minishell	*minishell_get(void);
 int			ft_fork(void);
 
 // read_next_line.c
-char	*read_next_line(int fd);
+char		*read_next_line(int fd);
 
 #endif

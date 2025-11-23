@@ -1,19 +1,23 @@
 #include "minishell.h"
 
-static void	clean_exit(u_int64_t exit_stat)
+static void	clean_exit(u_int64_t status)
 {
 	garbage_free_all();
-	exit(exit_stat);
+	exit(status);
 }
 
-void	ft_error(char *msg, char *file, int line, u_int64_t exit_stat)
+void	ft_error(char *msg, char *file, int line, u_int64_t status)
 {
-	fprintf(stderr, "%s: In file \033[34m%s\033[0m on \033[31mline %d\033[0m\n", msg, file, line);
-	clean_exit(exit_stat);
+	ft_fprintf(2, "%s: In file \033[34m%s\033[0m on \033[31mline %d\033[0m\n", msg, file, line);
+	clean_exit(status);
 }
 
-int	error_msg(char *msg, char *file, int line, unsigned char rtn_value)
+int	print_error(char *msg, unsigned char status)
 {
-	fprintf(stderr, "%s: In file \033[32m%s\033[0m on \033[31mline %d\033[0m\n", msg, file, line);
-	return (rtn_value);
+	t_minishell	*shell;
+
+	shell = minishell_get();
+	ft_fprintf(2, "%s\n", msg);
+	shell->last_exit_status = status;
+	return (status);
 }

@@ -11,7 +11,7 @@ char	*fti_readline(char *promt)
 		cmd = readline(promt);
 		if (!cmd)
 		{
-			printf("\n");
+			ft_fprintf(1, "\n");
 			return (NULL);
 		}
 		len = ft_strlen(cmd);

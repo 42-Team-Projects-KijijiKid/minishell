@@ -45,5 +45,6 @@ char	*read_next_line(int fd)
 	if (read_bytes == -1)
 		ft_error("read failed", __FILE__, __LINE__, 1); // TODO: Enter Error Message
 	buffer[index] = '\0';
+	garbage_add_to_layer(&minishell_get()->garbage.temporary, (void *)buffer);
 	return (buffer);
 }

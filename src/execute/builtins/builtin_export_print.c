@@ -49,7 +49,7 @@ void	print_sorted_exported(void)
 	sorted_env = sort_env(shell);
 	while (*sorted_env)
 	{
-		printf("declare -x %s\n", *sorted_env);
+		ft_fprintf(1, "declare -x %s\n", *sorted_env);
 		sorted_env++;
 	}
 }

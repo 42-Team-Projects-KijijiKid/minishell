@@ -33,12 +33,12 @@ int	validate_quote_pairs(char *line)
 		if (*line == '\'')
 		{
 			if (!find_matching_quote(&line))
-				return (error_msg("Syntax Error", __FILE__, __LINE__, 2));
+				return (print_error("Syntax Error", 2)); // TODO: Correct Error Message
 		}
 		else if (*line == '\"')
 		{
 			if (!find_matching_quote(&line))
-				return (error_msg("Syntax Error", __FILE__, __LINE__, 2));
+				return (print_error("Syntax Error", 2)); // TODO: Correct Error Message
 		}
 		if (*line
 			&& *line != '\''
