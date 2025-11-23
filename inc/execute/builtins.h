@@ -23,6 +23,9 @@ int	builtin_pwd(char **args);
 int	builtin_unset(char **args);
 
 // builtin_export_helpers.c
-int	check_attendance_equal(char *str);
+bool	check_attendance_equal(char *str);
+
+// builtin_export_print.c
+void	print_sorted_exported(void);
 
 #endif

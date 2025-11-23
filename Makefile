@@ -40,7 +40,7 @@ TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redire
 DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
 
 #.c files in src/execute with subfolders
-BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset export_helpers)))
+BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset export_helpers export_print)))
 REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(addsuffix .c, append heredoc in out)))
 
 #.c files in src/utils with subfolders
