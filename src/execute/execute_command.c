@@ -82,7 +82,7 @@ static int	execute_redirects(t_tree_node *node)
 		if (redirect->type == LESS)
 			exit_code = execute_rdr_in(redirect);
 		else if (redirect->type == GREAT)
-			execute_rdr_out(redirect);
+			exit_code = execute_rdr_out(redirect);
 		else if (redirect->type == DLESS)
 			execute_rdr_heredoc(redirect);
 		else if (redirect->type == DGREAT)
@@ -103,7 +103,7 @@ void execute_command(t_tree_node *node)
 	expand(node);
 	shell = minishell_get();
 	if (node->args == NULL || (*node->args == NULL && node->redirect.head == NULL))
-		ft_fprintf(2, "Invalid args for command execution", __FILE__);
+		ft_fprintf(2, INVALID_ARGS_EXECUTION, __FILE__);
 	if (execute_redirects(node))
 		return ;
 	if (node->args[0] != NULL)

@@ -137,10 +137,10 @@ int	init_here_doc(char *limiter)
 
 	shell = minishell_get();
 	if (pipe(pipe_fds) == -1)
-		ft_error("Pipe creation failed", __FILE__, __LINE__, 12);
+		ft_error(PIPE_FAILED, __FILE__, __LINE__, 131);
 	pid = fork();
 	if (pid == -1)
-		ft_error("Fork failed", __FILE__, __LINE__, 120);
+		ft_error(FORK_FAILED, __FILE__, __LINE__, 131);
 	if (pid == 0)
 		run_child(limiter, pipe_fds);
 	if (waitpid(pid, &wstatus, 0) == -1
