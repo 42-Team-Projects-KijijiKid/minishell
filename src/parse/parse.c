@@ -18,6 +18,8 @@ int	minishell_parse(char *input)
 	if (*get_error_code())
 		return (*get_error_code());
 	manager.head_token = tokenize(input);
+	if (*get_error_code())
+		return (*get_error_code());
 	// print_tokens(manager.head_token, "Head");
 	tokens_validate(manager.head_token);
 	if (*get_error_code())

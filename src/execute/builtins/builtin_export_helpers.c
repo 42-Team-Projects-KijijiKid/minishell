@@ -13,7 +13,7 @@ bool	has_value(char *str)
 
 bool	has_valid_key(char *str)
 {
-	if (!ft_isalpha(*str))
+	if (!ft_isalpha(*str) && *str != '_')
 	{
 		ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, str);
 		return (false);
@@ -23,7 +23,7 @@ bool	has_valid_key(char *str)
 	ft_fprintf(1, "Here 2\n");
 	while (*str && *str != '=')
 	{
-		if (!ft_isalnum(*str))
+		if (!ft_isalnum(*str) && *str != '_')
 			return (false);
 		str++;
 	}

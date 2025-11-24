@@ -137,6 +137,11 @@ t_token	*tokenize(char *input)
 			node->args = tokens_split_args(&input);
 		if (!(*input))
 			break ;
+		if (*input == ';')
+		{
+			*get_error_code() = print_error("Invalid Syntax with semicolon", 127);
+			return (NULL);
+		}
 		next = (t_token *)fti_malloc(sizeof(t_token), TEMPORARY);
 		next->prev = node;
 		node->next = next;
