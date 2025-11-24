@@ -22,7 +22,7 @@ static char	**sort_env(t_minishell *shell)
 	int		x;
 
 	env_array = env_list_to_2d();
-	sorted_env = fti_malloc(sizeof(char *) * shell->env.size, TEMPORARY);
+	sorted_env = fti_malloc(sizeof(char *) * (shell->env.size + 1), TEMPORARY);
 	outside_idx = 0;
 	while (env_array[outside_idx] != NULL)
 	{
@@ -37,6 +37,7 @@ static char	**sort_env(t_minishell *shell)
 		sorted_env[x] = env_array[outside_idx];
 		outside_idx++;
 	}
+	sorted_env[x] = NULL;
 	return (sorted_env);
 }
 
