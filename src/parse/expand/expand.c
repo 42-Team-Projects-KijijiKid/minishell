@@ -129,9 +129,9 @@ bool	check_single_variable(char **array)
 
 	if (!array[1])
 	{
+		i = 1;
 		if (array[0][i] != '$')
 			return (false);
-		i = 1;
 		while (array[0][i])
 		{
 			if (is_whitespace(array[0][i]))
