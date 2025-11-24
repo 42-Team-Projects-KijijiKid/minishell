@@ -14,10 +14,17 @@ static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quote
 		*double_quotes = !*double_quotes;
 		(*str)++; 
 	}
-	else if (**str && **str)
+	else if (**str && **str != '\\')
 	{
 		rtn[*i] = **str;
 		(*i)++;
+		(*str)++;
+	}
+	else
+	{
+		if (**str == '\\')
+			(*str)++;
+		rtn[(*i)++] = **str;
 		(*str)++;
 	}
 }
