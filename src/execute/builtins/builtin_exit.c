@@ -29,7 +29,7 @@ int builtin_exit(char **args)
 		if (args[2])
 		{
 			ft_fprintf(2, "bash: exit: too many arguments\n");
-			return (0);
+			exit (1);
 		}
 		else
 			check_argument(args[1]);
