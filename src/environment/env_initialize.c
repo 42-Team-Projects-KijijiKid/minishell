@@ -90,6 +90,7 @@ void environment_initialize(char **env_vars)
 		else
 			break ;
 		node->next = new_node;
+		new_node->prev = node; 
 		node = new_node;
 	}
 	node->next = NULL;

@@ -29,11 +29,6 @@ t_minishell	*minishell_initialize(char **env)
 	return (shell);
 }
 
-static void	minishell(char	*input)
-{
-	
-}
-
 void	run_minishell(void)
 {
 	char		*cmd;
