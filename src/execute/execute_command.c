@@ -102,7 +102,7 @@ void execute_command(t_tree_node *node)
 
 	expand(node);
 	shell = minishell_get();
-	if (node->args == NULL || (*node->args == NULL && node->redirect.head == NULL))
+	if (node->args == NULL)
 		ft_fprintf(2, INVALID_ARGS_EXECUTION, __FILE__);
 	if (execute_redirects(node))
 		return ;

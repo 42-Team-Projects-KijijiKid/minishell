@@ -10,6 +10,7 @@ char	*get_environment_value(char *str)
 	t_minishell		*minishell;
 	t_env_node		*env;
 	unsigned int	len;
+	char			*empty;
 
 	len = ft_strlen(str);
 	minishell = minishell_get();
@@ -23,5 +24,7 @@ char	*get_environment_value(char *str)
 	}
 	if (env)
 		return (env->value);
-	return (NULL);
+	empty = fti_malloc(1, TEMPORARY);
+	*empty = '\0';
+	return (empty);
 }

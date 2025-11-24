@@ -127,13 +127,24 @@ bool	check_single_variable(char **array)
 {
 	int	i;
 
+	if (!*array)
+		return (false);	
 	if (!array[1])
 	{
-		i = 1;
+		i = 0;
+		while (is_whitespace(array[0][i]))
+		{
+			if (!array[0][i])
+				return (true);
+			i++;
+		}
 		if (array[0][i] != '$')
 			return (false);
+		i++;
 		while (array[0][i])
 		{
+			if (array[0][i] == '$')
+				return (false);
 			if (is_whitespace(array[0][i]))
 			{
 				while (is_whitespace(array[0][i]))
