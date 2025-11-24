@@ -44,7 +44,7 @@ BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix
 REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(addsuffix .c, append heredoc in out)))
 
 #.c files in src/utils with subfolders
-INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_malloc fti_readline fti_strdup fti_strjoin fti_fork fti_itoa fti_substr))
+INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_malloc fti_readline fti_strdup fti_strjoin fti_fork fti_itoa fti_substr fti_split))
 SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 
 # This is the total path to the .c files in the prefixed directory

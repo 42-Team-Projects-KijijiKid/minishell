@@ -4,7 +4,7 @@ static void	export_key_value_variable(char *str)
 {
 	char **arr;
 
-	arr = ft_split(str, '=');
+	arr = fti_split(str, '=');
 	env_set_value(arr[0], arr[1]);
 	return ;
 }

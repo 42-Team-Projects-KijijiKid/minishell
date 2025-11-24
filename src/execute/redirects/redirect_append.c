@@ -17,4 +17,5 @@ int execute_rdr_append(t_redirect_node *redirect)
 		ft_error(DUP2_FAILED, __FILE__, __LINE__, 131);
 	}
 	close(fd);
+	return (0);
 }
