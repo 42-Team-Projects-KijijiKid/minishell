@@ -47,7 +47,8 @@ void	print_sorted_exported(void)
 	char		**sorted_env;
 
 	shell = minishell_get();
-	sorted_env = sort_env(shell);
+	// sorted_env = sort_env(shell);
+	sorted_env = env_list_to_2d();
 	while (*sorted_env)
 	{
 		ft_fprintf(1, "declare -x %s\n", *sorted_env);

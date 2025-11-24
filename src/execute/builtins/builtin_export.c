@@ -1,11 +1,23 @@
 #include "../../../inc/minishell.h"
 
+static bool	check_for_concat(char *str)
+{
+	while (*str && *str != '=')
+	{
+		if (*str == '+')
+			return (true)
+		str++;
+	}
+	return (false);
+}
+
 static void	export_key_value_variable(char *str)
 {
 	char **arr;
-
-	arr = fti_split(str, '=');
-	env_set_value(arr[0], arr[1]);
+	if (check_for_concat(str))	
+		concatenate_env(str);
+	else
+		
 	return ;
 }
 
