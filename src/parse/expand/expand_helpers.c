@@ -41,8 +41,8 @@ char	*null_end_str(char **str)
 		(*str)++;
 		i++;
 	}
-	if (**str && **str == '\"')
-		(*str)++;
+	// if (**str && **str == '\"')
+	// 	(*str)++;
 	rtn[i] = '\0';
 	return (rtn);
 }
