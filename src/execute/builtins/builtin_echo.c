@@ -1,29 +1,37 @@
 #include "../../../inc/minishell.h"
 
-int builtin_echo(char **args)
+static bool	n_flag(char *str)
 {
-	int i;
-	int newline;
+	int	index;
 
-	i = 1;
-	// if(args[i])
-	// {
-	// 	printf("%s", args[i]);
-	newline = 1;
-	// 	i++;
-	// }
-	// while (args[i] && ft_strncmp(args[i], "-n", ft_strlen(args[i])) == 0) // New version required, that adds to garbage collector
-	// {
-	// 	newline = 0;
-	// 	i++;
-	// }
-	while (args[i])
+	if (str == NULL || str[0] != '-')
+		return (false);
+	index = 1;
+	while (str[index] == 'n')
+		index++;
+	if (str[index] == '\0' && index > 1)
+		return (true);
+	return (false);
+}
+
+int	builtin_echo(char **args)
+{
+	int		index;
+	bool	newline;
+
+	newline = true;
+	index = 1;
+	while (n_flag(args[index]))
 	{
-		ft_fprintf(STDOUT_FILENO,"%s", args[i]);
-		if (args[i + 1] 
-			&& *args[i] != ' ')
-			ft_fprintf(STDOUT_FILENO, " ");
-		i++;
+		index++;
+		newline = false;
+	}
+	while (args && args[index])
+	{
+		ft_fprintf(STDOUT_FILENO, "%s", args[index]);
+		if (args[index + 1] != NULL)
+			ft_printf(" ");
+		index++;
 	}
 	if (newline)
 		ft_fprintf(STDOUT_FILENO, "\n");
