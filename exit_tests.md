@@ -413,3 +413,39 @@ Shell wird beendet, "Never reached" wird NICHT ausgegeben
 3. Modulo 256 Berechnung bei großen Zahlen
 4. Negative Zahlen richtig umrechnen
 5. Leerer String wird als nicht-numerisch behandelt
+
+
+
+
+
+
+
+
+
+exit 0 0
+
+exit
+
+exit ""
+
+exit 1 2
+
+exit 1 2 3
+
+exit 42 42 42 42 42 
+
+
+
+
+
+
+exit something somethingv2
+
+exit
+
+exit ""
+
+exit A 2 3
+
+exit cd ..
+

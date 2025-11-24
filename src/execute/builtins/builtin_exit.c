@@ -7,6 +7,8 @@ static void	check_argument(char *str)
 	buf = str;
 	while (*str)
 	{
+		if (*str == '-' || *str == '+')
+			str++;
 		if (!ft_isdigit(*str))
 		{
 			ft_fprintf(2, "exit: %s: numeric argument required\n", buf);
@@ -18,10 +20,12 @@ static void	check_argument(char *str)
 
 int builtin_exit(char **args)
 {
+	long long	exit_code;
+
 	if (!args[1])
 	{
 		garbage_free_all();
-		ft_fprintf(1, "exit\n");
+		ft_fprintf(1, "exit");
 		exit(0);
 	}
 	else
@@ -29,10 +33,18 @@ int builtin_exit(char **args)
 		if (args[2])
 		{
 			ft_fprintf(2, "bash: exit: too many arguments\n");
-			exit (1);
+			if (ft_isdigit(args[1][0]))
+				exit (1);
+			exit (2);
 		}
 		else
+		{
+			
+		}
 			check_argument(args[1]);
-		exit (ft_atoi(args[1]));
+		exit_code = ft_atol(args[1]);
+		if (exit_code < 0)
+			exit_code = 256 + (exit_code % 256);
+		exit (exit_code);
 	}
 }
