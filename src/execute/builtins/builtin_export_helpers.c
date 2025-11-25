@@ -61,6 +61,26 @@ bool	has_value(char *str)
 	return (true);
 }
 
+static bool check_plus_sign(char **str, int *count, char *buf)
+{
+	if (**str == '+')
+	{
+		(*str)++;
+		if (**str != '=')
+		{
+			ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
+			return (false);
+		}
+		(*count)++;
+	}
+	if (1 < *count)
+	{
+		ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
+		return (false);
+	}
+	return (true);
+}
+
 bool	has_valid_key(char *str)
 {
 	int		count;
@@ -80,21 +100,8 @@ bool	has_valid_key(char *str)
 		if (!ft_isalnum(*str) && *str != '_'
 			&& *str != '+')
 			return (false);
-		if (*str == '+')
-		{
-			str++;
-			if (*str != '=')
-			{
-				ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
-				return (false);
-			}
-			count++;
-		}
-		if (1 < count)
-		{
-			ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
+		if (!check_plus_sign(&str, &count, buf))
 			return (false);
-		}
 		str++;
 	}
 	return (true);
