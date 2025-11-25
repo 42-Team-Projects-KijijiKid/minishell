@@ -125,7 +125,11 @@ t_token	*tokenize(char *input)
 		while (*input == ' ')
 			input++;
 		if (!*input)
+		{
+			if (head == node)
+				*get_error_code() = print_error("Just spaces as input", 127);
 			break ;
+		}
 		node->type = TEXT;
 		node->args = NULL;
 		if (is_meta_char(*input))
