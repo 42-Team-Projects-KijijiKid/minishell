@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char	*null_end_str_heredoc(char **str)
+static char	*null_end_str_heredoc(char **str)
 {
 	int		i;
 	char	*rtn;
@@ -25,7 +25,7 @@ char	*null_end_str_heredoc(char **str)
 	return (rtn);
 }
 
-unsigned int	strlen_with_expansion_herdoc(char *str)
+static unsigned int	strlen_with_expansion_herdoc(char *str)
 {
 	int		len_1;
 	int		len_2;
@@ -52,7 +52,7 @@ unsigned int	strlen_with_expansion_herdoc(char *str)
 	return (len_1 + len_2);
 }
 
-char	*expand_heredoc(char *line)
+static char	*expand_heredoc(char *line)
 {
 	char	*rtn;
 	char	*tmp_str;
@@ -85,7 +85,7 @@ char	*expand_heredoc(char *line)
 	return (rtn);
 }
 
-int	len_to_newline(char *line)
+static int	len_to_newline(char *line)
 {
 	int	i;
 
@@ -95,7 +95,7 @@ int	len_to_newline(char *line)
 	return (i);
 }
 
-void	run_child(char *limiter, int *pipe_fds)
+static void	run_heredoc(char *delimiter, int *pipe_fds)
 {
 	char		*line;
 	t_minishell	*shell;
@@ -111,8 +111,8 @@ void	run_child(char *limiter, int *pipe_fds)
 		line = get_next_line(STDIN_FILENO);
 		garbage_add_to_layer(&shell->garbage.persistent, line);
 		len = len_to_newline(line);
-		if (ft_strncmp(line, limiter, len) == 0
-			&& *line != '\n' && len == ft_strlen(limiter))
+		if (ft_strncmp(line, delimiter, len) == 0
+			&& *line != '\n' && len == ft_strlen(delimiter))
 			break ;
 		line = expand_heredoc(line);
 		write(pipe_fds[1], line, len);
@@ -125,10 +125,10 @@ void	run_child(char *limiter, int *pipe_fds)
 }
 
 /// @brief Initializes a here_doc in a child process
-/// @param limiter Limiter character
+/// @param delimiter delimiter character
 /// @return The read-end of the pipe the content of here_doc
 /// was writting to
-int	init_here_doc(char *limiter)
+int	initialize_heredoc(char *delimiter)
 {
 	int			pid;
 	int			pipe_fds[2];
@@ -142,7 +142,7 @@ int	init_here_doc(char *limiter)
 	if (pid == -1)
 		ft_error(FORK_FAILED, __FILE__, __LINE__, 131);
 	if (pid == 0)
-		run_child(limiter, pipe_fds);
+		run_heredoc(delimiter, pipe_fds);
 	if (waitpid(pid, &wstatus, 0) == -1
 		|| wstatus != 0)
 	{
@@ -164,7 +164,7 @@ void	execute_rdr_heredoc(t_redirect_node *redirect)
 	if (shell->herdoc)
 	{
 		dup2(shell->filedescriptor.std_in, STDIN_FILENO);
-		pipe_read_end = init_here_doc(redirect->file);
+		pipe_read_end = initialize_heredoc(redirect->file);
 		dup2(pipe_read_end, STDIN_FILENO);
 		close(pipe_read_end);
 	}

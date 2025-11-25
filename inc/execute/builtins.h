@@ -8,7 +8,7 @@ int	builtin_cd(char **args);
 int	builtin_echo(char **args);
 
 // builtin_env.c
-int	builtin_env(void);
+int	builtin_env(char **args);
 
 // builtin_exit.c
 int	builtin_exit(char **args);
