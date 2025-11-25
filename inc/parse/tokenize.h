@@ -4,8 +4,11 @@
 #include "../structs.h"
 
 // tokenize.c
-bool	is_meta_char(char input);
 t_token	*tokenize(char *input);
+
+//tokenize_helpers.c
+e_tree_node_type	evaluate_token_type(char **input);
+bool	is_meta_char(char input);
 
 // tokens_find_root.c
 t_token	*find_root(t_token *token_head);
