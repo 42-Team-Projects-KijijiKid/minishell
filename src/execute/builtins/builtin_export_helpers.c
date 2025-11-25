@@ -63,6 +63,11 @@ bool	has_value(char *str)
 
 bool	has_valid_key(char *str)
 {
+	int		count;
+	char	*buf;
+
+	buf = str;
+	count = 0;
 	if (!ft_isalpha(*str) && *str != '_')
 	{
 		ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, str);
@@ -75,6 +80,21 @@ bool	has_valid_key(char *str)
 		if (!ft_isalnum(*str) && *str != '_'
 			&& *str != '+')
 			return (false);
+		if (*str == '+')
+		{
+			str++;
+			if (*str != '=')
+			{
+				ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
+				return (false);
+			}
+			count++;
+		}
+		if (1 < count)
+		{
+			ft_fprintf(STDERR_FILENO, INVALID_IDENTIFIER, buf);
+			return (false);
+		}
 		str++;
 	}
 	return (true);
