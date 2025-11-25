@@ -5,7 +5,7 @@ static bool	check_for_concat(char *str)
 	while (*str && *str != '=')
 	{
 		if (*str == '+')
-			return (true)
+			return (true);
 		str++;
 	}
 	return (false);
@@ -13,11 +13,10 @@ static bool	check_for_concat(char *str)
 
 static void	export_key_value_variable(char *str)
 {
-	char **arr;
 	if (check_for_concat(str))	
 		concatenate_env(str);
 	else
-		
+		export_to_env(str);
 	return ;
 }
 

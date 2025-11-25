@@ -79,13 +79,13 @@ static char *concatenate_paths(char *current_pwd, char *new_path)
 	len = ft_strlen(current_pwd) - 1;
 	if (current_pwd[len] != '/')
 	{
-		rtn = fti_strjoin(current_pwd, "/");
-		rtn = fti_strjoin(rtn, new_path);
+		rtn = fti_strjoin(current_pwd, "/", TEMPORARY);
+		rtn = fti_strjoin(rtn, new_path, TEMPORARY);
 	}
 	else
 	{
 		if (*new_path != '/')
-			rtn = fti_strjoin("/", new_path);
+			rtn = fti_strjoin("/", new_path, TEMPORARY);
 		else
 			rtn = fti_strdup(new_path, TEMPORARY);
 	}

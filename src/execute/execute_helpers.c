@@ -21,10 +21,10 @@ char	*get_bin_path_of_command(char *cmd, char **paths_2d)
 	char	*path_cmd;
 	char	*full_path;
 
-	path_cmd = fti_strjoin("/", cmd);
+	path_cmd = fti_strjoin("/", cmd, TEMPORARY);
 	while (*paths_2d)
 	{
-		full_path = fti_strjoin(*paths_2d, path_cmd);
+		full_path = fti_strjoin(*paths_2d, path_cmd, TEMPORARY);
 		if (access(full_path, X_OK) == 0)
 		{
 			free(path_cmd);

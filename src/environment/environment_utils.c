@@ -80,26 +80,7 @@ int	env_set_value(char *key, char *value)
 		}
 		node = node->next;
 	}
-	new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
-	shell->env.tail->next = new_node;
-	new_node->prev = shell->env.tail;
-	shell->env.size++;
-	shell->env.tail = new_node;
-	new_node->next = NULL;
-	new_node->key_len = ft_strlen(key);
-	new_node->key = fti_malloc(new_node->key_len + 1, PERSISTENT);
-	ft_strlcpy(new_node->key, key, new_node->key_len + 1);
-	if (value)
-	{
-		new_node->value_len = ft_strlen(value);
-		new_node->value = fti_malloc(new_node->value_len + 1, PERSISTENT);
-		ft_strlcpy(new_node->value, value, new_node->value_len + 1);
-	}
-	else
-	{
-		new_node->value_len =0;
-		new_node->value = NULL;
-	}
+	add_new_env_var(key, value);
 	return (0);
 }
 

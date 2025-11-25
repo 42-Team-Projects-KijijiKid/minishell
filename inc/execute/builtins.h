@@ -23,8 +23,13 @@ int	builtin_pwd(char **args);
 int	builtin_unset(char **args);
 
 // builtin_export_helpers.c
+void	concatenate_env(char *str);
+char	*extract_value(char *str);
 bool	has_valid_key(char *str);
 bool	has_value(char *str);
+
+// builtin_export_helpers_2.c
+char	*extract_key(char *str);
 
 // builtin_export_print.c
 void	print_sorted_exported(void);

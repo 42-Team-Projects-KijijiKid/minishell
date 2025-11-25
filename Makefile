@@ -40,7 +40,7 @@ TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redire
 DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
 
 #.c files in src/execute with subfolders
-BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset export_helpers export_print)))
+BUILTIN_FILES			:= $(addprefix $(BUILTIN_DIR), $(addprefix builtin_, $(addsuffix .c, cd echo env exit export pwd unset export_helpers export_helpers_2 export_print)))
 REDIRECTS_FILES			:= $(addprefix $(REDIRECTS_DIR), $(addprefix redirect_, $(addsuffix .c, append heredoc in out)))
 
 #.c files in src/utils with subfolders
@@ -48,10 +48,10 @@ INTEGRATIONS_FILES		:= $(addprefix $(INTEGRATIONS_DIR), $(addsuffix .c, fti_mall
 SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 
 # This is the total path to the .c files in the prefixed directory
-PARSING			:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
-EXECUTE			:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
-ENVIRONMENT		:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c)
-UTILS			:= $(addprefix $(UTILS_DIR), garbage.c error.c init_minishell.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
+PARSING					:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
+EXECUTE					:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
+ENVIRONMENT				:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c environment_utils_2.c)
+UTILS					:= $(addprefix $(UTILS_DIR), garbage.c error.c init_minishell.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)

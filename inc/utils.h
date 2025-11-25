@@ -16,7 +16,7 @@ char	**fti_split(char const *s, char c);
 char		*fti_strdup(const char *s, e_garbage_layers layer);
 
 // integrations/fti_strjoin.c
-char		*fti_strjoin(char const *s1, char const *s2);
+char	*fti_strjoin(char const *s1, char const *s2, e_garbage_layers layer);
 
 // integrations/fti_itoa.c
 char	*fti_itoa(int n);
