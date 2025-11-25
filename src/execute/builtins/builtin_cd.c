@@ -27,7 +27,7 @@ static int	count_go_back(char *new_path)
 		len = len_until_slash(new_path);
 		if (2 < len)
 		{
-			ft_fprintf(STDERR_FILENO, CD_FAILED, new_path);
+			ft_fprintf(STDERR_FILENO, NO_FILE_DIR, "cd", new_path);
 			return (-1);
 		}
 		else if (len == 2)
@@ -136,7 +136,7 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		ft_fprintf(STDERR_FILENO , CD_FAILED, args[1]);
+		ft_fprintf(STDERR_FILENO , NO_FILE_DIR, "cd", args[1]);
 		return (1);
 	}
 	return (0);

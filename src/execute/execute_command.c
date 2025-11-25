@@ -27,7 +27,7 @@ static int	execute_builtin(t_tree_node *node)
 	else if (!ft_strncmp(node->args[0], "pwd", len) && len == 3)
 		exit = builtin_pwd(node->args);
 	else if (!ft_strncmp(node->args[0], "env", len) && len == 3)
-		exit = builtin_env();
+		exit = builtin_env(node->args);
 	if (exit != -1)
 		shell->last_exit_status = exit;
 	return (exit);

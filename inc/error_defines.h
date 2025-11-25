@@ -22,7 +22,7 @@
 #define FORK_FAILED "Fork failed\n"
 
 //Builtins
-#define CD_FAILED "cd: %s: No such file or directory\n"
+#define NO_FILE_DIR "%s: %s: No such file or directory\n"
 #define CD_TO_MANY_ARGS "cd: too many arguments"
 #define INVALID_IDENTIFIER "export: \'%s\': not a valid identifier\n"
 
