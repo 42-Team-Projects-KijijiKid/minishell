@@ -1,96 +1,37 @@
 #include "../../../inc/minishell.h"
 
-static void	process_non_dollar(char **str, \
-	char *rtn, int *i, bool *double_quotes, bool *single_quotes)
-{
-	if (!quote_has_content(*str) && (!*double_quotes || !*single_quotes))
-		*str += 2;
-	else if (**str == '\'' && !*double_quotes)
-	{
-		*single_quotes = !*single_quotes;
-		(*str)++;
-	}
-	else if (**str == '\"' && !*single_quotes)
-	{
-		*double_quotes = !*double_quotes;
-		(*str)++;
-	}
-	else if (**str && **str != '\\')
-	{
-		rtn[*i] = **str;
-		(*i)++;
-		(*str)++;
-	}
-	else
-	{
-		if (**str == '\\')
-			(*str)++;
-		rtn[(*i)++] = **str;
-		(*str)++;
-	}
-}
-
-static bool	env_value(char **str, char *rtn, int *i)
-{
-	char	*tmp_str;
-
-	tmp_str = give_env_str(str);
-	while (tmp_str && *tmp_str)
-	{
-		rtn[*i] = *tmp_str;
-		(*i)++;
-		tmp_str++;
-	}
-	if (!tmp_str)
-		return (false);
-	return (true);
-}
-
-static bool	check_if_valid(char *str)
-{
-	str++;
-	if (*str == '\0')
-		return (false);
-	else
-		return (true);
-	return (false);
-}
-
-char	*expand_single_argument(char *str)
+char	*expand_arguments(char *str)
 {
 	char				*buffer;
 	char				*rtn;
 	unsigned int		expanded_len;
 	int					i;
-	bool				single_quotes;
-	bool				double_quotes;
-	char				*tmp_str;
+	bool				quotes[2];
 
 	buffer = str;
 	expanded_len = total_length(str);
 	i = 0;
 	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
-	single_quotes = false;
-	double_quotes = false;
+	quotes[0] = false;
+	quotes[1] = false;
 	while (*str)
 	{
-		if (*str == '$' && !single_quotes
+		if (*str == '$' && !quotes[1]
 			&& check_if_valid(str))
 		{
 			if (!env_value(&str, rtn, &i)
-				&& double_quotes)
+				&& quotes[0])
 				rtn[i++] = '$';
 		}
 		else
-			process_non_dollar(&str, rtn, &i, &double_quotes, &single_quotes);
+			process_non_dollar(&str, rtn, &i, &quotes);
 	}
-	rtn[i] = '\0';
-	return (rtn);
+	return (rtn[i] = '\0', rtn);
 }
 
 /// @brief Goes trough 2D Array checking
 ///possible expansions and replacing the strings
-void	expand_arguments(t_tree_node *node)
+void	possible_expansion(t_tree_node *node)
 {
 	char			**head;
 	t_redirect_node	*redir;
@@ -101,7 +42,7 @@ void	expand_arguments(t_tree_node *node)
 		if (ft_strncmp(*node->args, "~", ft_strlen(*node->args)) == 0)
 			*node->args = get_environment_value("HOME");
 		else
-			*node->args = expand_single_argument(*node->args);
+			*node->args = expand_arguments(*node->args);
 		node->args++;
 	}
 	redir = node->redirect.head;
@@ -110,79 +51,10 @@ void	expand_arguments(t_tree_node *node)
 		if (ft_strncmp(redir->file, "~", ft_strlen(redir->file)) == 0)
 			redir->file = get_environment_value("HOME");
 		else
-			redir->file = expand_single_argument(redir->file);
+			redir->file = expand_arguments(redir->file);
 		redir = redir->next;
 	}
 	node->args = head;
-}
-
-bool	is_whitespace(char ch)
-{
-	if (ch == 32 || (9 <= ch && ch <= 13))
-		return (true);
-	return (false);
-}
-
-bool	check_single_variable(char **array)
-{
-	int	i;
-
-	if (!*array)
-		return (false);
-	if (!array[1])
-	{
-		i = 0;
-		while (is_whitespace(array[0][i]))
-		{
-			if (!array[0][i])
-				return (true);
-			i++;
-		}
-		if (array[0][i] != '$')
-			return (false);
-		i++;
-		while (array[0][i])
-		{
-			if (array[0][i] == '$')
-				return (false);
-			if (is_whitespace(array[0][i]))
-			{
-				while (is_whitespace(array[0][i]))
-				{
-					if (!array[0][i])
-						return (true);
-					i++;
-				}
-				return (false);
-			}
-			i++;
-		}
-		return (true);
-	}
-	return (false);
-}
-
-void	expand_single_variable(t_tree_node *node)
-{
-	int		i;
-	int		len;
-	char	*env_key;
-	char	*env_value;
-
-	i = 1;
-	len = 0;
-	while (node->args[0][i] && !is_whitespace(node->args[0][i++]))
-		len++;
-	i = 1;
-	env_key = (char *)fti_malloc(len + 1, TEMPORARY);
-	while (node->args[0][i] && !is_whitespace(node->args[0][i]))
-	{
-		env_key[i - 1] = node->args[0][i];
-		i++;
-	}
-	env_key[i - 1] = '\0';
-	env_value = get_environment_value(env_key);
-	node->args = fti_split(env_value, ' ');
 }
 
 /// @brief Goes recursively through the
@@ -199,14 +71,10 @@ t_tree_node	*expand(t_tree_node *node)
 	if (node->type == TEXT)
 	{
 		if (node->args)
-		{
-			if (check_single_variable(node->args))
-				expand_single_variable(node);
-			else
-				expand_arguments(node);
-		}
+			possible_expansion(node);
 	}
 	expand(node->left);
 	expand(node->right);
 	return (node);
 }
+
