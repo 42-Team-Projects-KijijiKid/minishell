@@ -40,7 +40,7 @@ static void	print_token_arguments(t_token *token)
 		i = 0;
 		printf("~ args: ");
 		while (strs[i])
-			printf("\"%s\", ", strs[i++]);	
+			printf("\"%s\", ", strs[i++]);
 		printf(" ~");
 	}
 }

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void print_operator(t_tree_node_type type)
+static void	print_operator(t_tree_node_type type)
 {
 	if (type == AND_IF)
 		printf("&&");
@@ -10,7 +10,7 @@ static void print_operator(t_tree_node_type type)
 		printf("|");
 }
 
-void	debug_ast(char *prefix ,char *file, int line, t_tree_node *node)
+void	debug_ast(char *prefix, char *file, int line, t_tree_node *node)
 {
 	char	**tmp;
 

@@ -12,7 +12,7 @@ static void	print_redirects(t_tree_node *node)
 	}
 }
 
-static void print_operator(t_tree_node_type type)
+static void	print_operator(t_tree_node_type type)
 {
 	if (type == AND_IF)
 		printf("&&");
@@ -22,19 +22,44 @@ static void print_operator(t_tree_node_type type)
 		printf("|");
 }
 
-void	print_ast_structure(t_tree_node *node, int level, bool left)
+static void	print_indent(int level)
+{
+	int	i;
+
+	i = 0;
+	while (i < level)
+	{
+		printf("        ");
+		i++;
+	}
+}
+
+static void	print_args_and_redirs(t_tree_node *node)
 {
 	char	**tmp;
 
+	tmp = node->args;
+	printf("[");
+	while (*tmp)
+	{
+		printf("%s, ", *tmp);
+		tmp++;
+	}
+	printf("]");
+	if (node->redirect.head)
+		print_redirects(node);
+}
+
+void	print_ast_structure(t_tree_node *node, int level, bool left)
+{
 	if (!node)
 		return ;
 	print_ast_structure(node->right, level + 1, false);
-	for (int i = 0; i < level; i++)
-		printf("		");
+	print_indent(level);
 	if (left)
-		printf("L: ");
+		printf("Left: ");
 	else
-		printf("R: ");
+		printf("Right: ");
 	if (level != 0)
 		printf("-> ");
 	if (node->sub)
@@ -42,18 +67,7 @@ void	print_ast_structure(t_tree_node *node, int level, bool left)
 	if (node->type != TEXT)
 		print_operator(node->type);
 	else
-	{
-		tmp = node->args;
-		printf("[");
-		while (*tmp)
-		{
-			printf("%s, ", *tmp);
-			tmp++;
-		}
-		printf("]");
-		if (node->redirect.head)
-			print_redirects(node);
-	}
+		print_args_and_redirs(node);
 	printf("\n");
 	print_ast_structure(node->left, level + 1, true);
 }
