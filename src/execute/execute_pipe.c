@@ -25,7 +25,18 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 		close(in_fd);
 }
 
-static void	execute_left_tree(t_tree_node *node, \
+static void	fd_error(int in, int r, int w, int code)
+{
+	if (in >= 0)
+		close(in);
+	if (r >= 0)
+		close(r);
+	if (w >= 0)
+		close(w);
+	ft_error("Dup2 failed", __FILE__, __LINE__, code);
+}
+
+static void	execute_left_tree(t_tree_node *node,
 	int in_fd, int read_fd, int write_fd)
 {
 	int	pid;
@@ -38,20 +49,11 @@ static void	execute_left_tree(t_tree_node *node, \
 		if (in_fd != STDIN_FILENO)
 		{
 			if (dup2(in_fd, STDIN_FILENO) == -1)
-			{
-				close(in_fd);
-				close(read_fd);
-				close(write_fd);
-				ft_error("Dup2 failed", __FILE__, __LINE__, 913);
-			}
+				fd_error(in_fd, read_fd, write_fd, 913);
 			close(in_fd);
 		}
 		if (dup2(write_fd, STDOUT_FILENO) == -1)
-		{
-			close(read_fd);
-			close(write_fd);
-			ft_error("Dup2 failed", __FILE__, __LINE__, 913);
-		}
+			fd_error(-1, read_fd, write_fd, 913);
 		close(read_fd);
 		close(write_fd);
 		execute_node(node->left);
