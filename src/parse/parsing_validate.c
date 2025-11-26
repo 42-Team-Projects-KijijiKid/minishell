@@ -44,8 +44,7 @@ void	validate_quote_pairs(char *line)
 				*error_code = print_error(
 						"Syntax Error: wrong use of double quotes", 2);
 		}
-		if (*line
-			&& *line != '\''
+		if (*line && *line != '\''
 			&& *line != '\"')
 			line++;
 	}

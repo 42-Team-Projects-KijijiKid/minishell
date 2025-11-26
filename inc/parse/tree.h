@@ -14,7 +14,15 @@ bool		is_redirect(t_tree_node_type type);
 void		tree_redirects(t_build_manager *manager);
 
 // tree_subshell.c
+void		tree_build(t_build_manager *manager);
+void		build_right_subtree(t_build_manager *manager);
+void		build_left_subtree(t_build_manager *manager);
+
+// tree_subshell_2.c
+int			count_outer_subshells_reverse(t_token *token);
+int			count_outer_subshells(t_token *token);
 int			count_subshell_cutoffs(t_token *token);
 void		tree_subshells(t_build_manager *manager);
+
 
 #endif
