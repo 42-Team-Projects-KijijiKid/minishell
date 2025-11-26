@@ -7,8 +7,8 @@ static char	*extend_string(char *string, int added_length)
 	int		index;
 
 	length = ft_strlen(string);
-	extended_string = (char *)malloc(\
-		sizeof(char) * (length + added_length + 1));
+	extended_string = (char *)malloc(
+			sizeof(char) * (length + added_length + 1));
 	index = 0;
 	while (index < length)
 	{
@@ -20,7 +20,7 @@ static char	*extend_string(char *string, int added_length)
 	return (extended_string);
 }
 
-bool	reading_loop(char *character, int *buffer_size, \
+bool	reading_loop(char *character, int *buffer_size,
 	int *index, char **buffer)
 {
 	if (*character == '\n')

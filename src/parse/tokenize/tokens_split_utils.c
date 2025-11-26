@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-static bool is_meta(char *str)
+static bool	is_meta(char *str)
 {
 	char	match;
 
@@ -28,7 +28,7 @@ unsigned int	count_arguments(char *str)
 		while (*str && (!is_meta_char(*str) || !is_meta(str))
 			&& *str != ' ')
 		{
-			if (*str == '\''\
+			if (*str == '\''
 				|| *str == '\"')
 			{
 				quote = *str;

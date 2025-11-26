@@ -35,14 +35,14 @@ void	validate_quote_pairs(char *line)
 		if (*line == '\'')
 		{
 			if (!find_matching_quote(&line))
-				*error_code = print_error(\
-					"Syntax Error: wrong use of single quotes", 2);
+				*error_code = print_error(
+						"Syntax Error: wrong use of single quotes", 2);
 		}
 		else if (*line == '\"')
 		{
 			if (!find_matching_quote(&line))
-				*error_code = print_error(\
-					"Syntax Error: wrong use of double quotes", 2);
+				*error_code = print_error(
+						"Syntax Error: wrong use of double quotes", 2);
 		}
 		if (*line
 			&& *line != '\''
