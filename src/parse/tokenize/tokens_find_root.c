@@ -2,7 +2,7 @@
 
 static int	get_precedence(t_tree_node_type type)
 {
-	if (type == AND_IF ||  type == OR_IF)
+	if (type == AND_IF || type == OR_IF)
 		return (1);
 	if (type == PIPE)
 		return (2);

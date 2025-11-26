@@ -3,7 +3,7 @@
 bool	is_meta_char(char input)
 {
 	int			i;
-	const char	meta[8] = {'|', '&', ';', '(', ')', \
+	const char	meta[8] = {'|', '&', ';', '(', ')',
 		'<', '>', '\0'};
 
 	i = 0;
@@ -26,7 +26,8 @@ static int	len_to_space(char *str)
 	return (i);
 }
 
-static void	single_char_evaluation(char **input, int *len, t_tree_node_type *type)
+static void	single_char_evaluation(char **input, int *len,
+			t_tree_node_type *type)
 {
 	*len = 1;
 	if (ft_strncmp(input[0], "|", *len) == 0)

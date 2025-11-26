@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-static bool is_meta(char *str)
+static bool	is_meta(char *str)
 {
 	char	match;
 
@@ -71,6 +71,5 @@ t_token	*tokenize(char *input)
 		node->next = next;
 		node = next;
 	}
-	node->next = NULL;
-	return (head);
+	return (node->next = NULL, head);
 }
