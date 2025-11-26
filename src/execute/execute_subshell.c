@@ -19,7 +19,7 @@ void	execute_subshell(t_tree_node *node)
 	{
 		waitpid(pid, &status, 0);
 		if (!WIFEXITED(status))
-			ft_error("Unexpected error in subshell execution", \
+			ft_error("Unexpected error in subshell execution",
 				__FILE__, __LINE__, 991);
 	}
 }
