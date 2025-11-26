@@ -34,7 +34,7 @@ INTEGRATIONS_DIR	:= integrations/
 SIGNALS_DIR	:= signals/
 
 #.c files in src/parsing with subfolders
-EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers get_environment_value expand_total_len)) 
+EXPAND_FILES			:= $(addprefix $(EXPAND_DIR), $(addsuffix .c, expand expand_helpers expand_helpers_2 get_environment_value expand_total_len)) 
 TOKENIZE_FILES			:= $(addprefix $(TOKENIZE_DIR), $(addsuffix .c, tokenize tokenize_helpers $(addprefix tokens_, find_root split_args split_utils validate))) 
 TREE_FILES				:= $(addprefix $(TREE_DIR), $(addsuffix .c, tree_build tree_redirects tree_utils tree_subshells))
 DEBUG_FILES				:= $(addprefix $(DEBUG_DIR), $(addsuffix .c, print_tree debug_ast print_token_list))
