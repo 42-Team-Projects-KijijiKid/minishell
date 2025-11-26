@@ -67,12 +67,22 @@ char	*env_value_from_str(char **str)
 	return (rtn);
 }
 
+static void	assign_values(t_env_node *node, char **env_vars)
+{
+	node->key = env_key_from_str(env_vars);
+	node->value = env_value_from_str(env_vars);
+	node->key_len = ft_strlen(node->key);
+	node->value_len = ft_strlen(node->value);
+}
+
 void	environment_initialize(char **env_vars)
 {
 	t_minishell	*shell;
 	t_env_node	*node;
 	t_env_node	*new_node;
 
+	if (!(*env_vars))
+		ft_error(ENV_LIST_EMPTY, __FILE__, __LINE__, 131);
 	shell = minishell_get();
 	node = fti_malloc(sizeof(t_env_node), PERSISTENT);
 	node->prev = NULL;
@@ -80,15 +90,11 @@ void	environment_initialize(char **env_vars)
 	while (*env_vars && env_vars)
 	{
 		shell->env.size++;
-		node->key = env_key_from_str(env_vars);
-		node->value = env_value_from_str(env_vars);
-		node->key_len = ft_strlen(node->key);
-		node->value_len = ft_strlen(node->value);
+		assign_values(node, env_vars);
 		env_vars++;
-		if (env_vars && *env_vars)
-			new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
-		else
+		if (!(*env_vars))
 			break ;
+		new_node = fti_malloc(sizeof(t_env_node), PERSISTENT);
 		node->next = new_node;
 		new_node->prev = node;
 		node = new_node;

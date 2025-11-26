@@ -14,6 +14,11 @@ int	builtin_env(char **args)
 		return (127);
 	}
 	env = env_list_to_2d();
+	if (!env)
+	{
+		ft_fprintf(2, ENV_LIST_EMPTY);
+		return (1);
+	}
 	while (env && *env)
 	{
 		ft_fprintf(STDOUT_FILENO, "%s\n", *env);

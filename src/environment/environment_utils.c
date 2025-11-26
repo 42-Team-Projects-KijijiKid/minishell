@@ -125,6 +125,8 @@ char	**env_list_to_2d(void)
 	shell = minishell_get();
 	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), TEMPORARY);
 	node = shell->env.head;
+	if (!node)
+		return (NULL);
 	i = 0;
 	while (node)
 	{
