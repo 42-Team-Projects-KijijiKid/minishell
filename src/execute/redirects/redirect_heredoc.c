@@ -68,7 +68,7 @@ static char	*expand_heredoc(char *line)
 		{
 			line++;
 			tmp_str = null_end_str_heredoc(&line);
-			tmp_str =  get_environment_value(tmp_str);
+			tmp_str = get_environment_value(tmp_str);
 			while (tmp_str && *tmp_str)
 			{
 				rtn[i] = *tmp_str;
@@ -157,7 +157,7 @@ int	initialize_heredoc(char *delimiter)
 
 void	execute_rdr_heredoc(t_redirect_node *redirect)
 {
-	int	pipe_read_end;
+	int			pipe_read_end;
 	t_minishell	*shell;
 
 	shell = minishell_get();

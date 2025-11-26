@@ -11,14 +11,15 @@ static void	check_argument(char *str)
 			str++;
 		if (!ft_isdigit(*str))
 		{
-			ft_fprintf(STDERR_FILENO, "exit: %s: numeric argument required\n", buf);
+			ft_fprintf(STDERR_FILENO, \
+				"exit: %s: numeric argument required\n", buf);
 			exit (2);
 		}
 		str++;
 	}
 }
 
-int builtin_exit(char **args)
+int	builtin_exit(char **args)
 {
 	long long	exit_code;
 
@@ -40,7 +41,8 @@ int builtin_exit(char **args)
 		{
 			if (!args[1][0])
 			{
-				ft_fprintf(STDERR_FILENO, "bash: exit: : numeric argument required");
+				ft_fprintf(STDERR_FILENO, \
+					"bash: exit: : numeric argument required");
 				exit(2);
 			}
 			check_argument(args[1]);

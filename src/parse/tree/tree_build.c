@@ -17,7 +17,8 @@ void	build_left_subtree(t_build_manager *manager)
 {
 	t_build_manager	left_manager;
 
-	left_manager.head_token = get_left_tokens(manager->head_token, manager->root_token);
+	left_manager.head_token = get_left_tokens(\
+		manager->head_token, manager->root_token);
 	left_manager.root_token = find_root(left_manager.head_token);
 	if (minishell_get()->last_exit_status)
 		return ;

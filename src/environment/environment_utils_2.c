@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void			add_new_env_var(char *key, char *value)
+void	add_new_env_var(char *key, char *value)
 {
 	t_minishell	*shell;
 	t_env_node	*new_node;
@@ -22,7 +22,7 @@ void			add_new_env_var(char *key, char *value)
 	}
 	else
 	{
-		new_node->value_len =0;
+		new_node->value_len = 0;
 		new_node->value = NULL;
 	}
 }

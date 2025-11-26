@@ -9,7 +9,7 @@ t_minishell	*minishell_get(void)
 
 t_minishell	*minishell_initialize(char **env)
 {
-	t_minishell *shell;
+	t_minishell	*shell;
 
 	shell = minishell_get();
 	shell->garbage.persistent.head = NULL;
@@ -29,7 +29,7 @@ t_minishell	*minishell_initialize(char **env)
 	return (shell);
 }
 
-void	run_minishell(void)
+static bool	minishell_interactive(void)
 {
 	char		*cmd;
 	t_minishell	*shell;
@@ -37,28 +37,47 @@ void	run_minishell(void)
 
 	shell = minishell_get();
 	error_code = get_error_code();
+	*error_code = 0;
+	cmd = fti_readline("Minishell>> ");
+	if (!cmd)
+		return (false);
+	minishell_parse(cmd);
+	if (*error_code == 0)
+		minishell_execute();
+	free(cmd);
+	garbage_free_layer(&shell->garbage.temporary);
+	return (true);
+}
+
+static bool	minishell_non_interactive(void)
+{
+	char		*cmd;
+	t_minishell	*shell;
+	int			*error_code;
+
+	shell = minishell_get();
+	error_code = get_error_code();
+	*error_code = 0;
+	cmd = read_next_line(STDIN_FILENO);
+	if (!cmd || *cmd == '\0')
+		return (false);
+	minishell_parse(cmd);
+	if (*error_code == 0)
+		minishell_execute();
+	garbage_free_layer(&shell->garbage.temporary);
+	return (true);
+}
+
+void	minishell_run(void)
+{
 	while (isatty(STDIN_FILENO))
 	{
-		*error_code = 0;
-		cmd = fti_readline("Minishell>> ");
-		if (!cmd)
+		if (!minishell_interactive())
 			break ;
-		minishell_parse(cmd);
-		if (*error_code == 0)
-			minishell_execute();
-		free(cmd);
-		garbage_free_layer(&shell->garbage.temporary);
 	}
 	while (!isatty(STDIN_FILENO))
 	{
-		*error_code = 0;
-		cmd = read_next_line(STDIN_FILENO);
-		if (!cmd || *cmd == '\0')
+		if (!minishell_non_interactive())
 			break ;
-		minishell_parse(cmd);
-		if (*error_code == 0)
-			minishell_execute();
-		// free(cmd);
-		garbage_free_layer(&shell->garbage.temporary);
 	}
 }

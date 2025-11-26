@@ -24,7 +24,7 @@ char	*extract_value(char *str)
 	i = 0;
 	shell = minishell_get();
 	while (*str && *str != '+'
-			&& *str != '=')
+		&& *str != '=')
 		str++;
 	if (*str && *str == '+')
 		str++;

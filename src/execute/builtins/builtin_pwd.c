@@ -1,8 +1,8 @@
 #include "../../../inc/minishell.h"
 
-int builtin_pwd(char **args)
+int	builtin_pwd(char **args)
 {
-	char *pwd;
+	char	*pwd;
 
 	pwd = env_get_value("PWD");
 	if (!pwd)

@@ -25,11 +25,10 @@ void	execute_subshell(t_tree_node *node);
 // execute.c
 void	execute_node(t_tree_node *node);
 void	execute_node_by_type(t_tree_node *node);
-void	minishell_execute();
+void	minishell_execute(void);
 
 //execute_helpers.c
 char	*get_bin_path_of_command(char *cmd, char **paths_2d);
 char	**get_path_array(char **envp);
-
 
 #endif

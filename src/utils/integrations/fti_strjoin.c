@@ -1,13 +1,14 @@
 #include "minishell.h"
 
-char	*fti_strjoin(char const *s1, char const *s2, e_garbage_layers layer)
+char	*fti_strjoin(char const *s1, char const *s2, t_garbage_layers layer)
 {
 	size_t		i;
 	char		*str;
 
 	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)fti_malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1), layer);
+	str = (char *)fti_malloc(sizeof(char) * (\
+		ft_strlen(s1) + ft_strlen(s2) + 1), layer);
 	if (!str)
 		return (NULL);
 	i = 0;

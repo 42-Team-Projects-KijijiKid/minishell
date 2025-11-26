@@ -12,7 +12,7 @@ char	*rtn_key_value(t_env_node *node)
 	char	*rtn;
 	int		i;
 	int		x;
-	
+
 	if (!node)
 		return (NULL);
 	len = node->value_len + node->key_len + 1;
@@ -23,9 +23,9 @@ char	*rtn_key_value(t_env_node *node)
 		rtn[i] = node->key[i];
 		i++;
 	}
-	if(!node->value)
+	if (!node->value)
 	{
-		rtn[i]= '\0';
+		rtn[i] = '\0';
 		return (rtn);
 	}
 	rtn[i++] = '=';
@@ -115,13 +115,13 @@ int	env_unset_value(char *key)
 /// execeve
 /// @param  
 /// @return 2D array of env variables 
-char	**env_list_to_2d(void) // turn_2d() in expansion/create_inv.c
+char	**env_list_to_2d(void)
 {
 	t_minishell	*shell;
 	t_env_node	*node;
 	char		**rtn;
 	int			i;
-	
+
 	shell = minishell_get();
 	rtn = fti_malloc(sizeof(char *) * (shell->env.size + 1), TEMPORARY);
 	node = shell->env.head;
@@ -130,7 +130,7 @@ char	**env_list_to_2d(void) // turn_2d() in expansion/create_inv.c
 	{
 		rtn[i] = rtn_key_value(node);
 		node = node->next;
-		i++; 
+		i++;
 	}
 	rtn[i] = NULL;
 	return (rtn);

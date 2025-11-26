@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-int execute_rdr_in(t_redirect_node *redirect)
+int	execute_rdr_in(t_redirect_node *redirect)
 {
 	int	fd;
 

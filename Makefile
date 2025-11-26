@@ -9,7 +9,7 @@ CFLAGS	:= -g -Iinc/ -Ilibft
 vpath %.h inc/
 
 # <==== Files & Folders =====>
-MAIN_FILE	:= main.c
+CORE_FILES	:= main.c minishell.c
 
 SRC_DIR		:= src/
 OBJS_DIR	:= objs/
@@ -51,13 +51,13 @@ SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 PARSING					:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
 EXECUTE					:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
 ENVIRONMENT				:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c environment_utils_2.c)
-UTILS					:= $(addprefix $(UTILS_DIR), garbage.c error.c init_minishell.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
+UTILS					:= $(addprefix $(UTILS_DIR), garbage.c error.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
 
 # Every folder path including the .c files inside the src/ folder 
 MELTING_POT	:= $(PARSING) $(ENVIRONMENT) $(UTILS) $(EXECUTE)
 
 # Every Folder path prefixed with src/ and the main (top level)
-SRCS		:= $(addprefix $(SRC_DIR), $(MAIN_FILE) $(MELTING_POT))
+SRCS		:= $(addprefix $(SRC_DIR), $(CORE_FILES) $(MELTING_POT))
 
 # All .c to .o -> See compilation Rule $< $@
 OBJS		:= $(addprefix $(OBJS_DIR), $(SRCS:%.c=%.o))

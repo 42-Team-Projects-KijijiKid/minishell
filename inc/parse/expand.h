@@ -1,7 +1,7 @@
 #ifndef EXPAND_H
 # define EXPAND_H
 
-#include "../structs.h"
+# include "../structs.h"
 
 // expand.c
 t_tree_node		*expand(t_tree_node *node);
@@ -17,5 +17,5 @@ char			*give_env_str(char **str);
 unsigned int	total_length(char *str);
 
 // get_environment_value.c
-char	*get_environment_value(char *str);
+char			*get_environment_value(char *str);
 #endif

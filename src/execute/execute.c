@@ -23,7 +23,7 @@ void	execute_node(t_tree_node *node)
 		execute_node_by_type(node);
 }
 
-void minishell_execute(void)
+void	minishell_execute(void)
 {
 	t_minishell	*shell;
 

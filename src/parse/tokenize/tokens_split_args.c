@@ -13,7 +13,7 @@ static int	len_in_quotes(char *input)
 		input++;
 		len++;
 	}
-	if (*input ==  quote)
+	if (*input == quote)
 		len++;
 	return (len);
 }
@@ -25,7 +25,7 @@ unsigned int	total_len(char	*input)
 	i = 0;
 	while (input[i] && input[i] != ' ')
 	{
-		if (input[i] == '\'' 
+		if (input[i] == '\'' \
 			|| input[i] == '\"')
 			i += len_in_quotes(&input[i]);
 		else
@@ -44,7 +44,7 @@ static char	*get_argument(char **input)
 	i = 0;
 	token_len = total_len(*input);
 	rtn = fti_malloc(sizeof(char) * (token_len + 1), TEMPORARY);
-	while ( **input && **input != ' '
+	while (**input && **input != ' '\
 		&& !is_meta_char(**input))
 	{
 		if (**input == '\''
@@ -58,7 +58,7 @@ static char	*get_argument(char **input)
 			{
 				rtn[i] = **input;
 				i++;
-				(*input)++; 
+				(*input)++;
 			}
 		}
 		rtn[i] = **input;
@@ -89,8 +89,8 @@ char	**tokens_split_args(char **input)
 	i = 0;
 	while (i < words)
 	{
-		while (**input && 
-				**input == ' ')
+		while (**input && \
+			**input == ' ')
 			(*input)++;
 		rtn[i] = get_argument(input);
 		i++;

@@ -1,6 +1,6 @@
 #include "../../inc/minishell.h"
 
-void execute_subshell(t_tree_node *node)
+void	execute_subshell(t_tree_node *node)
 {
 	int			pid;
 	t_minishell	*shell;
@@ -19,6 +19,7 @@ void execute_subshell(t_tree_node *node)
 	{
 		waitpid(pid, &status, 0);
 		if (!WIFEXITED(status))
-			ft_error("Unexpected error in subshell execution", __FILE__, __LINE__, 991);
+			ft_error("Unexpected error in subshell execution", \
+				__FILE__, __LINE__, 991);
 	}
 }

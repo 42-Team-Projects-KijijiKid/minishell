@@ -1,6 +1,6 @@
 #include "../inc/minishell.h"
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_minishell	*shell;
 	char		*cmd;
@@ -9,7 +9,7 @@ int main(int ac, char **av, char **env)
 	(void)av;
 	sig_init();
 	shell = minishell_initialize(env);
-	run_minishell();
+	minishell_run();
 	clear_history();
 	close_default_filedescriptor();
 	garbage_free_all();

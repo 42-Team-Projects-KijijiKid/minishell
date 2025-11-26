@@ -4,7 +4,7 @@ t_token	*get_last_token(t_token *node)
 {
 	while (node->next)
 		node = node->next;
-	return (node);	
+	return (node);
 }
 
 int	count_parenthesis_at_end(t_token *token)
@@ -64,11 +64,11 @@ int	count_outer_subshells_reverse(t_token *token)
 	last = get_final_before_parenthesis(token, true);
 	token = get_last_token(token);
 	if (token == last)
-		return (0);	
+		return (0);
 	while (token && token != last->prev)
 	{
 		if (token->type != RPAREN)
-			initial = false;		
+			initial = false;
 		if (token->type == LPAREN)
 			depth--;
 		else if (token->type == RPAREN)
@@ -94,11 +94,11 @@ int	count_outer_subshells(t_token *token)
 	min_depth = INT_MAX;
 	last = get_final_before_parenthesis(token, false);
 	if (token == last)
-		return (0);	
+		return (0);
 	while (token && token != last->next)
 	{
 		if (token->type != LPAREN)
-			initial = false;		
+			initial = false;
 		if (token->type == LPAREN)
 			depth++;
 		else if (token->type == RPAREN)
@@ -133,7 +133,7 @@ void	tree_subshells(t_build_manager *manager)
 	head = manager->head_token;
 	last = head;
 	while (last->next)
-		last = last->next;	
+		last = last->next;
 	cutoffs = count_subshell_cutoffs(manager->head_token);
 	manager->root_node->sub = cutoffs;
 	while (cutoffs--)

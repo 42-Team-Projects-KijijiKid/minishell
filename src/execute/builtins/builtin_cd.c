@@ -71,7 +71,7 @@ static char	*go_dir_back(char *current_pwd, char *new_path)
 	return (new_path);
 }
 
-static char *concatenate_paths(char *current_pwd, char *new_path)
+static char	*concatenate_paths(char *current_pwd, char *new_path)
 {
 	int		len;
 	char	*rtn;
@@ -92,10 +92,9 @@ static char *concatenate_paths(char *current_pwd, char *new_path)
 	return (rtn);
 }
 
-
 static char	*build_path(char *current_pwd, char *new_path)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (new_path[i + 1])
@@ -117,7 +116,7 @@ int	builtin_cd(char **args)
 {
 	char	*new_pwd;
 	char	*old_pwd;
-	
+
 	old_pwd = get_environment_value("PWD");
 	if (!args[1])
 		new_pwd = get_environment_value("HOME");
@@ -125,7 +124,7 @@ int	builtin_cd(char **args)
 	{
 		if (!args[2])
 			new_pwd = build_path(old_pwd, args[1]);
-		else	
+		else
 		{
 			ft_fprintf(2, CD_TO_MANY_ARGS);
 			return (1);
@@ -138,7 +137,7 @@ int	builtin_cd(char **args)
 	}
 	else
 	{
-		ft_fprintf(STDERR_FILENO , NO_FILE_DIR, "cd", args[1]);
+		ft_fprintf(STDERR_FILENO, NO_FILE_DIR, "cd", args[1]);
 		return (1);
 	}
 	return (0);

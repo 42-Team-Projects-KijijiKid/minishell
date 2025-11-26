@@ -1,20 +1,20 @@
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-# include <aio.h> // for ssize_t
+# include <aio.h>
 # include <stdbool.h>
 
 /*######################
 #    File Descriptor   #
 ######################*/
 
-typedef struct	s_fd_node
+typedef struct s_fd_node
 {
 	int					fd;
 	struct s_fd_node	*next;
 }	t_fd_node;
 
-typedef struct	s_fd_meta
+typedef struct s_fd_meta
 {
 	int			std_in;
 	int			std_out;
@@ -23,7 +23,6 @@ typedef struct	s_fd_meta
 	t_fd_node	*tail;
 	size_t		size;
 }	t_fd_meta;
-
 
 /*######################
 # Abstract Syntax Tree #
@@ -34,47 +33,34 @@ typedef struct s_filedescriptor
 	int	std_in;
 	int	std_out;
 	int	std_err;
-}	s_filedescriptor;
+}	t_filedescriptor;
 
-
-typedef enum	e_tree_node_type
+typedef enum e_tree_node_type
 {
 	TEXT,
-	// PROP_CMD,		// Probably a command
-	// IO_FILENAME,	// In/Out filename
-	PIPE,			// |
-	AND_IF,			// &&
-	OR_IF,			// ||
-	LESS,			// <
-	GREAT,			// >
-	// LESSGREAT,		// <> open for read, write (I/O)
-	DGREAT,			// >>
-	DLESS,			// <<
-	// DLESSDASH,		// <<-
-	LPAREN,			// (
-	RPAREN			// )
-}	e_tree_node_type;
+	PIPE,
+	AND_IF,
+	OR_IF,
+	LESS,
+	GREAT,
+	DGREAT,
+	DLESS,
+	LPAREN,
+	RPAREN
+}	t_tree_node_type;
 
 /*#############
 # Redirection #
 #############*/
 
-/* typedef enum	e_redirect_type
+typedef struct s_redirect_node
 {
-	IN_FD,
-	OUT_FD,
-	HEREDOC,
-	STD
-}	t_redirect_type; */
-
-typedef struct	s_redirect_node
-{
-	e_tree_node_type		type;
+	t_tree_node_type		type;
 	char					*file;
 	struct s_redirect_node	*next;
 }	t_redirect_node;
 
-typedef	struct	s_redirection
+typedef struct s_redirection
 {
 	t_redirect_node	*head;
 	t_redirect_node	*tail;
@@ -87,7 +73,7 @@ typedef	struct	s_redirection
 
 typedef struct s_tree_node
 {
-	e_tree_node_type	type;
+	t_tree_node_type	type;
 	char				**args;
 	int					sub;
 	struct s_tree_node	*left;
@@ -102,7 +88,7 @@ typedef struct s_tree_node
 typedef struct s_token
 {
 	char				**args;
-	e_tree_node_type	type;
+	t_tree_node_type	type;
 	struct s_token		*next;
 	struct s_token		*prev;
 }	t_token;
@@ -122,7 +108,7 @@ typedef struct s_build_manager
 # Environment #
 #############*/
 
-typedef struct	s_env_node
+typedef struct s_env_node
 {
 	char				*key;
 	char				*value;
@@ -132,7 +118,7 @@ typedef struct	s_env_node
 	struct s_env_node	*prev;
 }	t_env_node;
 
-typedef struct	s_environment
+typedef struct s_environment
 {
 	t_env_node	*head;
 	t_env_node	*tail;
@@ -143,23 +129,23 @@ typedef struct	s_environment
 # Garbage Collector #
 ###################*/
 
-typedef enum	e_garbage_layers
+typedef enum e_garbage_layers
 {
 	PERSISTENT,
 	TEMPORARY
-}	e_garbage_layers;
+}	t_garbage_layers;
 
 typedef struct s_garbage_node
 {
-	void				*mem;
-	struct	s_garbage_node	*next;
+	void					*mem;
+	struct s_garbage_node	*next;
 }	t_garbage_node;
 
 typedef struct s_garbage_layer
 {
 	t_garbage_node	*head;
 	t_garbage_node	*tail;
-	ssize_t		size;
+	ssize_t			size;
 }	t_garbage_layer;
 
 typedef struct s_garbage
@@ -172,12 +158,12 @@ typedef struct s_garbage
 # Minishell #
 ###########*/
 
-typedef struct	s_minishell
+typedef struct s_minishell
 {
 	t_tree_node			*tree_root;
 	t_garbage			garbage;
 	t_environment		env;
-	s_filedescriptor	filedescriptor;
+	t_filedescriptor	filedescriptor;
 	bool				herdoc;
 	int					last_exit_status;
 	t_fd_meta			fd_table;
@@ -191,6 +177,6 @@ typedef enum e_operator
 {
 	OP_AND,
 	OP_OR
-}	e_operator;
+}	t_operator;
 
 #endif

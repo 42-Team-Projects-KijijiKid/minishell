@@ -1,6 +1,6 @@
 #include "../../../inc/minishell.h"
 
-static int	get_precedence(e_tree_node_type type)
+static int	get_precedence(t_tree_node_type type)
 {
 	if (type == AND_IF ||  type == OR_IF)
 		return (1);
@@ -11,7 +11,7 @@ static int	get_precedence(e_tree_node_type type)
 	return (4);
 }
 
-static bool	check_precedence(int prec_bef, e_tree_node_type current)
+static bool	check_precedence(int prec_bef, t_tree_node_type current)
 {
 	int	prec_cur;
 
@@ -46,7 +46,8 @@ t_token	*find_root_without_subshell(t_token *head, t_token *tail)
 		head = head->next;
 	}
 	if (!root)
-		*get_error_code() = print_error("Error: Parsing failed in find_root_without_subshell()", 2); // TODO: Correct Error Message
+		*get_error_code() = print_error(\
+			"Error: Parsing failed in find_root_without_subshell()", 2);
 	return (root);
 }
 

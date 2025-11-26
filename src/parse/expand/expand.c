@@ -1,9 +1,10 @@
 #include "../../../inc/minishell.h"
 
-static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quotes, bool *single_quotes)
+static void	process_non_dollar(char **str, \
+	char *rtn, int *i, bool *double_quotes, bool *single_quotes)
 {
 	if (!quote_has_content(*str) && (!*double_quotes || !*single_quotes))
-			*str += 2;
+		*str += 2;
 	else if (**str == '\'' && !*double_quotes)
 	{
 		*single_quotes = !*single_quotes;
@@ -12,7 +13,7 @@ static void	process_non_dollar(char **str, char *rtn, int *i, bool *double_quote
 	else if (**str == '\"' && !*single_quotes)
 	{
 		*double_quotes = !*double_quotes;
-		(*str)++; 
+		(*str)++;
 	}
 	else if (**str && **str != '\\')
 	{
@@ -33,10 +34,10 @@ static bool	env_value(char **str, char *rtn, int *i)
 {
 	char	*tmp_str;
 
-	tmp_str =  give_env_str(str);
+	tmp_str = give_env_str(str);
 	while (tmp_str && *tmp_str)
 	{
-		rtn[*i] =  *tmp_str;
+		rtn[*i] = *tmp_str;
 		(*i)++;
 		tmp_str++;
 	}
@@ -76,7 +77,6 @@ char	*expand_single_argument(char *str)
 		if (*str == '$' && !single_quotes
 			&& check_if_valid(str))
 		{
-			// env_value(&str, rtn, &i);
 			if (!env_value(&str, rtn, &i)
 				&& double_quotes)
 				rtn[i++] = '$';
@@ -92,7 +92,7 @@ char	*expand_single_argument(char *str)
 ///possible expansions and replacing the strings
 void	expand_arguments(t_tree_node *node)
 {
-	char 			**head;
+	char			**head;
 	t_redirect_node	*redir;
 
 	head = node->args;
@@ -116,7 +116,7 @@ void	expand_arguments(t_tree_node *node)
 	node->args = head;
 }
 
-bool	is_whitespace(char	ch)
+bool	is_whitespace(char ch)
 {
 	if (ch == 32 || (9 <= ch && ch <= 13))
 		return (true);
@@ -128,7 +128,7 @@ bool	check_single_variable(char **array)
 	int	i;
 
 	if (!*array)
-		return (false);	
+		return (false);
 	if (!array[1])
 	{
 		i = 0;
@@ -164,7 +164,7 @@ bool	check_single_variable(char **array)
 
 void	expand_single_variable(t_tree_node *node)
 {
-	int	i;
+	int		i;
 	int		len;
 	char	*env_key;
 	char	*env_value;
@@ -180,7 +180,7 @@ void	expand_single_variable(t_tree_node *node)
 		env_key[i - 1] = node->args[0][i];
 		i++;
 	}
-	env_key[i - 1] ='\0';
+	env_key[i - 1] = '\0';
 	env_value = get_environment_value(env_key);
 	node->args = fti_split(env_value, ' ');
 }
@@ -210,63 +210,3 @@ t_tree_node	*expand(t_tree_node *node)
 	expand(node->right);
 	return (node);
 }
-
-/**
- * 
- * 
- * 	STORING OLD FILES
- * 
- */
-
-
-//  if (!quote_has_content(*node->args))
-// 	*node->args = " ";
-// else if (**node->args == '\'')
-// 	*node->args = single_quotes(*node->args);
-// else if (**node->args == '\"' && quote_has_content(*node->args))
-// 	*node->args = double_quotes(*node->args);
-// else if (**node->args == '$')
-// 	*node->args = argument_expand(*node->args);
-// else if (!ft_strncmp(*node->args, "~", ft_strlen(*node->args)))
-// 	*node->args = get_environment_value("HOME");
-
-
-
-// /// @brief Does not expand the variable
-// /// and removes the single quotes leaving the
-// /// inner quotes if present
-// /// @param str 
-// char	*single_quotes(char *str)
-// {
-// 	int		str_len;
-// 	char	*rtn;
-// 	int		i;
-
-// 	if (*str == '\'')
-// 		str++;
-// 	str_len = strlen_whitout_quotes(str, '\'');
-// 	rtn = fti_malloc(sizeof(char) * str_len + 1, TEMPORARY);
-// 	i = 0;
-// 	while (*str != '\'')
-// 	{
-// 		rtn[i] = *str;
-// 		str++;
-// 		i++;
-// 	}
-// 	rtn[i] = '\0';
-// 	return (rtn);
-// }
-
-// /// @brief Does not expand the variable
-// /// and removes the single quotes leaving the
-// /// inner quotes if present.
-// /// Rebuilds the whole string with expansion.
-// /// @param str 
-// char	*double_quotes(char *str)
-// {
-// 	if (*str == '\"')
-// 		str++;
-// 	else
-// 		ft_error("Tried to expand a invalid string", __FILE__, __LINE__, 73);
-// 	return (expand_inside_str(str, '\"'));
-// }

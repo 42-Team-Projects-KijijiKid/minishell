@@ -1,4 +1,4 @@
-	#include "../../inc/minishell.h"
+#include "../../inc/minishell.h"
 
 /// @brief Checks if command node is a builting
 /// and executes if so
@@ -94,7 +94,7 @@ static int	execute_redirects(t_tree_node *node)
 	return (exit_code);
 }
 
-void execute_command(t_tree_node *node)
+void	execute_command(t_tree_node *node)
 {
 	t_minishell	*shell;
 	int			pid;
@@ -113,10 +113,10 @@ void execute_command(t_tree_node *node)
 			pid = ft_fork();
 			if (pid == 0)
 				execute_executable(node);
-			if (waitpid(pid, &wstatus, 0) == -1  || wstatus != 0)
+			if (waitpid(pid, &wstatus, 0) == -1 || wstatus != 0)
 				shell->last_exit_status = 127;
 			else
-					shell->last_exit_status = 0;
+				shell->last_exit_status = 0;
 			sig_init();
 		}
 	}

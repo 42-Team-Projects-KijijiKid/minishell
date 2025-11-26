@@ -1,9 +1,9 @@
 #include "../../../inc/minishell.h"
 
-int execute_rdr_out(t_redirect_node *redirect)
+int	execute_rdr_out(t_redirect_node *redirect)
 {
-	int	fd;
-	char *filename;
+	int		fd;
+	char	*filename;
 
 	filename = redirect->file;
 	fd = open(filename, O_WRONLY | O_CREAT, 0644);

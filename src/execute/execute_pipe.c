@@ -24,7 +24,9 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 	if (in_fd != STDIN_FILENO)
 		close(in_fd);
 }
-static void	execute_left_tree(t_tree_node *node, int in_fd, int read_fd, int write_fd)
+
+static void	execute_left_tree(t_tree_node *node, \
+	int in_fd, int read_fd, int write_fd)
 {
 	int	pid;
 
@@ -56,6 +58,7 @@ static void	execute_left_tree(t_tree_node *node, int in_fd, int read_fd, int wri
 		exit(EXIT_SUCCESS);
 	}
 }
+
 static void	exec_pipe_recursive(t_tree_node *node, int in_fd)
 {
 	int		pipe_fds[2];

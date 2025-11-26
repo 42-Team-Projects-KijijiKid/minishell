@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:26:51 by mandre            #+#    #+#             */
-/*   Updated: 2025/11/20 17:56:14 by mandre           ###   ########.fr       */
+/*   Updated: 2025/11/26 09:31:34 by aeckert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,5 @@ size_t	strlen_special(const char *str);
 char	*ft_strdup_gnl(const char *s);
 char	*ft_strjoin_gnl(char const *s1, char const *s2);
 void	ft_memmove_gnl(char *dest, char *src, size_t n);
-
 
 #endif

@@ -1,9 +1,9 @@
 #include "../../../inc/minishell.h"
 
-void	*fti_malloc(ssize_t size, e_garbage_layers type)
+void	*fti_malloc(ssize_t size, t_garbage_layers type)
 {
 	t_minishell	*meta;
-	void	*rtn;
+	void		*rtn;
 
 	meta = minishell_get();
 	rtn = malloc(size);

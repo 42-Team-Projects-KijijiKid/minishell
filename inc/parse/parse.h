@@ -16,9 +16,8 @@ void	validate_quote_pairs(char *line);
 void	print_ast_structure(t_tree_node *root, int level, bool left);
 
 // debug/debug_ast.c
-void	debug_ast(char *prefix ,char *file, int line, t_tree_node *node);
+void	debug_ast(char *prefix, char *file, int line, t_tree_node *node);
 void	print_tokens(t_token *token, char *list_name);
-int		*get_level();
-
+int		*get_level(void);
 
 #endif

@@ -13,7 +13,7 @@ static bool	check_for_concat(char *str)
 
 static void	export_key_value_variable(char *str)
 {
-	if (check_for_concat(str))	
+	if (check_for_concat(str))
 		concatenate_env(str);
 	else
 		export_to_env(str);
@@ -36,7 +36,7 @@ static int	export_variable(char *str)
 	return (0);
 }
 
-int builtin_export(char **args)
+int	builtin_export(char **args)
 {
 	int	i;
 	int	exit;

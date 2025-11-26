@@ -34,15 +34,13 @@ char	*null_end_str(char **str)
 	rtn = fti_malloc((sizeof(char) * i) + 1, TEMPORARY);
 	i = 0;
 	while (**str && **str != ' ' && !is_meta_char(**str)
-			&& **str != '$' && **str != '\"'
-			&& **str != '\'' && **str != '/')
+		&& **str != '$' && **str != '\"'
+		&& **str != '\'' && **str != '/')
 	{
 		rtn[i] = **str;
 		(*str)++;
 		i++;
 	}
-	// if (**str && **str == '\"')
-	// 	(*str)++;
 	rtn[i] = '\0';
 	return (rtn);
 }
@@ -94,7 +92,7 @@ char	*give_env_str(char **str)
 	if (!*tmp)
 		return (NULL);
 	if (ft_strncmp(tmp, "?", ft_strlen(tmp)) == 0)
-		return(last_exit_code());
+		return (last_exit_code());
 	rtn = get_environment_value(tmp);
 	return (rtn);
 }
@@ -105,13 +103,14 @@ char	*expand_inside_str(char *str, char quote)
 	char	*tmp_str;
 	int		i;
 
-	rtn = fti_malloc((sizeof(char) * strlen_with_expansion(str, quote)) + 1, TEMPORARY);
+	rtn = fti_malloc((sizeof(char) * strlen_with_expansion(\
+		str, quote)) + 1, TEMPORARY);
 	i = 0;
 	while (*str != quote && *str)
 	{
 		if (*str == '$')
 		{
-			tmp_str =  give_env_str(&str);
+			tmp_str = give_env_str(&str);
 			while (tmp_str && *tmp_str)
 			{
 				rtn[i++] = *tmp_str;

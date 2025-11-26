@@ -67,7 +67,7 @@ char	*env_value_from_str(char **str)
 	return (rtn);
 }
 
-void environment_initialize(char **env_vars)
+void	environment_initialize(char **env_vars)
 {
 	t_minishell	*shell;
 	t_env_node	*node;
@@ -90,7 +90,7 @@ void environment_initialize(char **env_vars)
 		else
 			break ;
 		node->next = new_node;
-		new_node->prev = node; 
+		new_node->prev = node;
 		node = new_node;
 	}
 	node->next = NULL;

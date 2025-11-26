@@ -12,7 +12,7 @@ static void	print_redirects(t_tree_node *node)
 	}
 }
 
-static void print_operator(e_tree_node_type type)
+static void print_operator(t_tree_node_type type)
 {
 	if (type == AND_IF)
 		printf("&&");

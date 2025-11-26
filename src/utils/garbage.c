@@ -1,9 +1,13 @@
 #include "../../inc/minishell.h"
 
-void	garbage_add_node(t_garbage_layer *layer_meta, void *data)
+/// @brief Adds the provided data to a linked list.
+/// @param layer_head Layer where to add the data.
+/// @param data void pointer of the data
+/// @return new head of layer
+void	garbage_add_to_layer(t_garbage_layer *layer_meta, void *data)
 {
 	t_garbage_node	*node;
-	
+
 	node = malloc(sizeof(t_garbage_node));
 	if (!node)
 		ft_error("Malloc failed", __FILE__, __LINE__, 2);
@@ -24,20 +28,11 @@ void	garbage_add_node(t_garbage_layer *layer_meta, void *data)
 	}
 }
 
-/// @brief Adds the provided data to a linked list.
-/// @param layer_head Layer where to add the data.
-/// @param data void pointer of the data
-/// @return new head of layer
-void garbage_add_to_layer(t_garbage_layer *layer_meta, void *data)
-{
-	garbage_add_node(layer_meta, data);
-}
-
 /// @brief Totaly frees the stored information of the layer
 /// @param layer_head Provided layer
 void	garbage_free_layer(t_garbage_layer *layer_meta)
 {
-	t_garbage_node 	*tmp;
+	t_garbage_node	*tmp;
 
 	while (layer_meta->head)
 	{

@@ -13,7 +13,7 @@ unsigned int	count_arguments(char *str)
 		while (*str && !is_meta_char(*str)
 			&& *str != ' ')
 		{
-			if (*str == '\'' 
+			if (*str == '\''\
 				|| *str == '\"')
 			{
 				quote = *str;

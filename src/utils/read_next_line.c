@@ -7,7 +7,8 @@ static char	*extend_string(char *string, int added_length)
 	int		index;
 
 	length = ft_strlen(string);
-	extended_string = (char *)malloc(sizeof(char) * (length + added_length + 1));
+	extended_string = (char *)malloc(\
+		sizeof(char) * (length + added_length + 1));
 	index = 0;
 	while (index < length)
 	{
@@ -17,6 +18,21 @@ static char	*extend_string(char *string, int added_length)
 	extended_string[length + added_length] = '\0';
 	free(string);
 	return (extended_string);
+}
+
+bool	reading_loop(char *character, int *buffer_size, \
+	int *index, char **buffer)
+{
+	if (*character == '\n')
+		return (false);
+	if (*index == *buffer_size - 1)
+	{
+		*buffer = extend_string(*buffer, 100);
+		*buffer_size += 100;
+	}
+	buffer[0][*index] = *character;
+	(*index)++;
+	return (true);
 }
 
 char	*read_next_line(int fd)
@@ -30,20 +46,13 @@ char	*read_next_line(int fd)
 	buffer_size = 100;
 	buffer = (char *)malloc(sizeof(char) * buffer_size);
 	index = 0;
-	while ((read_bytes = read(STDIN_FILENO, &character, 1)) > 0)
+	while (read(STDIN_FILENO, &character, 1) > 0)
 	{
-		if (character == '\n')
-			break;
-		if (index == buffer_size -1)
-		{
-			buffer = extend_string(buffer, 100);
-			buffer_size += 100;
-		}
-		buffer[index] = character;
-		index++;
+		if (!reading_loop(&character, &buffer_size, &index, &buffer))
+			break ;
 	}
 	if (read_bytes == -1)
-		ft_error("read failed", __FILE__, __LINE__, 1); // TODO: Enter Error Message
+		ft_error("read failed", __FILE__, __LINE__, 1);
 	buffer[index] = '\0';
 	garbage_add_to_layer(&minishell_get()->garbage.temporary, (void *)buffer);
 	return (buffer);

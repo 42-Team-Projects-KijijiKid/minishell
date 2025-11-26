@@ -10,7 +10,7 @@ void	export_to_env(char *str)
 	shell = minishell_get();
 	key = extract_key(str);
 	value = extract_value(str);
-	node =  shell->env.head;
+	node = shell->env.head;
 	while (node)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0
@@ -35,7 +35,7 @@ void	concatenate_env(char *str)
 	shell = minishell_get();
 	key = extract_key(str);
 	value = extract_value(str);
-	node =  shell->env.head;
+	node = shell->env.head;
 	while (node)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0
@@ -61,7 +61,7 @@ bool	has_value(char *str)
 	return (true);
 }
 
-static bool check_plus_sign(char **str, int *count, char *buf)
+static bool	check_plus_sign(char **str, int *count, char *buf)
 {
 	if (**str == '+')
 	{

@@ -8,7 +8,8 @@ static void	clean_exit(u_int64_t status)
 
 void	ft_error(char *msg, char *file, int line, u_int64_t status)
 {
-	ft_fprintf(2, "%s: In file \033[34m%s\033[0m on \033[31mline %d\033[0m\n", msg, file, line);
+	ft_fprintf(2, "%s: In file \033[34m%s\033[0m \
+		on \033[31mline %d\033[0m\n", msg, file, line);
 	clean_exit(status);
 }
 

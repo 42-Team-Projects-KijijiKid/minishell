@@ -1,6 +1,6 @@
-# include "minishell.h"
+#include "minishell.h"
 
-char	*fti_strdup(const char *s, e_garbage_layers layer)
+char	*fti_strdup(const char *s, t_garbage_layers layer)
 {
 	size_t	i;
 	size_t	s_len;
