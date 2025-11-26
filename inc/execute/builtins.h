@@ -4,6 +4,11 @@
 // builtin_cd.c
 int		builtin_cd(char **args);
 
+// builtin_cd.c
+int		len_until_slash(char *line);
+int		count_go_back(char *new_path);
+char	*cut_till_slash(char *current_pwd);
+
 // builtin_echo.c
 int		builtin_echo(char **args);
 
