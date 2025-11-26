@@ -16,6 +16,9 @@
 		"initializer_list": "c",
 		"ranges": "c",
 		"span": "c",
-		"utility": "c"
+		"utility": "c",
+		"memory": "c",
+		"functional": "c",
+		"tuple": "c"
 	}
 }

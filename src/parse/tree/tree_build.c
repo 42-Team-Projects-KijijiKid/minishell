@@ -20,7 +20,7 @@ void	build_left_subtree(t_build_manager *manager)
 	left_manager.head_token = get_left_tokens(\
 		manager->head_token, manager->root_token);
 	left_manager.root_token = find_root(left_manager.head_token);
-	if (minishell_get()->last_exit_status)
+	if (*get_error_code())
 		return ;
 	left_manager.root_node = token_to_tree_node(left_manager.root_token);
 	manager->root_node->left = left_manager.root_node;
@@ -33,7 +33,7 @@ void	build_right_subtree(t_build_manager *manager)
 
 	right_manager.head_token = get_right_tokens(manager->root_token);
 	right_manager.root_token = find_root(right_manager.head_token);
-	if (minishell_get()->last_exit_status)
+	if (*get_error_code())
 		return ;
 	right_manager.root_node = token_to_tree_node(right_manager.root_token);
 	manager->root_node->right = right_manager.root_node;
@@ -43,7 +43,7 @@ void	build_right_subtree(t_build_manager *manager)
 void	tree_build(t_build_manager *manager)
 {
 	tokens_validate(manager->head_token);
-	if (minishell_get()->last_exit_status)
+	if (*get_error_code())
 		return ;
 	tree_subshells(manager);
 	if (manager->root_token->type == TEXT)
