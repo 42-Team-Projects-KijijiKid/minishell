@@ -38,6 +38,7 @@ static bool	minishell_interactive(void)
 	shell = minishell_get();
 	error_code = get_error_code();
 	*error_code = 0;
+	shell->herdoc = true;
 	cmd = fti_readline("Minishell>> ");
 	if (!cmd)
 		return (false);
@@ -58,6 +59,7 @@ static bool	minishell_non_interactive(void)
 	shell = minishell_get();
 	error_code = get_error_code();
 	*error_code = 0;
+	shell->herdoc = true;
 	cmd = read_next_line(STDIN_FILENO);
 	if (!cmd || *cmd == '\0')
 		return (false);

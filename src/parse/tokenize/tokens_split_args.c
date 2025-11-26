@@ -92,7 +92,13 @@ char	**tokens_split_args(char **input)
 		while (**input && \
 			**input == ' ')
 			(*input)++;
-		rtn[i] = get_argument(input);
+		if (**input != '&')
+			rtn[i] = get_argument(input);
+		else
+		{
+			rtn[i] = fti_strdup("&", TEMPORARY);
+			(*input)++;
+		}
 		i++;
 	}
 	rtn[i] = NULL;
