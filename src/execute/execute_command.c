@@ -33,6 +33,17 @@ static int	execute_builtin(t_tree_node *node)
 	return (exit);
 }
 
+static char	*resolve_bin_path(char *cmd, char **split_path)
+{
+	char	*bin_path;
+
+	if (split_path)
+		return (get_bin_path_of_command(cmd, split_path));
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	return (NULL);
+}
+
 static void	execute_executable(t_tree_node *node)
 {
 	char	**envp;
@@ -41,18 +52,7 @@ static void	execute_executable(t_tree_node *node)
 
 	envp = env_list_to_2d();
 	split_path = get_path_array(envp);
-	if (!split_path)
-	{
-		if (access(*node->args, X_OK) == 0)
-			bin_path = *node->args;
-		else
-		{
-			ft_fprintf(2, "%s: command not found\n", *node->args);
-			exit (127);
-		}
-	}
-	else
-		bin_path = get_bin_path_of_command(*node->args, split_path);
+	bin_path = resolve_bin_path(*node->args, split_path);
 	if (!bin_path)
 	{
 		if (access(*node->args, X_OK) == 0)
@@ -60,12 +60,12 @@ static void	execute_executable(t_tree_node *node)
 		else
 		{
 			ft_fprintf(2, "%s: command not found\n", *node->args);
-			exit (127);
+			exit(127);
 		}
 	}
 	close_default_filedescriptor();
 	execve(bin_path, node->args, envp);
-	exit (127);
+	exit(127);
 }
 
 static int	execute_redirects(t_tree_node *node)
