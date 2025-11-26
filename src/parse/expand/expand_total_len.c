@@ -13,7 +13,7 @@ static unsigned int	give_env_len(char **str)
 	return (len);
 }
 
-static int	process_non_dollar(char **sp,
+static int	process_non_dollar_len(char **sp,
 	bool *single_quotes, bool *double_quotes)
 {
 	if (!quote_has_content(*sp) && (!*single_quotes || !*double_quotes))
@@ -36,7 +36,7 @@ static int	process_non_dollar(char **sp,
 	return (0);
 }
 
-static bool	check_if_valid(char *str)
+static bool	check_if_valid_len(char *str)
 {
 	str++;
 	if (*str == '\0')
@@ -62,10 +62,10 @@ unsigned int	total_length(char *str)
 	while (*str)
 	{
 		if (*str == '$' && !single_quotes
-			&& check_if_valid(str))
+			&& check_if_valid_len(str))
 			total_len += give_env_len(&str);
 		else
-			total_len += process_non_dollar(&str,
+			total_len += process_non_dollar_len(&str,
 					&single_quotes, &double_quotes);
 	}
 	return (total_len);
