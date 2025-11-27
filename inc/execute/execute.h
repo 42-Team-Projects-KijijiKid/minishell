@@ -12,6 +12,9 @@ void	add_fd_to_list(int fd);
 // execute_command.c
 void	execute_command(t_tree_node *node);
 
+// execute_command_2.c
+void	handle_child_exit(t_minishell *sh, t_tree_node *n);
+
 // execute_operator.c
 void	execute_and(t_tree_node *node);
 void	execute_or(t_tree_node *node);

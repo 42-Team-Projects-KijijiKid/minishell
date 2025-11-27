@@ -33,39 +33,6 @@ static int	execute_builtin(t_tree_node *node)
 	return (exit);
 }
 
-static char	*resolve_bin_path(char *cmd, char **split_path)
-{
-	if (split_path)
-		return (get_bin_path_of_command(cmd, split_path));
-	if (access(cmd, X_OK) == 0)
-		return (cmd);
-	return (NULL);
-}
-
-static void	execute_executable(t_tree_node *node)
-{
-	char	**envp;
-	char	**split_path;
-	char	*bin_path;
-
-	envp = env_list_to_2d();
-	split_path = get_path_array(envp);
-	bin_path = resolve_bin_path(*node->args, split_path);
-	if (!bin_path)
-	{
-		if (access(*node->args, X_OK) == 0)
-			bin_path = *node->args;
-		else
-		{
-			ft_fprintf(2, "%s: command not found\n", *node->args);
-			exit(127);
-		}
-	}
-	close_default_filedescriptor();
-	execve(bin_path, node->args, envp);
-	exit(127);
-}
-
 static int	execute_redirects(t_tree_node *node)
 {
 	t_redirect_node	*redirect;
@@ -94,29 +61,18 @@ static int	execute_redirects(t_tree_node *node)
 
 void	execute_command(t_tree_node *node)
 {
-	t_minishell	*shell;
-	int			pid;
-	int			wstatus;
+	t_minishell	*sh;
 
 	expand(node);
-	shell = minishell_get();
+	sh = minishell_get();
 	if (node->args == NULL)
 		ft_fprintf(2, INVALID_ARGS_EXECUTION, __FILE__);
 	if (execute_redirects(node))
 		return ;
 	if (node->args[0] != NULL)
 	{
-		if (execute_builtin(node) == -1 && shell->herdoc)
-		{
-			pid = ft_fork();
-			if (pid == 0)
-				execute_executable(node);
-			if (waitpid(pid, &wstatus, 0) == -1 || wstatus != 0)
-				shell->last_exit_status = 127;
-			else
-				shell->last_exit_status = 0;
-			sig_init();
-		}
+		if (execute_builtin(node) == -1 && sh->herdoc)
+			handle_child_exit(sh, node);
 	}
 	default_filedescripor();
 }

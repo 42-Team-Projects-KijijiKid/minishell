@@ -49,7 +49,7 @@ SIGNALS_FILES			:= $(addprefix $(SIGNALS_DIR), $(addsuffix .c, signals))
 
 # This is the total path to the .c files in the prefixed directory
 PARSING					:= $(addprefix $(PARSING_DIR), parse.c parsing_validate.c  $(EXPAND_FILES) $(TOKENIZE_FILES) $(TREE_FILES) $(DEBUG_FILES))
-EXECUTE					:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
+EXECUTE					:= $(addprefix $(EXECUTION_DIR), execute.c filedescriptor_helpers.c $(addprefix execute_, $(addsuffix .c, command command_2 operator pipe subshell helpers)) $(BUILTIN_FILES) $(REDIRECTS_FILES))
 ENVIRONMENT				:= $(addprefix $(ENVIRONMENT_DIR), env_initialize.c environment_utils.c environment_utils_2.c)
 UTILS					:= $(addprefix $(UTILS_DIR), garbage.c error.c read_next_line.c $(INTEGRATIONS_FILES) $(SIGNALS_FILES))
 
