@@ -17,12 +17,15 @@ void		tree_redirects(t_build_manager *manager);
 void		tree_build(t_build_manager *manager);
 void		build_right_subtree(t_build_manager *manager);
 void		build_left_subtree(t_build_manager *manager);
+t_token		*get_final_before_parenthesis(t_token *token, bool reverse);
+t_token		*get_last_token(t_token *node);
+int			count_parenthesis_at_start(t_token *token);
+int			count_parenthesis_at_end(t_token *token);
 
 // tree_subshell_2.c
 int			count_outer_subshells_reverse(t_token *token);
 int			count_outer_subshells(t_token *token);
 int			count_subshell_cutoffs(t_token *token);
 void		tree_subshells(t_build_manager *manager);
-
 
 #endif

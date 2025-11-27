@@ -29,5 +29,4 @@ int					tokens_validate(t_token *token);
 bool				is_operator(t_tree_node_type type);
 int					count_token_type(t_token *token, t_tree_node_type type);
 
-
 #endif

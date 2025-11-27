@@ -27,5 +27,4 @@ unsigned int	total_length(char *str);
 // get_environment_value.c
 char			*get_environment_value(char *str);
 
-
 #endif

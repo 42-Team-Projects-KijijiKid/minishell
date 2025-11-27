@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	parentesis_depth(t_tree_node_type *type, int *depth, bool rev)
+static void	parentesis_depth(t_tree_node_type type, int *depth, bool rev)
 {
 	if (rev)
 	{
