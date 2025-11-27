@@ -43,4 +43,3 @@ unsigned int	count_arguments(char *str)
 	}
 	return (words);
 }
-

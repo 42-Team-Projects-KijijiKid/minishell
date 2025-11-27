@@ -34,11 +34,26 @@ unsigned int	total_len(char	*input)
 	return (i);
 }
 
+static void	handle_quotes(char *rtn, int *i, char **input)
+{
+	char	quote;
+
+	quote = **input;
+	rtn[(*i)] = **input;
+	(*i)++;
+	(*input)++;
+	while (**input != quote)
+	{
+		rtn[(*i)] = **input;
+		(*i)++;
+		(*input)++;
+	}
+}
+
 static char	*get_argument(char **input)
 {
 	int		token_len;
 	char	*rtn;
-	char	quote;
 	int		i;
 
 	i = 0;
@@ -50,16 +65,7 @@ static char	*get_argument(char **input)
 		if (**input == '\''
 			|| **input == '\"')
 		{
-			quote = **input;
-			rtn[i] = **input;
-			i++;
-			(*input)++;
-			while (**input != quote)
-			{
-				rtn[i] = **input;
-				i++;
-				(*input)++;
-			}
+			handle_quotes(rtn, &i, input);
 		}
 		rtn[i] = **input;
 		i++;
