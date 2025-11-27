@@ -17,26 +17,23 @@ static bool	is_meta(char *str)
 
 unsigned int	count_arguments(char *str)
 {
-	int		words;
-	char	quote;
+	unsigned int	words;
+	char			quote;
 
 	words = 0;
 	while (*str && (!is_meta_char(*str) || !is_meta(str)))
 	{
 		if (*str != ' ')
 			words++;
-		while (*str && (!is_meta_char(*str) || !is_meta(str))
-			&& *str != ' ')
+		while (*str && (!is_meta_char(*str) || !is_meta(str)) && *str != ' ')
 		{
-			if (*str == '\''
-				|| *str == '\"')
+			if (*str == '\'' || *str == '\"')
 			{
-				quote = *str;
-				str++;
-				while (*str
-					&& *str != quote)
+				quote = *str++;
+				while (*str && *str != quote)
 					str++;
-				str++;
+				if (*str)
+					str++;
 			}
 			else
 				str++;
@@ -46,3 +43,4 @@ unsigned int	count_arguments(char *str)
 	}
 	return (words);
 }
+
