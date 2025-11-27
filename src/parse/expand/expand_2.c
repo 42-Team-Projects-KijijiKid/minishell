@@ -22,10 +22,10 @@ void	process_non_dollar(char **str, char *rtn, int *i, bool (*quotes)[2])
 	}
 	else
 	{
-		if (**str == '\\')
-			(*str)++;
 		rtn[(*i)++] = **str;
 		(*str)++;
+		if (**str && **str == '\\')
+			(*str)++;
 	}
 }
 
