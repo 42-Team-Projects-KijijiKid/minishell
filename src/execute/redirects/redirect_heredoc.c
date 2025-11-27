@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-static int	len_to_newline(char *line)
+static size_t	len_to_newline(char *line)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
@@ -14,7 +14,7 @@ static void	run_heredoc(char *delimiter, int *pipe_fds)
 {
 	char		*line;
 	t_minishell	*shell;
-	int			len;
+	size_t		len;
 
 	sig_heredoc();
 	shell = minishell_get();

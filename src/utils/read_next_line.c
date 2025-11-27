@@ -35,11 +35,10 @@ bool	reading_loop(char *character, int *buffer_size,
 	return (true);
 }
 
-char	*read_next_line(int fd)
+char	*read_next_line(void)
 {
 	char	*buffer;
 	char	character;
-	int		read_bytes;
 	int		buffer_size;
 	int		index;
 
@@ -51,8 +50,6 @@ char	*read_next_line(int fd)
 		if (!reading_loop(&character, &buffer_size, &index, &buffer))
 			break ;
 	}
-	if (read_bytes == -1)
-		ft_error("read failed", __FILE__, __LINE__, 1);
 	buffer[index] = '\0';
 	garbage_add_to_layer(&minishell_get()->garbage.temporary, (void *)buffer);
 	return (buffer);

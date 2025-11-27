@@ -11,7 +11,6 @@ int	minishell_parse(char *input)
 {
 	t_minishell		*shell;
 	t_build_manager	manager;
-	int				validate_rtn;
 
 	shell = minishell_get();
 	validate_quote_pairs(input);

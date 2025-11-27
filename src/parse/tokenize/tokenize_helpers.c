@@ -16,16 +16,6 @@ bool	is_meta_char(char input)
 	return (false);
 }
 
-static int	len_to_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != ' ')
-		i++;
-	return (i);
-}
-
 static void	single_char_evaluation(char **input, int *len,
 			t_tree_node_type *type)
 {

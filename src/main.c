@@ -3,7 +3,6 @@
 int	main(int ac, char **av, char **env)
 {
 	t_minishell	*shell;
-	char		*cmd;
 
 	(void)ac;
 	(void)av;

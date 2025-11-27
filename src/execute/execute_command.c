@@ -35,8 +35,6 @@ static int	execute_builtin(t_tree_node *node)
 
 static char	*resolve_bin_path(char *cmd, char **split_path)
 {
-	char	*bin_path;
-
 	if (split_path)
 		return (get_bin_path_of_command(cmd, split_path));
 	if (access(cmd, X_OK) == 0)

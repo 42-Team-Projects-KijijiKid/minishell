@@ -64,7 +64,6 @@ static void	execute_left_tree(t_tree_node *node,
 static void	exec_pipe_recursive(t_tree_node *node, int in_fd)
 {
 	int		pipe_fds[2];
-	pid_t	pid;
 
 	if (node->type != PIPE)
 	{

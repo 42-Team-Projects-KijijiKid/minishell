@@ -2,6 +2,7 @@
 
 void	ctrl_c(int signal)
 {
+	(void)signal;
 	write(1, "\n", 1);
 	rl_on_new_line();
 	rl_redisplay();
@@ -23,6 +24,7 @@ void	ctrl_heredoc(int sig)
 {
 	t_minishell	*shell;
 
+	(void)sig;
 	shell = minishell_get();
 	close(shell->fd_table.head->fd);
 	close_default_filedescriptor();

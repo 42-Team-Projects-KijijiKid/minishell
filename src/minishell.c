@@ -60,7 +60,7 @@ static bool	minishell_non_interactive(void)
 	error_code = get_error_code();
 	*error_code = 0;
 	shell->herdoc = true;
-	cmd = read_next_line(STDIN_FILENO);
+	cmd = read_next_line();
 	if (!cmd || *cmd == '\0')
 		return (false);
 	minishell_parse(cmd);

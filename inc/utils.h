@@ -41,6 +41,6 @@ t_minishell	*minishell_get(void);
 int			ft_fork(void);
 
 // read_next_line.c
-char		*read_next_line(int fd);
+char		*read_next_line(void);
 
 #endif

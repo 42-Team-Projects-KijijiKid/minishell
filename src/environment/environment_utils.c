@@ -60,7 +60,6 @@ int	env_set_value(char *key, char *value)
 {
 	t_minishell	*shell;
 	t_env_node	*node;
-	t_env_node	*new_node;
 
 	shell = minishell_get();
 	node = shell->env.head;
