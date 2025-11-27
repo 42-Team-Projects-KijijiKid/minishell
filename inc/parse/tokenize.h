@@ -20,11 +20,14 @@ char				**tokens_split_args(char **input);
 unsigned int		count_arguments(char *str);
 
 // tokens_validate.c
-bool				is_operator(t_tree_node_type type);
-int					count_token_type(t_token *token, t_tree_node_type type);
 bool				validate_subshells(t_token *token);
 bool				validate_redirects(t_token *token);
 bool				validate_operators(t_token *token);
 int					tokens_validate(t_token *token);
+
+// tokens_validate_2.c
+bool				is_operator(t_tree_node_type type);
+int					count_token_type(t_token *token, t_tree_node_type type);
+
 
 #endif

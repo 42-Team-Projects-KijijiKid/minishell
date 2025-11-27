@@ -1,30 +1,5 @@
 #include "../../../inc/minishell.h"
 
-bool	is_operator(t_tree_node_type type)
-{
-	if (type == AND_IF)
-		return (true);
-	else if (type == OR_IF)
-		return (true);
-	else if (type == PIPE)
-		return (true);
-	return (false);
-}
-
-int	count_token_type(t_token *token, t_tree_node_type type)
-{
-	int	count;
-
-	count = 0;
-	while (token)
-	{
-		if (token->type == type)
-			count++;
-		token = token->next;
-	}
-	return (count);
-}
-
 bool	validate_subshells(t_token *token)
 {
 	int	depth;
@@ -75,14 +50,14 @@ bool	validate_operators(t_token *token)
 		{
 			if (!token->prev || !token->next)
 				return (false);
-			if (is_operator(token->prev->type) ||
-				is_operator(token->next->type))
+			if (is_operator(token->prev->type)
+				|| is_operator(token->next->type))
 				return (false);
-			if (token->prev->type == LPAREN ||
-				token->next->type == RPAREN)
+			if (token->prev->type == LPAREN
+				|| token->next->type == RPAREN)
 				return (false);
-			if (is_redirect(token->prev->type) ||
-				is_redirect(token->next->type))
+			if (is_redirect(token->prev->type)
+				|| is_redirect(token->next->type))
 				return (false);
 		}
 		token = token->next;
