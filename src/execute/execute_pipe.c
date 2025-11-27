@@ -6,7 +6,7 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 
 	pid = fork();
 	if (pid < 0)
-		ft_error("fork failed", __FILE__, __LINE__, 911);
+		ft_error("fork failed", __FILE__, __LINE__, 131);
 	if (pid == 0)
 	{
 		if (in_fd != STDIN_FILENO)
@@ -14,13 +14,14 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 			if (dup2(in_fd, STDIN_FILENO) == -1)
 			{
 				close(in_fd);
-				ft_error("dup2 failed", __FILE__, __LINE__, 913);
+				ft_error("dup2 failed", __FILE__, __LINE__, 131);
 			}
 			close(in_fd);
 		}
 		execute_node(node);
-		exit(EXIT_SUCCESS);
+		exit (minishell_get()->last_exit_status);
 	}
+	minishell_get()->pipe_pid = pid;
 	if (in_fd != STDIN_FILENO)
 		close(in_fd);
 }
@@ -43,17 +44,17 @@ static void	execute_left_tree(t_tree_node *node,
 
 	pid = fork();
 	if (pid < 0)
-		ft_error("fork failed", __FILE__, __LINE__, 911);
+		ft_error("fork failed", __FILE__, __LINE__, 131);
 	if (pid == 0)
 	{
 		if (in_fd != STDIN_FILENO)
 		{
 			if (dup2(in_fd, STDIN_FILENO) == -1)
-				fd_error(in_fd, read_fd, write_fd, 913);
+				fd_error(in_fd, read_fd, write_fd, 131);
 			close(in_fd);
 		}
 		if (dup2(write_fd, STDOUT_FILENO) == -1)
-			fd_error(-1, read_fd, write_fd, 913);
+			fd_error(-1, read_fd, write_fd, 131);
 		close(read_fd);
 		close(write_fd);
 		execute_node(node->left);
@@ -86,8 +87,13 @@ void	execute_pipe(t_tree_node *node)
 
 	shell = minishell_get();
 	exec_pipe_recursive(node, STDIN_FILENO);
-	while (wait(&status) > 0)
-		continue ;
-	shell->last_exit_status = status;
+	if (waitpid(shell->pipe_pid, &status, 0) == -1)
+		shell->last_exit_status = 127;
+	else if (WIFEXITED(status))
+		shell->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		shell->last_exit_status = 128 + WTERMSIG(status);
+	else
+		shell->last_exit_status = 1;
 	default_filedescripor();
 }

@@ -165,6 +165,7 @@ typedef struct s_minishell
 	t_environment		env;
 	t_filedescriptor	filedescriptor;
 	bool				herdoc;
+	int					pipe_pid;
 	int					last_exit_status;
 	t_fd_meta			fd_table;
 }	t_minishell;

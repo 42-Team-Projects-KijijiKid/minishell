@@ -61,22 +61,22 @@ static void	execute_executable(t_tree_node *node)
 	exit(127);
 }
 
-void	handle_child_exit(t_minishell *sh, t_tree_node *n)
+void	handle_child_exit(t_minishell *shell, t_tree_node *node)
 {
 	int	pid;
-	int	st;
+	int	status;
 
 	pid = ft_fork();
 	if (pid == 0)
-		execute_executable(n);
-	if (waitpid(pid, &st, 0) == -1)
-		sh->last_exit_status = 127;
-	else if (WIFEXITED(st))
-		sh->last_exit_status = WEXITSTATUS(st);
-	else if (WIFSIGNALED(st))
-		sh->last_exit_status = 128 + WTERMSIG(st);
+		execute_executable(node);
+	if (waitpid(pid, &status, 0) == -1)
+		shell->last_exit_status = 127;
+	else if (WIFEXITED(status))
+		shell->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		shell->last_exit_status = 128 + WTERMSIG(status);
 	else
-		sh->last_exit_status = 1;
+		shell->last_exit_status = 1;
 	sig_init();
 }
 
