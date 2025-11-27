@@ -10,6 +10,8 @@ char	*expand_arguments(char *str)
 
 	buffer = str;
 	expanded_len = total_length(str);
+	if (expanded_len == 0)
+		return (NULL);
 	i = 0;
 	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
 	quotes[0] = false;
