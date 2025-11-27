@@ -1,5 +1,23 @@
 #include "minishell.h"
 
+static void	parentesis_depth(t_tree_node_type *type, int *depth, bool rev)
+{
+	if (rev)
+	{
+		if (type == LPAREN)
+			(*depth)--;
+		else if (type == RPAREN)
+			(*depth)++;
+	}
+	else
+	{
+		if (type == LPAREN)
+			(*depth)++;
+		else if (type == RPAREN)
+			(*depth)--;
+	}
+}
+
 int	count_outer_subshells_reverse(t_token *token)
 {
 	int		depth;
@@ -18,10 +36,7 @@ int	count_outer_subshells_reverse(t_token *token)
 	{
 		if (token->type != RPAREN)
 			initial = false;
-		if (token->type == LPAREN)
-			depth--;
-		else if (token->type == RPAREN)
-			depth++;
+		parentesis_depth(token->type, &depth, true);
 		if (initial == false && min_depth > depth)
 			min_depth = depth;
 		token = token->prev;
@@ -48,10 +63,7 @@ int	count_outer_subshells(t_token *token)
 	{
 		if (token->type != LPAREN)
 			initial = false;
-		if (token->type == LPAREN)
-			depth++;
-		else if (token->type == RPAREN)
-			depth--;
+		parentesis_depth(token->type, &depth, false);
 		if (initial == false && min_depth > depth)
 			min_depth = depth;
 		token = token->next;
