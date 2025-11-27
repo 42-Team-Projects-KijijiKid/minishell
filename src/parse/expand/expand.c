@@ -77,4 +77,3 @@ t_tree_node	*expand(t_tree_node *node)
 	expand(node->right);
 	return (node);
 }
-

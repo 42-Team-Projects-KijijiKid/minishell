@@ -58,6 +58,12 @@ static char	*build_path(char *current_pwd, char *new_path)
 	return (new_path);
 }
 
+static void	set_env(char *new_pwd, char *old_pwd)
+{
+	env_set_value("PWD", new_pwd);
+	env_set_value("OLDPWD", old_pwd);
+}
+
 int	builtin_cd(char **args)
 {
 	char	*new_pwd;
@@ -77,10 +83,7 @@ int	builtin_cd(char **args)
 		}
 	}
 	if (chdir(new_pwd) == 0)
-	{
-		env_set_value("PWD", new_pwd);
-		env_set_value("OLDPWD", old_pwd);
-	}
+		set_env(new_pwd, old_pwd);
 	else
 	{
 		ft_fprintf(STDERR_FILENO, NO_FILE_DIR, "cd", args[1]);

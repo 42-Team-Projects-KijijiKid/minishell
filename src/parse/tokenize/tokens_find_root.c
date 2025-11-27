@@ -64,7 +64,6 @@ t_token	*find_root(t_token *head)
 	{
 		head = head->next;
 		tail = tail->prev;
-
 	}
 	return (find_root_without_subshell(head, tail));
 }
