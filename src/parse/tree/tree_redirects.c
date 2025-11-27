@@ -13,39 +13,56 @@ bool	is_redirect(t_tree_node_type type)
 	return (false);
 }
 
-void	tree_redirects(t_build_manager *manager)
+static t_token	*init_redirect_traversal(t_build_manager *m)
 {
-	t_token			*token;
-	t_redirect_node	*redirect;
+	t_token	*tok;
 
-	if (!manager->head_token->next)
-		return ;
-	if (manager->head_token->type == TEXT
-		&& manager->head_token == manager->root_token)
-		token = manager->head_token->next;
-	else if (is_redirect(manager->head_token->type))
+	if (!m->head_token->next)
+		return (NULL);
+	if (m->head_token->type == TEXT && m->head_token == m->root_token)
+		return (m->head_token->next);
+	if (is_redirect(m->head_token->type))
 	{
-		token = manager->head_token;
-		manager->root_node->args = (char **)fti_malloc(
+		tok = m->head_token;
+		m->root_node->args = (char **)fti_malloc(
 				sizeof(char *), TEMPORARY);
-		manager->root_node->args[0] = NULL;
+		m->root_node->args[0] = NULL;
+		return (tok);
 	}
-	redirect = NULL;
-	if (token && is_redirect(token->type))
-		redirect = (t_redirect_node *)fti_malloc(
+	return (NULL);
+}
+
+static t_redirect_node	*append_redirect_node(t_build_manager *m,
+	t_token *tok, t_redirect_node *redir)
+{
+	if (!redir)
+		redir = (t_redirect_node *)fti_malloc(
 				sizeof(t_redirect_node), TEMPORARY);
-	while (token && is_redirect(token->type))
+	if (m->root_node->redirect.head == NULL)
+		m->root_node->redirect.head = redir;
+	redir->type = tok->type;
+	redir->file = tok->next->args[0];
+	redir->next = NULL;
+	return (redir);
+}
+
+void	tree_redirects(t_build_manager *m)
+{
+	t_token			*tok;
+	t_redirect_node	*redir;
+
+	tok = init_redirect_traversal(m);
+	if (!tok || !is_redirect(tok->type))
+		return ;
+	redir = (t_redirect_node *)fti_malloc(
+			sizeof(t_redirect_node), TEMPORARY);
+	while (tok && is_redirect(tok->type))
 	{
-		if (manager->root_node->redirect.head == NULL)
-			manager->root_node->redirect.head = redirect;
-		redirect->type = token->type;
-		redirect->file = token->next->args[0];
-		redirect->next = NULL;
-		token = token->next;
-		token = token->next;
-		if (token && is_redirect(token->type))
-			redirect->next = (t_redirect_node *)fti_malloc(
+		redir = append_redirect_node(m, tok, redir);
+		tok = tok->next->next;
+		if (tok && is_redirect(tok->type))
+			redir->next = (t_redirect_node *)fti_malloc(
 					sizeof(t_redirect_node), TEMPORARY);
-		redirect = redirect->next;
+		redir = redir->next;
 	}
 }
