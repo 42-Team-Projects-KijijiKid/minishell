@@ -2,13 +2,11 @@
 
 char	*expand_arguments(char *str)
 {
-	char				*buffer;
 	char				*rtn;
 	unsigned int		expanded_len;
 	int					i;
 	bool				quotes[2];
 
-	buffer = str;
 	expanded_len = total_length(str);
 	if (expanded_len == 0)
 		return (NULL);
@@ -21,8 +19,7 @@ char	*expand_arguments(char *str)
 		if (*str == '$' && !quotes[1]
 			&& check_if_valid(str))
 		{
-			if (!env_value(&str, rtn, &i)
-				&& quotes[0])
+			if (!env_value(&str, rtn, &i) && quotes[0])
 				rtn[i++] = '$';
 		}
 		else

@@ -1,5 +1,14 @@
 #include "minishell.h"
 
+static void	backslash_expansion(char **str, char *rtn, int *i)
+{
+	(*str)++;
+	if (**str && **str == '\\')
+		rtn[(*i)++] = **str;
+	if (**str && **str == '\\')
+		(*str)++;
+}
+
 void	process_non_dollar(char **str, char *rtn, int *i, bool (*quotes)[2])
 {
 	if (!quote_has_content(*str) && (!(*quotes)[0] || !(*quotes)[1]))
@@ -21,12 +30,7 @@ void	process_non_dollar(char **str, char *rtn, int *i, bool (*quotes)[2])
 		(*str)++;
 	}
 	else
-	{
-		rtn[(*i)++] = **str;
-		(*str)++;
-		if (**str && **str == '\\')
-			(*str)++;
-	}
+		backslash_expansion(str, rtn, i);
 }
 
 bool	env_value(char **str, char *rtn, int *i)
