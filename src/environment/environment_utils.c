@@ -58,18 +58,24 @@ char	*env_get_value(char *key)
 
 int	env_set_value(char *key, char *value)
 {
-	t_minishell	*shell;
 	t_env_node	*node;
 
-	shell = minishell_get();
-	node = shell->env.head;
+	node = minishell_get()->env.head;
 	while (node)
 	{
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0
 			&& node->key_len == ft_strlen(key))
 		{
-			node->value = fti_strdup(value, PERSISTENT);
-			node->value_len = ft_strlen(node->value);
+			if (value)
+			{
+				node->value = fti_strdup(value, PERSISTENT);
+				node->value_len = ft_strlen(node->value);
+			}
+			else
+			{
+				node->value = NULL;
+				node->value_len = 0;
+			}
 			return (0);
 		}
 		node = node->next;

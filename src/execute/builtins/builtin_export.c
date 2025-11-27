@@ -22,6 +22,13 @@ static void	export_key_value_variable(char *str)
 
 static void	export_key_only(char *str)
 {
+	char	*buf;
+
+	buf = str;
+	while (*buf && *buf != '=')
+		buf++;
+	if (*buf == '=')
+		*buf = '\0';
 	env_set_value(str, NULL);
 }
 
