@@ -6,6 +6,11 @@ static int	is_file(const char *cmd)
 
 	if (!cmd)
 		return (0);
+	if (*cmd == '.')
+	{
+		ft_fprintf(2, "%s: command not found\n", cmd);
+		exit(127);
+	}
 	directory = opendir(cmd);
 	if (directory != NULL)
 	{
