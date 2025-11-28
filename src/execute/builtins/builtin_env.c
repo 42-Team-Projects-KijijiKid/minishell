@@ -1,5 +1,20 @@
 #include "../../../inc/minishell.h"
 
+static bool	check_if_has_value(char *str)
+{
+	while (*str)
+	{
+		if (*str == '=')
+		{
+			str++;
+			if (*str)
+				return (true);
+		}
+		str++;
+	}
+	return (false);
+}
+
 // TODO: implement builtin_env
 // Functions exist in different branch:
 // env_to_2d_array
@@ -21,7 +36,8 @@ int	builtin_env(char **args)
 	}
 	while (env && *env)
 	{
-		ft_fprintf(STDOUT_FILENO, "%s\n", *env);
+		if (check_if_has_value(*env))
+			ft_fprintf(STDOUT_FILENO, "%s\n", *env);
 		env++;
 	}
 	return (0);
