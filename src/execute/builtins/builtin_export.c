@@ -13,10 +13,19 @@ static bool	check_for_concat(char *str)
 
 static void	export_key_value_variable(char *str)
 {
+	char	*value;
+
 	if (check_for_concat(str))
 		concatenate_env(str);
 	else
-		export_to_env(str);
+	{
+		value = str;
+		while (*value && *value != '=')
+			value++;
+		*value = '\0';
+		value++;
+		env_set_value(str, value);
+	}
 	return ;
 }
 

@@ -28,6 +28,7 @@ void	ctrl_heredoc(int sig)
 	shell = minishell_get();
 	close(shell->fd_table.head->fd);
 	close_default_filedescriptor();
+	garbage_free_all();
 	exit(130);
 }
 
