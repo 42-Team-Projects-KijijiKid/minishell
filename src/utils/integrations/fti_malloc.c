@@ -9,6 +9,7 @@ void	*fti_malloc(ssize_t size, t_garbage_layers type)
 	rtn = malloc(size);
 	if (!rtn)
 		ft_error("Malloc failed", __FILE__, __LINE__, 2);
+	ft_bzero(rtn, size);
 	if (type == PERSISTENT)
 		garbage_add_to_layer(&meta->garbage.persistent, (void *)rtn);
 	else if (type == TEMPORARY)

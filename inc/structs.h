@@ -16,9 +16,6 @@ typedef struct s_fd_node
 
 typedef struct s_fd_meta
 {
-	int			std_in;
-	int			std_out;
-	int			std_err;
 	t_fd_node	*head;
 	t_fd_node	*tail;
 	size_t		size;

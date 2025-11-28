@@ -23,7 +23,7 @@ int	builtin_exit(char **args)
 {
 	long long	exit_code;
 
-    garbage_free_all();
+    // garbage_free_all();
 	if (!args[1])
 		exit(0);
 	if (args[2])

@@ -52,6 +52,9 @@ void	garbage_free_all(void)
 
 	meta = minishell_get();
 	clear_history();
+	close(meta->filedescriptor.std_err);
+	close(meta->filedescriptor.std_in);
+	close(meta->filedescriptor.std_out);
 	garbage_free_layer(&meta->garbage.persistent);
 	garbage_free_layer(&meta->garbage.temporary);
 }
