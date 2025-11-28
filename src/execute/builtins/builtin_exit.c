@@ -19,29 +19,34 @@ static void	check_argument(char *str)
 	}
 }
 
-int	builtin_exit(char **args)
+static void	cleanup_exit(int status)
+{
+	garbage_free_all();
+	exit (status);
+}
+
+void	builtin_exit(char **args)
 {
 	long long	exit_code;
 
-    // garbage_free_all();
 	if (!args[1])
 		exit(0);
 	if (args[2])
 	{
 		ft_fprintf(STDERR_FILENO, "bash: exit: too many arguments\n");
 		if (ft_isdigit(args[1][0]))
-			exit(1);
-		exit(2);
+			cleanup_exit(1);
+		cleanup_exit(2);
 	}
 	if (!args[1][0])
 	{
 		ft_fprintf(STDERR_FILENO,
 			"bash: exit: : numeric argument required\n");
-		exit(2);
+		cleanup_exit(2);
 	}
 	check_argument(args[1]);
 	exit_code = ft_atol(args[1]);
 	if (exit_code < 0)
 		exit_code = 256 + (exit_code % 256);
-	exit(exit_code);
+	cleanup_exit(exit_code);
 }

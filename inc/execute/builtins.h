@@ -16,7 +16,7 @@ int		builtin_echo(char **args);
 int		builtin_env(char **args);
 
 // builtin_exit.c
-int		builtin_exit(char **args);
+void	builtin_exit(char **args);
 
 // builtin_export.c
 int		builtin_export(char **args);
