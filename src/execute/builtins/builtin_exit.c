@@ -23,11 +23,9 @@ int	builtin_exit(char **args)
 {
 	long long	exit_code;
 
+    garbage_free_all();
 	if (!args[1])
-	{
-		garbage_free_all();
 		exit(0);
-	}
 	if (args[2])
 	{
 		ft_fprintf(STDERR_FILENO, "bash: exit: too many arguments\n");
