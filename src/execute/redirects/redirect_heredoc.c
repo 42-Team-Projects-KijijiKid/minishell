@@ -22,8 +22,9 @@ static void	run_heredoc(char *delimiter, int *pipe_fds)
 	close(pipe_fds[0]);
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
+		line = readline(">");
+		if (*line == 26)
+			break ;
 		garbage_add_to_layer(&shell->garbage.persistent, line);
 		len = len_to_newline(line);
 		if (ft_strncmp(line, delimiter, len) == 0
