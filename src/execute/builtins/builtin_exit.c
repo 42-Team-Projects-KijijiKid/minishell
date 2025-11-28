@@ -30,7 +30,7 @@ void	builtin_exit(char **args)
 	long long	exit_code;
 
 	if (!args[1])
-		exit(0);
+		cleanup_exit(0);
 	if (args[2])
 	{
 		ft_fprintf(STDERR_FILENO, "bash: exit: too many arguments\n");

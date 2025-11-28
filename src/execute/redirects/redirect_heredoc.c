@@ -29,7 +29,6 @@ static void	run_heredoc(char *delimiter, int *pipe_fds)
 		if (ft_strncmp(line, delimiter, len) == 0
 			&& *line != '\n' && len == ft_strlen(delimiter))
 			break ;
-		// line = expand_heredoc(line);
 		write(pipe_fds[1], line, len);
 		write(pipe_fds[1], "\n", 1);
 	}

@@ -19,6 +19,7 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 			close(in_fd);
 		}
 		execute_node(node);
+		garbage_free_all();
 		exit (minishell_get()->last_exit_status);
 	}
 	minishell_get()->pipe_pid = pid;
@@ -58,6 +59,7 @@ static void	execute_left_tree(t_tree_node *node,
 		close(read_fd);
 		close(write_fd);
 		execute_node(node->left);
+		garbage_free_all();
 		exit(EXIT_SUCCESS);
 	}
 }

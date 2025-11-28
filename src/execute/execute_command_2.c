@@ -23,7 +23,6 @@ static int	is_file(const char *cmd)
 	return (0);
 }
 
-
 static char	*resolve_bin_path(char *cmd, char **split_path)
 {
 	char	*bin_path;
@@ -53,8 +52,7 @@ static void	execute_executable(t_tree_node *node)
 	bin_path = resolve_bin_path(*node->args, split_path);
 	if (!bin_path)
 	{
-		if (access(*node->args, X_OK) == 0
-			&& !is_file(*node->args))
+		if (access(*node->args, X_OK) == 0 && !is_file(*node->args))
 			bin_path = *node->args;
 		else
 		{
@@ -88,4 +86,3 @@ void	handle_child_exit(t_minishell *shell, t_tree_node *node)
 		shell->last_exit_status = 1;
 	sig_init();
 }
-

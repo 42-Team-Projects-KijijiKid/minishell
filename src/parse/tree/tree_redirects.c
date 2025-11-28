@@ -13,19 +13,20 @@ bool	is_redirect(t_tree_node_type type)
 	return (false);
 }
 
-void	build_redirect(t_build_manager *manager, \
+void	build_redirect(t_build_manager *manager,
 	t_redirect_node **redirect, t_token **token)
 {
-		if (manager->root_node->redirect.head == NULL)
-			manager->root_node->redirect.head = *redirect;
-		(*redirect)->type = (*token)->type;
-		(*redirect)->file = (*token)->next->args[0];
-		(*redirect)->next = NULL;
-		*token = (*token)->next;
-		*token = (*token)->next;
-		if ((*token) && is_redirect((*token)->type))
-			(*redirect)->next = (t_redirect_node *)fti_malloc(sizeof(t_redirect_node), TEMPORARY);
-		*redirect = (*redirect)->next;
+	if (manager->root_node->redirect.head == NULL)
+		manager->root_node->redirect.head = *redirect;
+	(*redirect)->type = (*token)->type;
+	(*redirect)->file = (*token)->next->args[0];
+	(*redirect)->next = NULL;
+	*token = (*token)->next;
+	*token = (*token)->next;
+	if ((*token) && is_redirect((*token)->type))
+		(*redirect)->next = (t_redirect_node *)fti_malloc(
+				sizeof(t_redirect_node), TEMPORARY);
+	*redirect = (*redirect)->next;
 }
 
 void	tree_redirects(t_build_manager *manager)
@@ -36,17 +37,20 @@ void	tree_redirects(t_build_manager *manager)
 	if (!manager->head_token->next)
 		return ;
 	token = manager->head_token;
-	if (manager->head_token->type == TEXT && manager->head_token == manager->root_token)
+	if (manager->head_token->type == TEXT
+		&& manager->head_token == manager->root_token)
 		token = manager->head_token->next;
 	else if (is_redirect(manager->head_token->type))
 	{
 		token = manager->head_token;
-		manager->root_node->args = (char **)fti_malloc(sizeof(char *), TEMPORARY);
+		manager->root_node->args = (char **)fti_malloc(
+				sizeof(char *), TEMPORARY);
 		manager->root_node->args[0] = NULL;
 	}
 	redirect = NULL;
 	if (token && is_redirect(token->type))
-		redirect = (t_redirect_node *)fti_malloc(sizeof(t_redirect_node), TEMPORARY);
+		redirect = (t_redirect_node *)fti_malloc(sizeof(
+					t_redirect_node), TEMPORARY);
 	while (token && is_redirect(token->type))
 		build_redirect(manager, &redirect, &token);
 }
