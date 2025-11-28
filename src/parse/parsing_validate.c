@@ -23,12 +23,8 @@ static bool	find_matching_quote(char **str)
 /// @param line 
 void	validate_quote_pairs(char *line)
 {
-	unsigned int	double_quote;
-	unsigned int	single_quote;
 	int				*error_code;
 
-	double_quote = 0;
-	single_quote = 0;
 	error_code = get_error_code();
 	while (*line)
 	{
