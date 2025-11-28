@@ -63,7 +63,7 @@ int	initialize_heredoc(char *delimiter)
 		shell->last_exit_status = 130;
 		close(pipe_fds[0]);
 		shell->herdoc = false;
-		ft_fprintf(1, "\n");
+		write(1, "\n", 1);
 	}
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);

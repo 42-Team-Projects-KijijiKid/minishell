@@ -7,7 +7,7 @@ static int	is_file(const char *cmd)
 	if (!cmd)
 		return (0);
 	if (ft_strncmp(cmd, "..", ft_strlen(cmd)) == 0
-		&& ft_strncmp(cmd, ".", ft_strlen(cmd)))
+		&& ft_strncmp(cmd, ".", ft_strlen(cmd)) == 0)
 	{
 		ft_fprintf(2, "%s: command not found\n", cmd);
 		garbage_free_all();

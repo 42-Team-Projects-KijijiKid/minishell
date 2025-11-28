@@ -3,22 +3,6 @@
 	"editor.tabSize": 4,
 	"editor.detectIndentation": true,
 	"files.associations": {
-		"stdlib.h": "c",
-		"minishell.h": "c",
-		"execute.h": "c",
-		"unistd.h": "c",
-		"signal.h": "c",
-		"types.h": "c",
-		"signals.h": "c",
-		"termios.h": "c",
-		"array": "c",
-		"string_view": "c",
-		"initializer_list": "c",
-		"ranges": "c",
-		"span": "c",
-		"utility": "c",
-		"memory": "c",
-		"functional": "c",
-		"tuple": "c"
+		"minishell.h": "c"
 	}
 }
