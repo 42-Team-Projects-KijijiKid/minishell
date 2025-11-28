@@ -6,7 +6,7 @@ int	execute_rdr_out(t_redirect_node *redirect)
 	char	*filename;
 
 	filename = redirect->file;
-	fd = open(filename, O_WRONLY | O_CREAT, 0644);
+	fd = open(filename, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	if (fd == -1)
 	{
 		ft_fprintf(2, OUTFILE_PERMISSION_DENIED, filename);
