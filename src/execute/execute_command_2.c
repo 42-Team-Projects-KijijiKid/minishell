@@ -6,7 +6,8 @@ static int	is_file(const char *cmd)
 
 	if (!cmd)
 		return (0);
-	if (*cmd == '.')
+	if (ft_strncmp(cmd, "..", ft_strlen(cmd)) == 0
+		&& ft_strncmp(cmd, ".", ft_strlen(cmd)))
 	{
 		ft_fprintf(2, "%s: command not found\n", cmd);
 		garbage_free_all();
@@ -63,8 +64,8 @@ static void	execute_executable(t_tree_node *node)
 	}
 	close_default_filedescriptor();
 	execve(bin_path, node->args, envp);
-	garbage_free_all();
 	is_file(*node->args);
+	garbage_free_all();
 	exit(127);
 }
 
