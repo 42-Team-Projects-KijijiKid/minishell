@@ -9,6 +9,7 @@ static int	is_file(const char *cmd)
 	if (*cmd == '.')
 	{
 		ft_fprintf(2, "%s: command not found\n", cmd);
+		garbage_free_all();
 		exit(127);
 	}
 	directory = opendir(cmd);
@@ -16,6 +17,7 @@ static int	is_file(const char *cmd)
 	{
 		closedir(directory);
 		ft_fprintf(2, "%s: Is a directory\n", cmd);
+		garbage_free_all();
 		exit (126);
 	}
 	return (0);
@@ -57,11 +59,13 @@ static void	execute_executable(t_tree_node *node)
 		else
 		{
 			ft_fprintf(2, "%s: command not found\n", *node->args);
+			garbage_free_all();
 			exit(127);
 		}
 	}
 	close_default_filedescriptor();
 	execve(bin_path, node->args, envp);
+	garbage_free_all();
 	is_file(*node->args);
 	exit(127);
 }

@@ -8,7 +8,7 @@ char	**get_path_array(char **envp)
 	{
 		if (ft_strncmp("PATH=", *envp, ft_strlen("PATH=")) == 0)
 		{
-			path_2d = ft_split((*envp + 5), ':');
+			path_2d = fti_split((*envp + 5), ':');
 			return (path_2d);
 		}
 		envp++;
@@ -26,13 +26,8 @@ char	*get_bin_path_of_command(char *cmd, char **paths_2d)
 	{
 		full_path = fti_strjoin(*paths_2d, path_cmd, TEMPORARY);
 		if (access(full_path, X_OK) == 0)
-		{
-			free(path_cmd);
 			return (full_path);
-		}
-		free(full_path);
 		paths_2d++;
 	}
-	free(path_cmd);
 	return (NULL);
 }
