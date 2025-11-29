@@ -51,6 +51,8 @@ static char	*build_path(char *current_pwd, char *new_path)
 		new_path = fti_strdup(new_path, TEMPORARY);
 	else if (!ft_strncmp(new_path, "..", 2))
 		new_path = go_dir_back(current_pwd, new_path);
+	else if (!ft_strncmp(new_path, ".", 1))
+		new_path = current_pwd;
 	else if (!ft_strncmp(new_path, "-", 1))
 		new_path = env_get_value("OLDPWD");
 	else
