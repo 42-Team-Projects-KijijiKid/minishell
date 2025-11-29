@@ -7,7 +7,9 @@ static bool	check_if_has_value(char *str)
 		if (*str == '=')
 		{
 			str++;
-			if (*str)
+			if (!str)
+				return (false);
+			else
 				return (true);
 		}
 		str++;
