@@ -107,6 +107,5 @@ char	*expand_inside_str(char *str, char quote)
 		if (*str && *str != '$')
 			str++;
 	}
-	rtn[i] = '\0';
-	return (rtn);
+	return (rtn[i] = '\0', rtn);
 }

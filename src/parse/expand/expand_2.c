@@ -1,18 +1,18 @@
 #include "minishell.h"
 
 static void	process_non_dollar(char **str,
-	char *rtn, int *i, bool *double_quotes, bool *single_quotes)
+	char *rtn, int *i, bool (*quotes)[2])
 {
-	if (!quote_has_content(*str) && (!*double_quotes || !*single_quotes))
+	if (!quote_has_content(*str) && (!(*quotes)[0] || !(*quotes)[1]))
 		*str += 2;
-	else if (**str == '\'' && !*double_quotes)
+	else if (**str == '\'' && !(*quotes)[0])
 	{
-		*single_quotes = !*single_quotes;
+		(*quotes)[1] = !(*quotes)[1];
 		(*str)++;
 	}
-	else if (**str == '\"' && !*single_quotes)
+	else if (**str == '\"' && !(*quotes)[1])
 	{
-		*double_quotes = !*double_quotes;
+		(*quotes)[0] = !(*quotes)[0];
 		(*str)++;
 	}
 	else if (**str && **str != '\\')
@@ -36,29 +36,27 @@ char	*expand_single_argument(char *str)
 	char				*rtn;
 	unsigned int		expanded_len;
 	int					i;
-	bool				single_quotes;
-	bool				double_quotes;
+	bool				quotes[2];
 
 	buffer = str;
 	expanded_len = total_length(str);
 	i = 0;
 	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
-	single_quotes = false;
-	double_quotes = false;
+	quotes[0] = false;
+	quotes[1] = false;
 	while (*str)
 	{
-		if (*str == '$' && !single_quotes
+		if (*str == '$' && !quotes[1]
 			&& check_char(str))
 		{
-			if (!env_value(&str, rtn, &i)
-				&& double_quotes)
+			if (!env_value(&str, rtn, &i) && quotes[0])
 				rtn[i++] = '$';
 		}
 		else
-			process_non_dollar(&str, rtn, &i, &double_quotes, &single_quotes);
+			process_non_dollar(&str, rtn, &i, &quotes);
 	}
-	rtn[i] = '\0';
-	return (rtn);
+
+	return (rtn[i] = '\0', rtn);
 }
 
 /// @brief Goes trough 2D Array checking
