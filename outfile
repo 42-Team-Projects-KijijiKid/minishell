@@ -1,0 +1,14 @@
+total 192K
+drwxr-xr-x 2 mandre 2024_heilbronn   56 Nov 28 15:17 .vscode
+-rw-r--r-- 1 mandre 2024_heilbronn 3.4K Nov 28 15:17 Makefile
+drwxr-xr-x 4 mandre 2024_heilbronn  146 Nov 28 15:17 inc
+-rw-r--r-- 1 mandre 2024_heilbronn   27 Nov 28 15:17 .gitignore
+-rw-r--r-- 1 mandre 2024_heilbronn   85 Nov 28 15:17 supp.supp
+drwxr-xr-x 6 mandre 2024_heilbronn   99 Nov 28 15:17 src
+drwxr-xr-x 6 mandre 2024_heilbronn  122 Nov 29 11:11 ..
+drwxr-xr-x 8 mandre 2024_heilbronn 4.0K Nov 29 14:29 .git
+drwxr-xr-x 6 mandre 2024_heilbronn  148 Nov 29 14:29 libft
+drwxr-xr-x 3 mandre 2024_heilbronn   17 Nov 29 14:29 objs
+-rwxr-xr-x 1 mandre 2024_heilbronn 175K Nov 29 14:29 minishell
+-rw-r--r-- 1 mandre 2024_heilbronn    0 Nov 29 14:37 outfile
+drwxr-xr-x 8 mandre 2024_heilbronn  163 Nov 29 14:37 .

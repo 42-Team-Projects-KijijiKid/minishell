@@ -41,7 +41,10 @@ void	concatenate_env(char *str)
 		if (ft_strncmp(node->key, key, ft_strlen(key)) == 0
 			&& node->key_len == ft_strlen(key))
 		{
-			node->value = fti_strjoin(node->value, value, PERSISTENT);
+			if (!node->value)
+				node->value = fti_strdup(value, PERSISTENT);
+			else
+				node->value = fti_strjoin(node->value, value, PERSISTENT);
 			node->value_len = ft_strlen(node->value);
 			return ;
 		}
