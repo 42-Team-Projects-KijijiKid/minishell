@@ -7,19 +7,17 @@
 t_tree_node		*expand(t_tree_node *node);
 
 // expand_2.c
-void			process_non_dollar(char **str, char *rtn,
-					int *i, bool (*quotes)[2]);
-bool			env_value(char **str, char *rtn, int *i);
-bool			check_if_valid(char *str);
+void			expand_arguments(t_tree_node *node);
+char			*expand_single_argument(char *str);
 
 // expand_helpers.c
-unsigned int	strlen_with_expansion(char *str, char quote);
-char			*expand_inside_str(char *str, char quote);
-char			*give_env_str(char **str);
+bool			is_whitespace(char ch);
+bool			check_char(char *str);
+bool			env_value(char **str, char *rtn, int *i);
+bool			quote_has_content(char *str);
 
 // expand_helpers_2.c
-char			*null_end_str(char **str);
-bool			quote_has_content(char *str);
+char			*give_env_str(char **str);
 
 // expand_total_len.c
 unsigned int	total_length(char *str);

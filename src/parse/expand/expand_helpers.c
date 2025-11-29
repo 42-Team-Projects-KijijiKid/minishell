@@ -1,82 +1,50 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
-unsigned int	strlen_with_expansion(char *str, char quote)
+bool	env_value(char **str, char *rtn, int *i)
 {
-	int		len_1;
-	int		len_2;
 	char	*tmp_str;
 
-	len_1 = 0;
-	len_2 = 0;
-	while (*str != quote && *str)
+	tmp_str = give_env_str(str);
+	while (tmp_str && *tmp_str)
 	{
-		if (*str == '$')
-		{
-			str++;
-			tmp_str = null_end_str(&str);
-			tmp_str = get_environment_value(tmp_str);
-			if (tmp_str)
-				len_2 += ft_strlen(tmp_str);
-		}
-		if (*str && *str != quote)
-			len_1++;
-		if (*str && *str != '$')
-			str++;
+		rtn[*i] = *tmp_str;
+		(*i)++;
+		tmp_str++;
 	}
-	return (len_1 + len_2);
+	if (!tmp_str)
+		return (false);
+	return (true);
 }
 
-char	*last_exit_code(void)
+bool	is_whitespace(char ch)
 {
-	t_minishell	*shell;
-
-	shell = minishell_get();
-	return (fti_itoa(shell->last_exit_status));
+	if (ch == 32 || (9 <= ch && ch <= 13))
+		return (true);
+	return (false);
 }
 
-char	*give_env_str(char **str)
+bool	check_char(char *str)
 {
-	char	*tmp;
-	char	*rtn;
-
-	if (**str == '$')
-		(*str)++;
+	str++;
+	if (*str == '\0')
+		return (false);
 	else
-		return (NULL);
-	tmp = null_end_str(str);
-	if (!*tmp)
-		return (NULL);
-	if (ft_strncmp(tmp, "?", ft_strlen(tmp)) == 0)
-		return (last_exit_code());
-	rtn = get_environment_value(tmp);
-	return (rtn);
+		return (true);
+	return (false);
 }
 
-char	*expand_inside_str(char *str, char quote)
+bool	quote_has_content(char *str)
 {
-	char	*rtn;
-	char	*tmp_str;
-	int		i;
+	char	quote;
 
-	rtn = fti_malloc((sizeof(char) * strlen_with_expansion(
-					str, quote)) + 1, TEMPORARY);
-	i = 0;
+	if (*str != '\''
+		|| *str != '\"')
+		return (true);
+	quote = *str;
+	str++;
+	if (quote == *str)
+		return (false);
 	while (*str != quote && *str)
-	{
-		if (*str == '$')
-		{
-			tmp_str = give_env_str(&str);
-			while (tmp_str && *tmp_str)
-			{
-				rtn[i++] = *tmp_str;
-				tmp_str++;
-			}
-		}
-		if (*str != quote && *str
-			&& *str != '$')
-			rtn[i++] = *str;
-		if (*str && *str != '$')
-			str++;
-	}
-	return (rtn[i] = '\0', rtn);
+		str++;
+	return (true);
 }

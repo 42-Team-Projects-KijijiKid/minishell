@@ -1,59 +1,65 @@
-#include "../../../inc/minishell.h"
+#include "minishell.h"
 
-char	*expand_arguments(char *str)
+static bool	check_single_variable(char **array)
 {
-	char				*rtn;
-	unsigned int		expanded_len;
-	int					i;
-	bool				quotes[2];
+	int	i;
 
-	expanded_len = total_length(str);
-	if (expanded_len == 0)
-		return (NULL);
-	i = 0;
-	rtn = fti_malloc(sizeof(char) * (expanded_len + 1), TEMPORARY);
-	quotes[0] = false;
-	quotes[1] = false;
-	while (*str)
+	if (!*array)
+		return (false);
+	if (!array[1])
 	{
-		if (*str == '$' && !quotes[1]
-			&& check_if_valid(str))
+		i = 0;
+		while (is_whitespace(array[0][i]))
 		{
-			if (!env_value(&str, rtn, &i) && quotes[0])
-				rtn[i++] = '$';
+			if (!array[0][i])
+				return (true);
+			i++;
 		}
-		else
-			process_non_dollar(&str, rtn, &i, &quotes);
+		if (array[0][i] != '$')
+			return (false);
+		i++;
+		while (array[0][i])
+		{
+			if (array[0][i] == '$')
+				return (false);
+			if (is_whitespace(array[0][i]))
+			{
+				while (is_whitespace(array[0][i]))
+				{
+					if (!array[0][i])
+						return (true);
+					i++;
+				}
+				return (false);
+			}
+			i++;
+		}
+		return (true);
 	}
-	return (rtn[i] = '\0', rtn);
+	return (false);
 }
 
-/// @brief Goes trough 2D Array checking
-///possible expansions and replacing the strings
-void	possible_expansion(t_tree_node *node)
+static void	expand_single_variable(t_tree_node *node)
 {
-	char			**head;
-	t_redirect_node	*redir;
+	int		i;
+	int		len;
+	char	*env_key;
+	char	*env_value;
 
-	head = node->args;
-	while (*node->args)
+	i = 1;
+	len = 0;
+	while (node->args[0][i] && !is_whitespace(node->args[0][i++]))
+		len++;
+	i = 1;
+	env_key = (char *)fti_malloc(len + 1, TEMPORARY);
+	while (node->args[0][i] && !is_whitespace(node->args[0][i]))
 	{
-		if (ft_strncmp(*node->args, "~", ft_strlen(*node->args)) == 0)
-			*node->args = get_environment_value("HOME");
-		else
-			*node->args = expand_arguments(*node->args);
-		node->args++;
+		env_key[i - 1] = node->args[0][i];
+		i++;
 	}
-	redir = node->redirect.head;
-	while (redir)
-	{
-		if (ft_strncmp(redir->file, "~", ft_strlen(redir->file)) == 0)
-			redir->file = get_environment_value("HOME");
-		else
-			redir->file = expand_arguments(redir->file);
-		redir = redir->next;
-	}
-	node->args = head;
+	env_key[i - 1] = '\0';
+	env_value = get_environment_value(env_key);
+	node->args = fti_split(env_value, ' ');
 }
 
 /// @brief Goes recursively through the
@@ -70,7 +76,12 @@ t_tree_node	*expand(t_tree_node *node)
 	if (node->type == TEXT)
 	{
 		if (node->args)
-			possible_expansion(node);
+		{
+			if (check_single_variable(node->args))
+				expand_single_variable(node);
+			else
+				expand_arguments(node);
+		}
 	}
 	expand(node->left);
 	expand(node->right);
