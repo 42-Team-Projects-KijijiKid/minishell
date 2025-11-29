@@ -1,6 +1,12 @@
 #include "../../../inc/minishell.h"
 
-static void	check_argument(char *str)
+void	cleanup_exit(int status)
+{
+	garbage_free_all();
+	exit (status);
+}
+
+static void	argument_is_numeric(char *str)
 {
 	char	*buf;
 
@@ -13,30 +19,26 @@ static void	check_argument(char *str)
 		{
 			ft_fprintf(STDERR_FILENO,
 				"exit: %s: numeric argument required\n", buf);
-			exit (2);
+			cleanup_exit(2);
 		}
 		str++;
 	}
 }
 
-static void	cleanup_exit(int status)
-{
-	garbage_free_all();
-	exit (status);
-}
-
-void	builtin_exit(char **args)
+int	builtin_exit(char **args)
 {
 	long long	exit_code;
 
 	if (!args[1])
 		cleanup_exit(0);
+	argument_is_numeric(args[1]);
 	if (args[2])
 	{
+		ft_fprintf(STDOUT_FILENO, "exit\n");
 		ft_fprintf(STDERR_FILENO, "bash: exit: too many arguments\n");
 		if (ft_isdigit(args[1][0]))
-			cleanup_exit(1);
-		cleanup_exit(2);
+			return(1);
+		return(2);
 	}
 	if (!args[1][0])
 	{
@@ -44,9 +46,9 @@ void	builtin_exit(char **args)
 			"bash: exit: : numeric argument required\n");
 		cleanup_exit(2);
 	}
-	check_argument(args[1]);
-	exit_code = ft_atol(args[1]);
+	exit_code = fti_atol_exit(args[1]);
 	if (exit_code < 0)
 		exit_code = 256 + (exit_code % 256);
 	cleanup_exit(exit_code);
+	return (-1);
 }

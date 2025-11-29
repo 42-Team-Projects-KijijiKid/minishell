@@ -19,7 +19,7 @@ static int	execute_builtin(t_tree_node *node)
 	else if (!ft_strncmp(node->args[0], "echo", len) && len == 4)
 		exit = builtin_echo(node->args);
 	else if (!ft_strncmp(node->args[0], "exit", len) && len == 4)
-		builtin_exit(node->args);
+		exit = builtin_exit(node->args);
 	else if (!ft_strncmp(node->args[0], "export", len) && len == 6)
 		exit = builtin_export(node->args);
 	else if (!ft_strncmp(node->args[0], "unset", len) && len == 5)

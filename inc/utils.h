@@ -3,6 +3,9 @@
 
 # include "structs.h"
 
+// integrations/fti_atol_exit.c
+long		fti_atol_exit(const char *str);
+
 // integrations/fti_malloc.c
 void		*fti_malloc(ssize_t size, t_garbage_layers type);
 
