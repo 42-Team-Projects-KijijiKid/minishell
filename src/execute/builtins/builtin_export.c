@@ -34,9 +34,11 @@ static void	export_key_only(char *str)
 	char	*buf;
 
 	buf = str;
-	while (*buf && *buf != '=')
+	while (*buf && *buf != '='
+		&& *buf != '+')
 		buf++;
-	if (*buf == '=')
+	if (*buf == '='
+		|| *buf == '+')
 		*buf = '\0';
 	env_set_value(str, NULL);
 }
