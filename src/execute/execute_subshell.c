@@ -13,6 +13,7 @@ void	execute_subshell(t_tree_node *node)
 	if (pid == 0)
 	{
 		execute_node_by_type(node);
+		garbage_free_all();
 		exit(shell->last_exit_status);
 	}
 	else
