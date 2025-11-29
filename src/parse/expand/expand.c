@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+static bool	check_after_var_start(char **array, int *i)
+{
+	while (array[0][*i])
+	{
+		if (array[0][*i] == '$')
+			return (false);
+		if (is_whitespace(array[0][*i]))
+		{
+			while (is_whitespace(array[0][*i]))
+			{
+				if (!array[0][*i])
+					return (true);
+				(*i)++;
+			}
+			return (false);
+		}
+		(*i)++;
+	}
+	return (true);
+}
+
 static bool	check_single_variable(char **array)
 {
 	int	i;
@@ -18,23 +39,7 @@ static bool	check_single_variable(char **array)
 		if (array[0][i] != '$')
 			return (false);
 		i++;
-		while (array[0][i])
-		{
-			if (array[0][i] == '$')
-				return (false);
-			if (is_whitespace(array[0][i]))
-			{
-				while (is_whitespace(array[0][i]))
-				{
-					if (!array[0][i])
-						return (true);
-					i++;
-				}
-				return (false);
-			}
-			i++;
-		}
-		return (true);
+		return (check_after_var_start(array, &i));
 	}
 	return (false);
 }
