@@ -2,6 +2,8 @@
 # define MINISHELL_H
 
 # define EXIT_BASE 125
+# define _POSIX_C_SOURCE 202405L
+# define _DEFAULT_SOURCE
 
 # include <stdio.h>
 # include <readline/readline.h>

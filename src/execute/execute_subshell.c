@@ -6,7 +6,7 @@ void	execute_subshell(t_tree_node *node)
 	t_minishell	*shell;
 	int			status;
 
-	pid = fork();
+	pid = ft_fork();
 	shell = minishell_get();
 	if (pid == -1)
 		ft_error("Fork failed", __FILE__, __LINE__, 92);

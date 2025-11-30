@@ -4,7 +4,7 @@ static void	execute_last_node(t_tree_node *node, int in_fd)
 {
 	int	pid;
 
-	pid = fork();
+	pid = ft_fork();
 	if (pid < 0)
 		ft_error("fork failed", __FILE__, __LINE__, 131);
 	if (pid == 0)
@@ -43,7 +43,7 @@ static void	execute_left_tree(t_tree_node *node,
 {
 	int	pid;
 
-	pid = fork();
+	pid = ft_fork();
 	if (pid < 0)
 		ft_error("fork failed", __FILE__, __LINE__, 131);
 	if (pid == 0)
