@@ -46,4 +46,7 @@ int			ft_fork(void);
 // read_next_line.c
 char		*read_next_line(void);
 
+// shell_level.c
+void	update_shell_level(void);
+
 #endif
