@@ -1,8 +1,0 @@
-{
-	"editor.insertSpaces": false,
-	"editor.tabSize": 4,
-	"editor.detectIndentation": true,
-	"files.associations": {
-		"minishell.h": "c"
-	}
-}
