@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*   By: mandre <mandre@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/30 12:16:34 by aeckert           #+#    #+#             */
-/*   Updated: 2025/11/30 12:19:45 by aeckert          ###   ########.fr       */
+/*   Updated: 2025/11/30 12:59:15 by mandre           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ void	execute_pipe(t_tree_node *node)
 		shell->last_exit_status = 128 + WTERMSIG(status);
 	else
 		shell->last_exit_status = 1;
+	wait(NULL);
 	default_filedescripor();
 }
