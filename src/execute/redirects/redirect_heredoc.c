@@ -53,7 +53,7 @@ int	initialize_heredoc(char *delimiter)
 	shell = minishell_get();
 	if (pipe(pipe_fds) == -1)
 		ft_error(PIPE_FAILED, __FILE__, __LINE__, 131);
-	pid = fork();
+	pid = ft_fork();
 	if (pid == -1)
 		ft_error(FORK_FAILED, __FILE__, __LINE__, 131);
 	if (pid == 0)
@@ -65,6 +65,8 @@ int	initialize_heredoc(char *delimiter)
 		close(pipe_fds[0]);
 		shell->herdoc = false;
 		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
 	}
 	close(pipe_fds[1]);
 	return (pipe_fds[0]);

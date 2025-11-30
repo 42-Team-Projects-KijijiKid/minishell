@@ -53,5 +53,4 @@ void	sig_heredoc(void)
 	sa.sa_flags = 0;
 	sigaction(SIGTSTP, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
-
 }

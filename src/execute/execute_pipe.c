@@ -97,6 +97,6 @@ void	execute_pipe(t_tree_node *node)
 		shell->last_exit_status = 128 + WTERMSIG(status);
 	else
 		shell->last_exit_status = 1;
-	wait(NULL);
+	// wait(NULL);
 	default_filedescripor();
 }
