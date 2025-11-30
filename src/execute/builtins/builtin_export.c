@@ -32,15 +32,18 @@ static void	export_key_value_variable(char *str)
 static void	export_key_only(char *str)
 {
 	char	*buf;
+	char	concat;
 
 	buf = str;
-	while (*buf && *buf != '='
-		&& *buf != '+')
+	concat = false;
+	while (*buf && *buf != '=' && *buf != '+')
 		buf++;
-	if (*buf == '='
-		|| *buf == '+')
+	if (*buf == '+')
+		concat = true;
+	if (*buf == '=' || *buf == '+')
 		*buf = '\0';
-	env_set_value(str, NULL);
+	if (!concat)
+		env_set_value(str, NULL);
 }
 
 static int	export_variable(char *str)

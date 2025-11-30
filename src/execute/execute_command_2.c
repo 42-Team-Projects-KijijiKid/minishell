@@ -76,7 +76,10 @@ void	handle_child_exit(t_minishell *shell, t_tree_node *node)
 
 	pid = ft_fork();
 	if (pid == 0)
+	{
+		sig_reset();
 		execute_executable(node);
+	}
 	if (waitpid(pid, &status, 0) == -1)
 		shell->last_exit_status = 127;
 	else if (WIFEXITED(status))
