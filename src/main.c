@@ -8,6 +8,7 @@ int	main(int ac, char **av, char **env)
 	(void)av;
 	sig_init();
 	shell = minishell_initialize(env);
+	update_shell_level();
 	minishell_run();
 	clear_history();
 	close_default_filedescriptor();
