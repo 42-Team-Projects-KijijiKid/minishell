@@ -77,8 +77,7 @@ void	handle_child_exit(t_minishell *shell, t_tree_node *node)
 	pid = ft_fork();
 	if (pid == 0)
 	{
-		signal(SIGQUIT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		sig_reset();
 		execute_executable(node);
 	}
 	if (waitpid(pid, &status, 0) == -1)

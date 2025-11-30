@@ -72,10 +72,7 @@ int	builtin_export(char **args)
 	{
 		exit = export_variable(args[i]);
 		if (exit == 1)
-		{
-			ft_fprintf(2, "export: %s: not a valid identifier\n", args[i]);
 			break ;
-		}
 		i++;
 	}
 	return (exit);
