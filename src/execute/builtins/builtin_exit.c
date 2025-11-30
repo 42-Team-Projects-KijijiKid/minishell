@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/30 12:17:18 by aeckert           #+#    #+#             */
+/*   Updated: 2025/11/30 12:20:05 by aeckert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../inc/minishell.h"
 
 void	cleanup_exit(int status)
@@ -37,8 +49,8 @@ int	builtin_exit(char **args)
 		ft_fprintf(STDOUT_FILENO, "exit\n");
 		ft_fprintf(STDERR_FILENO, "bash: exit: too many arguments\n");
 		if (ft_isdigit(args[1][0]))
-			return(1);
-		return(2);
+			return (1);
+		return (2);
 	}
 	if (!args[1][0])
 	{

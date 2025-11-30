@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/30 12:16:07 by aeckert           #+#    #+#             */
+/*   Updated: 2025/11/30 12:20:32 by aeckert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	process_non_dollar(char **str,
@@ -55,7 +67,6 @@ char	*expand_single_argument(char *str)
 		else
 			process_non_dollar(&str, rtn, &i, &quotes);
 	}
-
 	return (rtn[i] = '\0', rtn);
 }
 

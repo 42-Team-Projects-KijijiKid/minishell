@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/30 12:17:47 by aeckert           #+#    #+#             */
+/*   Updated: 2025/11/30 12:18:58 by aeckert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef UTILS_H
 # define UTILS_H
 
@@ -47,6 +59,6 @@ int			ft_fork(void);
 char		*read_next_line(void);
 
 // shell_level.c
-void	update_shell_level(void);
+void		update_shell_level(void);
 
 #endif

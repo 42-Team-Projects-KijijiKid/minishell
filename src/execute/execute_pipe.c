@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_pipe.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aeckert <aeckert@student.42heilbronn.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/30 12:16:34 by aeckert           #+#    #+#             */
+/*   Updated: 2025/11/30 12:19:45 by aeckert          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 static void	execute_last_node(t_tree_node *node, int in_fd)
@@ -97,6 +109,5 @@ void	execute_pipe(t_tree_node *node)
 		shell->last_exit_status = 128 + WTERMSIG(status);
 	else
 		shell->last_exit_status = 1;
-	// wait(NULL);
 	default_filedescripor();
 }
