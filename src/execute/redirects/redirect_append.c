@@ -4,7 +4,7 @@ int	execute_rdr_append(t_redirect_node *redirect)
 {
 	int	fd;
 
-	fd = open(redirect->file, O_WRONLY | O_CREAT | O_APPEND);
+	fd = open(redirect->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
 		ft_fprintf(2, INFILE_NOT_FOUND, redirect->file);
