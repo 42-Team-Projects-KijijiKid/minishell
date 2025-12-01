@@ -35,7 +35,7 @@ static void	run_heredoc(char *delimiter, int *pipe_fds)
 	while (1)
 	{
 		line = readline(">");
-		if (*line == 26)
+		if (!line)
 			break ;
 		garbage_add_to_layer(&shell->garbage.persistent, line);
 		len = len_to_newline(line);

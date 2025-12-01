@@ -57,7 +57,8 @@ static char	*build_path(char *current_pwd, char *new_path)
 	i = 0;
 	while (new_path[i + 1])
 		i++;
-	if (new_path[i] == '/')
+	if (new_path[i] == '/'
+		&& 1 < ft_strlen(new_path))
 		new_path[i] = '\0';
 	if (*new_path == '/')
 		new_path = fti_strdup(new_path, TEMPORARY);
