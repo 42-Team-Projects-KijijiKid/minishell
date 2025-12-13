@@ -23,13 +23,13 @@ static void	run_heredoc(char *delimiter, int *pipe_fds)
 	while (1)
 	{
 		write(1, "> ", 2);
-		line = get_next_line(STDIN_FILENO);
-		garbage_add_to_layer(&shell->garbage.persistent, line);
+		line = readline("> ");
+		if (!line)
+			break ;
 		len = len_to_newline(line);
 		if (ft_strncmp(line, delimiter, len) == 0
 			&& *line != '\n' && len == ft_strlen(delimiter))
 			break ;
-		// line = expand_heredoc(line);
 		write(pipe_fds[1], line, len);
 		write(pipe_fds[1], "\n", 1);
 	}

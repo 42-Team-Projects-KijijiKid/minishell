@@ -15,11 +15,12 @@ void	execute_subshell(t_tree_node *node)
 		execute_node_by_type(node);
 		exit(shell->last_exit_status);
 	}
+	if (waitpid(pid, &status, 0) == -1)
+		shell->last_exit_status = 127;
+	else if (WIFEXITED(status))
+		shell->last_exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		shell->last_exit_status = 128 + WTERMSIG(status);
 	else
-	{
-		waitpid(pid, &status, 0);
-		if (!WIFEXITED(status))
-			ft_error("Unexpected error in subshell execution",
-				__FILE__, __LINE__, 991);
-	}
+		shell->last_exit_status = 1;
 }
